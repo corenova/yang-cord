@@ -1,0 +1,93 @@
+module xos-core {
+  namespace "urn:xos:core:service";
+  prefix xos;
+  yang-version 1.1;
+
+  organization
+   "Open Networking Lab (XOS) / Corenova Technologies";
+
+  contact
+    "Larry Peterson <llp@onlab.us>
+     Peter K. Lee <peter@corenova.com>";
+  
+  import ietf-yang-types { prefix yang; }
+
+  revision 2016-07-14 {
+    description "Initial revision.";
+  }
+  
+  identity kind;
+  identity generic    { base kind; }
+  identity subscriber { base kind; }
+
+  typedef unique-identifier {
+    description "defines valid formats for external reference id";
+    type union {
+      type yang:uuid;
+      type inet:uri;
+      type uint32 { range 1..max; }
+    }
+  }
+
+  grouping tenant-root {
+
+    description
+      "A Tenant Root is one of the things that can sit at the root of a chain
+       of tenancy. This object represents a node.";
+
+    leaf id {
+      type unique-identifier;
+      config false;
+      mandatory true;
+    }
+    leaf kind {
+      type identityref {
+        base kind;
+      }
+      default generic;
+    }
+    leaf name {
+      type string {
+        length 0..255;
+      }
+      description "Specify name of the TenantRoot";
+    }
+
+    leaf service-specific-attribute { type string; }
+    leaf service-specific-id {
+      type unique-identifier;
+      mandatory true;
+    }
+
+    list subscribed-tenants {
+      config false;
+      // not exactly clear how this is populated
+    }
+    
+  }
+  
+  grouping subscriber {
+    uses tenant-root {
+      refine kind { default subscriber; }
+    }
+    // seems we should have interesting attributes specific to subscriber?
+    
+  }
+
+  // main configuration tree for XOS
+
+  container api {
+    container service {
+      // placeholder endpoint for services
+    }
+    container tenant {
+      container cord {
+        // placeholder endpoint for augment
+      }
+      container onos {
+        // placeholder endpoint for augment
+      }
+    }
+  }
+  
+}

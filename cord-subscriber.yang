@@ -1,0 +1,192 @@
+module cord-subscriber {
+  namespace "urn:cord:subscriber";
+  prefix cord-sub;
+  yang-version 1.1;
+
+  organization
+   "Open Networking Lab (CORD) / Corenova Technologies";
+
+  contact
+    "Larry Peterson <llp@onlab.us>
+     Peter K. Lee <peter@corenova.com>";
+  
+  import xos-core        { prefix xos; }
+  import cord-device     { prefix dev; }
+  import ietf-yang-types { prefix yang; }
+  import yang-node-link  { prefix node; }
+
+  revision 2016-07-14 {
+    description "Initial revision.";
+  }
+  
+  identity cord-subscriber { base xos:subscriber; }
+
+  grouping subscriber {
+    uses xos:subscriber {
+      refine kind { default cord-subscriber; }
+    }
+    leaf status {
+      type enumeration {
+        enum "enabled" {
+          description "Enabled";
+          value 1;
+        }
+        enum "suspended" {
+          description "Suspended";
+        }
+        enum "delinquent" {
+          description "Delinquent";
+        }
+        enum "violation" {
+          description "Copyright Violation";
+        }
+      }
+      default enabled;
+    }
+    leaf demo { type boolean; default false; }
+    leaf uplink-speed {
+      type dev:bandwidth;
+      default 1000000000;      
+    }
+    leaf downlink-speed {
+      type dev:bandwidth;
+      default 1000000000;      
+    }
+
+    container services {
+      description
+        "Contains various services available to the subscriber";
+      
+      container cdn {
+        leaf enabled { type boolean; default false; }
+      }
+      container firewall {
+        leaf enabled { type boolean; default false; }
+        leaf-list rules {
+          // should qualify further
+          type string;
+        }
+      }
+      container url-filter {
+        leaf enabled { type boolean; default false; }
+        leaf level {
+          type enumeration {
+            enum "PG";
+            // other types of level...
+          }
+        }
+        leaf-list rules {
+          // should qualify further
+          type string;
+        }
+      }
+      container uverse {
+        leaf enabled { type boolean; default false; }
+      }
+    }
+
+    list devices {
+      uses dev:device;
+      key 'mac';
+
+      action create {
+        input {
+          leaf mac {
+            type yang:mac-address;
+            mandatory true;
+          }
+          // other acceptable attributes that can be used during create
+        }
+      }
+      action update {
+        input {
+          leaf mac {
+            type yang:mac-address;
+            //must "../.[mac = current()]";
+            mandatory true;
+          }
+          // other acceptable attributes for updating
+        }
+      }
+      action delete {
+        input {
+          leaf mac {
+            type yang:mac-address;
+            //must "../.[mac = current()]";
+            mandatory true;
+          }
+          // other acceptable attributes for updating
+        }
+      }
+    }
+    action save {
+      description "when invoked, saves the model to a safe place";
+    }
+  }
+
+  grouping subscriber-controller {
+    uses subscriber;
+
+    container features {
+      node:link cdn {
+        path "../../services/cdn/enabled";
+      }
+      node:link uplink-speed {
+        path "../../uplink-speed";
+      }
+      node:link downlink-speed {
+        path "../../downlink-speed";
+      }
+      node:link uverse {
+        path "../../services/uverse/enabled";
+      }
+      node:link status {
+        path "../../status";
+      }
+      action update {
+        description "when invoked, updates the features container (PUT)";
+      }
+    }
+    
+    container identity {
+      node:link account-num {
+        path "../../service-specific-id";
+      }
+      node:link name {
+        path "../../name";
+      }
+      action update {
+        description "when invoked, updates the identity container (PUT)";
+      }
+    }
+
+    container related {
+      // placeholder where other services can augment for their info
+    }
+
+    action create;
+    action delete;
+  }
+
+  // primary configuration tree for this module
+  list subscriber {
+    uses subscriber-controller;
+    key 'id';
+
+    description
+      "Authorative list of all subscriber instances";
+
+    leaf humanReadableName {
+      config false;
+      type string {
+        pattern '^cordSubscriber-\w+$';
+      }
+    }
+  }
+
+  // here we augment the /api/tenant/cord API configuration tree in 'xos' module
+  augment "/xos:api/xos:tenant/xos:cord" {
+    node:link subscriber { path "/subscriber"; }
+  }
+  
+}
