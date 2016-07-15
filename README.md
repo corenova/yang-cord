@@ -1,7 +1,9 @@
 # yang-cord
 YANG models for CORD
 
-This is a work-in-progress effort to create YANG data models for the CORD project.
+This is a **work-in-progress** effort to create YANG data models for the CORD project.
+
+You may contact Larry Peterson <llp@onlab.us> and/or Peter Lee <peter@corenova.com> if any questions.
 
 ## xos-core.yang
 
@@ -53,8 +55,4 @@ One note on the `related` object, it is currently a placeholder container and I 
 
 ### configuration tree
 
-
-
-
-
-
+There are two main entry-points on the `subscriber` instances.  I've defined a `list subscriber` construct directly in the `module cord-subscriber` which basically uses the `grouping subscriber-controller` data model.  This means that the `cord-subscriber` YANG module itself will be the authorative holder of all subscriber instances.  Subsequently, I've augmented the `xos` module at the `/api/tenant/cord` configuration tree to have a `node:link` to the subscriber list within the `cord-subscriber` YANG module.  This convention makes it possible to access the `subscriber` instances by directly accessing the `cord-subscriber` module, such as `/restconf/cord-subscriber:subscriber` or via the `xos` module, such as `/restconf/xos-core:api/tenant/cord/subscriber`.  We'll discuss this topic further.
