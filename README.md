@@ -17,6 +17,8 @@ I created this YANG module based on the `CordDevice` class found inside the `sub
 
 This module contains the heart of the initial modeling exercise.  It captures the CORD Subscriber data model (which extends XOS Subscriber model, which extends XOS TenantRoot model).  There are two primary models: `grouping subscriber` and `grouping subscriber-controller`.
 
+### grouping subscriber
+
 The 'subscriber' model extends the xos:subscriber (from the [xos-core.yang](./xos-core.yang)) and mirrors as closely as possible the `CordSubscriberRoot` class.  Some deviations were largely around the variable name convention where I've replaced all underscore with a dash (*upload_speed* is now *upload-speed*).  This is largely to comply with YANG convention where the schema is used to model XML element structure and underscores are not really used in XML based representations (not even sure if it is valid...).
 
 The other key deviation is in the organization of the various attributes.  Instead of having a simple flat list of properties, I've grouped them into related 'services' (pseudo-JSON below):
@@ -42,4 +44,17 @@ services: {
 ```
 
 Eventually, I think these four *hard-coded* services will be moved out of the `cord-subscriber` data model altogether.  I'm not sure what "on-boarded" services actually implement these features but it should be augmented by those individual service's YANG models into the cord-subscriber data model.
+
+### grouping subscriber-controller
+
+I've internally debated creating this controller model because I thought that the necessary attributes were rather effectively captured in the prior `grouping subscriber` schema definition.  But the presence of the `related` object container in the controller (that shouldn't be in the underlying model) convinced me to model it according to the `CordSubscriberNew` class found inside `api/tenant/cord/subscriber.py`.  This `subscriber-controller` model extends the `subscriber` model (inheriting all its attributes) and introduces the additional containers for `features`, `identity`, and `related`.  Since the main function of the `subscriber-controller` model is to essentially layer a *view-like* overlay on top of the underlying cord-subscriber model, I've introduced a new *custom extension* construct called `node:link`.  This is to capture the fact that the various attributes being expressed are simply a reference link to the exact same data that is located at a different place within the same object.
+
+One note on the `related` object, it is currently a placeholder container and I expect it will remain that way as part of the model.  The reason is, the attributes that are currently mapped inside all come from the `VOLT` service (which then has other attributes from `VSG` service, etc.).  When we get to the step of modeling the various `Service` entities, we'll capture the necessary *augment* behavior in those separate YANG modules (i.e. cord-service-volt.yang, cord-service-vsg.yang, etc.).
+
+### configuration tree
+
+
+
+
+
 
