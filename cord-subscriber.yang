@@ -119,6 +119,7 @@ module cord-subscriber {
         }
       }
     }
+    
     action save {
       description "when invoked, saves the model to a safe place";
     }
@@ -163,9 +164,6 @@ module cord-subscriber {
     container related {
       // placeholder where other services can augment for their info
     }
-
-    action create;
-    action delete;
   }
 
   // primary configuration tree for this module
@@ -182,6 +180,8 @@ module cord-subscriber {
         pattern '^cordSubscriber-\w+$';
       }
     }
+    action create;
+    action delete;
   }
 
   // here we augment the /api/tenant/cord API configuration tree in 'xos' module
