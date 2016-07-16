@@ -1,5 +1,5 @@
 module cord-subscriber {
-  namespace "urn:cord:subscriber";
+  namespace "urn:onlab:cord:subscriber";
   prefix cord-sub;
   yang-version 1.1;
 

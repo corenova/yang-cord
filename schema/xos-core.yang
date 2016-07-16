@@ -1,5 +1,5 @@
 module xos-core {
-  namespace "urn:xos:core:service";
+  namespace "urn:onlab:xos:core";
   prefix xos;
   yang-version 1.1;
 
@@ -11,6 +11,7 @@ module xos-core {
      Peter K. Lee <peter@corenova.com>";
   
   import ietf-yang-types { prefix yang; }
+  import ietf-inet-types { prefix inet; }
 
   revision 2016-07-14 {
     description "Initial revision.";

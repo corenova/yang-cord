@@ -1,0 +1,51 @@
+{
+  "name": "yang-cord",
+  "version": "1.0.0",
+  "description": "YANG model-driven CORD",
+  "author": "Peter K. Lee <peter@corenova.com>",
+  "license": "Apache-2.0",
+  "homepage": "http://wiki.opencord.org/",
+  "repository": "corenova/yang-cord",
+  "keywords": [
+    "cord",
+    "opencord",
+    "onlab",
+    "xos",
+    "onos",
+    "subscriber",
+    "tenant",
+    "device",
+    "yangjs",
+    "express",
+    "service"
+  ],
+  "models": {
+    "ietf-yang-types": "yang-js",
+    "ietf-inet-types": "yang-js",
+    "xos-core": "./schema/xos-core.yang",
+    "cord-device": "./schema/cord-device.yang",
+    "cord-subscriber": "./schema/cord-subscriber.yang"
+  },
+  "dependencies": {
+    "node-uuid": "^1.4.7",
+    "superagent": "^2.0.0",
+    "yang-js": "^0.14.15"
+  },
+  "devDependencies": {
+    "coffee-script": ">=1.7.0",
+    "config": "^1.19.0",
+    "mocha": "~2.0.1",
+    "rimraf": "^2.5.2",
+    "should": "~3.1.3"
+  },
+  "main": "./lib/index.js",
+  "scripts": {
+    "clean": "rimraf dist/* lib/*",
+    "prebuild": "npm run clean -s && mkdir -p dist",
+    "build:src": "coffee -o lib -c src",
+    "build": "npm run build:src",
+    "prepublish": "npm run build",
+    "pretest": "npm run build",
+    "test": "mocha"
+  }
+}

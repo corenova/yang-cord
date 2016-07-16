@@ -1,5 +1,5 @@
 module cord-device {
-  namespace "urn:cord:device";
+  namespace "urn:onlab:cord:device";
   prefix cord-dev;
   yang-version 1.1;
 
@@ -17,8 +17,9 @@ module cord-device {
   }
 
   typedef bandwidth {
-    type unit32;
-    range 1000000..max; // should be at least 1 Mbps?
+    type uint32 {
+      range 1000000..max; // should be at least 1 Mbps?  
+    }
     units 'bps';
   }
   
