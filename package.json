@@ -29,7 +29,7 @@
   "dependencies": {
     "node-uuid": "^1.4.7",
     "superagent": "^2.0.0",
-    "yang-js": "^0.14.16"
+    "yang-js": "^0.14.18"
   },
   "devDependencies": {
     "coffee-script": ">=1.7.0",
