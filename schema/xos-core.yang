@@ -38,7 +38,6 @@ module xos-core {
 
     leaf id {
       type unique-identifier;
-      config false;
       mandatory true;
     }
     leaf kind {

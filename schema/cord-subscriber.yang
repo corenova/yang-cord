@@ -13,7 +13,7 @@ module cord-subscriber {
   import xos-core        { prefix xos; }
   import cord-device     { prefix dev; }
   import ietf-yang-types { prefix yang; }
-  import yang-node-link  { prefix node; }
+  //import yang-node-link  { prefix node; }
 
   revision 2016-07-14 {
     description "Initial revision.";
@@ -129,20 +129,20 @@ module cord-subscriber {
     uses subscriber;
 
     container features {
-      node:link cdn {
-        path "../../services/cdn/enabled";
+      leaf cdn {
+        //path "../../services/cdn/enabled";
       }
-      node:link uplink-speed {
-        path "../../uplink-speed";
+      leaf uplink-speed {
+        //path "../../uplink-speed";
       }
-      node:link downlink-speed {
-        path "../../downlink-speed";
+      leaf downlink-speed {
+        //path "../../downlink-speed";
       }
-      node:link uverse {
-        path "../../services/uverse/enabled";
+      leaf uverse {
+        //path "../../services/uverse/enabled";
       }
-      node:link status {
-        path "../../status";
+      leaf status {
+        //path "../../status";
       }
       action update {
         description "when invoked, updates the features container (PUT)";
@@ -150,11 +150,11 @@ module cord-subscriber {
     }
     
     container identity {
-      node:link account-num {
-        path "../../service-specific-id";
+      leaf account-num {
+        //path "../../service-specific-id";
       }
-      node:link name {
-        path "../../name";
+      leaf name {
+        //path "../../name";
       }
       action update {
         description "when invoked, updates the identity container (PUT)";
@@ -186,7 +186,9 @@ module cord-subscriber {
 
   // here we augment the /api/tenant/cord API configuration tree in 'xos' module
   augment "/xos:api/xos:tenant/xos:cord" {
-    node:link subscriber { path "/subscriber"; }
+    container subscriber {
+      //path "/subscriber";
+    }
   }
   
 }
