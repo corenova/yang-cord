@@ -22,14 +22,20 @@
   "models": {
     "ietf-yang-types": "yang-js",
     "ietf-inet-types": "yang-js",
+    "corenova-node": "corenova",
     "xos-core": "./schema/xos-core.yang",
+    "cord-core": "./lib/cord-core.js",
     "cord-device": "./schema/cord-device.yang",
-    "cord-subscriber": "./schema/cord-subscriber.yang"
+    "cord-subscriber": "./lib/cord-subscriber.js"
   },
   "dependencies": {
     "node-uuid": "^1.4.7",
     "superagent": "^2.0.0",
-    "yang-js": "^0.14.18"
+    "yang-express": "^0.2.1",
+    "yang-js": "^0.14.20"
+  },
+  "optionalDependencies": {
+    "corenova": "^1.0.0"
   },
   "devDependencies": {
     "coffee-script": ">=1.7.0",
@@ -38,7 +44,7 @@
     "rimraf": "^2.5.2",
     "should": "~3.1.3"
   },
-  "main": "./lib/index.js",
+  "main": "./lib/server.js",
   "scripts": {
     "clean": "rimraf dist/* lib/*",
     "prebuild": "npm run clean -s && mkdir -p dist",
@@ -46,6 +52,7 @@
     "build": "npm run build:src",
     "prepublish": "npm run build",
     "pretest": "npm run build",
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node lib/server.js"
   }
 }

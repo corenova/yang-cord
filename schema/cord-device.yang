@@ -44,6 +44,5 @@ module cord-device {
       }
       action update;
     }
-    action save;
   }
 }

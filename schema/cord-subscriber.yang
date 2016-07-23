@@ -1,6 +1,7 @@
 module cord-subscriber {
+  
   namespace "urn:onlab:cord:subscriber";
-  prefix cord-sub;
+  prefix csub;
   yang-version 1.1;
 
   organization
@@ -10,15 +11,28 @@ module cord-subscriber {
     "Larry Peterson <llp@onlab.us>
      Peter K. Lee <peter@corenova.com>";
   
-  import xos-core        { prefix xos; }
-  import cord-device     { prefix dev; }
-  import ietf-yang-types { prefix yang; }
-  //import yang-node-link  { prefix node; }
+  description
+   "This module contains CORD Subscriber model representing its
+    relationship to features, services, and devices.
 
+    Copyright (c) 2016 ON.LAB and the persons identified as authors of
+    the code.  All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, is permitted pursuant to, and subject to the license
+    terms of the Apache License, Version 2.0 which accompanies this
+    distribution, and is available at
+    (http://www.apache.org/licenses/LICENSE-2.0).";
+  
   revision 2016-07-14 {
     description "Initial revision.";
   }
   
+  import xos-core        { prefix xos; }
+  import cord-device     { prefix dev; }
+  import ietf-yang-types { prefix yang; }
+  import corenova-node   { prefix node; }
+
   identity cord-subscriber { base xos:subscriber; }
 
   grouping subscriber {
@@ -85,110 +99,51 @@ module cord-subscriber {
       }
     }
 
-    list devices {
+    list device {
       uses dev:device;
-      key 'mac';
+      key "mac";
 
       action create {
-        input {
-          leaf mac {
-            type yang:mac-address;
-            mandatory true;
-          }
-          // other acceptable attributes that can be used during create
-        }
+        input { uses dev:device; }
       }
       action update {
-        input {
-          leaf mac {
-            type yang:mac-address;
-            //must "../.[mac = current()]";
-            mandatory true;
-          }
-          // other acceptable attributes for updating
-        }
+        input { uses dev:device; }
       }
-      action delete {
-        input {
-          leaf mac {
-            type yang:mac-address;
-            //must "../.[mac = current()]";
-            mandatory true;
-          }
-          // other acceptable attributes for updating
-        }
-      }
-    }
-    
-    action save {
-      description "when invoked, saves the model to a safe place";
+      action delete;
     }
   }
 
   grouping subscriber-controller {
     uses subscriber;
 
+    node:view "features identity related";
+
     container features {
-      leaf cdn {
-        //path "../../services/cdn/enabled";
-      }
-      leaf uplink-speed {
-        //path "../../uplink-speed";
-      }
-      leaf downlink-speed {
-        //path "../../downlink-speed";
-      }
-      leaf uverse {
-        //path "../../services/uverse/enabled";
-      }
-      leaf status {
-        //path "../../status";
-      }
+      leaf cdn            { node:link "../../services/cdn/enabled"; }
+      leaf uplink-speed   { node:link "../../uplink-speed"; }
+      leaf downlink-speed { node:link "../../downlink-speed"; }
+      leaf uverse         { node:link "../../services/uverse/enabled"; }
+      leaf status         { node:link "../../status"; }
+      
       action update {
         description "when invoked, updates the features container (PUT)";
       }
     }
     
     container identity {
-      leaf account-num {
-        //path "../../service-specific-id";
-      }
-      leaf name {
-        //path "../../name";
-      }
+      leaf account-num { node:link "../../service-specific-id"; }
+      leaf name        { node:link "../../name"; }
+      
       action update {
         description "when invoked, updates the identity container (PUT)";
       }
     }
 
     container related {
-      // placeholder where other services can augment for their info
-    }
-  }
-
-  // primary configuration tree for this module
-  list subscriber {
-    uses subscriber-controller;
-    key 'id';
-
-    description
-      "Authorative list of all subscriber instances";
-
-    leaf humanReadableName {
       config false;
-      type string {
-        pattern '^cordSubscriber-\w+$';
-      }
-    }
-    action create;
-    action delete;
-  }
-
-  // here we augment the /api/tenant/cord API configuration tree in 'xos' module
-  augment "/xos:api/xos:tenant/xos:cord" {
-    container subscriber {
-      //path "/subscriber";
+      description
+        "placeholder where other services can augment for info they want to
+         share (READ-ONLY)";
     }
   }
-  
 }

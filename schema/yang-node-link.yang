@@ -1,5 +1,0 @@
-module yang-node {
-  extension link {
-    argument name;
-  }
-}
