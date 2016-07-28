@@ -41,9 +41,9 @@ module xos-core {
   typedef unique-identifier {
     description "defines valid formats for external reference id";
     type union {
+      type uint32 { range 1..max; }
       type yang:uuid;
       type inet:uri;
-      type uint32 { range 1..max; }
     }
   }
 

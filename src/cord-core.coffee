@@ -11,7 +11,7 @@ require('yang-js').register()
 
 module.exports = require('../schema/cord-core.yang').bind {
 
-  '/cord/subscriber/humanReadableName': -> "cordSubscriber-#{@get '../id'}"
+  '/cord:subscriber/humanReadableName': -> "cordSubscriber-#{@get '../id'}"
 
-  '/cord/subscriber/delete': (input, resolve, reject) -> reject "not yet implemented"
+  '/cord:subscriber/delete': (input, resolve, reject) -> reject "not yet implemented"
 }

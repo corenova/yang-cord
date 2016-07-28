@@ -15,29 +15,18 @@ module corenova-node {
   feature corenova-node {
     description
       "this is to indicate the agent supports dynamic schema node
-       link/map/view.";
+       link and view constraints.";
   }
     
   extension link {
     description
-      "Links the current leaf (or leaf-list) to an alternate leaf in the
-       schema data tree. The current leaf becomes a 'mirror' instance
-       of the target node.";
-    argument target-node-path {
-      yin-element true;
-    }
-  }
-
-  extension map {
-    description
-      "Maps the current container (or list entry) to an alternate container
-       in the schema data tree. The target-node-path must not map to
-       leaf or leaf-list nodes. The current container will map to
-       additional data nodes found inside the alternate container. The
-       mapped data nodes behave similarly to the 'link' extension
-       case. It can be defined one or more times within the same
-       container to map across modules and other subtrees.";
-    argument target-node-path {
+      "Links a new 'link-name' element to an alternate data node element in
+       the schema data tree referenced by the 'path' sub statement. It
+       can be used within 'container' or 'list' type data element to
+       hold one or more such 'links' as part of its configuration data
+       tree.  The new link element becomes a 'mirror' instance of the
+       target node found in the path expression.";
+    argument link-name {
       yin-element true;
     }
   }

@@ -33,27 +33,26 @@ module cord-core {
   
   /*** primary configuration tree for this module ***/
   
-  container cord {
-    list subscriber {
-      uses csub:subscriber-controller;
-      key "id";
+  list subscriber {
+    uses csub:subscriber-controller;
+    key "id";
 
-      description
-        "Authorative list of all subscriber instances";
+    description
+      "Authorative list of all subscriber instances";
 
-      leaf humanReadableName {
-        config false;
-        type string {
-          pattern '^cordSubscriber-\w+$';
-        }
+    leaf humanReadableName {
+      config false;
+      type string {
+        pattern '^cordSubscriber-\w+$';
       }
-      action delete;
+    }
+    action delete;
+  }
+
+  // here we augment the /api/tenant API configuration tree in 'xos' module
+  augment "/xos:api/xos:tenant" {
+    container cord {
+      node:link subscriber { path "/cord:subscriber"; }
     }
   }
-
-  // here we augment the /api/tenant/cord API configuration tree in 'xos' module
-  augment "/xos:api/xos:tenant" {
-    container cord { node:map "/cord:cord"; }
-  }
-  
 }

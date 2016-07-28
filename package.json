@@ -31,8 +31,8 @@
   "dependencies": {
     "node-uuid": "^1.4.7",
     "superagent": "^2.0.0",
-    "yang-express": "^0.2.1",
-    "yang-js": "^0.14.20"
+    "yang-express": "^0.2.2",
+    "yang-js": "^0.14.22"
   },
   "optionalDependencies": {
     "corenova": "^1.0.0"

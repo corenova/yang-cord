@@ -119,11 +119,11 @@ module cord-subscriber {
     node:view "features identity related";
 
     container features {
-      leaf cdn            { node:link "../../services/cdn/enabled"; }
-      leaf uplink-speed   { node:link "../../uplink-speed"; }
-      leaf downlink-speed { node:link "../../downlink-speed"; }
-      leaf uverse         { node:link "../../services/uverse/enabled"; }
-      leaf status         { node:link "../../status"; }
+      node:link cdn            { path "../services/cdn/enabled"; }
+      node:link uplink-speed   { path "../uplink-speed"; }
+      node:link downlink-speed { path "../downlink-speed"; }
+      node:link uverse         { path "../services/uverse/enabled"; }
+      node:link status         { path "../status"; }
       
       action update {
         description "when invoked, updates the features container (PUT)";
@@ -131,8 +131,8 @@ module cord-subscriber {
     }
     
     container identity {
-      leaf account-num { node:link "../../service-specific-id"; }
-      leaf name        { node:link "../../name"; }
+      node:link account-num { path "../service-specific-id"; }
+      node:link name        { path "../name"; }
       
       action update {
         description "when invoked, updates the identity container (PUT)";

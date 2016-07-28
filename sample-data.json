@@ -1,12 +1,10 @@
 {
-  "api": {
+  "xos-core:api": {
     "service": {},
     "tenant":  {}
   },
-  "cord": {
-    "subscriber": [
-      { "id": 1, "service-specific-id": 1000 },
-      { "id": 2, "service-specific-id": 1001 }
-    ]
-  }
+  "cord-core:subscriber": [
+    { "id": 1, "service-specific-id": 1000 },
+    { "id": 2, "service-specific-id": 1001 }
+  ]
 }
