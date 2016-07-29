@@ -1,6 +1,6 @@
 {
   "name": "yang-cord",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "YANG model-driven CORD",
   "author": "Peter K. Lee <peter@corenova.com>",
   "license": "Apache-2.0",
