@@ -1,5 +1,4 @@
-# yang-cord
-YANG model-driven CORD
+# YANG model-driven CORD
 
 This is a **work-in-progress** effort to create [YANG](http://tools.ietf.org/html/rfc6020) data models for
 the CORD project and deliver flexible service compositions.
