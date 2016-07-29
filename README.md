@@ -1,8 +1,9 @@
 # YANG model-driven CORD
 
 This is a **work-in-progress** effort to create
-[YANG](http://tools.ietf.org/html/rfc6020) data models for the [CORD](http://opencord.org)
-project and deliver flexible service compositions.
+[YANG](http://tools.ietf.org/html/rfc6020) data models for the
+[CORD](http://opencord.org) project and deliver flexible service
+compositions.
 
 You may contact Larry Peterson <llp@onlab.us> and Peter Lee
 <peter@corenova.com> to learn more about this initiative and find out
@@ -19,8 +20,8 @@ $ npm install yang-cord
 Following the installation, you can **start** an instance of the YANG
 model-driven REST API web server. It utilizes
 [yang-express](http://github.com/corenova/yang-express) middleware
-framework built on Express.js to provide dynamic YANG model-driven API
-routing capability.
+framework built on [Express.js](http://expressjs.com) to provide
+dynamic YANG model-driven API routing capability.
 
 ```bash
 $ npm start
@@ -35,7 +36,7 @@ mounted 'xos-core' model
 
 ## Reference Guides
 
-- [API Overview](./doc/api-overview.md) - provides walkthrough on *interacting with the REST API endpoints*
+- [API Guide](./src/api/README.md) - provides a walkthrough on *interacting with the REST API endpoints*
 - [Modeler's Guide](./schema/README.md) - provides information on *current YANG models for XOS and CORD* and what's coming up next
 - [Developer's Guide](./src/README.md) - provides technical detail on *controller logic and dynamic interfaces* and how to best leverage YANG model-driven developer tools for getting things done *fast*.
 

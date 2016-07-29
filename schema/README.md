@@ -8,8 +8,8 @@ recommendations on expressing them as YANG models.
 
 The initial effort is centered around capturing the CORD Subscriber
 model and its dependent models.  We'll be reguarly updating this
-document as we capture any additional models from XOS/CORD repository
-in the coming days.
+document as we capture additional models from XOS/CORD repository in
+the coming days.
 
 ## XOS Data Models
 
@@ -27,7 +27,7 @@ convention here is the existence of the `/api/tenant` and
 we're considering this YANG module to be the **master** module that
 all other modules derive from and augments into this module.  You can
 see this *augment* behavior in the
-[cord-subscriber.yang](./cord-subscriber.yang) schema.
+[cord-core.yang](./cord-core.yang) schema.
 
 As we capture more XOS data models, we will likely organize the
 additional models as separate YANG modules, such as `xos-service`,
