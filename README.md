@@ -29,11 +29,9 @@ mounted 'xos-core' model
 
 ## Reference Guides
 
-For more information on **interacting with the REST API endpoints**, please refer to the [API Overview](./doc/api-overview.md) documentation found in the `./doc` folder.
-
-For more information on **current YANG models for XOS and CORD**, please refer to the [Model Overview](./schema/README.md) documentation found in the `./schema` folder.
-
-For more information on **controller logic and dynamic interfaces**, please refer to the [Source Overview](./src/README.md) documentation found in the `./src` folder.
+- [API Overview](./doc/api-overview.md) - provides walkthrough on *interacting with the REST API endpoints*
+- [Modeler's Guide](./schema/README.md) - provides information on *current YANG models for XOS and CORD* and what's coming up next
+- [Developer's Guide](./src/README.md) - provides technical detail on *controller logic and dynamic interfaces* and how to best leverage YANG model-driven developer tools for getting things done *fast*.
 
 ## Tests
 
