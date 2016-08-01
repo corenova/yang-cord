@@ -34,6 +34,12 @@ mounted 'xos-core' model
 [cord-core] calling GET on /cord-core:subscriber
 ```
 
+_An option `--port` is provided to specify the port to listen on, it can be used with:_
+
+```
+npm start -- --port 3000
+```
+
 ## Reference Guides
 
 - [API Guide](./src/api/README.md) - provides a walkthrough on *interacting with the REST API endpoints*
