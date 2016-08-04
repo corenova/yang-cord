@@ -7,8 +7,6 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 #
 
-require('events').EventEmitter.defaultMaxListeners = 100
-
 yang = require('yang-js')
 argv = require('minimist')(process.argv.slice(2))
 

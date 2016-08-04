@@ -34,7 +34,7 @@ module cord-core {
   /*** primary configuration tree for this module ***/
   
   list subscriber {
-    uses csub:subscriber-controller;
+    uses csub:subscriber;
     key "id";
 
     description
