@@ -32,8 +32,8 @@
     "minimist": "^1.2.0",
     "node-uuid": "^1.4.7",
     "superagent": "^2.0.0",
-    "yang-express": "^0.2.5",
-    "yang-js": "^0.15.0"
+    "yang-express": "^0.2.6",
+    "yang-js": "^0.15.1"
   },
   "optionalDependencies": {
     "corenova": "^1.0.0"
