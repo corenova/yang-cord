@@ -161,7 +161,7 @@ that does not contain any data behave as *shadow* properties, which
 basically means they spring to life once valid data gets placed into
 it but stays *invisible* otherwise.
 
-### DELETE a Subscriber
+### Delete a Subscriber
 
 Valid URIs:
 
@@ -211,6 +211,168 @@ Response:
 The POST operation is only available on YANG `list` schema elements as
 well as `rpc` and `action` elements. This operation also accepts
 **bulk create** request data by supplying a JSON array.
+
+### Describe the Subscriber Model
+
+This operation provides discovery of a given data model's
+characteristics as well as other data node elements available inside
+the data model. It can be used by REST API consumers to auto-discover
+additional paths and metadata associated with the target entity.  It's
+also useful for *dynamically generating API documentation* for a given
+data model.
+
+Valid URIs:
+
+- OPTIONS /cord-core:subscriber
+- OPTIONS /cord:subscriber
+- OPTIONS /subscriber
+
+Request:
+```bash
+$ curl -X OPTIONS localhost:5050/cord:subscriber
+```
+Response:
+```json
+{
+  "name": "cord-core:subscriber",
+  "kind": "list",
+  "path": "/cord-core:subscriber",
+  "exists": true,
+  "key": "id",
+  "description": "Authorative list of all subscriber instances",
+  "data": {
+    "humanReadableName": {
+      "kind": "leaf",
+      "config": false,
+      "type": {
+        "string": {
+          "pattern": "/^cordSubscriber-\\w+$/"
+        }
+      }
+    },
+    "status": {
+      "kind": "leaf",
+      "type": {
+        "enumeration": {
+          "enum": {
+            "enabled": {
+              "description": "Enabled",
+              "value": "1"
+            },
+            "suspended": {
+              "description": "Suspended",
+              "value": "2"
+            },
+            "delinquent": {
+              "description": "Delinquent",
+              "value": "3"
+            },
+            "violation": {
+              "description": "Copyright Violation",
+              "value": "4"
+            }
+          }
+        }
+      },
+      "default": "enabled"
+    },
+    "demo": {
+      "kind": "leaf",
+      "type": "boolean",
+      "default": "false"
+    },
+    "uplink-speed": {
+      "kind": "leaf",
+      "type": {
+        "dev:bandwidth": {
+          "range": "1000000..max"
+        }
+      },
+      "default": "1000000000",
+      "units": "bps"
+    },
+    "downlink-speed": {
+      "kind": "leaf",
+      "type": {
+        "dev:bandwidth": {
+          "range": "1000000..max"
+        }
+      },
+      "default": "1000000000",
+      "units": "bps"
+    },
+    "id": {
+      "kind": "leaf",
+      "type": {
+        "unique-identifier": {
+          "type": {
+            "uint32": {
+              "range": "1..max"
+            },
+            "yang:uuid": {
+              "pattern": "/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/"
+            }
+          }
+        }
+      },
+      "mandatory": true
+    },
+    "kind": {
+      "kind": "leaf",
+      "type": {
+        "identityref": {
+          "base": "kind"
+        }
+      },
+      "default": "generic"
+    },
+    "name": {
+      "kind": "leaf",
+      "type": {
+        "string": {
+          "length": "0..255"
+        }
+      },
+      "description": "Specify name of the TenantRoot"
+    },
+    "service-specific-attribute": {
+      "kind": "leaf",
+      "type": "string"
+    },
+    "service-specific-id": {
+      "kind": "leaf",
+      "type": {
+        "unique-identifier": {
+          "type": {
+            "uint32": {
+              "range": "1..max"
+            },
+            "yang:uuid": {
+              "pattern": "/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/"
+            }
+          }
+        }
+      },
+      "mandatory": true
+    },
+    "delete": {
+      "kind": "action"
+    },
+    "services": {
+      "kind": "container",
+      "description": "Contains various services available to the subscriber"
+    },
+    "device": {
+      "kind": "list",
+      "key": "mac"
+    },
+    "subscribed-tenants": {
+      "kind": "list",
+      "config": false
+    }
+  }
+}
+```
 
 ### Additional Endpoints
 
