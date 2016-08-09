@@ -10,13 +10,18 @@
 yang = require('yang-js')
 argv = require('minimist')(process.argv.slice(2))
 
-require('yang-express').run {
-
-  port: argv.port || 5050
+app = require('yang-express') {
   models: [
     yang.require 'cord-core'
     yang.require 'xos-core'
   ]
-  data: require '../../sample-data.json'
+  controllers: [
+    'restjson'
+    'socket-io'
+  ]
+  views: [
 
+  ]
+  data: require '../../sample-data.json'
 }
+app.run argv.port || 5050

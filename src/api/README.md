@@ -404,8 +404,8 @@ For example, if you tried to POST /cord:subscriber without the
 `mandatory` *id* and *service-specific-id* properties, it will
 generate an error and reject the request.
 
-Also, if you tried to PUT using data values that does not conform to
-the underlying YANG schema for that data element, it will generate an
+Also, if you tried to PUT using data values that do not conform to the
+underlying YANG schema for that data element, it will generate an
 error and reject the requst.
 
 Invalid Request:

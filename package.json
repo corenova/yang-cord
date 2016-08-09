@@ -1,6 +1,6 @@
 {
   "name": "yang-cord",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "YANG model-driven CORD",
   "author": "Peter K. Lee <peter@corenova.com>",
   "license": "Apache-2.0",
@@ -32,8 +32,8 @@
     "minimist": "^1.2.0",
     "node-uuid": "^1.4.7",
     "superagent": "^2.0.0",
-    "yang-express": "^0.2.7",
-    "yang-js": "^0.15.3"
+    "yang-express": "^0.2.8",
+    "yang-js": "^0.15.4"
   },
   "optionalDependencies": {
     "corenova": "^1.0.0"
