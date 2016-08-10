@@ -26,20 +26,24 @@ YANG model-driven CORD reference implementation.
 
 ```coffeescript
 yang = require('yang-js')
+argv = require('minimist')(process.argv.slice(2))
 
-require('yang-express').run {
-
-  port: 5050
+app = require('yang-express') {
   models: [
     yang.require 'cord-core'
     yang.require 'xos-core'
   ]
+  controllers: [
+    'restjson'
+    'socket-io'
+  ]
+  views: []
   data: require '../../sample-data.json'
-
 }
+app.run argv.port || 5050
 ```
 
-Yes, it's really that simple. 
+Yep, it's really that simple. 
 
 ## CORD API Reference
 
