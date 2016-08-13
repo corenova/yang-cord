@@ -26,12 +26,21 @@ dynamic YANG model-driven API routing capability.
 ```bash
 $ npm start
 
-> yang-cord@1.0.1 start /home/peter/yang-cord
-> node lib/server.js
+> yang-cord@1.0.8 start /home/plee/hack/yang-cord
+> node lib/api/server.js
 
-mounted 'cord-core' model
-mounted 'xos-core' model
-[cord-core] calling GET on /cord-core:subscriber
+[yang-express] start of a new journey
+[openapi] enabling...
+[openapi] enabled ok
+[restjson] enabling...
+[restjson] enabled ok
+[websocket] enabling...
+[yang-express] registering a new link
+[yang-express] registered 'link:cord-core'
+[yang-express] registering a new link
+[yang-express] registered 'link:xos-core'
+[websocket] binding to server
+[websocket] enabled ok
 ```
 
 _An option `--port` is provided to specify the port to listen on, it can be used with:_

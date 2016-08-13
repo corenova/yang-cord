@@ -18,7 +18,7 @@ for XML but instead follows the
 [YANG-JSON](https://datatracker.ietf.org/doc/draft-ietf-netmod-yang-json)
 specifications for representing configuration data in JSON.
 
-Below is the complete snippet from [server.coffee](./server.coffee)
+Below is the primary snippet from [server.coffee](./server.coffee)
 demonstrating how to use
 [yang-express](http://github.com/corenova/yang-express) middleware
 framework to fire up a web server instance capable of serving up the
@@ -26,21 +26,16 @@ YANG model-driven CORD reference implementation.
 
 ```coffeescript
 yang = require('yang-js')
-argv = require('minimist')(process.argv.slice(2))
-
-app = require('yang-express') {
-  models: [
-    yang.require 'cord-core'
-    yang.require 'xos-core'
-  ]
-  controllers: [
-    'restjson'
-    'socket-io'
-  ]
-  views: []
-  data: require '../../sample-data.json'
-}
-app.run argv.port || 5050
+app = require('yang-express') ->
+  @set 'pkginfo', require('../../package.json')
+  @set 'initial state', require('../../sample-data.json')
+  @enable 'openapi', 'restjson', 'websocket'
+  
+  cord = @link yang.require('cord-core')
+  xos  = @link yang.require('xos-core')
+  
+  cord.on 'update', (prop) ->
+    console.log "[#{prop.path}] got updated, should consider persisting the change somewhere"
 ```
 
 Yep, it's really that simple. 
@@ -53,6 +48,23 @@ are essentially interpreted and served **during runtime** depending on
 the YANG runtime model along with the configuration data state at any given
 point in time. Basically, it performs *adaptive* API routing and
 rendering.
+
+### Open-API Specification (Swagger 2.0)
+
+Initial partial-support for dynamic **openapi** specification
+generation has been introduced with the latest
+[yang-express](http://github.com/corenova/yang-express) middleware
+framework. It can send back JSON or YAML based specification output
+depending on the requesting client's `Accept` header. It defaults to
+JSON output.
+
+You can give it a try by issuing one of the following:
+```bash
+$ curl localhost:5050/swagger.spec
+$ curl localhost:5050/swagger.spec -H 'accept: text/yaml'
+```
+
+We'll plan to fully support the **openapi** specification along the way.
 
 ### View Subscribers
 
