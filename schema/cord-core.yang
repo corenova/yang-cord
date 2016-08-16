@@ -40,7 +40,7 @@ module cord-core {
     description
       "Authorative list of all subscriber instances";
 
-    leaf humanReadableName {
+    leaf label {
       config false;
       type string {
         pattern '^cordSubscriber-\w+$';
