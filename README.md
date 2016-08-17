@@ -51,7 +51,7 @@ npm start -- --port 3000
 
 ## Reference Guides
 
-- [API Guide](./src/api/README.md) - provides a walkthrough on *interacting with the REST API endpoints*
+- [API Guide](./src/README.md) - provides a walkthrough on *interacting with the REST API endpoints*
 - [Modeler's Guide](./schema/README.md) - provides information on *current YANG models for XOS and CORD* and what's coming up next
 - [Developer's Guide](./src/README.md) - provides technical detail on *controller logic and dynamic interfaces* and how to best leverage YANG model-driven developer tools for getting things done *fast*.
 

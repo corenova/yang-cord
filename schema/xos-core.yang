@@ -75,7 +75,7 @@ module xos-core {
       mandatory true;
     }
 
-    list subscribed-tenants {
+    list subscribed-tenant {
       config false;
       // not exactly clear how this is populated
     }
