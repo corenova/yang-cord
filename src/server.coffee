@@ -14,13 +14,14 @@ app = require('yang-express') ->
   @enable 'openapi', require('../package.json')
   @enable 'restjson'
   @enable 'websocket'
-  
-  data = require('../sample-data.json')
-  cord = @link Yang.require('cord-core'), data
-  xos  = @link Yang.require('xos-core'), data
-  
-  cord.on 'update', (prop) ->
-    console.log "[#{prop.path}] got updated, should consider persisting the change somewhere"
+
+  @open 'cord', ->
+    @import Yang.require('cord-core')
+    @import Yang.require('xos-core')
+
+    @connect require('../sample-data.json')
+    @on 'update', (prop) ->
+      console.log "[#{prop.path}] got updated, should consider persisting the change somewhere"
 
 module.exports = app
 

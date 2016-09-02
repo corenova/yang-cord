@@ -47,11 +47,13 @@ module xos-core {
     }
   }
 
-  grouping tenant-root {
-    description
-      "A Tenant Root is one of the things that can sit at the root of a chain
-       of tenancy. This object represents a node.";
-
+  grouping service-attribute {
+    leaf name  { type string { length 0..128; } }
+    leaf value { type string; }
+    // don't need pointer back to service
+  }
+  
+  grouping xos-base {
     leaf id {
       type unique-identifier;
       mandatory true;
@@ -66,14 +68,26 @@ module xos-core {
       type string {
         length 0..255;
       }
-      description "Specify name of the TenantRoot";
     }
-
-    leaf service-specific-attribute { type string; }
+    // NOTE: this used to be service-specific-attribute
+    //leaf service-specific-attribute { type string; }
+    list attribute { uses service-attribute; }
+    // TODO: service-specific-id should be one of the attributes above?
     leaf service-specific-id {
       type unique-identifier;
       mandatory true;
     }
+  }
+
+  grouping tenant-root {
+    uses xos-base {
+      refine 'name' {
+        description "Specify name of the TenantRoot";
+      }
+    }
+    description
+      "A Tenant Root is one of the things that can sit at the root of a chain
+       of tenancy. This object represents a node.";
 
     list subscribed-tenant {
       config false;
@@ -87,7 +101,86 @@ module xos-core {
     }
     // seems we should have interesting attributes specific to subscriber?
   }
+  
+  grouping provider {
+    uses tenant-root {
+      refine kind { default provider; }
+    }
+    // seems we should have interesting attributes specific to provider?
+  }
 
+  grouping service {
+    uses xos-base {
+      refine 'name' {
+        description "Name of the Service";
+      }
+    }
+    leaf description {
+      type string {
+        length 0..254;
+      }
+      description "Description of the Service";
+    }
+    leaf version {
+      type string { length 0..30; }
+      description "Version of Service Definition";
+    }
+    
+    leaf enabled   { type boolean; default true; }
+    leaf published { type boolean; default true; }
+
+    container external-assets {
+      leaf view { type inet:uri; }
+      leaf icon { type inet:uri; }
+    }
+    
+    list keypair {
+      description "collection of public/private key pair(s)";
+      leaf public  { type string { length 0..1024; } }
+      leaf private { type string { length 0..1024; } }
+    }
+    
+    // TOOD: need to better understand relationship between Service and Slice
+    action scale {
+      description "Adjust scale for slice(s)";
+    }
+
+    // TODO: need to better understand relationship between Service and VTN
+  }
+
+  grouping tenancy {
+    uses xos-base;
+
+    choice provider {
+      description "only one type of provider node is valid.";
+      case service { leaf provider-service { type instance-identifier; } }
+    }
+    
+    choice subscriber {
+      description "only one type of subscriber node is valid.";
+      case service { leaf subscriber-service { type instance-identifier; } }
+      case tenant  { leaf subscriber-tenant  { type instance-identifier; } }
+      case user    { leaf subscriber-user    { type instance-identifier; } }
+      case root    { leaf subscriber-root    { type instance-identifier; } }
+      case network { leaf subscriber-network { type instance-identifier; } }
+    }
+
+    leaf connect-method {
+      //when "../kind == 'static-tenant'";
+      
+      type enumeration {
+        enum public { description "Public"; }
+        enum private { description "Private"; }
+        enum private-unidirectional { description "Private Uni-directional"; }
+        enum na { description "Not Applicable"; }
+      }
+      default na;
+    }
+
+    // TODO: should be able to deal with TenantWithContainer here
+    
+  }
+  
   /*** main configuration tree for XOS ***/
 
   container api {
