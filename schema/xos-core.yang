@@ -47,10 +47,57 @@ module xos-core {
     }
   }
 
-  grouping service-attribute {
+  grouping xos-attribute {
     leaf name  { type string { length 0..128; } }
     leaf value { type string; }
     // don't need pointer back to service
+  }
+
+  grouping xos-sync-record {
+    description "Synchronizer-specific properties for model records";
+    
+    leaf created { type yang:date-and-time; }
+    leaf updated { type yang:date-and-time; }
+    leaf enacted { type yang:date-and-time; }
+    leaf policed { type yang:date-and-time; }
+        
+    leaf writable { type boolean; default true; }
+    leaf locked   { type boolean; default false; }
+    leaf deleted  { type boolean; default false; }
+      
+    leaf dirty {
+      config false;
+      type boolean;
+      default false;
+    }
+      
+    container sync {
+      anydata register {
+        description "scratchpad used by the Observer";
+      }
+      leaf progress {
+        type enumeration {
+          enum provisioning {
+            value 0;
+            description "Provisioning in progress";
+          }
+        }
+      }
+      leaf disabled { type boolean; default false; }
+      leaf enforced { type boolean; default true; }
+
+      list policy {
+        // TODO: how are policy defined/enforced?
+      }
+    }
+      
+    action diff {
+      when "../dirty == true";
+      description "retrieve diff of model state if dirty";
+    }
+    action save {
+      description "trigger save into data store via synchronizer";
+    }
   }
   
   grouping xos-base {
@@ -69,13 +116,23 @@ module xos-core {
         length 0..255;
       }
     }
-    // NOTE: this used to be service-specific-attribute
-    //leaf service-specific-attribute { type string; }
-    list attribute { uses service-attribute; }
-    // TODO: service-specific-id should be one of the attributes above?
+    
+    list attribute {
+      uses xos-attribute;
+      key name;
+      status deprecated;
+      reference "XOS: service-specific-attribute";
+      description "backwards-compatible attribute association";
+    }
     leaf service-specific-id {
       type unique-identifier;
       mandatory true;
+      status deprecated;
+    }
+
+    container record {
+      if-feature synchronizer;
+      uses xos-sync-record;
     }
   }
 
@@ -129,13 +186,14 @@ module xos-core {
     leaf enabled   { type boolean; default true; }
     leaf published { type boolean; default true; }
 
-    container external-assets {
+    container links {
       leaf view { type inet:uri; }
       leaf icon { type inet:uri; }
     }
     
     list keypair {
       description "collection of public/private key pair(s)";
+      // should be a specific typedef for storing this content
       leaf public  { type string { length 0..1024; } }
       leaf private { type string { length 0..1024; } }
     }
