@@ -1,0 +1,297 @@
+module xos-types {
+  namespace "urn:onlab:xos:types";
+  prefix xos-types;
+  yang-version 1.1;
+
+  organization
+   "Open Networking Lab (CORD) / Corenova Technologies";
+
+  contact
+    "Larry Peterson <llp@onlab.us>
+     Peter K. Lee <peter@corenova.com>";
+  
+  import ietf-yang-types { prefix yang; }
+  
+  revision 2016-09-12 {
+    description "Initial revision.";
+  }
+
+  grouping unique-identifier {
+    description "defines valid formats for external reference id";
+    type union {
+      type uint32 { range 1..max; }
+      type yang:uuid;
+      type inet:uri;
+    }
+  }
+
+  container refs {
+    grouping image {
+      uses unique-identifier;
+    }
+
+    grouping controller-network {
+      uses unique-identifier;
+    }
+
+    grouping site {
+      uses unique-identifier;
+    }
+
+    grouping tenant-root-role {
+      uses unique-identifier;
+    }
+
+    grouping slice-role {
+      uses unique-identifier;
+    }
+
+    grouping site-deployment {
+      uses unique-identifier;
+    }
+
+    grouping tenant-privilege {
+      uses unique-identifier;
+    }
+
+    grouping tag {
+      uses unique-identifier;
+    }
+
+    grouping user-credential {
+      uses unique-identifier;
+    }
+
+    grouping invoice {
+      uses unique-identifier;
+    }
+
+    grouping slice-privilege {
+      uses unique-identifier;
+    }
+
+    grouping flavor {
+      uses unique-identifier;
+    }
+
+    grouping port {
+      uses unique-identifier;
+    }
+
+    grouping service-role {
+      uses unique-identifier;
+    }
+
+    grouping controller-site {
+      uses unique-identifier;
+    }
+
+    grouping controller-slice {
+      uses unique-identifier;
+    }
+
+    grouping tenant-role {
+      uses unique-identifier;
+    }
+
+    grouping slice {
+      uses unique-identifier;
+    }
+
+    grouping network {
+      uses unique-identifier;
+    }
+
+    grouping controller-role {
+      uses unique-identifier;
+    }
+
+    grouping diag {
+      uses unique-identifier;
+    }
+
+    grouping service-class {
+      uses unique-identifier;
+    }
+
+    grouping tenant-attribute {
+      uses unique-identifier;
+    }
+
+    grouping site-role {
+      uses unique-identifier;
+    }
+
+    grouping subscriber {
+      uses unique-identifier;
+    }
+
+    grouping instance {
+      uses unique-identifier;
+    }
+
+    grouping charge {
+      uses unique-identifier;
+    }
+
+    grouping program {
+      uses unique-identifier;
+    }
+
+    grouping role {
+      uses unique-identifier;
+    }
+
+    grouping usable-object {
+      uses unique-identifier;
+    }
+
+    grouping node-label {
+      uses unique-identifier;
+    }
+
+    grouping slice-credential {
+      uses unique-identifier;
+    }
+
+    grouping node {
+      uses unique-identifier;
+    }
+
+    grouping address-pool {
+      uses unique-identifier;
+    }
+
+    grouping dashboard-view {
+      uses unique-identifier;
+    }
+
+    grouping network-parameter {
+      uses unique-identifier;
+    }
+
+    grouping image-deployments {
+      uses unique-identifier;
+    }
+
+    grouping controller-user {
+      uses unique-identifier;
+    }
+
+    grouping reserved-resource {
+      uses unique-identifier;
+    }
+
+    grouping network-template {
+      uses unique-identifier;
+    }
+
+    grouping controller-dashboard-view {
+      uses unique-identifier;
+    }
+
+    grouping user-dashboard-view {
+      uses unique-identifier;
+    }
+
+    grouping controller {
+      uses unique-identifier;
+    }
+
+    grouping user {
+      uses unique-identifier;
+    }
+
+    grouping deployment {
+      uses unique-identifier;
+    }
+
+    grouping reservation {
+      uses unique-identifier;
+    }
+
+    grouping site-privilege {
+      uses unique-identifier;
+    }
+
+    grouping payment {
+      uses unique-identifier;
+    }
+
+    grouping tenant {
+      uses unique-identifier;
+    }
+
+    grouping network-slice {
+      uses unique-identifier;
+    }
+
+    grouping account {
+      uses unique-identifier;
+    }
+
+    grouping tenant-root {
+      uses unique-identifier;
+    }
+
+    grouping service {
+      uses unique-identifier;
+    }
+
+    grouping controller-slice-privilege {
+      uses unique-identifier;
+    }
+
+    grouping site-credential {
+      uses unique-identifier;
+    }
+
+    grouping deployment-privilege {
+      uses unique-identifier;
+    }
+
+    grouping network-parameter-type {
+      uses unique-identifier;
+    }
+
+    grouping provider {
+      uses unique-identifier;
+    }
+
+    grouping tenant-with-container {
+      uses unique-identifier;
+    }
+
+    grouping deployment-role {
+      uses unique-identifier;
+    }
+
+    grouping project {
+      uses unique-identifier;
+    }
+
+    grouping tenant-root-privilege {
+      uses unique-identifier;
+    }
+
+    grouping slice-tag {
+      uses unique-identifier;
+    }
+
+    grouping coarse-tenant {
+      uses unique-identifier;
+    }
+
+    grouping router {
+      uses unique-identifier;
+    }
+
+    grouping service-resource {
+      uses unique-identifier;
+    }
+
+    grouping service-privilege {
+      uses unique-identifier;
+    }
+  }
+}
