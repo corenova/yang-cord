@@ -1,5 +1,4 @@
 module cord-subscriber {
-  
   namespace "urn:onlab:cord:subscriber";
   prefix csub;
   yang-version 1.1;
@@ -13,7 +12,7 @@ module cord-subscriber {
   
   description
    "This module contains CORD Subscriber model representing its
-    relationship to features, services, and devices.
+    relationship to features and services.
 
     Copyright (c) 2016 ON.LAB and the persons identified as authors of
     the code.  All rights reserved.

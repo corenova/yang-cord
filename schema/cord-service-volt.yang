@@ -1,0 +1,167 @@
+module cord-service-volt {
+  namespace "urn:onlab:cord:service:volt";
+  prefix volt;
+  yang-version 1.1;
+
+  import ietf-yang-types { prefix yang; }
+  import xos-core { prefix xos; }
+
+  organization
+   "Open Networking Lab (CORD) / Corenova Technologies";
+
+  contact
+    "Larry Peterson <llp@onlab.us>
+     Peter K. Lee <peter@corenova.com>";
+
+  revision 2016-09-09 {
+    description "Initial revision.";
+  }
+
+  identity volt-service { base xos:service; }
+
+  feature onos-app-olt {
+    description "System facility to configure VLAN tags on the OLT.";
+  }
+  feature onos-app-aaa {
+    description "System facility to broker authentication between CPE and Radius server.";
+  }
+
+  typedef bandwidth {
+    type xos:bandwidth;
+    default 1000000000; // VOLT bandwidth default is 1Gbps
+  }
+  typedef subscriber-flow {
+    type leafref {
+      path "/volt:service/volt:provider/volt:port/volt:id";
+    }
+  }
+
+  grouping devices-list {
+    grouping olt-device {
+      description
+        "This grouping describes an OLT device which contains ODN link attachments.";
+    
+      leaf name {
+        description "name of OLT device";
+        type string {
+          length 1..254;
+        }
+      }
+      leaf mac { type yang:mac-address; mandatory true; }
+
+      container uplink {
+        description "Uplink description of the OLT device.";
+        leaf network { type yang:uuid; }
+        leaf tag {
+          if-feature onos-app-olt;
+          type xos:vlan;
+          description
+            "Represents S-Tag for instructing OLT to associate a VLAN tag for
+             traffic originating from OLT device.";
+        }
+      }
+    
+      list link {
+        description
+          "Each link represents an ONU/ONT (Optical Network Termination) endpoint
+           connection.";
+
+        key serial;
+        unique tag;
+      
+        leaf mac    { type yang:mac-address; mandatory true; }
+        leaf serial { type string; mandatory true; }
+        leaf active { type boolean; default false; }
+        leaf tag {
+          if-feature onos-app-olt;
+          type xos:vlan;
+          description
+            "Represents C-Tag for instructing ONT to add/remove vlan tag for
+             traffic within OLT device.";
+        }
+      }
+    }
+    list device {
+      description
+        "Each entry represents an OLT device.";
+      key mac;
+      //unique 'uplink/tag';
+      uses olt-device;
+    }
+  }
+  grouping provider {
+    description
+      "This grouping represents a VOLT agent/provider which manages multiple
+       OLT devices. The VOLT agent provides aggregate abstraction of
+       the entire PON as a sigle switch to the controller. Each port
+       entry of the agent represents each ONU/ONT endpoint as a
+       separate openflow port.";
+
+    uses devices-list {
+      description
+        "Each entry represents an OLT device managed by the agent.";
+    }
+    list port {
+      description
+        "Each entry represents an ONU/ONT endpoint connected across OLT devices.";
+      key id;
+      leaf id {
+        description "OpenFlow Port ID";
+        type yang:uuid;
+        mandatory true;
+      }
+      leaf link {
+        type leafref {
+          path '../../device/link/serial';
+        }
+        mandatory true;
+      }
+    }
+    container radius {
+      if-feature onos-app-aaa;
+      // configuration for how to broker authentication requests
+    }
+  }
+  grouping subscriber {
+    description
+      "This grouping represents a VOLT service subscriber along with
+       references to ONU/ONT access endpoints used by the subscriber.";
+    
+    list tag {
+      description
+        "Each entry represents a unique combination of the OLT uplink VLAN
+         (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+         into the fabric for the subscriber.";
+      
+      key 'outer inner';
+      leaf outer {
+        type leafref {
+          path "/volt:service/volt:provider/volt:device/volt:uplink/volt:tag";
+        }
+      }
+      leaf inner {
+        type leafref {
+          path "/volt:service/volt:provider/volt:device/volt:link/volt:tag";
+        }
+      }
+    }
+    leaf-list flows {
+      description
+        "Each entry represents a unique openflow port ID that the subscriber
+         uses to connect into the fabric from the VOLT service.";
+      config false;
+      type subscriber-flow;
+    }
+  }
+
+  /*
+   * Configuration data
+   */
+  container service {
+    uses xos:service {
+      refine kind { default volt-service; }
+      augment "provider"   { uses volt:provider; }
+      augment "subscriber" { uses volt:subscriber; }
+    }
+  }
+}

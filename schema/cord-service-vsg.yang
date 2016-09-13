@@ -1,0 +1,148 @@
+module cord-service-vsg {
+  namespace "urn:onlab:cord:service:volt";
+  prefix volt;
+  yang-version 1.1;
+
+  import ietf-yang-types { prefix yang; }
+  import xos-core { prefix xos; }
+  import cord-service-volt { prefix volt; }
+
+  organization
+   "Open Networking Lab (CORD) / Corenova Technologies";
+
+  contact
+    "Larry Peterson <llp@onlab.us>
+     Peter K. Lee <peter@corenova.com>";
+
+  revision 2016-09-09 {
+    description "Initial revision.";
+  }
+
+  identity vsg-service { base xos:service; }
+
+  typedef subscriber-flow {
+    type leafref {
+      path "/vsg:service/vsg:provider/vsg:port/vsg:id";
+    }
+  }
+
+  grouping provider {
+    description
+      "This grouping represents a VSG agent/provider which manages multiple
+       VSG gateways. The VSG agent provides agregate abstraction of
+       the entire NFaaS as a single switch to the controller. Each
+       port entry of the agent represents each VSG endpoint as a
+       separate openflow port.";
+
+    list gateway {
+      description
+        "Each entry represents a VSG instance managed by the agent.";
+
+      leaf id { type yang:uuid; }
+      container services {
+        description
+          "Contains various services provided by the gateway.";
+        container cdn {
+          if-feature cdn;
+        }
+        container firewall {
+          if-feature firewall;
+          leaf-list rules { type string; }
+        }
+        container url-filter {
+          if-feature url-filter;
+          leaf level {
+            type enumeration {
+              enum "PG";
+              // others...
+            }
+          }
+          leaf-list rules { type string; }
+        }
+        container uverse {
+          if-feature uverse;
+        }
+      }
+    }
+    list port {
+      description
+        "Each entry represents a VSG endpoint connected across VSG gateways.";
+      key id;
+      leaf id {
+        description "OpenFlow Port ID";
+        type yang:uuid;
+        mandatory true;
+      }
+      leaf link {
+        type leafref {
+          path '../../gateway/id';
+        }
+        mandatory true;
+      }
+    }
+  }
+  grouping subscriber {
+    description
+      "This grouping represents a VSG service subscriber along with
+       reference to fabric flows used by the subscriber.";
+
+    leaf status {
+      type enumeration {
+        enum "enabled" {
+          description "Enabled";
+          value 1;
+        }
+        enum "suspended" {
+          description "Suspended";
+        }
+        enum "delinquent" {
+          description "Delinquent";
+        }
+        enum "violation" {
+          description "Copyright Violation";
+        }
+      }
+      default enabled;
+    }
+    leaf demo { type boolean; default false; }
+    leaf uplink-speed   { type volt:bandwidth; }
+    leaf downlink-speed { type volt:bandwidth; }
+    
+    list tag {
+      description
+        "Each entry represents a unique openflow port ID that the subscriber
+         connects to the VSG service from the fabric.";
+      
+      key flow;
+      leaf flow {
+        type union {
+          type volt:subscriber-flow;
+          type vsg:subscriber-flow {
+            description "can be an output flow from the VSG service.";
+          }
+          type yang:uuid {
+            description "supports a generic openflow port ID";
+          }
+        }
+      }
+    }
+    leaf-list flows {
+      description
+        "Each entry represents a unique openflow port ID that the subscriber
+         uses to connect into the fabric from the VSG service.";
+      config false;
+      type subscriber-flow;
+    }
+  }
+  
+  /*
+   * Configuration data
+   */
+  container service {
+    uses xos:service {
+      refine kind { default vsg-service; }
+      augment "provider"   { uses vsg:provider; }
+      augment "subscriber" { uses vsg:subscriber; }
+    }
+  }
+}
