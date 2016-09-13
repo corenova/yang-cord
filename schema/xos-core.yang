@@ -136,7 +136,6 @@ module xos-core {
       uses sync-record;
     }
   }
-
   grouping tenant-root {
     uses base-common {
       refine 'name' {
@@ -152,21 +151,21 @@ module xos-core {
       // not exactly clear how this is populated
     }
   }
-  
   grouping subscriber {
     uses tenant-root {
       refine kind { default subscriber; }
     }
     // seems we should have interesting attributes specific to subscriber?
   }
-  
   grouping provider {
     uses tenant-root {
       refine kind { default provider; }
     }
     // seems we should have interesting attributes specific to provider?
   }
-
+  grouping slice {
+    // TBD
+  }
   grouping service {
     uses base-common {
       refine 'name' {
@@ -219,6 +218,9 @@ module xos-core {
       uses xos:subscriber;
       notification subscriber-added;
       notification subscriber-deleted;
+    }
+    list slice {
+      uses xos:slice;
     }
     
     // TOOD: need to better understand relationship between Service and Slice

@@ -31,14 +31,15 @@ module cord-service-vsg {
       "This grouping represents a VSG agent/provider which manages multiple
        VSG gateways. The VSG agent provides agregate abstraction of
        the entire NFaaS as a single switch to the controller. Each
-       port entry of the agent represents each VSG endpoint as a
-       separate openflow port.";
+       port entry of the agent represents each VSG subscriber flow as
+       a separate openflow port.";
 
     list gateway {
       description
         "Each entry represents a VSG instance managed by the agent.";
 
-      leaf id { type yang:uuid; }
+      leaf id { type xos:unique-identifier; }
+      
       container services {
         description
           "Contains various services provided by the gateway.";
@@ -63,10 +64,18 @@ module cord-service-vsg {
           if-feature uverse;
         }
       }
+      list flow {
+        description
+          "Each flow represents a subscriber flow into the VSG instance.";
+        leaf id {
+          type yang:uuid;
+        }
+      }
     }
     list port {
       description
-        "Each entry represents a VSG endpoint connected across VSG gateways.";
+        "Each entry represents a VSG subscriber flow connected across VSG
+         gateways.";
       key id;
       leaf id {
         description "OpenFlow Port ID";
@@ -75,7 +84,7 @@ module cord-service-vsg {
       }
       leaf link {
         type leafref {
-          path '../../gateway/id';
+          path '../../gateway/flow/id';
         }
         mandatory true;
       }
