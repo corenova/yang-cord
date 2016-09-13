@@ -3,6 +3,10 @@ module xos-core {
   prefix xos;
   yang-version 1.1;
 
+  import ietf-yang-types { prefix yang; }
+  import ietf-inet-types { prefix inet; }
+  import xos-types       { prefix xtype; }
+
   organization
    "Open Networking Lab (XOS) / Corenova Technologies";
 
@@ -26,10 +30,6 @@ module xos-core {
     description "Initial revision.";
   }
   
-  import ietf-yang-types { prefix yang; }
-  import ietf-inet-types { prefix inet; }
-  import xos-types { prefix xos; }
-
   feature synchronizer {
     description
       "Enables configuration synchronization to the distributed store.";
@@ -38,24 +38,6 @@ module xos-core {
   identity kind;
   identity generic { base kind; }
   identity service { base kind; }
-
-  typedef unique-identifier {
-    description "defines valid formats for external reference id";
-    type union {
-      type uint32 { range 1..max; }
-      type yang:uuid;
-      type inet:uri;
-    }
-  }
-  typedef bandwidth {
-    type uint32 {
-      range 1000000..max; // should be at least 1 Mbps?  
-    }
-    units 'bps';
-  }
-  typedef vlan {
-    type uint16 { range 0..4095; }
-  }
 
   grouping attribute-pair {
     leaf name  { type string { length 0..128; } }
@@ -112,7 +94,7 @@ module xos-core {
   
   grouping base-common {
     leaf id {
-      type unique-identifier;
+      type xtype:unique-identifier;
       mandatory true;
     }
     leaf name {
@@ -128,7 +110,7 @@ module xos-core {
       description "backwards-compatible attribute association";
     }
     leaf service-specific-id {
-      type unique-identifier;
+      type xtype:unique-identifier;
       mandatory true;
       status deprecated;
     }
@@ -163,9 +145,6 @@ module xos-core {
       refine kind { default provider; }
     }
     // seems we should have interesting attributes specific to provider?
-  }
-  grouping slice {
-    // TBD
   }
   grouping service {
     uses base-common {
@@ -284,7 +263,7 @@ module xos-core {
 
     leaf slice-url {
        description "A URL describing the purpose of this slice";
-       type xos.refs.url-field; 
+       type xtype:url-field; 
        // blank true;
     }
 
@@ -295,7 +274,7 @@ module xos-core {
 
     leaf service {
        description "The service that runs in this slice";
-       type xos.refs.service;
+       type xtype:service;
     }
 
     leaf network {
@@ -309,42 +288,45 @@ module xos-core {
     }
 
     leaf service-class {
-       type xos.refs.service-class;
-       status deprecated;
+      type xtype:service-class;
+      status deprecated;
     }
    
     leaf creator {
-       type xos.refs.user;
+      type xtype:user;
     }
 
     leaf default-flavor {
-       type xos.refs.flavor;
+      type xtype:flavor;
     }
 
     leaf default-image {
-       type xos.refs.image;
+      type xtype:image;
     }
 
     leaf default-node {
-       type xos.refs.node;
+      type xtype:node;
     } 
 
     leaf mount-data-sets {
-       type string;
-       default "GenBank";
-       length 0..256;
+      type string {
+        length 0..256; 
+      }
+      default "GenBank";
     } 
 
     leaf default_isolation {
-       type string;
-       default "vm";
-       length 0..30;
+      type string {
+        length 0..30;
+      }
+      default "vm";
     } 
 
     leaf-list tags {
-        type leafref {
-            path "/tag[id = current()/../id]/id";
-        }
+      // below leafref is not valid since there is no /tag
+      type leafref {
+        path "/tag[id = current()/../id]/id";
+      }
     }
   }
   

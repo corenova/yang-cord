@@ -1,6 +1,6 @@
 module xos-types {
   namespace "urn:onlab:xos:types";
-  prefix xos-types;
+  prefix xtype;
   yang-version 1.1;
 
   organization
@@ -16,7 +16,10 @@ module xos-types {
     description "Initial revision.";
   }
 
-  grouping unique-identifier {
+  /*
+   * Typedefs
+   */
+  typedef unique-identifier {
     description "defines valid formats for external reference id";
     type union {
       type uint32 { range 1..max; }
@@ -24,274 +27,214 @@ module xos-types {
       type inet:uri;
     }
   }
-
-  container refs {
-    grouping image {
-      uses unique-identifier;
-    }
-
-    grouping controller-network {
-      uses unique-identifier;
-    }
-
-    grouping site {
-      uses unique-identifier;
-    }
-
-    grouping tenant-root-role {
-      uses unique-identifier;
-    }
-
-    grouping slice-role {
-      uses unique-identifier;
-    }
-
-    grouping site-deployment {
-      uses unique-identifier;
-    }
-
-    grouping tenant-privilege {
-      uses unique-identifier;
-    }
-
-    grouping tag {
-      uses unique-identifier;
-    }
-
-    grouping user-credential {
-      uses unique-identifier;
-    }
-
-    grouping invoice {
-      uses unique-identifier;
-    }
-
-    grouping slice-privilege {
-      uses unique-identifier;
-    }
-
-    grouping flavor {
-      uses unique-identifier;
-    }
-
-    grouping port {
-      uses unique-identifier;
-    }
-
-    grouping service-role {
-      uses unique-identifier;
-    }
-
-    grouping controller-site {
-      uses unique-identifier;
-    }
-
-    grouping controller-slice {
-      uses unique-identifier;
-    }
-
-    grouping tenant-role {
-      uses unique-identifier;
-    }
-
-    grouping slice {
-      uses unique-identifier;
-    }
-
-    grouping network {
-      uses unique-identifier;
-    }
-
-    grouping controller-role {
-      uses unique-identifier;
-    }
-
-    grouping diag {
-      uses unique-identifier;
-    }
-
-    grouping service-class {
-      uses unique-identifier;
-    }
-
-    grouping tenant-attribute {
-      uses unique-identifier;
-    }
-
-    grouping site-role {
-      uses unique-identifier;
-    }
-
-    grouping subscriber {
-      uses unique-identifier;
-    }
-
-    grouping instance {
-      uses unique-identifier;
-    }
-
-    grouping charge {
-      uses unique-identifier;
-    }
-
-    grouping program {
-      uses unique-identifier;
-    }
-
-    grouping role {
-      uses unique-identifier;
-    }
-
-    grouping usable-object {
-      uses unique-identifier;
-    }
-
-    grouping node-label {
-      uses unique-identifier;
-    }
-
-    grouping slice-credential {
-      uses unique-identifier;
-    }
-
-    grouping node {
-      uses unique-identifier;
-    }
-
-    grouping address-pool {
-      uses unique-identifier;
-    }
-
-    grouping dashboard-view {
-      uses unique-identifier;
-    }
-
-    grouping network-parameter {
-      uses unique-identifier;
-    }
-
-    grouping image-deployments {
-      uses unique-identifier;
-    }
-
-    grouping controller-user {
-      uses unique-identifier;
-    }
-
-    grouping reserved-resource {
-      uses unique-identifier;
-    }
-
-    grouping network-template {
-      uses unique-identifier;
-    }
-
-    grouping controller-dashboard-view {
-      uses unique-identifier;
-    }
-
-    grouping user-dashboard-view {
-      uses unique-identifier;
-    }
-
-    grouping controller {
-      uses unique-identifier;
-    }
-
-    grouping user {
-      uses unique-identifier;
-    }
-
-    grouping deployment {
-      uses unique-identifier;
-    }
-
-    grouping reservation {
-      uses unique-identifier;
-    }
-
-    grouping site-privilege {
-      uses unique-identifier;
-    }
-
-    grouping payment {
-      uses unique-identifier;
-    }
-
-    grouping tenant {
-      uses unique-identifier;
-    }
-
-    grouping network-slice {
-      uses unique-identifier;
-    }
-
-    grouping account {
-      uses unique-identifier;
-    }
-
-    grouping tenant-root {
-      uses unique-identifier;
-    }
-
-    grouping service {
-      uses unique-identifier;
-    }
-
-    grouping controller-slice-privilege {
-      uses unique-identifier;
-    }
-
-    grouping site-credential {
-      uses unique-identifier;
-    }
-
-    grouping deployment-privilege {
-      uses unique-identifier;
-    }
-
-    grouping network-parameter-type {
-      uses unique-identifier;
-    }
-
-    grouping provider {
-      uses unique-identifier;
-    }
-
-    grouping tenant-with-container {
-      uses unique-identifier;
-    }
-
-    grouping deployment-role {
-      uses unique-identifier;
-    }
-
-    grouping project {
-      uses unique-identifier;
-    }
-
-    grouping tenant-root-privilege {
-      uses unique-identifier;
-    }
-
-    grouping slice-tag {
-      uses unique-identifier;
-    }
-
-    grouping coarse-tenant {
-      uses unique-identifier;
-    }
-
-    grouping router {
-      uses unique-identifier;
-    }
-
-    grouping service-resource {
-      uses unique-identifier;
-    }
-
-    grouping service-privilege {
-      uses unique-identifier;
-    }
+  typedef bandwidth {
+    type uint32 {
+      range 1000000..max; // should be at least 1 Mbps?  
+    }
+    units 'bps';
+  }
+  typedef vlan {
+    type uint16 { range 0..4095; }
+  }
+  typedef image {
+    type unique-identifier;
+  }
+  typedef controller-network {
+    type unique-identifier;
+  }
+  typedef site {
+    type unique-identifier;
+  }
+  typedef tenant-root-role {
+    type unique-identifier;
+  }
+  typedef slice-role {
+    type unique-identifier;
+  }
+  typedef site-deployment {
+    type unique-identifier;
+  }
+  typedef tenant-privilege {
+    type unique-identifier;
+  }
+  typedef tag {
+    type unique-identifier;
+  }
+  typedef user-credential {
+    type unique-identifier;
+  }
+  typedef invoice {
+    type unique-identifier;
+  }
+  typedef slice-privilege {
+    type unique-identifier;
+  }
+  typedef flavor {
+    type unique-identifier;
+  }
+  typedef port {
+    type unique-identifier;
+  }
+  typedef service-role {
+    type unique-identifier;
+  }
+  typedef controller-site {
+    type unique-identifier;
+  }
+  typedef controller-slice {
+    type unique-identifier;
+  }
+  typedef tenant-role {
+    type unique-identifier;
+  }
+  typedef slice {
+    type unique-identifier;
+  }
+  typedef network {
+    type unique-identifier;
+  }
+  typedef controller-role {
+    type unique-identifier;
+  }
+  typedef diag {
+    type unique-identifier;
+  }
+  typedef service-class {
+    type unique-identifier;
+  }
+  typedef tenant-attribute {
+    type unique-identifier;
+  }
+  typedef site-role {
+    type unique-identifier;
+  }
+  typedef subscriber {
+    type unique-identifier;
+  }
+  typedef instance {
+    type unique-identifier;
+  }
+  typedef charge {
+    type unique-identifier;
+  }
+  typedef program {
+    type unique-identifier;
+  }
+  typedef role {
+    type unique-identifier;
+  }
+  typedef usable-object {
+    type unique-identifier;
+  }
+  typedef node-label {
+    type unique-identifier;
+  }
+  typedef slice-credential {
+    type unique-identifier;
+  }
+  typedef node {
+    type unique-identifier;
+  }
+  typedef address-pool {
+    type unique-identifier;
+  }
+  typedef dashboard-view {
+    type unique-identifier;
+  }
+  typedef network-parameter {
+    type unique-identifier;
+  }
+  typedef image-deployments {
+    type unique-identifier;
+  }
+  typedef controller-user {
+    type unique-identifier;
+  }
+  typedef reserved-resource {
+    type unique-identifier;
+  }
+  typedef network-template {
+    type unique-identifier;
+  }
+  typedef controller-dashboard-view {
+    type unique-identifier;
+  }
+  typedef user-dashboard-view {
+    type unique-identifier;
+  }
+  typedef controller {
+    type unique-identifier;
+  }
+  typedef user {
+    type unique-identifier;
+  }
+  typedef deployment {
+    type unique-identifier;
+  }
+  typedef reservation {
+    type unique-identifier;
+  }
+  typedef site-privilege {
+    type unique-identifier;
+  }
+  typedef payment {
+    type unique-identifier;
+  }
+  typedef tenant {
+    type unique-identifier;
+  }
+  typedef network-slice {
+    type unique-identifier;
+  }
+  typedef account {
+    type unique-identifier;
+  }
+  typedef tenant-root {
+    type unique-identifier;
+  }
+  typedef service {
+    type unique-identifier;
+  }
+  typedef controller-slice-privilege {
+    type unique-identifier;
+  }
+  typedef site-credential {
+    type unique-identifier;
+  }
+  typedef deployment-privilege {
+    type unique-identifier;
+  }
+  typedef network-parameter-type {
+    type unique-identifier;
+  }
+  typedef provider {
+    type unique-identifier;
+  }
+  typedef tenant-with-container {
+    type unique-identifier;
+  }
+  typedef deployment-role {
+    type unique-identifier;
+  }
+  typedef project {
+    type unique-identifier;
+  }
+  typedef tenant-root-privilege {
+    type unique-identifier;
+  }
+  typedef slice-tag {
+    type unique-identifier;
+  }
+  typedef coarse-tenant {
+    type unique-identifier;
+  }
+  typedef router {
+    type unique-identifier;
+  }
+  typedef service-resource {
+    type unique-identifier;
+  }
+  typedef service-privilege {
+    type unique-identifier;
   }
 }
