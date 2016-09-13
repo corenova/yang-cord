@@ -28,6 +28,7 @@ module xos-core {
   
   import ietf-yang-types { prefix yang; }
   import ietf-inet-types { prefix inet; }
+  import xos-types { prefix xos; }
 
   feature synchronizer {
     description
@@ -262,6 +263,89 @@ module xos-core {
 
     // TODO: should be able to deal with TenantWithContainer here
     
+  }
+
+  grouping slice {
+    description 
+      "A slice is a logically centralized container for network and compute resources"
+
+    uses base-common;
+
+    leaf enabled {
+       type boolean;
+       default true;
+    }
+
+    leaf omf-friendly {
+       type boolean;
+       default false;
+       status deprecated;
+    }
+
+    leaf slice-url {
+       description "A URL describing the purpose of this slice";
+       type xos.refs.url-field; 
+       // blank true;
+    }
+
+    leaf max-instances {
+       description "The maximum number of VMs that this slice is allowed to allocate";
+       type uint32;
+    } 
+
+    leaf service {
+       description "The service that runs in this slice";
+       type xos.refs.service;
+    }
+
+    leaf network {
+       description "The network that the slice uses to connect to other slices and to the Internet.";
+       type string;
+    }
+
+    leaf exposed-ports {
+       description "The ports to be exposed for other slices to connect to";
+       type string;
+    }
+
+    leaf service-class {
+       type xos.refs.service-class;
+       status deprecated;
+    }
+   
+    leaf creator {
+       type xos.refs.user;
+    }
+
+    leaf default-flavor {
+       type xos.refs.flavor;
+    }
+
+    leaf default-image {
+       type xos.refs.image;
+    }
+
+    leaf default-node {
+       type xos.refs.node;
+    } 
+
+    leaf mount-data-sets {
+       type string;
+       default "GenBank";
+       length 0..256;
+    } 
+
+    leaf default_isolation {
+       type string;
+       default "vm";
+       length 0..30;
+    } 
+
+    leaf-list tags {
+        type leafref {
+            path "/tag[id = current()/../id]/id";
+        }
+    }
   }
   
   /*** main configuration tree for XOS ***/
