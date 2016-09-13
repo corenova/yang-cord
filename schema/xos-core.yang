@@ -1,5 +1,5 @@
 module xos-core {
-  namespace "urn:onlab:xos:core";
+  namespace "urn:onlab:xtype:core";
   prefix xos;
   yang-version 1.1;
 
@@ -188,19 +188,19 @@ module xos-core {
         "Each entry represents a provider of the service. Each unique service
          should augment this block with service specific attributes.";
       key id;
-      uses xos:provider;
+      uses xtype:provider;
     }
     list subscriber {
       description
         "Each entry represents a subscriber of the service. Each unique service
          should augment this block with service specific attributes.";
       key id;
-      uses xos:subscriber;
+      uses xtype:subscriber;
       notification subscriber-added;
       notification subscriber-deleted;
     }
     list slice {
-      uses xos:slice;
+      uses xtype:slice;
     }
     
     // TOOD: need to better understand relationship between Service and Slice
@@ -330,6 +330,1007 @@ module xos-core {
     }
   }
   
+  
+  grouping controller-images {
+    uses xos-base;
+
+    leaf image { 
+      type xtype:image; 
+    }
+
+    leaf controller { 
+      type xtype:controller; 
+    }
+
+    container synchronizer {
+        if-feature synchronizer {
+            leaf glance-image-id { 
+              type string;
+            }
+        }
+    }
+  }
+
+  grouping controller-site-privilege {
+    uses xos-base;
+
+    leaf controller { 
+      type xtype:controller; 
+    }
+
+    leaf site-privilege { 
+      type xtype:site-privilege; 
+    }
+    
+   container synchronizer {
+     if-feature synchronizer {
+
+       leaf role-id { 
+         type string;
+       }
+     }
+   }
+
+  grouping image {
+    uses xos-base;
+
+    
+    leaf kind { 
+      type string;
+    }
+    leaf disk-format { 
+      type string;
+    }
+    leaf container-format { 
+      type string;
+    }
+    leaf path { 
+      type string;
+    }
+    leaf tag { 
+      type string;
+    }
+  }
+
+  grouping controller-network {
+    uses xos-base;
+    leaf network { 
+      type xtype:network; 
+    }
+    leaf controller { 
+      type xtype:controller; 
+    }
+    
+    container synchronizer {
+        if-feature synchronizer {
+            leaf net-id { 
+              type string;
+            }
+            leaf router-id { 
+              type string;
+            }
+            leaf subnet-id { 
+              type string;
+            }
+        }
+
+    leaf subnet { 
+      type string;
+    }
+   
+  }
+
+  grouping site {
+    uses xos-base;
+    
+    leaf site-url { 
+      type xtype:url-field;
+    }
+    leaf enabled { 
+      type boolean;
+    }
+    leaf hosts-nodes { 
+      type boolean;
+    }
+    leaf hosts-users { 
+      type boolean;
+    }
+    leaf location { 
+      type xtype:geoposition-field;
+    }
+    leaf longitude { 
+      type decimal64;
+    }
+    leaf latitude { 
+      type decimal64;
+    }
+    leaf login-base { 
+      type string;
+    }
+    leaf is-public { 
+      type boolean;
+    }
+    leaf abbreviated-name { 
+      type string;
+    }
+  }
+
+  grouping slice-role {
+    uses xos-base;
+    leaf role { 
+      type string;
+    }
+  }
+
+  grouping site-deployment {
+    uses xos-base;
+    leaf site { 
+      type xtype:site; 
+    }
+    leaf deployment { 
+      type xtype:deployment; 
+    }
+    leaf controller { 
+      type xtype:controller; 
+    }
+    container synchronizer {
+        if-feature synchronizer {
+
+          leaf availability-zone { 
+            type string;
+          }
+        }
+    }
+  }
+
+  
+  grouping user-credential {
+    uses xos-base;
+    leaf user { 
+      type xtype:user; 
+    }
+    
+    leaf key-id { 
+      type string;
+    }
+
+    leaf enc-value { 
+      type xtype:encrypted-string;
+    }
+  }
+
+  grouping invoice {
+    uses xos-base;
+    leaf date { 
+      type xtype:datetime;
+    }
+    leaf account { 
+      type xtype:account; 
+    }
+  }
+
+  grouping slice-privilege {
+    uses xos-base;
+    leaf user { 
+      type xtype:user; 
+    }
+    leaf slice { 
+      type xtype:slice; 
+    }
+    leaf role { 
+      type xtype:role; 
+    }
+  }
+
+  grouping flavor {
+    uses xos-base;
+    
+    leaf description { 
+      type string;
+    }
+    leaf flavor { 
+      type string;
+    }
+    leaf order { 
+      type uint32;
+    }
+    leaf default { 
+      type boolean;
+    }
+  }
+
+  grouping port {
+    uses xos-base;
+    leaf network { 
+      type xtype:network; 
+    }
+    leaf instance { 
+      type xtype:instance; 
+    }
+    container synchronizer {
+        if-feature synchronizer {
+            leaf ip { 
+              type inet:ip-address;
+            }
+            leaf port-id { 
+              type string;
+            }
+            leaf mac { 
+              type string;
+            }
+        }
+    }
+    leaf xos-created { 
+      type boolean;
+    }
+  }
+
+  grouping service-role {
+    uses xos-base;
+    leaf role { 
+      type string;
+    }
+  }
+
+  grouping controller-site {
+    uses xos-base;
+    leaf site { 
+      type xtype:site; 
+    }
+
+    leaf controller { 
+      type xtype:controller; 
+    }
+
+    container synchronizer {
+        if-feature synchronizer {
+
+          leaf tenant-id { 
+            type string;
+          }
+        }
+    }
+  }
+
+  grouping controller-slice {
+    uses xos-base;
+    leaf controller { 
+      type xtype:controller; 
+    }
+    leaf slice { 
+      type xtype:slice; 
+    }
+    
+    container synchronizer {
+        if-feature synchronizer {
+          leaf tenant-id { 
+            type string;
+          }
+        }
+    }
+  }
+
+  grouping tenant-role {
+    uses xos-base;
+    leaf role { 
+      type string;
+    }
+  }
+
+  grouping network {
+    uses xos-base;
+    leaf template { 
+      type xtype:template; 
+    }
+
+    leaf subnet { 
+      type string;
+    }
+
+    leaf ports { 
+      type string;
+    }
+
+    leaf labels { 
+      type string;
+    }
+
+    leaf owner { 
+      type xtype:owner; 
+    }
+
+    leaf guaranteed-bandwidth { 
+      type uint32;
+    }
+
+    leaf permit-all-slices { 
+      type boolean;
+    }
+
+    leaf topology-parameters { 
+      type string;
+    }
+
+    leaf controller-url { 
+      type string;
+    }
+
+    leaf controller-parameters { 
+      type string;
+    }
+
+    container synchronizer {
+        if-feature synchronizer {
+            leaf network-id { 
+              type string;
+            }
+            leaf router-id { 
+              type string;
+            }
+            leaf subnet-id { 
+              type string;
+            }
+        }
+    }
+    leaf autoconnect { 
+      type boolean;
+    }
+  }
+
+  grouping controller-role {
+    uses xos-base;
+    leaf role { 
+      type string;
+    }
+  }
+
+  grouping diag {
+    uses xos-base;
+    
+  }
+
+  grouping service-class {
+    uses xos-base;
+    
+    leaf description { 
+      type string;
+    }
+    leaf commitment { 
+      type uint32;
+    }
+    leaf membership-fee { 
+      type uint32;
+    }
+    leaf membership-fee-months { 
+      type uint32;
+    }
+    leaf upgrade-requires-approval { 
+      type boolean;
+    }
+  }
+
+  grouping site-role {
+    uses xos-base;
+    leaf role { 
+      type string;
+    }
+  }
+
+  grouping instance {
+    uses xos-base;
+    container synchronizer {
+      if-feature synchronizer {
+        leaf instance-id { 
+          type string;
+        }
+
+        leaf instance-uuid { 
+          type string;
+        }
+        
+        leaf instance-name { 
+          type string;
+        }
+
+        leaf ip { 
+          type inet:ip-address;
+        }
+    }
+    leaf image { 
+      type xtype:image; 
+    }
+    leaf creator { 
+      type xtype:creator; 
+    }
+    leaf slice { 
+      type xtype:slice; 
+    }
+    leaf deployment { 
+      type xtype:deployment; 
+    }
+    leaf node { 
+      type xtype:node; 
+    }
+    leaf number-cores { 
+      type uint32;
+    }
+    leaf flavor { 
+      type xtype:flavor; 
+    }
+    leaf user-data { 
+      type string;
+    }
+    leaf isolation { 
+      type string;
+    }
+    leaf volumes { 
+      type string;
+    }
+    leaf parent { 
+      type xtype:parent; 
+    }
+  }
+
+  grouping charge {
+    uses xos-base;
+    leaf account { 
+      type xtype:account; 
+    }
+    leaf slice { 
+      type xtype:slice; 
+    }
+    leaf kind { 
+      type string;
+    }
+    leaf state { 
+      type string;
+    }
+    leaf date { 
+      type xtype:datetime;
+    }
+    leaf object { 
+      type xtype:object; 
+    }
+    leaf amount { 
+      type decimal64;
+    }
+    leaf core-hours { 
+      type decimal64;
+    }
+    leaf invoice { 
+      type xtype:invoice; 
+    }
+  }
+
+  grouping program {
+    uses xos-base;
+    leaf description { 
+      type string;
+    }
+
+    leaf kind { 
+      type string;
+    }
+
+    leaf command { 
+      type string;
+    }
+
+    leaf owner { 
+      type xtype:owner; 
+    }
+
+    leaf contents { 
+      type string;
+    }
+
+    leaf output { 
+      type string;
+    }
+
+    leaf messages { 
+      type string;
+    }
+
+    leaf status { 
+      type string;
+    }
+  }
+
+  grouping role {
+    uses xos-base;
+    leaf role-type { 
+      type string;
+    }
+    leaf role { 
+      type string;
+    }
+    leaf description { 
+      type string;
+    }
+    leaf content-type { 
+      type xtype:content-type; 
+    }
+  }
+
+  grouping usable-object {
+    uses xos-base;
+  }
+
+  grouping node-label {
+    uses xos-base;
+  }
+
+  grouping slice-credential {
+    uses xos-base;
+    leaf slice { 
+      type xtype:slice; 
+    }
+    
+    leaf key-id { 
+      type string;
+    }
+    leaf enc-value { 
+      type xtype:encrypted-string;
+    }
+  }
+
+  grouping node {
+    uses xos-base;
+    leaf site-deployment { 
+      type xtype:site-deployment; 
+    }
+    leaf site { 
+      type xtype:site; 
+    }
+  }
+
+  grouping address-pool {
+    uses xos-base;
+    leaf addresses { 
+      type string;
+    }
+    leaf gateway-ip { 
+      type string;
+    }
+    leaf gateway-mac { 
+      type string;
+    }
+    leaf cidr { 
+      type string;
+    }
+    leaf inuse { 
+      type string;
+    }
+    leaf service { 
+      type xtype:service; 
+    }
+  }
+
+  grouping dashboard-view {
+    uses xos-base;
+    leaf url { 
+      type string;
+    }
+    leaf enabled { 
+      type boolean;
+    }
+  }
+
+  grouping network-parameter {
+    uses xos-base;
+    leaf parameter { 
+      type xtype:parameter; 
+    }
+    leaf value { 
+      type string;
+    }
+    leaf content-type { 
+      type xtype:content-type; 
+    }
+    leaf object-id { 
+      type uint32;
+    }
+  }
+
+  grouping image-deployments {
+    uses xos-base;
+    leaf image { 
+      type xtype:image; 
+    }
+    leaf deployment { 
+      type xtype:deployment; 
+    }
+  }
+
+  grouping controller-user {
+    uses xos-base;
+    leaf user { 
+      type xtype:user; 
+    }
+
+    leaf controller { 
+      type xtype:controller; 
+    }
+    
+    container synchronizer {
+        if-feature synchronizer {
+            leaf kuser-id { 
+              type string;
+            }
+        }
+      }
+  }
+
+  grouping reserved-resource {
+    uses xos-base;
+    leaf instance { 
+      type xtype:instance; 
+    }
+    leaf resource { 
+      type xtype:resource; 
+    }
+    leaf quantity { 
+      type uint32;
+    }
+    leaf reservationSet { 
+      type xtype:reservationSet; 
+    }
+  }
+
+  grouping network-template {
+    uses xos-base;
+    leaf description { 
+      type string;
+    }
+    leaf guaranteed-bandwidth { 
+      type uint32;
+    }
+    leaf visibility { 
+      type string;
+    }
+    leaf translation { 
+      type string;
+    }
+    leaf access { 
+      type string;
+    }
+    leaf shared-network-name { 
+      type string;
+    }
+    leaf shared-network-id { 
+      type string;
+    }
+    leaf topology-kind { 
+      type string;
+    }
+    leaf controller-kind { 
+      type string;
+    }
+  }
+
+  grouping controller-dashboard-view {
+    uses xos-base;
+    leaf controller { 
+      type xtype:controller; 
+    }
+    leaf dashboardView { 
+      type xtype:dashboardView; 
+    }
+    leaf enabled { 
+      type boolean;
+    }
+    leaf url { 
+      type string;
+    }
+  }
+
+  grouping user-dashboard-view {
+    uses xos-base;
+    leaf user { 
+      type xtype:user; 
+    }
+    leaf dashboardView { 
+      type xtype:dashboardView; 
+    }
+    leaf order { 
+      type uint32;
+    }
+  }
+
+  grouping controller {
+    uses xos-base;
+    leaf backend-type { 
+      type string;
+    }
+    leaf version { 
+      type string;
+    }
+    leaf auth-url { 
+      type string;
+    }
+    leaf admin-user { 
+      type string;
+    }
+    leaf admin-password { 
+      type string;
+    }
+    leaf admin-tenant { 
+      type string;
+    }
+    leaf domain { 
+      type string;
+    }
+    leaf rabbit-host { 
+      type string;
+    }
+    leaf rabbit-user { 
+      type string;
+    }
+    leaf rabbit-password { 
+      type string;
+    }
+    leaf deployment { 
+      type xtype:deployment; 
+    }
+  }
+
+  grouping user {
+    uses xos-base;
+    leaf password { 
+      type string;
+    }
+    leaf last-login { 
+      type xtype:datetime;
+    }
+    leaf email { 
+      type EmailField;
+    }
+    leaf username { 
+      type string;
+    }
+    leaf firstname { 
+      type string;
+    }
+    leaf lastname { 
+      type string;
+    }
+    leaf phone { 
+      type string;
+    }
+    leaf user-url { 
+      type xtype:url-field;
+    }
+    leaf site { 
+      type xtype:site; 
+    }
+    leaf public-key { 
+      type string;
+    }
+    leaf is-active { 
+      type boolean;
+    }
+    leaf is-admin { 
+      type boolean;
+    }
+    leaf is-staff { 
+      type boolean;
+    }
+    leaf is-readonly { 
+      type boolean;
+    }
+    leaf is-registering { 
+      type boolean;
+    }
+    leaf is-appuser { 
+      type boolean;
+    }
+    leaf login-page { 
+      type string;
+    }
+    leaf timezone { 
+      type xtype:time-zone-field;
+    }
+  }
+
+  grouping deployment {
+    uses xos-base;
+    
+    leaf access-control { 
+      type string;
+    }
+  }
+
+  grouping reservation {
+    uses xos-base;
+    leaf start-time { 
+      type xtype:datetime;
+    }
+    leaf slice { 
+      type xtype:slice; 
+    }
+    leaf duration { 
+      type uint32;
+    }
+  }
+
+  grouping site-privilege {
+    uses xos-base;
+    leaf user { 
+      type xtype:user; 
+    }
+    leaf site { 
+      type xtype:site; 
+    }
+    leaf role { 
+      type xtype:role; 
+    }
+  }
+
+  grouping payment {
+    uses xos-base;
+    leaf account { 
+      type xtype:account; 
+    }
+    leaf amount { 
+      type decimal64;
+    }
+    leaf date { 
+      type xtype:datetime;
+    }
+  }
+  
+  grouping network-slice {
+    uses xos-base;
+    leaf network { 
+      type xtype:network; 
+    }
+
+    leaf slice { 
+      type xtype:slice; 
+    }
+  }
+
+  grouping account {
+    uses xos-base;
+    leaf site { 
+      type xtype:site; 
+    }
+  }
+
+  grouping controller-slice-privilege {
+    uses xos-base;
+    leaf controller { 
+      type xtype:controller; 
+    }
+
+    leaf slice-privilege { 
+      type xtype:slice-privilege; 
+    }
+    
+    container synchronizer {
+        if-feature synchronizer {
+            leaf role-id { 
+              type string;
+            }
+        }
+    }
+  }
+
+  grouping site-credential {
+    uses xos-base;
+    leaf site { 
+      type xtype:site; 
+    }
+    
+    leaf key-id { 
+      type string;
+    }
+
+    leaf enc-value { 
+      type xtype:encrypted-string;
+    }
+  }
+
+  grouping deployment-privilege {
+    uses xos-base;
+    leaf user { 
+      type xtype:user; 
+    }
+
+    leaf deployment { 
+      type xtype:deployment; 
+    }
+
+    leaf role { 
+      type xtype:role; 
+    }
+  }
+
+  grouping network-parameter-type {
+    uses xos-base;
+    leaf description { 
+      type string;
+    }
+  }
+  
+  grouping deployment-role {
+    uses xos-base;
+    leaf role { 
+      type string;
+    }
+  }
+
+  grouping project {
+    uses xos-base;
+  }
+  
+  grouping slice-tag {
+    uses xos-base;
+    leaf slice { 
+      type xtype:slice; 
+    }
+    
+    leaf value { 
+      type string;
+    }
+  }
+
+  grouping router {
+    uses xos-base;
+    leaf owner { 
+      type xtype:owner; 
+    }
+  }
+
+  grouping service-resource {
+    uses xos-base;
+    leaf service-class { 
+      type xtype:service-class; 
+    }
+    
+    leaf max-units-deployment { 
+      type uint32;
+    }
+
+    leaf max-units-node { 
+      type uint32;
+    }
+
+    leaf max-duration { 
+      type uint32;
+    }
+
+    leaf bucket-in-rate { 
+      type uint32;
+    }
+
+    leaf bucket-max-size { 
+      type uint32;
+    }
+
+    leaf cost { 
+      type uint32;
+    }
+
+    leaf calendar-reservable { 
+      type boolean;
+    }
+  }
+
+  grouping service-privilege {
+    uses xos-base;
+    leaf user { 
+      type xtype:user; 
+    }
+    leaf service { 
+      type xtype:service; 
+    }
+    leaf role { 
+      type xtype:role; 
+    }
+  }
+
   /*** main configuration tree for XOS ***/
 
   container api {
