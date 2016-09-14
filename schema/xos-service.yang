@@ -1,0 +1,78 @@
+module xos-service {
+  namespace "urn:ietf:params:xml:ns:yang:xos-service";
+  prefix xserv;
+  yang-version 1.1;
+
+  import ietf-inet-types { prefix inet; }
+  import xos-core        { prefix xos; }
+  import xos-slice       { prefix xslice; }
+
+  organization
+   "Open Networking Lab (XOS) / Corenova Technologies";
+
+  contact
+    "Larry Peterson <llp@onlab.us>
+     Peter K. Lee <peter@corenova.com>";
+  
+  description
+   "This module contains a collection of Service models for XOS.
+
+    Copyright (c) 2016 ON.LAB and the persons identified as authors of
+    the code.  All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, is permitted pursuant to, and subject to the license
+    terms of the Apache License, Version 2.0 which accompanies this
+    distribution, and is available at
+    (http://www.apache.org/licenses/LICENSE-2.0).";
+  
+  revision 2016-09-13 {
+    description "Initial revision.";
+  }
+
+  grouping service {
+    uses xos:provider {
+      refine 'name' {
+        description "Name of the Service";
+      }
+    }
+    leaf description {
+      type string {
+        length 0..254;
+      }
+      description "Description of the Service";
+    }
+    leaf version {
+      type string { length 0..30; }
+      description "Version of Service Definition";
+    }
+    
+    leaf published { type boolean; default true; }
+
+    leaf view { type inet:uri; }
+    leaf icon { type inet:uri; }
+    
+    list keypair {
+      description "collection of public/private key pair(s)";
+      // should be a specific typedef for storing this content
+      leaf public  { type string { length 0..1024; } }
+      leaf private { type string { length 0..1024; } }
+    }
+    
+    container controller {
+      description
+        "Primary configuration block for managing the service.  Each unique
+         service should augment with additional service specific
+         configuration data nodes.";
+      
+      list slice {
+        uses xslice:slice;
+      }
+      // TOOD: need to better understand relationship between Service and Slice
+      action scale {
+        description "Adjust scale for slice(s)";
+      }
+    }
+    // TODO: need to better understand relationship between Service and VTN
+  }
+}

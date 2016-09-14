@@ -1,11 +1,13 @@
-module cord-service-volt {
-  namespace "urn:onlab:cord:service:volt";
+module volt-service {
+  namespace "urn:ietf:params:xml:ns:yang:volt-service";
   prefix volt;
   yang-version 1.1;
 
   import ietf-yang-types { prefix yang; }
-  import xos-core { prefix xos; }
-
+  import xos-core        { prefix xos; }
+  import xos-service     { prefix xserv; }
+  import xos-types       { prefix xtype; }
+  
   organization
    "Open Networking Lab (CORD) / Corenova Technologies";
 
@@ -17,7 +19,7 @@ module cord-service-volt {
     description "Initial revision.";
   }
 
-  identity volt-service { base xos:service; }
+  identity volt { base xos:service; }
 
   feature onos-app-olt {
     description "System facility to configure VLAN tags on the OLT.";
@@ -27,12 +29,12 @@ module cord-service-volt {
   }
 
   typedef bandwidth {
-    type xos:bandwidth;
+    type xtype:bandwidth;
     default 1000000000; // VOLT bandwidth default is 1Gbps
   }
   typedef subscriber-flow {
     type leafref {
-      path "/volt:service/volt:provider/volt:port/volt:id";
+      path "/volt:service/volt:controller/volt:port/volt:id";
     }
   }
 
@@ -54,7 +56,7 @@ module cord-service-volt {
         leaf network { type yang:uuid; }
         leaf tag {
           if-feature onos-app-olt;
-          type xos:vlan;
+          type xtype:vlan;
           description
             "Represents S-Tag for instructing OLT to associate a VLAN tag for
              traffic originating from OLT device.";
@@ -74,7 +76,7 @@ module cord-service-volt {
         leaf active { type boolean; default false; }
         leaf tag {
           if-feature onos-app-olt;
-          type xos:vlan;
+          type xtype:vlan;
           description
             "Represents C-Tag for instructing ONT to add/remove vlan tag for
              traffic within OLT device.";
@@ -89,18 +91,15 @@ module cord-service-volt {
       uses olt-device;
     }
   }
-  grouping provider {
+  grouping controller {
     description
-      "This grouping represents a VOLT agent/provider which manages multiple
-       OLT devices. The VOLT agent provides aggregate abstraction of
-       the entire PON as a sigle switch to the controller. Each port
-       entry of the agent represents each ONU/ONT endpoint as a
-       separate openflow port.";
+      "This grouping represents a VOLT agent/controller which manages
+       multiple OLT devices. The VOLT agent provides aggregate
+       abstraction of the entire PON as a sigle switch to the
+       controller. Each port entry of the agent represents each
+       ONU/ONT endpoint as a separate openflow port.";
 
-    uses devices-list {
-      description
-        "Each entry represents an OLT device managed by the agent.";
-    }
+    uses devices-list;
     list port {
       description
         "Each entry represents an ONU/ONT endpoint connected across OLT devices.";
@@ -127,25 +126,24 @@ module cord-service-volt {
       "This grouping represents a VOLT service subscriber along with
        references to ONU/ONT access endpoints used by the subscriber.";
     
-    list tag {
+    container tags {
       description
         "Each entry represents a unique combination of the OLT uplink VLAN
          (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
          into the fabric for the subscriber.";
       
-      key 'outer inner';
       leaf outer {
         type leafref {
-          path "/volt:service/volt:provider/volt:device/volt:uplink/volt:tag";
+          path "/volt:service/volt:controller/volt:device/volt:uplink/volt:tag";
         }
       }
       leaf inner {
         type leafref {
-          path "/volt:service/volt:provider/volt:device/volt:link/volt:tag";
+          path "/volt:service/volt:controller/volt:device/volt:link/volt:tag";
         }
       }
     }
-    leaf-list flows {
+    leaf flow-id {
       description
         "Each entry represents a unique openflow port ID that the subscriber
          uses to connect into the fabric from the VOLT service.";
@@ -155,12 +153,12 @@ module cord-service-volt {
   }
 
   /*
-   * Configuration data
+   * Configuration data nodes
    */
   container service {
-    uses xos:service {
-      refine kind { default volt-service; }
-      augment "provider"   { uses volt:provider; }
+    uses xserv:service {
+      refine kind { default volt; }
+      augment "controller" { uses volt:controller; }
       augment "subscriber" { uses volt:subscriber; }
     }
   }

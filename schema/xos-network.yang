@@ -1,0 +1,199 @@
+module xos-network {
+  namespace "urn:ietf:params:xml:ns:yang:xos-network";
+  prefix xnet;
+  yang-version 1.1;
+
+  import ietf-yang-types { prefix yang; }
+  import ietf-inet-types { prefix inet; }
+  import xos-types       { prefix xtype; }
+
+  organization
+   "Open Networking Lab (XOS) / Corenova Technologies";
+
+  contact
+    "Larry Peterson <llp@onlab.us>
+     Peter K. Lee <peter@corenova.com>";
+  
+  description
+   "This module contains a collection of core models for XOS.
+
+    Copyright (c) 2016 ON.LAB and the persons identified as authors of
+    the code.  All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, is permitted pursuant to, and subject to the license
+    terms of the Apache License, Version 2.0 which accompanies this
+    distribution, and is available at
+    (http://www.apache.org/licenses/LICENSE-2.0).";
+  
+  revision 2016-09-13 {
+    description "Initial revision.";
+  }
+
+  grouping network {
+    uses xos-base;
+    leaf template { 
+      type xtype:template; 
+    }
+
+    leaf subnet { 
+      type string;
+    }
+
+    leaf ports { 
+      type string;
+    }
+
+    leaf labels { 
+      type string;
+    }
+
+    leaf owner { 
+      type xtype:owner; 
+    }
+
+    leaf guaranteed-bandwidth { 
+      type uint32;
+    }
+
+    leaf permit-all-slices { 
+      type boolean;
+    }
+
+    leaf topology-parameters { 
+      type string;
+    }
+
+    leaf controller-url { 
+      type string;
+    }
+
+    leaf controller-parameters { 
+      type string;
+    }
+
+    container synchronizer {
+        if-feature synchronizer {
+            leaf network-id { 
+              type string;
+            }
+            leaf router-id { 
+              type string;
+            }
+            leaf subnet-id { 
+              type string;
+            }
+        }
+    }
+    leaf autoconnect { 
+      type boolean;
+    }
+  }
+  grouping port {
+    uses xos-base;
+    leaf network { 
+      type xtype:network; 
+    }
+    leaf instance { 
+      type xtype:instance; 
+    }
+    container synchronizer {
+        if-feature synchronizer {
+            leaf ip { 
+              type inet:ip-address;
+            }
+            leaf port-id { 
+              type string;
+            }
+            leaf mac { 
+              type string;
+            }
+        }
+    }
+    leaf xos-created { 
+      type boolean;
+    }
+  }
+  grouping address-pool {
+    uses xos-base;
+    leaf addresses { 
+      type string;
+    }
+    leaf gateway-ip { 
+      type string;
+    }
+    leaf gateway-mac { 
+      type string;
+    }
+    leaf cidr { 
+      type string;
+    }
+    leaf inuse { 
+      type string;
+    }
+    leaf service { 
+      type xtype:service; 
+    }
+  }
+
+  grouping network-parameter {
+    uses xos-base;
+    leaf parameter { 
+      type xtype:parameter; 
+    }
+    leaf value { 
+      type string;
+    }
+    leaf content-type { 
+      type xtype:content-type; 
+    }
+    leaf object-id { 
+      type uint32;
+    }
+  }
+
+  grouping network-template {
+    uses xos-base;
+    leaf description { 
+      type string;
+    }
+    leaf guaranteed-bandwidth { 
+      type uint32;
+    }
+    leaf visibility { 
+      type string;
+    }
+    leaf translation { 
+      type string;
+    }
+    leaf access { 
+      type string;
+    }
+    leaf shared-network-name { 
+      type string;
+    }
+    leaf shared-network-id { 
+      type string;
+    }
+    leaf topology-kind { 
+      type string;
+    }
+    leaf controller-kind { 
+      type string;
+    }
+  }
+
+  grouping router {
+    uses xos-base;
+    leaf owner { 
+      type xtype:owner; 
+    }
+  }
+
+  grouping network-parameter-type {
+    uses xos-base;
+    leaf description { 
+      type string;
+    }
+  }
+}

@@ -1,0 +1,339 @@
+module xos-accessibility {
+  namespace "urn:ietf:params:xml:ns:yang:xos-accessibility";
+  prefix xacc;
+  yang-version 1.1;
+
+  import ietf-yang-types { prefix yang; }
+  import ietf-inet-types { prefix inet; }
+  import xos-types       { prefix xtype; }
+
+  organization
+    "Open Networking Lab (XOS) / Corenova Technologies";
+
+  contact
+    "Larry Peterson <llp@onlab.us>
+     Peter K. Lee <peter@corenova.com>";
+  
+  description
+    "This module contains a collection of core models for XOS.
+
+    Copyright (c) 2016 ON.LAB and the persons identified as authors of
+    the code.  All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, is permitted pursuant to, and subject to the license
+    terms of the Apache License, Version 2.0 which accompanies this
+    distribution, and is available at
+    (http://www.apache.org/licenses/LICENSE-2.0).";
+  
+  revision 2016-09-13 {
+    description "Initial revision.";
+  }
+
+  grouping service-class {
+    uses xos-base;
+    
+    leaf description { 
+      type string;
+    }
+    leaf commitment { 
+      type uint32;
+    }
+    leaf membership-fee { 
+      type uint32;
+    }
+    leaf membership-fee-months { 
+      type uint32;
+    }
+    leaf upgrade-requires-approval { 
+      type boolean;
+    }
+  }
+
+  grouping user-credential {
+    uses xos-base;
+    leaf user { 
+      type xtype:user; 
+    }
+    
+    leaf key-id { 
+      type string;
+    }
+
+    leaf enc-value { 
+      type xtype:encrypted-string;
+    }
+  }
+
+  grouping invoice {
+    uses xos-base;
+    leaf date { 
+      type xtype:datetime;
+    }
+    leaf account { 
+      type xtype:account; 
+    }
+  }
+
+  grouping charge {
+    uses xos-base;
+    leaf account { 
+      type xtype:account; 
+    }
+    leaf slice { 
+      type xtype:slice; 
+    }
+    leaf kind { 
+      type string;
+    }
+    leaf state { 
+      type string;
+    }
+    leaf date { 
+      type xtype:datetime;
+    }
+    leaf object { 
+      type xtype:object; 
+    }
+    leaf amount { 
+      type decimal64;
+    }
+    leaf core-hours { 
+      type decimal64;
+    }
+    leaf invoice { 
+      type xtype:invoice; 
+    }
+  }
+
+  grouping role {
+    uses xos-base;
+    leaf role-type { 
+      type string;
+    }
+    leaf role { 
+      type string;
+    }
+    leaf description { 
+      type string;
+    }
+    leaf content-type { 
+      type xtype:content-type; 
+    }
+  }
+
+  grouping dashboard-view {
+    uses xos-base;
+    leaf url { 
+      type string;
+    }
+    leaf enabled { 
+      type boolean;
+    }
+  }
+
+  grouping controller-dashboard-view {
+    uses xos-base;
+    leaf controller { 
+      type xtype:controller; 
+    }
+    leaf dashboardView { 
+      type xtype:dashboardView; 
+    }
+    leaf enabled { 
+      type boolean;
+    }
+    leaf url { 
+      type string;
+    }
+  }
+
+  grouping user-dashboard-view {
+    uses xos-base;
+    leaf user { 
+      type xtype:user; 
+    }
+    leaf dashboardView { 
+      type xtype:dashboardView; 
+    }
+    leaf order { 
+      type uint32;
+    }
+  }
+
+  grouping user {
+    uses xos-base;
+    leaf password { 
+      type string;
+    }
+    leaf last-login { 
+      type xtype:datetime;
+    }
+    leaf email { 
+      type EmailField;
+    }
+    leaf username { 
+      type string;
+    }
+    leaf firstname { 
+      type string;
+    }
+    leaf lastname { 
+      type string;
+    }
+    leaf phone { 
+      type string;
+    }
+    leaf user-url { 
+      type xtype:url-field;
+    }
+    leaf site { 
+      type xtype:site; 
+    }
+    leaf public-key { 
+      type string;
+    }
+    leaf is-active { 
+      type boolean;
+    }
+    leaf is-admin { 
+      type boolean;
+    }
+    leaf is-staff { 
+      type boolean;
+    }
+    leaf is-readonly { 
+      type boolean;
+    }
+    leaf is-registering { 
+      type boolean;
+    }
+    leaf is-appuser { 
+      type boolean;
+    }
+    leaf login-page { 
+      type string;
+    }
+    leaf timezone { 
+      type xtype:time-zone-field;
+    }
+  }
+  grouping service-role {
+    uses xos-base;
+    leaf role { 
+      type string;
+    }
+  }
+  grouping service-privilege {
+    uses xos-base;
+    leaf user { 
+      type xtype:user; 
+    }
+    leaf service { 
+      type xtype:service; 
+    }
+    leaf role { 
+      type xtype:role; 
+    }
+  }
+
+  grouping payment {
+    uses xos-base;
+    leaf account { 
+      type xtype:account; 
+    }
+    leaf amount { 
+      type decimal64;
+    }
+    leaf date { 
+      type xtype:datetime;
+    }
+  }
+  
+  grouping account {
+    uses xos-base;
+    leaf site { 
+      type xtype:site; 
+    }
+  }
+
+  grouping service-resource {
+    uses xos-base;
+    leaf service-class { 
+      type xtype:service-class; 
+    }
+    
+    leaf max-units-deployment { 
+      type uint32;
+    }
+
+    leaf max-units-node { 
+      type uint32;
+    }
+
+    leaf max-duration { 
+      type uint32;
+    }
+
+    leaf bucket-in-rate { 
+      type uint32;
+    }
+
+    leaf bucket-max-size { 
+      type uint32;
+    }
+
+    leaf cost { 
+      type uint32;
+    }
+
+    leaf calendar-reservable { 
+      type boolean;
+    }
+  }
+
+  grouping diag {
+    uses xos-base;
+    
+  }
+
+  grouping program {
+    uses xos-base;
+    leaf description { 
+      type string;
+    }
+
+    leaf kind { 
+      type string;
+    }
+
+    leaf command { 
+      type string;
+    }
+
+    leaf owner { 
+      type xtype:owner; 
+    }
+
+    leaf contents { 
+      type string;
+    }
+
+    leaf output { 
+      type string;
+    }
+
+    leaf messages { 
+      type string;
+    }
+
+    leaf status { 
+      type string;
+    }
+  }
+
+  grouping usable-object {
+    uses xos-base;
+  }
+
+}

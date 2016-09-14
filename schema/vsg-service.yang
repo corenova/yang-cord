@@ -1,11 +1,13 @@
-module cord-service-vsg {
-  namespace "urn:onlab:cord:service:volt";
-  prefix volt;
+module vsg-service {
+  namespace "urn:ietf:params:xml:ns:yang:vsg-service";
+  prefix vsg;
   yang-version 1.1;
 
   import ietf-yang-types { prefix yang; }
-  import xos-core { prefix xos; }
-  import cord-service-volt { prefix volt; }
+  import xos-core        { prefix xos; }
+  import xos-service     { prefix xserv; }
+  import xos-types       { prefix xtype; }
+  import volt-service    { prefix volt; }
 
   organization
    "Open Networking Lab (CORD) / Corenova Technologies";
@@ -18,27 +20,17 @@ module cord-service-vsg {
     description "Initial revision.";
   }
 
-  identity vsg-service { base xos:service; }
+  identity vsg { base xos:service; }
 
   typedef subscriber-flow {
     type leafref {
-      path "/vsg:service/vsg:provider/vsg:port/vsg:id";
+      path "/vsg:service/vsg:controller/vsg:port/vsg:id";
     }
   }
 
-  grouping provider {
-    description
-      "This grouping represents a VSG agent/provider which manages multiple
-       VSG gateways. The VSG agent provides agregate abstraction of
-       the entire NFaaS as a single switch to the controller. Each
-       port entry of the agent represents each VSG subscriber flow as
-       a separate openflow port.";
-
-    list gateway {
-      description
-        "Each entry represents a VSG instance managed by the agent.";
-
-      leaf id { type xos:unique-identifier; }
+  grouping gateways-list {
+    grouping subscriber-gateway {
+      leaf id { type xtype:unique-identifier; }
       
       container services {
         description
@@ -72,6 +64,23 @@ module cord-service-vsg {
         }
       }
     }
+    list gateway {
+      description
+        "Each entry represents a VSG instance.";
+      key id;
+      uses subscriber-gateway;
+    }
+  }
+
+  grouping controller {
+    description
+      "This grouping represents a VSG controller which manages multiple VSG
+       gateways. The VSG controller provides agregate abstraction of
+       the entire NFaaS as a single switch to the network fabric. Each
+       port entry of the controller represents each VSG subscriber
+       flow as a distinct openflow port.";
+
+    uses gateways-list;
     list port {
       description
         "Each entry represents a VSG subscriber flow connected across VSG
@@ -150,7 +159,7 @@ module cord-service-vsg {
   container service {
     uses xos:service {
       refine kind { default vsg-service; }
-      augment "provider"   { uses vsg:provider; }
+      augment "controller" { uses vsg:controller; }
       augment "subscriber" { uses vsg:subscriber; }
     }
   }
