@@ -4,7 +4,6 @@ module volt-service {
   yang-version 1.1;
 
   import ietf-yang-types { prefix yang; }
-  import xos-core        { prefix xos; }
   import xos-service     { prefix xserv; }
   import xos-types       { prefix xtype; }
   
@@ -19,7 +18,7 @@ module volt-service {
     description "Initial revision.";
   }
 
-  identity volt { base xos:service; }
+  identity virtual-olt { base xos:service; }
 
   feature onos-app-olt {
     description "System facility to configure VLAN tags on the OLT.";
@@ -157,7 +156,7 @@ module volt-service {
    */
   container service {
     uses xserv:service {
-      refine kind { default volt; }
+      refine kind { default virtual-olt; }
       augment "controller" { uses volt:controller; }
       augment "subscriber" { uses volt:subscriber; }
     }

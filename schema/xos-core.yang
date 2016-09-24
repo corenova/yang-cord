@@ -5,10 +5,12 @@ module xos-core {
 
   import ietf-yang-types { prefix yang; }
   import ietf-inet-types { prefix inet; }
+  import iana-crypt-hash { prefix ianach; }
+  import yang-meta-types { prefix meta; }
   import xos-types       { prefix xtype; }
 
   organization
-   "Open Networking Lab (XOS) / Corenova Technologies";
+   "Open Networking Lab / Corenova Technologies";
 
   contact
     "Larry Peterson <llp@onlab.us>
@@ -29,10 +31,16 @@ module xos-core {
   revision 2016-07-14 {
     description "Initial revision.";
   }
-  
-  identity kind;
-  identity service { base kind; }
-  identity generic { base service; }
+
+  identity subscriber {
+    base xtype:xos-tenant-kind;
+  }
+  identity provider {
+    base xtype:xos-tenant-kind;
+  }
+  identity service {
+    base provider;
+  }
   
   feature synchronizer {
     description
@@ -78,13 +86,32 @@ module xos-core {
         // TODO: how are policy defined/enforced?
       }
     }
-      
     action diff {
-      when "../dirty == true";
       description "retrieve diff of model state if dirty";
     }
     action save {
       description "trigger save into data store via synchronizer";
+    }
+  }
+  grouping access-control {
+    container access {
+      list privilege {
+        leaf user {
+          type xtype:unique-identifier;
+        }
+        leaf role {
+          type xtype:access-role;
+        }
+      }
+      list credential {
+        key key-id;
+        leaf key-id {
+          type string;
+        }
+        leaf enc-value {
+          type ianach:crypt-hash;
+        }
+      }
     }
   }
   grouping tenant {
@@ -93,7 +120,13 @@ module xos-core {
       mandatory true;
     }
     leaf name { type string { length 0..255; } }
-    leaf kind { type identityref { base kind; } }
+    leaf kind {
+      config false;
+      type identityref {
+        base xtype:xos-tenant-kind;
+      }
+    }
+    leaf description { type meta:description; }
     leaf enabled { type boolean; default true; }
     list attribute {
       key name;
@@ -133,13 +166,15 @@ module xos-core {
     }
     list subscriber {
       description
-        "Each entry represents a subscriber of the service. Each unique service
-         should augment this block with service specific attributes.";
+        "Each entry represents a subscriber of the provider. Each unique
+         provider should augment this block with service specific
+         attributes.";
       key id;
       uses subscriber;
       notification subscriber-added;
       notification subscriber-deleted;
     }
+    uses access-control;
   }
   /*** main configuration tree for XOS ***/
 
@@ -156,5 +191,4 @@ module xos-core {
         "placeholder endpoint for tenants to augment";
     }
   }
-  
 }

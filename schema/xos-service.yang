@@ -6,9 +6,10 @@ module xos-service {
   import ietf-inet-types { prefix inet; }
   import xos-core        { prefix xos; }
   import xos-slice       { prefix xslice; }
+  import xos-controller  { prefix xcontrol; }
 
   organization
-   "Open Networking Lab (XOS) / Corenova Technologies";
+    "Open Networking Lab (XOS) / Corenova Technologies";
 
   contact
     "Larry Peterson <llp@onlab.us>
@@ -46,32 +47,32 @@ module xos-service {
       type string { length 0..30; }
       description "Version of Service Definition";
     }
-    
-    leaf published { type boolean; default true; }
-
-    leaf view { type inet:uri; }
-    leaf icon { type inet:uri; }
-    
+    leaf published {
+      type boolean;
+      default true;
+    }
+    leaf view {
+      type inet:uri;
+    }
+    leaf icon {
+      type inet:uri;
+    }
     list keypair {
       description "collection of public/private key pair(s)";
       // should be a specific typedef for storing this content
       leaf public  { type string { length 0..1024; } }
       leaf private { type string { length 0..1024; } }
     }
-    
+    leaf-list slices {
+      type leafref {
+        path "/xslice:controller/slice/id";
+      }
+    }
     container controller {
       description
         "Primary configuration block for managing the service.  Each unique
          service should augment with additional service specific
          configuration data nodes.";
-      
-      list slice {
-        uses xslice:slice;
-      }
-      // TOOD: need to better understand relationship between Service and Slice
-      action scale {
-        description "Adjust scale for slice(s)";
-      }
     }
     // TODO: need to better understand relationship between Service and VTN
   }

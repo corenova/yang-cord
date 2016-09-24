@@ -30,6 +30,20 @@ module xos-accessibility {
     description "Initial revision.";
   }
 
+  grouping network-parameter {
+    leaf parameter { 
+      type xtype:parameter; 
+    }
+    leaf value { 
+      type string;
+    }
+    leaf content-type { 
+      type xtype:content-type; 
+    }
+    leaf object-id { 
+      type uint32;
+    }
+  }
   grouping service-class {
     uses xos-base;
     

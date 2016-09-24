@@ -5,18 +5,20 @@ module xos-slice {
 
   import ietf-yang-types { prefix yang; }
   import ietf-inet-types { prefix inet; }
+  import opnfv-iaas      { prefix nfvi; }
   import xos-core        { prefix xos; }
+  import xos-topology    { prefix xtop; }
   import xos-types       { prefix xtype; }
 
   organization
-   "Open Networking Lab (XOS) / Corenova Technologies";
+    "Open Networking Lab (XOS) / Corenova Technologies, Inc.";
 
   contact
     "Larry Peterson <llp@onlab.us>
      Peter K. Lee <peter@corenova.com>";
   
   description
-   "This module contains a collection of Slice and related models for XOS.
+    "This module contains a collection of Slice and related models for XOS.
 
     Copyright (c) 2016 ON.LAB and the persons identified as authors of
     the code.  All rights reserved.
@@ -36,71 +38,72 @@ module xos-slice {
       "A slice is a logically centralized container for network and compute resources";
 
     uses xos:provider {
-      refine "name" { description "Name of the Slice"; }
+      refine "name" { description "Name of the slice"; }
     }
     leaf slice-url {
       description "A URL describing the purpose of this slice";
-      type xtype:url-field; 
+      type inet:uri;
       // blank true;
     }
-    leaf max-instances {
-      description "The maximum number of VMs that this slice is allowed to allocate";
-      type uint32;
-    } 
-    leaf service {
-      description "The service that runs in this slice";
-      type xtype:service;
+    leaf-list instances {
+      type leafref {
+        path "/nfvi:stack/compute/server/id";
+      }
+    }
+    leaf-list networks {
+      type leafref {
+        path "/nfvi:stack/network/network/id";
+      }
+    }
+    container policy {
+      leaf max-instances {
+        description "The maximum number of VMs that this slice is allowed to allocate";
+        type uint16;
+      }
+      leaf default-flavor {
+        type leafref {
+          path "/nfvi:stack/compute/flavor/id";
+        }
+      }
+      leaf default-image {
+        type leafref {
+          path "/nfvi:stack/compute/image/id";
+        }
+      }
+      leaf default-node {
+        type leafref {
+          path "/nfvi:stack/compute/host/id";
+        }
+      } 
+      leaf mount-data-sets {
+        type string {
+          length 0..256; 
+        }
+        default "GenBank";
+      } 
+      leaf default-isolation {
+        type xtype:isolation;
+      } 
     }
     leaf network {
-      description "The network that the slice uses to connect to other slices and to the Internet.";
+      description
+        "The network that the slice uses to connect to other slices and to the Internet.";
       type enumeration {
         enum none;
         enum host;
         enum bridged;
         enum noauto;
-        default none;
       }
+      default none;
     }
     leaf-leaf ports {
-      description "The ports to be exposed for other slices to connect to";
+      description
+        "The ports to be exposed for other slices to connect to";
       type uint16;
     }
-
     leaf creator {
       type xtype:user;
     }
-
-    leaf default-flavor {
-      type xtype:flavor;
-    }
-
-    leaf default-image {
-      type xtype:image;
-    }
-
-    leaf default-node {
-      type xtype:node;
-    } 
-
-    leaf mount-data-sets {
-      type string {
-        length 0..256; 
-      }
-      default "GenBank";
-    } 
-
-    leaf default_isolation {
-      type enumeration {
-        enum vm     { description 'Virtual Machine'; }
-        enum lxc    { description 'Container'; }
-        enum hybrid { description 'Container in Virtual Machine'; }
-      }
-      type string {
-        length 0..30;
-      }
-      default "vm";
-    } 
-
     leaf-list tags {
       // below leafref is not valid since there is no /tag
       type leafref {
@@ -108,6 +111,10 @@ module xos-slice {
       }
     }
     // below are deprecated and should not be used
+    leaf service {
+      description "The service that runs in this slice";
+      status deprecated;
+    }
     leaf omf-friendly {
       type boolean;
       default false;
@@ -118,182 +125,152 @@ module xos-slice {
       status deprecated;
     }
   }
-  grouping slice-privilege {
-    uses xos-base;
-    leaf user { 
-      type xtype:user; 
-    }
-    leaf slice { 
-      type xtype:slice; 
-    }
-    leaf role { 
-      type xtype:role; 
+
+  container controller {
+    list slice {
+      key id;
+      uses xslice:slice;
+      // TOOD: need to better understand relationship between Service and Slice
+      action scale {
+        description "Adjust scale for slice(s)";
+      }
     }
   }
-  grouping slice-credential {
-    uses xos-base;
-    leaf slice { 
-      type xtype:slice; 
+  
+  /*
+   * Augmentations to NFVI modules
+   */
+  augment "/nfvi:stack/nfvi:compute/nfvi:server" {
+    leaf slice {
+      // do we need this circular reference?
     }
-    
-    leaf key-id { 
+    leaf deployment {
+      type leafref {
+        path "/xtop:topology/deployment/id";
+      }
+    }
+    leaf isolation {
+      type xtype:isolation;
+    }
+    leaf-list volumes {
+      type string; // should be leafref
+    }
+    leaf parent {
+      type xtype:parent; // no idea what this is
+    }
+    container synchronizer {
+      if-feature synchronizer;
+      leaf instance-id { 
+        type string;
+      }
+      leaf instance-uuid { 
+        type string;
+      }
+      leaf instance-name { 
+        type string;
+      }
+      leaf ip { 
+        type inet:ip-address;
+      }
+    }
+  }
+  augment "/nfvi:stack/nfvi:compute/nfvi:image" {
+    leaf controller {
+      type xtype:controller-id;
+    }
+    leaf template {
+      type leafref {
+        path "/xtop:topology/template/id";
+      }
+    }
+    leaf-list deployments {
+      type leafref {
+        path "/xtop:topology/deployment/id";
+      }
+    }
+    container synchronizer {
+      if-feature xos:synchronizer;
+      leaf glance-image-id { 
+        type string;
+      }
+    }
+  }
+  augment "/nfvi:stack/nfvi:fabric/nfvi:network" {
+    leaf autoconnect {
+      type boolean;
+      default true;
+    }
+    leaf controller-url {
+      type inet:uri;
+    }
+    leaf-list labels {
       type string;
     }
-    leaf enc-value { 
-      type xtype:encrypted-string;
+    container policy {
+      leaf guaranteed-bandwidth { 
+        type uint32;
+      }
+      leaf permit-all-slices { 
+        type boolean;
+        default true;
+      }
+      leaf-list topology-parameters { 
+        type string;
+      }
+      leaf-list controller-parameters { 
+        type string;
+      }
+      list network-parameter {
+        type string;
+      }
     }
-  }
-  grouping instance {
-    uses xos-base;
     container synchronizer {
       if-feature synchronizer {
-        leaf instance-id { 
+        leaf network-id { 
           type string;
         }
-
-        leaf instance-uuid { 
+        leaf router-id { 
           type string;
         }
-        
-        leaf instance-name { 
+        leaf subnet-id { 
           type string;
         }
-
-        leaf ip { 
-          type inet:ip-address;
-        }
-    }
-    leaf image { 
-      type xtype:image; 
-    }
-    leaf creator { 
-      type xtype:creator; 
-    }
-    leaf slice { 
-      type xtype:slice; 
-    }
-    leaf deployment { 
-      type xtype:deployment; 
-    }
-    leaf node { 
-      type xtype:node; 
-    }
-    leaf number-cores { 
-      type uint32;
-    }
-    leaf flavor { 
-      type xtype:flavor; 
-    }
-    leaf user-data { 
-      type string;
-    }
-    leaf isolation { 
-      type string;
-    }
-    leaf volumes { 
-      type string;
-    }
-    leaf parent { 
-      type xtype:parent; 
+      }
     }
   }
-  grouping network-slice {
-    uses xos-base;
-    leaf network { 
-      type xtype:network; 
+  augment "/nfvi:stack/nfvi:fabric/nfvi:network/nfvi:subnet/nfvi:port" {
+    leaf instance {
+      type instance-identifier;
     }
-
-    leaf slice { 
-      type xtype:slice; 
-    }
-  }
-  grouping slice-role {
-    uses xos-base;
-    leaf role { 
-      type string;
-    }
-  }
-
-  grouping slice-tag {
-    uses xos-base;
-    leaf slice { 
-      type xtype:slice; 
-    }
-    
-    leaf value { 
-      type string;
-    }
-  }
-  grouping flavor {
-    uses xos-base;
-    
-    leaf description { 
-      type string;
-    }
-    leaf flavor { 
-      type string;
-    }
-    leaf order { 
-      type uint32;
-    }
-    leaf default { 
+    leaf xos-created {
       type boolean;
+      status deprecated;
+    }
+    container synchronizer {
+      if-feature xos:synchronizer;
+      leaf ip { 
+        type inet:ip-address;
+      }
+      leaf port-id { 
+        type yang:uuid;
+      }
+      leaf mac { 
+        type yang:mac-address;
+      }
     }
   }
-  grouping image {
-    uses xos-base;
-
-    
-    leaf kind { 
+  augment "/nfvi:stack/nfvi:fabric/nfvi:network/nfvi:subnet/nfvi:dhcp/nfvi:pool" {
+    leaf gateway-ip {
+      type inet:ip-address;
+    }
+    leaf gateway-mac {
+      type yang:mac-address;
+    }
+    leaf cidr {
       type string;
     }
-    leaf disk-format { 
-      type string;
-    }
-    leaf container-format { 
-      type string;
-    }
-    leaf path { 
-      type string;
-    }
-    leaf tag { 
-      type string;
-    }
-  }
-  grouping image-deployments {
-    uses xos-base;
-    leaf image { 
-      type xtype:image; 
-    }
-    leaf deployment { 
-      type xtype:deployment; 
-    }
-  }
-  grouping reservation {
-    uses xos-base;
-    leaf start-time { 
-      type xtype:datetime;
-    }
-    leaf slice { 
-      type xtype:slice; 
-    }
-    leaf duration { 
-      type uint32;
-    }
-  }
-  grouping reserved-resource {
-    uses xos-base;
-    leaf instance { 
-      type xtype:instance; 
-    }
-    leaf resource { 
-      type xtype:resource; 
-    }
-    leaf quantity { 
-      type uint32;
-    }
-    leaf reservationSet { 
-      type xtype:reservationSet; 
+    leaf inuse {
+      type boolean;
     }
   }
 }

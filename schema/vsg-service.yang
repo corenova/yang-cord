@@ -20,7 +20,7 @@ module vsg-service {
     description "Initial revision.";
   }
 
-  identity vsg { base xos:service; }
+  identity virtual-subscriber-gateway { base xos:service; }
 
   typedef subscriber-flow {
     type leafref {
@@ -157,8 +157,8 @@ module vsg-service {
    * Configuration data
    */
   container service {
-    uses xos:service {
-      refine kind { default vsg-service; }
+    uses xserv:service {
+      refine kind { default virtual-subscriber-gateway; }
       augment "controller" { uses vsg:controller; }
       augment "subscriber" { uses vsg:subscriber; }
     }

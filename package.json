@@ -24,6 +24,15 @@
     "ietf-inet-types": "yang-js",
     "corenova-node": "corenova",
     "xos-core": "./schema/xos-core.yang",
+    "xos-types": "./schema/xos-types.yang",
+    "xos-slice": "./schema/xos-slice.yang",
+    "xos-service": "./schema/xos-service.yang",
+    "xos-network": "./schema/xos-network.yang",
+    "xos-infrastructure": "./schema/xos-infrastructure.yang",
+    "xos-topology": "./schema/xos-topology.yang",
+    "volt-service": "./schema/volt-service.yang",
+    "vsg-service": "./schema/vsg-service.yang",
+    "vrouter-service": "./schema/vrouter-service.yang",
     "cord-core": "./lib/cord-core.js",
     "cord-device": "./lib/cord-device.js",
     "cord-subscriber": "./lib/cord-subscriber.js"
@@ -33,7 +42,7 @@
     "node-uuid": "^1.4.7",
     "superagent": "^2.0.0",
     "yang-express": "^0.3.15",
-    "yang-js": "^0.15.25"
+    "yang-js": "file:///home/plee/hack/yang-js"
   },
   "optionalDependencies": {
     "corenova": "^1.0.0"

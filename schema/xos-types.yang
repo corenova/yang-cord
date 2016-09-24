@@ -4,6 +4,7 @@ module xos-types {
   yang-version 1.1;
 
   import ietf-yang-types { prefix yang; }
+  import ietf-inet-types { prefix inet; }
   
   organization
    "Open Networking Lab (CORD) / Corenova Technologies";
@@ -28,6 +29,10 @@ module xos-types {
     description "Initial revision.";
   }
 
+  identity xos-tenant-kind {
+    description "Describes the type of tenant within XOS";
+  }
+  
   /*
    * Typedefs
    */
@@ -48,6 +53,22 @@ module xos-types {
   typedef vlan {
     type uint16 { range 0..4095; }
   }
+  typedef isolation {
+    type enumeration {
+      enum vm     { description 'Virtual Machine'; }
+      enum lxc    { description 'Container'; }
+      enum hybrid { description 'Container in Virtual Machine'; }
+    }
+    default 'vm';
+  }
+  typedef access-role {
+    type enumeration {
+      enum admin;
+      enum user;
+    }
+    default 'user';
+  }
+  /* Future Consideration
   typedef image {
     type unique-identifier;
   }
@@ -249,4 +270,5 @@ module xos-types {
   typedef service-privilege {
     type unique-identifier;
   }
+  */
 }
