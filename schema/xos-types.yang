@@ -64,6 +64,7 @@ module xos-types {
   typedef access-role {
     type enumeration {
       enum admin;
+      enum staff;
       enum user;
     }
     default 'user';

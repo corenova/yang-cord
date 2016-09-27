@@ -30,20 +30,6 @@ module xos-accessibility {
     description "Initial revision.";
   }
 
-  grouping network-parameter {
-    leaf parameter { 
-      type xtype:parameter; 
-    }
-    leaf value { 
-      type string;
-    }
-    leaf content-type { 
-      type xtype:content-type; 
-    }
-    leaf object-id { 
-      type uint32;
-    }
-  }
   grouping service-class {
     uses xos-base;
     
@@ -63,22 +49,6 @@ module xos-accessibility {
       type boolean;
     }
   }
-
-  grouping user-credential {
-    uses xos-base;
-    leaf user { 
-      type xtype:user; 
-    }
-    
-    leaf key-id { 
-      type string;
-    }
-
-    leaf enc-value { 
-      type xtype:encrypted-string;
-    }
-  }
-
   grouping invoice {
     uses xos-base;
     leaf date { 
@@ -172,70 +142,6 @@ module xos-accessibility {
     }
     leaf order { 
       type uint32;
-    }
-  }
-
-  grouping user {
-    uses xos-base;
-    leaf password { 
-      type string;
-    }
-    leaf last-login { 
-      type xtype:datetime;
-    }
-    leaf email { 
-      type EmailField;
-    }
-    leaf username { 
-      type string;
-    }
-    leaf firstname { 
-      type string;
-    }
-    leaf lastname { 
-      type string;
-    }
-    leaf phone { 
-      type string;
-    }
-    leaf user-url { 
-      type xtype:url-field;
-    }
-    leaf site { 
-      type xtype:site; 
-    }
-    leaf public-key { 
-      type string;
-    }
-    leaf is-active { 
-      type boolean;
-    }
-    leaf is-admin { 
-      type boolean;
-    }
-    leaf is-staff { 
-      type boolean;
-    }
-    leaf is-readonly { 
-      type boolean;
-    }
-    leaf is-registering { 
-      type boolean;
-    }
-    leaf is-appuser { 
-      type boolean;
-    }
-    leaf login-page { 
-      type string;
-    }
-    leaf timezone { 
-      type xtype:time-zone-field;
-    }
-  }
-  grouping service-role {
-    uses xos-base;
-    leaf role { 
-      type string;
     }
   }
   grouping service-privilege {

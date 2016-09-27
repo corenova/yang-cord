@@ -1,10 +1,11 @@
 module xos-topology {
   namespace "urn:ietf:params:xml:ns:yang:xos-topology";
-  prefix xdeploy;
+  prefix xtop;
   yang-version 1.1;
 
   import ietf-yang-types { prefix yang; }
   import ietf-inet-types { prefix inet; }
+  import yang-meta-types { prefix meta; }
   import xos-core        { prefix xos; }
   import xos-types       { prefix xtype; }
 
@@ -16,7 +17,7 @@ module xos-topology {
      Peter K. Lee <peter@corenova.com>";
   
   description
-    "This module contains a collection of Deployment models for XOS.
+    "This module contains a collection of Topology models for XOS.
 
     Copyright (c) 2016 ON.LAB and the persons identified as authors of
     the code.  All rights reserved.
@@ -31,6 +32,22 @@ module xos-topology {
     description "Initial revision.";
   }
 
+  grouping deployment {
+    uses xos:provider {
+      refine "name" { description "Name of the deployment"; }
+    }
+    leaf-list sites {
+      config false;
+      type leafref {
+        path "/topology/site/id";
+      }
+    }
+    leaf-list templates {
+      type leafref {
+        path "/topology/template/id";
+      }
+    }
+  }
   grouping site {
     uses xos:provider {
       refine "name" { description "Name of the site"; }
@@ -39,39 +56,9 @@ module xos-topology {
       description "A URL describing the purpose of this site";
       type inet:uri;
     }
-    leaf abbreviated-name { 
-      type string;
-    }
-    leaf is-public { 
-      type boolean;
-    }
-    leaf hosts-nodes { 
-      type boolean;
-    }
-    leaf hosts-users { 
-      type boolean;
-    }
-    leaf login-base { 
-      type string;
-    }
-    leaf deployment {
-      type leafref {
-        path "/xos:topology/deployment/id";
-      }
-    }
-    leaf controller {
-      type leafref {
-        path "/xos:topology/controller/id";
-      }
-    }
-    leaf-list nodes {
-      type leafref {
-        path "/xos:topology/node/id";
-      }
-    }
     container location {
       leaf geoposition {
-        type xtype:geoposition-field;
+        type string; // what is this data format?
       }
       leaf longitude { 
         type decimal64;
@@ -79,6 +66,37 @@ module xos-topology {
       leaf latitude { 
         type decimal64;
       }
+    }
+    leaf is-public { 
+      type boolean;
+    }
+    leaf login-base { 
+      type string;
+    }
+    leaf deployment {
+      type leafref {
+        path "/topology/deployment/id";
+      }
+    }
+    leaf-list nodes {
+      config false;
+      type leafref {
+        path "/topology/node/id";
+      }
+    }
+    leaf-list users {
+      config false;
+      type leafref {
+        path "/topology/user/id";
+      }
+    }
+    leaf hosts-nodes {
+      config false;
+      type boolean;
+    }
+    leaf hosts-users {
+      config false;
+      type boolean;
     }
     container synchronizer {
       if-feature xos:synchronizer;
@@ -89,38 +107,69 @@ module xos-topology {
   }
   grouping node {
     uses xos:tenant;
-    leaf deployment {
-      type leafref {
-        path "/xos:topology/deployment/id";
-      }
-    }
     leaf site { 
       type leafref {
-        path "/xos:topology/site/id";
+        path "/topology/site/id";
+      }
+    }
+    leaf deployment {
+      config false;
+      type leafref {
+        path "/topology/deployment/id";
       }
     }
   }
-
-  grouping deployment {
-    uses xos:provider {
-      refine "name" { description "Name of the deployment"; }
-    }
-    leaf-list sites {
-      type leafref {
-        path "/xos:topology/site/id";
+  grouping user {
+    uses xos:tenant {
+      refine 'name' {
+        config false;
+        description "Name of the user";
       }
     }
-    leaf-list templates {
+    leaf firstname {
+      type meta:person-name;
+    }
+    leaf lastname {
+      type meta:person-name;
+    }
+    leaf email {
+      type meta:email-address;
+    }
+    leaf phone {
+      type meta:phone-number;
+    }
+    leaf timezone {
+      type meta:timezone;
+    }
+    leaf site {
       type leafref {
-        path "/xos:topology/template/id";
+        path "/topology/site/id";
+      }
+    }
+    container credential {
+      leaf username {
+        type yang:yang-identifier;
+      }
+      leaf password {
+        type meta:password;
+      }
+      leaf role {
+        type xtype:access-role;
+      }
+      leaf public-key {
+        type string;
+      }
+      leaf login-page {
+        type inet:uri;
+      }
+      leaf last-login {
+        config false;
+        type yang:date-and-time;
       }
     }
   }
   grouping network-template {
     uses xos:tenant;
-    leaf description { 
-      type string;
-    }
     leaf guaranteed-bandwidth { 
       type uint32;
     }
@@ -149,23 +198,27 @@ module xos-topology {
 
   /*
    * Configuration Data Nodes
-   */ 
+   */
   container topology {
     list template {
       key id;
-      uses xdeploy:network-template;
-    }
-    list node {
-      key id;
-      uses xdeploy:node;
-    }
-    list site {
-      key id;
-      uses xdeploy:site;
+      uses xtop:network-template;
     }
     list deployment {
       key id;
-      uses xdeploy:deployment;
+      uses xtop:deployment;
+    }
+    list site {
+      key id;
+      uses xtop:site;
+    }
+    list node {
+      key id;
+      uses xtop:node;
+    }
+    list user {
+      key id;
+      uses xtop:user;
     }
   }
 }

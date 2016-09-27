@@ -20,16 +20,16 @@
     "service"
   ],
   "models": {
+    "iana-crypt-hash": "yang-js",
     "ietf-yang-types": "yang-js",
     "ietf-inet-types": "yang-js",
+    "yang-meta-types": "yang-js",
     "corenova-node": "corenova",
+    "opnfv-iaas": "opnfv-promise",
     "xos-core": "./schema/xos-core.yang",
-    "xos-types": "./schema/xos-types.yang",
     "xos-slice": "./schema/xos-slice.yang",
-    "xos-service": "./schema/xos-service.yang",
-    "xos-network": "./schema/xos-network.yang",
-    "xos-infrastructure": "./schema/xos-infrastructure.yang",
     "xos-topology": "./schema/xos-topology.yang",
+    "xos-types": "./schema/xos-types.yang",
     "volt-service": "./schema/volt-service.yang",
     "vsg-service": "./schema/vsg-service.yang",
     "vrouter-service": "./schema/vrouter-service.yang",
@@ -40,6 +40,7 @@
   "dependencies": {
     "minimist": "^1.2.0",
     "node-uuid": "^1.4.7",
+    "opnfv-promise": "file:///home/plee/hack/opnfv-promise",
     "superagent": "^2.0.0",
     "yang-express": "^0.3.15",
     "yang-js": "file:///home/plee/hack/yang-js"

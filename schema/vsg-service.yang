@@ -5,12 +5,12 @@ module vsg-service {
 
   import ietf-yang-types { prefix yang; }
   import xos-core        { prefix xos; }
-  import xos-service     { prefix xserv; }
+  import xos-slice       { prefix xslice; }
   import xos-types       { prefix xtype; }
   import volt-service    { prefix volt; }
 
   organization
-   "Open Networking Lab (CORD) / Corenova Technologies";
+    "Open Networking Lab (CORD) / Corenova Technologies";
 
   contact
     "Larry Peterson <llp@onlab.us>
@@ -22,12 +22,27 @@ module vsg-service {
 
   identity virtual-subscriber-gateway { base xos:service; }
 
-  typedef subscriber-flow {
+  typedef subscriber-inflow {
+    description
+      "Valid subscriber input flow for VSG service can be:
+       - VOLT flow
+       - VSG flow (chaining)
+       - other generic flow ID";
+    type union {
+      type volt:subscriber-outflow;
+      type vsg:subscriber-outflow;
+      type yang:uuid;
+    }
+  }
+  typedef subscriber-outflow {
     type leafref {
-      path "/vsg:service/vsg:controller/vsg:port/vsg:id";
+      path "/vsg:controller/vsg:port/vsg:id";
     }
   }
 
+  /*
+   * Groupings
+   */ 
   grouping gateways-list {
     grouping subscriber-gateway {
       leaf id { type xtype:unique-identifier; }
@@ -71,34 +86,6 @@ module vsg-service {
       uses subscriber-gateway;
     }
   }
-
-  grouping controller {
-    description
-      "This grouping represents a VSG controller which manages multiple VSG
-       gateways. The VSG controller provides agregate abstraction of
-       the entire NFaaS as a single switch to the network fabric. Each
-       port entry of the controller represents each VSG subscriber
-       flow as a distinct openflow port.";
-
-    uses gateways-list;
-    list port {
-      description
-        "Each entry represents a VSG subscriber flow connected across VSG
-         gateways.";
-      key id;
-      leaf id {
-        description "OpenFlow Port ID";
-        type yang:uuid;
-        mandatory true;
-      }
-      leaf link {
-        type leafref {
-          path '../../gateway/flow/id';
-        }
-        mandatory true;
-      }
-    }
-  }
   grouping subscriber {
     description
       "This grouping represents a VSG service subscriber along with
@@ -125,42 +112,63 @@ module vsg-service {
     leaf demo { type boolean; default false; }
     leaf uplink-speed   { type volt:bandwidth; }
     leaf downlink-speed { type volt:bandwidth; }
-    
-    list tag {
+    leaf inflow {
       description
-        "Each entry represents a unique openflow port ID that the subscriber
-         connects to the VSG service from the fabric.";
-      
-      key flow;
-      leaf flow {
-        type union {
-          type volt:subscriber-flow;
-          type vsg:subscriber-flow {
-            description "can be an output flow from the VSG service.";
-          }
-          type yang:uuid {
-            description "supports a generic openflow port ID";
-          }
-        }
-      }
+        "Represents a unique flow identifier from the fabric that the
+         subscriber connects into the VSG service.";
+      type vsg:subscriber-inflow;
     }
-    leaf-list flows {
+    leaf outflow {
       description
-        "Each entry represents a unique openflow port ID that the subscriber
-         uses to connect into the fabric from the VSG service.";
+        "Represents a unique flow identifier from the VSG service that the
+         subscriber uses to connect into the fabric.";
       config false;
-      type subscriber-flow;
+      type vsg:subscriber-outflow;
     }
   }
   
   /*
    * Configuration data
    */
-  container service {
-    uses xserv:service {
+  container controller {
+    description
+      "The controller configuration represents a VSG controller which manages
+       multiple VSG gateways. The VSG controller provides agregate
+       abstraction of the entire NFaaS as a single switch to the
+       network fabric. Each port entry of the controller represents
+       each VSG subscriber flow as a distinct openflow port.";
+    uses xos:service {
       refine kind { default virtual-subscriber-gateway; }
-      augment "controller" { uses vsg:controller; }
       augment "subscriber" { uses vsg:subscriber; }
+    }
+    container slice {
+      uses xslice:slice;
+    }
+    uses gateways-list {
+      augment gateway {
+        leaf instance {
+          type leafref {
+            path "../../../slice/instances";
+          }
+        }
+      }
+    }
+    list port {
+      description
+        "Each entry represents a VSG subscriber flow connected across VSG
+         gateways.";
+      key id;
+      leaf id {
+        description "OpenFlow Port ID";
+        type yang:uuid;
+        mandatory true;
+      }
+      leaf link {
+        type leafref {
+          path '../../gateway/flow/id';
+        }
+        mandatory true;
+      }
     }
   }
 }

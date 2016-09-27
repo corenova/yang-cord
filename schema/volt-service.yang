@@ -32,7 +32,7 @@ module volt-service {
     type xtype:bandwidth;
     default 1000000000; // VOLT bandwidth default is 1Gbps
   }
-  typedef subscriber-flow {
+  typedef subscriber-outflow {
     type leafref {
       path "/volt:controller/volt:port/volt:id";
     }
@@ -65,7 +65,6 @@ module volt-service {
              traffic originating from OLT device.";
         }
       }
-    
       list link {
         description
           "Each link represents an ONU/ONT (Optical Network Termination) endpoint
@@ -99,7 +98,7 @@ module volt-service {
       "This grouping represents a VOLT service subscriber along with
        references to ONU/ONT access endpoints used by the subscriber.";
     
-    container tags {
+    container inflow-tag {
       description
         "Each entry represents a unique combination of the OLT uplink VLAN
          (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
@@ -116,12 +115,12 @@ module volt-service {
         }
       }
     }
-    leaf flow-id {
+    leaf outflow {
       description
         "Each entry represents a unique openflow port ID that the subscriber
          uses to connect into the fabric from the VOLT service.";
       config false;
-      type subscriber-flow;
+      type subscriber-outflow;
     }
   }
 
@@ -142,7 +141,7 @@ module volt-service {
       }
       augment "subscriber" { uses volt:subscriber; }
     }
-
+    // additional service specific configurations
     container slice {
       uses xslice:slice;
     }

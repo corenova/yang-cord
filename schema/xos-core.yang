@@ -95,26 +95,28 @@ module xos-core {
       description "trigger save into data store via synchronizer";
     }
   }
-  grouping access-control {
-    container access {
-      list privilege {
-        leaf user {
-          type xtype:unique-identifier;
-        }
-        leaf role {
-          type xtype:access-role;
-        }
+  grouping credentials-list {
+    list credential {
+      key token;
+      leaf token {
+        type string;
       }
-      list credential {
-        key key-id;
-        leaf key-id {
-          type string;
-        }
-        leaf enc-value {
-          type ianach:crypt-hash;
-        }
+      leaf password {
+        type meta:password;
+      }
+      leaf user {
+        type xtype:unique-identifier;
+      }
+      leaf role {
+        type xtype:access-role;
       }
     }
+  }
+  grouping parameter {
+    leaf name { type yang:yang-identifier; }
+    leaf value { type string; }
+    leaf content-type { type string; }
+    leaf object-id { type uint32; }
   }
   grouping tenant {
     leaf id {
@@ -166,7 +168,7 @@ module xos-core {
     uses tenant {
       refine kind { default provider; }
     }
-    uses access-control;
+    uses credentials-list;
   }
   grouping service {
     uses xos:provider {
@@ -214,8 +216,9 @@ module xos-core {
     }
     // TODO: need to better understand relationship between Service and VTN
   }
-  /*** main configuration tree for XOS ***/
-
+  /*
+   * Configuration data nodes (main configuration tree for XOS)
+   */
   container api {
     description
       "The primary configuration interaction endpoint";
@@ -227,6 +230,15 @@ module xos-core {
     container tenant {
       description
         "placeholder endpoint for tenants to augment";
+    }
+    container core {
+      description
+        "placeholder endpoint for core entities to augment";
+      list service {
+        config false;
+        key id;
+        uses xos:service;
+      }
     }
   }
 }
