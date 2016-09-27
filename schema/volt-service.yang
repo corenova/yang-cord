@@ -4,7 +4,8 @@ module volt-service {
   yang-version 1.1;
 
   import ietf-yang-types { prefix yang; }
-  import xos-service     { prefix xserv; }
+  import xos-core        { prefix xos; }
+  import xos-slice       { prefix xslice; }
   import xos-types       { prefix xtype; }
   
   organization
@@ -33,10 +34,13 @@ module volt-service {
   }
   typedef subscriber-flow {
     type leafref {
-      path "/volt:service/volt:controller/volt:port/volt:id";
+      path "/volt:controller/volt:port/volt:id";
     }
   }
 
+  /*
+   * Groupings
+   */ 
   grouping devices-list {
     grouping olt-device {
       description
@@ -90,14 +94,58 @@ module volt-service {
       uses olt-device;
     }
   }
-  grouping controller {
+  grouping subscriber {
     description
-      "This grouping represents a VOLT agent/controller which manages
-       multiple OLT devices. The VOLT agent provides aggregate
-       abstraction of the entire PON as a sigle switch to the
-       controller. Each port entry of the agent represents each
-       ONU/ONT endpoint as a separate openflow port.";
+      "This grouping represents a VOLT service subscriber along with
+       references to ONU/ONT access endpoints used by the subscriber.";
+    
+    container tags {
+      description
+        "Each entry represents a unique combination of the OLT uplink VLAN
+         (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+         into the fabric for the subscriber.";
+      
+      leaf outer {
+        type leafref {
+          path "/volt:controller/volt:device/volt:uplink/volt:tag";
+        }
+      }
+      leaf inner {
+        type leafref {
+          path "/volt:controller/volt:device/volt:link/volt:tag";
+        }
+      }
+    }
+    leaf flow-id {
+      description
+        "Each entry represents a unique openflow port ID that the subscriber
+         uses to connect into the fabric from the VOLT service.";
+      config false;
+      type subscriber-flow;
+    }
+  }
 
+  /*
+   * Configuration data nodes
+   */
+  container controller {
+    description
+      "The controller configuration block represents a VOLT agent/controller
+       which manages multiple OLT devices. The VOLT agent provides
+       aggregate abstraction of the entire PON as a sigle switch to
+       the controller. Each port entry of the agent represents each
+       ONU/ONT endpoint as a separate openflow port.";
+    
+    uses xos:service {
+      refine kind  {
+        default virtual-olt;
+      }
+      augment "subscriber" { uses volt:subscriber; }
+    }
+
+    container slice {
+      uses xslice:slice;
+    }
     uses devices-list;
     list port {
       description
@@ -118,47 +166,6 @@ module volt-service {
     container radius {
       if-feature onos-app-aaa;
       // configuration for how to broker authentication requests
-    }
-  }
-  grouping subscriber {
-    description
-      "This grouping represents a VOLT service subscriber along with
-       references to ONU/ONT access endpoints used by the subscriber.";
-    
-    container tags {
-      description
-        "Each entry represents a unique combination of the OLT uplink VLAN
-         (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
-         into the fabric for the subscriber.";
-      
-      leaf outer {
-        type leafref {
-          path "/volt:service/volt:controller/volt:device/volt:uplink/volt:tag";
-        }
-      }
-      leaf inner {
-        type leafref {
-          path "/volt:service/volt:controller/volt:device/volt:link/volt:tag";
-        }
-      }
-    }
-    leaf flow-id {
-      description
-        "Each entry represents a unique openflow port ID that the subscriber
-         uses to connect into the fabric from the VOLT service.";
-      config false;
-      type subscriber-flow;
-    }
-  }
-
-  /*
-   * Configuration data nodes
-   */
-  container service {
-    uses xserv:service {
-      refine kind { default virtual-olt; }
-      augment "controller" { uses volt:controller; }
-      augment "subscriber" { uses volt:subscriber; }
     }
   }
 }

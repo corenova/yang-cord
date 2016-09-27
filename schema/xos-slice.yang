@@ -124,19 +124,12 @@ module xos-slice {
       type xtype:service-class;
       status deprecated;
     }
-  }
-
-  container controller {
-    list slice {
-      key id;
-      uses xslice:slice;
-      // TOOD: need to better understand relationship between Service and Slice
-      action scale {
-        description "Adjust scale for slice(s)";
-      }
+    // TOOD: need to better understand relationship between Service and Slice
+    action scale {
+      description "Adjust scale for slice(s)";
     }
   }
-  
+
   /*
    * Augmentations to NFVI modules
    */
