@@ -43,7 +43,7 @@
     "opnfv-promise": "file:///home/plee/hack/opnfv-promise",
     "superagent": "^2.0.0",
     "yang-express": "^0.3.15",
-    "yang-js": "file:///home/plee/hack/yang-js"
+    "yang-js": "^0.16.0"
   },
   "optionalDependencies": {
     "corenova": "^1.0.0"
