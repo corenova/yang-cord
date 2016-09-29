@@ -1,10 +1,22 @@
 {
-  "xos-core:api": {
-    "service": {},
-    "tenant":  {}
+  "xos-controller:tenant": {
+    "cord": {
+      "subscriber": [
+        { "id": 1, "service-specific-id": 1000 },
+        { "id": 2, "service-specific-id": 1001 }
+      ]
+    }
   },
-  "cord-core:subscriber": [
-    { "id": 1, "service-specific-id": 1000 },
-    { "id": 2, "service-specific-id": 1001 }
-  ]
+  "volt-service:controller": {
+    "id": 123,
+    "info": {
+
+    },
+    "subscriber": [
+
+    ],
+    "device": [
+
+    ]
+  }
 }

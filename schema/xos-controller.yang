@@ -1,22 +1,25 @@
 module xos-controller {
   namespace "urn:ietf:params:xml:ns:yang:xos-controller";
-  prefix xcontrol;
+  prefix xos;
   yang-version 1.1;
 
   import ietf-yang-types { prefix yang; }
   import ietf-inet-types { prefix inet; }
-  import xos-core        { prefix xos; }
+  import iana-crypt-hash { prefix ianach; }
+  import yang-meta-types { prefix meta; }
   import xos-types       { prefix xtype; }
 
   organization
-    "Open Networking Lab (XOS) / Corenova Technologies";
+   "Open Networking Lab / Corenova Technologies";
 
   contact
     "Larry Peterson <llp@onlab.us>
      Peter K. Lee <peter@corenova.com>";
   
   description
-    "This module contains a collection of Controller models for XOS.
+   "This module contains a collection of core models for XOS.  The core
+    models represent primary first-order entities such as Tenant,
+    Subscriber, Provider, and Service.
 
     Copyright (c) 2016 ON.LAB and the persons identified as authors of
     the code.  All rights reserved.
@@ -27,164 +30,209 @@ module xos-controller {
     distribution, and is available at
     (http://www.apache.org/licenses/LICENSE-2.0).";
   
-  revision 2016-09-23 {
+  revision 2016-07-14 {
     description "Initial revision.";
   }
 
-  grouping controller {
-    uses xos:provider;
-    leaf backend-type { 
-      type string;
-    }
-    leaf version { 
-      type string;
-    }
-    leaf auth-url { 
-      type string;
-    }
-    leaf admin-user { 
-      type string;
-    }
-    leaf admin-password { 
-      type string;
-    }
-    leaf admin-tenant { 
-      type string;
-    }
-    leaf domain { 
-      type string;
-    }
-    container message-queue {
-      leaf rabbit-host { 
-        type string;
-      }
-      leaf rabbit-user { 
-        type string;
-      }
-      leaf rabbit-password { 
-        type string;
-      }
-    }
-    leaf deployment { 
-      type xtype:deployment; 
-    }
+  identity subscriber {
+    base xtype:xos-tenant-kind;
   }
-  grouping controller-site-privilege {
-    uses xos:tenant;
-
-    leaf controller { 
-      type xtype:controller; 
-    }
-
-    leaf site-privilege { 
-      type xtype:site-privilege; 
-    }
-    
-    container synchronizer {
-      if-feature xos:synchronizer;
-      leaf role-id { 
-        type string;
-      }
-    }
+  identity provider {
+    base xtype:xos-tenant-kind;
   }
-  grouping controller-network {
-    uses xos:tenant;
-    leaf network { 
-      type xtype:network; 
-    }
-    leaf controller { 
-      type xtype:controller; 
-    }
-    leaf subnet { 
-      type string;
-    }
-    container synchronizer {
-      if-feature synchronizer;
-      leaf net-id { 
-        type string;
-      }
-      leaf router-id { 
-        type string;
-      }
-      leaf subnet-id { 
-        type string;
-      }
-    }
-  }
-  grouping controller-site {
-    uses xos:tenant;
-    leaf site { 
-      type xtype:site; 
-    }
-
-    leaf controller { 
-      type xtype:controller; 
-    }
-
-    container synchronizer {
-      if-feature synchronizer;
-      leaf tenant-id { 
-        type string;
-      }
-    }
-  }
-  grouping controller-slice {
-    uses xos:tenant;
-    leaf controller { 
-      type xtype:controller; 
-    }
-    leaf slice { 
-      type xtype:slice; 
-    }
-    
-    container synchronizer {
-      if-feature synchronizer;
-      leaf tenant-id { 
-        type string;
-      }
-    }
-  }
-  grouping controller-role {
-    uses xos:tenant;
-    leaf role { 
-      type string;
-    }
-  }
-  grouping controller-user {
-    uses xos:tenant;
-    leaf user { 
-      type xtype:user; 
-    }
-
-    leaf controller { 
-      type xtype:controller; 
-    }
-    
-    container synchronizer {
-      if-feature synchronizer {
-        leaf kuser-id { 
-          type string;
-        }
-      }
-    }
-  }
-  grouping controller-slice-privilege {
-    uses xos:tenant;
-    leaf controller { 
-      type xtype:controller; 
-    }
-
-    leaf slice-privilege { 
-      type xtype:slice-privilege; 
-    }
-    
-    container synchronizer {
-      if-feature synchronizer {
-        leaf role-id { 
-          type string;
-        }
-      }
-    }
+  identity service {
+    base provider;
   }
   
+  feature synchronizer {
+    description
+      "Enables configuration synchronization to the distributed store.";
+  }
+  /*
+   * Groupings
+   */
+  grouping record {
+    description "Synchronizer-specific properties for model entities";
+    
+    leaf created { type yang:date-and-time; }
+    leaf updated { type yang:date-and-time; }
+    leaf enacted { type yang:date-and-time; }
+    leaf policed { type yang:date-and-time; }
+        
+    leaf writable { type boolean; default true; }
+    leaf locked   { type boolean; default false; }
+    leaf deleted  { type boolean; default false; }
+      
+    leaf dirty {
+      config false;
+      type boolean;
+      default false;
+    }
+      
+    container sync {
+      anydata register {
+        description "scratchpad used by the Observer";
+      }
+      leaf progress {
+        type enumeration {
+          enum provisioning {
+            value 0;
+            description "Provisioning in progress";
+          }
+        }
+      }
+      leaf disabled { type boolean; default false; }
+      leaf enforced { type boolean; default true; }
+
+      list policy {
+        // TODO: how are policy defined/enforced?
+      }
+    }
+    action diff {
+      description "retrieve diff of model state if dirty";
+    }
+    action save {
+      description "trigger save into data store via synchronizer";
+    }
+  }
+  grouping credentials-list {
+    list credential {
+      key token;
+      leaf token {
+        type string;
+      }
+      leaf password {
+        type meta:password;
+      }
+      leaf user {
+        type xtype:unique-identifier;
+      }
+      leaf role {
+        type xtype:access-role;
+      }
+    }
+  }
+  grouping parameter {
+    leaf name { type yang:yang-identifier; }
+    leaf value { type string; }
+    leaf content-type { type string; }
+    leaf object-id { type uint32; }
+  }
+  grouping tenant {
+    leaf id {
+      type xtype:unique-identifier;
+      mandatory true;
+    }
+    leaf name { type string { length 0..255; } }
+    leaf kind {
+      config false;
+      type identityref {
+        base xtype:xos-tenant-kind;
+      }
+    }
+    leaf description { type meta:description; }
+    leaf enabled { type boolean; default true; }
+    list attribute {
+      key name;
+      leaf name  { type string { length 0..128; } }
+      leaf value { type string; }
+      status deprecated;
+      reference "XOS: service-specific-attribute";
+      description "backwards-compatible attribute association";
+    }
+    leaf service-specific-id {
+      type xtype:unique-identifier;
+      status deprecated;
+    }
+    container record {
+      if-feature synchronizer;
+      uses xos:record;
+    }
+  }
+  grouping subscriber {
+    uses tenant {
+      refine kind { default subscriber; }
+    }
+    leaf connectivity {
+      type enumeration {
+        enum public { description "Public"; }
+        enum private { description "Private"; }
+        enum private-unidirectional { description "Private Uni-directional"; }
+        enum na { description "Not Applicable"; }
+      }
+      default na;
+    }
+  }
+  grouping provider {
+    uses tenant {
+      refine kind { default provider; }
+    }
+    uses credentials-list;
+  }
+  grouping service {
+    uses xos:provider {
+      refine 'name' {
+        description "Name of the Service";
+      }
+    }
+    container info {
+      leaf description {
+        type string {
+          length 0..254;
+        }
+        description "Description of the Service";
+      }
+      leaf version {
+        type string { length 0..30; }
+        description "Version of Service Definition";
+      }
+      leaf view {
+        type inet:uri;
+      }
+      leaf icon {
+        type inet:uri;
+      }
+    }
+    leaf published {
+      type boolean;
+      default true;
+    }
+    list keypair {
+      description "collection of public/private key pair(s)";
+      // should be a specific typedef for storing this content
+      leaf public  { type string { length 0..1024; } }
+      leaf private { type string { length 0..1024; } }
+    }
+    list subscriber {
+      description
+        "Each entry represents a subscriber of the service. Each unique service
+         provider should augment this block with service specific
+         attributes.";
+      key id;
+      uses subscriber;
+      notification subscriber-added;
+      notification subscriber-deleted;
+    }
+    // TODO: need to better understand relationship between Service and VTN
+  }
+  /*
+   * Configuration data nodes (main configuration tree for XOS)
+   */
+  container core {
+    description
+      "placeholder endpoint for additional core entities to augment";
+    list service {
+      config false;
+      key id;
+      uses xos:service;
+    }
+  }
+  container service {
+    description
+      "placeholder endpoint for services to augment";
+  }
+  container tenant {
+    description
+      "placeholder endpoint for tenants to augment";
+  }
 }

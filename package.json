@@ -24,29 +24,23 @@
     "ietf-yang-types": "yang-js",
     "ietf-inet-types": "yang-js",
     "yang-meta-types": "yang-js",
-    "corenova-node": "corenova",
     "opnfv-iaas": "opnfv-promise",
-    "xos-core": "./schema/xos-core.yang",
+    "xos-controller": "./schema/xos-controller.yang",
     "xos-slice": "./schema/xos-slice.yang",
     "xos-topology": "./schema/xos-topology.yang",
     "xos-types": "./schema/xos-types.yang",
-    "volt-service": "./schema/volt-service.yang",
-    "vsg-service": "./schema/vsg-service.yang",
-    "vrouter-service": "./schema/vrouter-service.yang",
-    "cord-core": "./lib/cord-core.js",
-    "cord-device": "./lib/cord-device.js",
-    "cord-subscriber": "./lib/cord-subscriber.js"
+    "cord-tenant": "./lib/cord-tenant.js",
+    "volt-service": "./volt/volt-service.yang",
+    "vsg-service":  "./vsg/vsg-service.yang",
+    "vrouter-service": "./vrouter/vrouter-service.yang"
   },
   "dependencies": {
     "minimist": "^1.2.0",
     "node-uuid": "^1.4.7",
-    "opnfv-promise": "file:///home/plee/hack/opnfv-promise",
+    "opnfv-promise": "git://github.com/opnfv/promise#develop",
     "superagent": "^2.0.0",
-    "yang-express": "^0.3.15",
-    "yang-js": "^0.16.0"
-  },
-  "optionalDependencies": {
-    "corenova": "^1.0.0"
+    "yang-express": "^0.4.0",
+    "yang-js": "^0.16.1"
   },
   "devDependencies": {
     "coffee-script": ">=1.7.0",

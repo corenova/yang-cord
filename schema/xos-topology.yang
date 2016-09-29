@@ -6,7 +6,7 @@ module xos-topology {
   import ietf-yang-types { prefix yang; }
   import ietf-inet-types { prefix inet; }
   import yang-meta-types { prefix meta; }
-  import xos-core        { prefix xos; }
+  import xos-controller  { prefix xos; }
   import xos-types       { prefix xtype; }
 
   organization
@@ -39,12 +39,12 @@ module xos-topology {
     leaf-list sites {
       config false;
       type leafref {
-        path "/topology/site/id";
+        path "/xos:core/site/id";
       }
     }
     leaf-list templates {
       type leafref {
-        path "/topology/template/id";
+        path "/xos:core/template/id";
       }
     }
   }
@@ -75,19 +75,19 @@ module xos-topology {
     }
     leaf deployment {
       type leafref {
-        path "/topology/deployment/id";
+        path "/xos:core/deployment/id";
       }
     }
     leaf-list nodes {
       config false;
       type leafref {
-        path "/topology/node/id";
+        path "/xos:core/node/id";
       }
     }
     leaf-list users {
       config false;
       type leafref {
-        path "/topology/user/id";
+        path "/xos:core/user/id";
       }
     }
     leaf hosts-nodes {
@@ -109,13 +109,13 @@ module xos-topology {
     uses xos:tenant;
     leaf site { 
       type leafref {
-        path "/topology/site/id";
+        path "/xos:core/site/id";
       }
     }
     leaf deployment {
       config false;
       type leafref {
-        path "/topology/deployment/id";
+        path "/xos:core/deployment/id";
       }
     }
   }
@@ -143,7 +143,7 @@ module xos-topology {
     }
     leaf site {
       type leafref {
-        path "/topology/site/id";
+        path "/xos:core/site/id";
       }
     }
     container credential {
@@ -197,9 +197,9 @@ module xos-topology {
   }
 
   /*
-   * Configuration Data Nodes
+   * Augmentations to XOS core
    */
-  container topology {
+  augment "/xos:core" {
     list template {
       key id;
       uses xtop:network-template;

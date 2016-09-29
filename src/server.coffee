@@ -7,26 +7,43 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 #
 
-Yang = require('yang-js')
+Yang = require 'yang-js'
+data = require '../sample-data.json'
 
-app = require('yang-express') ->
-  @enable 'yangapi'
-  @enable 'openapi', require('../package.json')
-  @enable 'restjson'
-  @enable 'websocket'
+cord = Yang.require('cord-tenant').eval(data)
+volt = Yang.require('volt-service').eval(data)
+vsg  = Yang.require('vsg-service').eval(data)
+xos  = Yang.require('xos-controller').eval(data)
 
-  @open 'cord', ->
-    @import Yang.require('cord-core')
-    @import Yang.require('xos-core')
+express = require('yang-express').eval {
+  'yang-express:server':
+    info:
+      title: "CORD (Central Office Re-architected as a Datacenter)"
+      description: "YANG model-driven CORD"
+      version: "1.0",
+      contact:
+        name: "Peter Lee"
+        url: "http://github.com/corenova/yang-cord"
+        email: "peter@corenova.com"
+      license:
+        name: "Apache-2.0"
+    router: [
+      { name: "xos-controller" }
+      { name: "ietf-yang-library" }
+    ]
+}
+express
+  .enable 'restjson'
+  .enable 'openapi'
 
-    @connect require('../sample-data.json')
-    @on 'update', (prop) ->
-      console.log "[#{prop.path}] got updated, should consider persisting the change somewhere"
-
-module.exports = app
+module.exports = express
 
 # only start if directly invoked
 if require.main is module
+  yaml = require 'js-yaml'
   argv = require('minimist')(process.argv.slice(2))
-  argv.port ?= 5050
-  app.listen argv.port
+  express.in('run').invoke(argv)
+    .then (res) ->
+      console.info "XOS running with:"
+      console.info yaml.dump(res)
+    .catch (err) -> console.error err

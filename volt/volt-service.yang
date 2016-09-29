@@ -4,7 +4,8 @@ module volt-service {
   yang-version 1.1;
 
   import ietf-yang-types { prefix yang; }
-  import xos-core        { prefix xos; }
+  import cord-tenant     { prefix cord; }
+  import xos-controller  { prefix xos; }
   import xos-slice       { prefix xslice; }
   import xos-types       { prefix xtype; }
   
@@ -98,7 +99,7 @@ module volt-service {
       "This grouping represents a VOLT service subscriber along with
        references to ONU/ONT access endpoints used by the subscriber.";
     
-    container inflow-tag {
+    container tags {
       description
         "Each entry represents a unique combination of the OLT uplink VLAN
          (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
@@ -165,6 +166,37 @@ module volt-service {
     container radius {
       if-feature onos-app-aaa;
       // configuration for how to broker authentication requests
+    }
+  }
+  /*
+   * Augmentations to XOS
+   */
+  augment "/xos:tenant/cord/subscriber" {
+    leaf volt-id {
+      type leafref {
+        path "/volt:controller/subscriber/id";
+      }
+    }
+    container volt {
+      when "../volt-id";
+      leaf c-tag {
+        config false;
+        type leafref {
+          path "/volt:controller/subscriber/tags/outer";
+        }
+      }
+      leaf s-tag {
+        config false;
+        type leafref {
+          path "/volt:controller/subscriber/tags/inner";
+        }
+      }
+      leaf uplink-speed {
+        type volt:bandwidth;
+      }
+      leaf downlink-speed {
+        type volt:bandwidth;
+      }
     }
   }
 }

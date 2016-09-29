@@ -7,11 +7,10 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 #
 
-require('yang-js').register()
+require 'yang-js'
 
-module.exports = require('../schema/cord-core.yang').bind {
+module.exports = require('../schema/cord-tenant.yang').bind {
 
-  '/cord:subscriber/label': -> "cordSubscriber-#{@get '../id'}"
-
-  '/cord:subscriber/delete': (input, resolve, reject) -> reject "not yet implemented"
+  '{cord:subscriber}/label': -> @content = "cordSubscriber-#{@get '../id'}"
+  
 }

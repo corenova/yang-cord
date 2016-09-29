@@ -6,7 +6,7 @@ module xos-slice {
   import ietf-yang-types { prefix yang; }
   import ietf-inet-types { prefix inet; }
   import opnfv-iaas      { prefix nfvi; }
-  import xos-core        { prefix xos; }
+  import xos-controller  { prefix xos; }
   import xos-topology    { prefix xtop; }
   import xos-types       { prefix xtype; }
 
@@ -103,7 +103,7 @@ module xos-slice {
     }
     leaf creator {
       type leafref {
-        path "/xtop:topology/user/id";
+        path "/xos:core/user/id";
       }
     }
     leaf-list tags {
@@ -123,7 +123,7 @@ module xos-slice {
   /*
    * Augmentations to XOS core and NFVI modules
    */
-  augment "/xos:api/xos:core" {
+  augment "/xos:core" {
     list slice {
       key id;
       uses xslice:slice;
@@ -136,7 +136,7 @@ module xos-slice {
     }
     leaf deployment {
       type leafref {
-        path "/xtop:topology/xtop:deployment/xtop:id";
+        path "/xos:core/deployment/id";
       }
     }
     leaf isolation {
@@ -167,12 +167,12 @@ module xos-slice {
   augment "/nfvi:controller/nfvi:compute/nfvi:image" {
     leaf template {
       type leafref {
-        path "/xtop:topology/xtop:template/xtop:id";
+        path "/xos:core/template/id";
       }
     }
     leaf-list deployments {
       type leafref {
-        path "/xtop:topology/xtop:deployment/xtop:id";
+        path "/xos:core/deployment/id";
       }
     }
     container synchronizer {
