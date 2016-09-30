@@ -34,14 +34,17 @@ module xos-controller {
     description "Initial revision.";
   }
 
-  identity subscriber {
-    base xtype:xos-tenant-kind;
+  identity xos-tenant {
+    description "Describes the type of tenant within XOS";
   }
-  identity provider {
-    base xtype:xos-tenant-kind;
+  identity xos-subscriber {
+    base xos-tenant;
   }
-  identity service {
-    base provider;
+  identity xos-provider {
+    base xos-tenant;
+  }
+  identity xos-service {
+    base xos-provider;
   }
   
   feature synchronizer {
@@ -127,23 +130,11 @@ module xos-controller {
     leaf kind {
       config false;
       type identityref {
-        base xtype:xos-tenant-kind;
+        base xos-tenant;
       }
     }
     leaf description { type meta:description; }
     leaf enabled { type boolean; default true; }
-    list attribute {
-      key name;
-      leaf name  { type string { length 0..128; } }
-      leaf value { type string; }
-      status deprecated;
-      reference "XOS: service-specific-attribute";
-      description "backwards-compatible attribute association";
-    }
-    leaf service-specific-id {
-      type xtype:unique-identifier;
-      status deprecated;
-    }
     container record {
       if-feature synchronizer;
       uses xos:record;
@@ -175,23 +166,11 @@ module xos-controller {
         description "Name of the Service";
       }
     }
-    container info {
-      leaf description {
-        type string {
-          length 0..254;
-        }
-        description "Description of the Service";
-      }
-      leaf version {
-        type string { length 0..30; }
-        description "Version of Service Definition";
-      }
-      leaf view {
-        type inet:uri;
-      }
-      leaf icon {
-        type inet:uri;
-      }
+    leaf view-url {
+      type inet:uri;
+    }
+    leaf icon-url {
+      type inet:uri;
     }
     leaf published {
       type boolean;
@@ -202,6 +181,18 @@ module xos-controller {
       // should be a specific typedef for storing this content
       leaf public  { type string { length 0..1024; } }
       leaf private { type string { length 0..1024; } }
+    }
+    list attribute {
+      key name;
+      leaf name  { type string { length 0..128; } }
+      leaf value { type string; }
+      status deprecated;
+      reference "XOS: service-specific-attribute";
+      description "backwards-compatible attribute association";
+    }
+    leaf service-specific-id {
+      type xtype:unique-identifier;
+      status deprecated;
     }
     list subscriber {
       description
@@ -220,19 +211,15 @@ module xos-controller {
    */
   container core {
     description
-      "placeholder endpoint for additional core entities to augment";
-    list service {
-      config false;
-      key id;
-      uses xos:service;
-    }
+      "Primary endpoint for additional core entities to augment";
+    uses xos:provider;
   }
   container service {
     description
-      "placeholder endpoint for services to augment";
+      "Primary endpoint for services to augment";
   }
   container tenant {
     description
-      "placeholder endpoint for tenants to augment";
+      "Primary endpoint for tenants to augment";
   }
 }

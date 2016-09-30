@@ -28,13 +28,13 @@ module cord-tenant {
   revision 2016-09-29 {
     description "Combine CORD subscriber and augment XOS.";
   }
-  
   revision 2016-07-22 {
     description "Initial revision.";
   }
 
-  identity cord-subscriber { base xos:subscriber; }
-
+  identity cord-subscriber {
+    base xos:xos-subscriber;
+  }
   /*
    * Groupings
    */
@@ -71,7 +71,6 @@ module cord-tenant {
       default false;
     }
   }
-
   /*
    * Augmentations to XOS
    */

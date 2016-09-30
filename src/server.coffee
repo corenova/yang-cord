@@ -7,43 +7,28 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 #
 
+config = require 'config'
 Yang = require 'yang-js'
-data = require '../sample-data.json'
+yaml = require 'js-yaml'
 
-cord = Yang.require('cord-tenant').eval(data)
-volt = Yang.require('volt-service').eval(data)
-vsg  = Yang.require('vsg-service').eval(data)
-xos  = Yang.require('xos-controller').eval(data)
-
-express = require('yang-express').eval {
-  'yang-express:server':
-    info:
-      title: "CORD (Central Office Re-architected as a Datacenter)"
-      description: "YANG model-driven CORD"
-      version: "1.0",
-      contact:
-        name: "Peter Lee"
-        url: "http://github.com/corenova/yang-cord"
-        email: "peter@corenova.com"
-      license:
-        name: "Apache-2.0"
-    router: [
-      { name: "xos-controller" }
-      { name: "ietf-yang-library" }
-    ]
-}
-express
+xos = Yang.import('xos-controller').eval(config)
+server = require('yang-express').eval(config)
+server
   .enable 'restjson'
   .enable 'openapi'
 
-module.exports = express
+module.exports = server
 
-# only start if directly invoked
-if require.main is module
-  yaml = require 'js-yaml'
-  argv = require('minimist')(process.argv.slice(2))
-  express.in('run').invoke(argv)
-    .then (res) ->
-      console.info "XOS running with:"
-      console.info yaml.dump(res)
-    .catch (err) -> console.error err
+server.once 'run', (opts={}) ->
+  includes = [].concat(opts.include).filter(Boolean)
+  for include in includes
+    try Yang.import(include).eval(config)
+    catch e
+      console.error e
+      throw new Error "unable to include '#{include}' YANG module, check your local 'package.json' for models"
+    server.in('server/router').merge name: include
+  server.in('run').invoke(opts)
+  .then (res) ->
+    console.info "XOS Controller running with:"
+    console.info yaml.dump(res)
+  .catch (err) -> console.error err

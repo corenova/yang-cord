@@ -25,20 +25,25 @@
     "ietf-inet-types": "yang-js",
     "yang-meta-types": "yang-js",
     "opnfv-iaas": "opnfv-promise",
-    "xos-controller": "./schema/xos-controller.yang",
+    "xos-controller": "./lib/xos-controller.js",
     "xos-slice": "./schema/xos-slice.yang",
     "xos-topology": "./schema/xos-topology.yang",
     "xos-types": "./schema/xos-types.yang",
     "cord-tenant": "./lib/cord-tenant.js",
-    "volt-service": "./volt/volt-service.yang",
-    "vsg-service":  "./vsg/vsg-service.yang",
-    "vrouter-service": "./vrouter/vrouter-service.yang"
+    "volt-service": "yang-volt",
+    "vsg-service": "yang-vsg"
+  },
+  "main": "./lib/cord-core.js",
+  "bin": {
+    "xos": "bin/xos"
   },
   "dependencies": {
+    "config": "^1.21.0",
     "minimist": "^1.2.0",
     "node-uuid": "^1.4.7",
     "opnfv-promise": "git://github.com/opnfv/promise#develop",
     "superagent": "^2.0.0",
+    "yang-volt": "file:./yang-volt",
     "yang-express": "^0.4.0",
     "yang-js": "^0.16.1"
   },
@@ -50,7 +55,6 @@
     "should": "~3.1.3",
     "webpack": "^1.13.1"
   },
-  "main": "./lib/cord-core.js",
   "scripts": {
     "clean": "rimraf dist/* lib/*",
     "prebuild": "npm run clean -s && mkdir -p dist",
@@ -60,6 +64,6 @@
     "prepublish": "npm run build",
     "pretest": "npm run build",
     "test": "mocha",
-    "start": "node lib/server.js"
+    "start": "bin/xos -I cord-tenant -I volt-service"
   }
 }

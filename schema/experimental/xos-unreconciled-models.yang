@@ -1,5 +1,5 @@
-module xos-unreconciled-models {
-  namespace "urn:ietf:params:xml:ns:yang:xos-incomplete";
+module xos-accessibility {
+  namespace "urn:ietf:params:xml:ns:yang:xos-accessibility";
   prefix xacc;
   yang-version 1.1;
 

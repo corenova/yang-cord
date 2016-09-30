@@ -1,0 +1,42 @@
+{
+  "name": "yang-volt",
+  "version": "1.0.0",
+  "description": "YANG model-driven VOLT",
+  "author": "Peter K. Lee <peter@corenova.com>",
+  "license": "Apache-2.0",
+  "homepage": "http://wiki.opencord.org/",
+  "repository": "corenova/yang-cord",
+  "private": true,
+  "keywords": [
+    "cord",
+    "opencord",
+    "onlab",
+    "xos",
+    "onos",
+    "service",
+    "volt"
+  ],
+  "controller": {
+    "model": "volt-service",
+    "config": "./volt-service.yaml",
+    "public-key": "./volt-service.pub",
+    "private-key": "./volt-service.key",
+    "synchronizer": "./volt-synchronizer.py"
+  },
+  "models": {
+    "ietf-yang-types": "yang-js",
+    "cord-tenant": "yang-cord",
+    "xos-controller": "yang-cord",
+    "xos-slice": "yang-cord",
+    "xos-types": "yang-cord",
+    "volt-service": "./volt-service.yang"
+  },
+  "main": "./volt-service.js",
+  "dependencies": {
+    "yang-js": "^0.16.2",
+    "yang-cord": "../"
+  },
+  "devDependencies": {
+    "yang-express": "^0.4.0"
+  }
+}

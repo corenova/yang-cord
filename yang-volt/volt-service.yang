@@ -158,7 +158,7 @@ module volt-service {
       }
       leaf link {
         type leafref {
-          path '../../device/link/serial';
+          path '/volt:controller/device/link/serial';
         }
         mandatory true;
       }

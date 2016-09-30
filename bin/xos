@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+var argv = require('minimist')(process.argv.slice(2), {
+  boolean: [ 'help' ],
+  alias: {
+    help: 'h',
+	port: 'p',
+    include: 'I'
+  }
+});
+
+if (argv.h === true) {
+  var help;
+  help  = "  Usage: xos [options] file...\n\n";
+  help += "  Options:\n";
+  help += "    -p, --port <number>        Run XOS Controller on <port>\n";
+  help += "    -I, --include [module...]  Add YANG module to XOS runtime\n";
+  console.info(help);
+  process.exit();
+}
+
+require('../lib/server').emit('run',argv)
