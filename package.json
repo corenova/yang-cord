@@ -1,6 +1,6 @@
 {
   "name": "yang-cord",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "YANG model-driven CORD",
   "author": "Peter K. Lee <peter@corenova.com>",
   "license": "Apache-2.0",
@@ -43,9 +43,9 @@
     "node-uuid": "^1.4.7",
     "opnfv-promise": "git://github.com/opnfv/promise#develop",
     "superagent": "^2.0.0",
-    "yang-volt": "file:./yang-volt",
     "yang-express": "^0.4.0",
-    "yang-js": "^0.16.1"
+    "yang-js": "^0.16.2",
+    "yang-volt": "file:./services/yang-volt"
   },
   "devDependencies": {
     "coffee-script": ">=1.7.0",

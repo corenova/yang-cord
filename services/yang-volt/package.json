@@ -34,7 +34,7 @@
   "main": "./volt-service.js",
   "dependencies": {
     "yang-js": "^0.16.2",
-    "yang-cord": "../"
+    "yang-cord": "../.."
   },
   "devDependencies": {
     "yang-express": "^0.4.0"
