@@ -14,5 +14,4 @@ yang-express:server:
     license:
       name: 'Apache-2.0'
   router:
-    - name: xos-controller
     - name: ietf-yang-library

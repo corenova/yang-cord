@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+var yaml = require('js-yaml');
 var argv = require('minimist')(process.argv.slice(2), {
   boolean: [ 'help' ],
   alias: {
@@ -11,7 +12,7 @@ var argv = require('minimist')(process.argv.slice(2), {
 
 if (argv.h === true) {
   var help;
-  help  = "  Usage: xos [options] file...\n\n";
+  help  = "  Usage: xos [options]\n\n";
   help += "  Options:\n";
   help += "    -p, --port <number>        Run XOS Controller on <port>\n";
   help += "    -I, --include [module...]  Add YANG module to XOS runtime\n";
@@ -19,4 +20,14 @@ if (argv.h === true) {
   process.exit();
 }
 
-require('../lib/server').emit('run',argv)
+argv.include = [ 'xos-controller' ].concat(argv.include).filter(Boolean);
+
+var config = argv.config = require('config');
+require('yang-express').eval(config)
+  .enable('restjson')
+  .enable('openapi')
+  .in('run').invoke(argv)
+  .then(function (res) {
+    console.info("XOS Controller started with:");
+    console.info(yaml.dump(res));
+  })

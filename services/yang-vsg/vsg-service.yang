@@ -136,7 +136,7 @@ module vsg-service {
       augment gateway {
         leaf instance {
           type leafref {
-            path "../../../slice/instances";
+            path "/vsg:controller/slice/instances";
           }
         }
       }
@@ -153,7 +153,7 @@ module vsg-service {
       }
       leaf link {
         type leafref {
-          path '../../gateway/flow/id';
+          path '/vsg:controller/gateway/flow/id';
         }
         mandatory true;
       }

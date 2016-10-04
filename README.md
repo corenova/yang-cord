@@ -26,21 +26,27 @@ dynamic YANG model-driven API routing capability.
 ```bash
 $ npm start
 
-> yang-cord@1.0.8 start /home/plee/hack/yang-cord
-> node lib/api/server.js
+> yang-cord@1.2.0 start /home/plee/hack/yang-cord
+> bin/xos -I cord-tenant -I volt-service
 
-[yang-express] start of a new journey
-[openapi] enabling...
-[openapi] enabled ok
-[restjson] enabling...
-[restjson] enabled ok
-[websocket] enabling...
-[yang-express] registering a new link
-[yang-express] registered 'link:cord-core'
-[yang-express] registering a new link
-[yang-express] registered 'link:xos-core'
-[websocket] binding to server
-[websocket] enabled ok
+XOS Controller started with:
+info:
+  title: CORD (Central Office Re-architected as a Datacenter)
+  description: YANG model-driven CORD
+  version: '1.0'
+  contact:
+    name: Peter Lee
+    url: 'http://github.com/corenova/yang-cord'
+    email: peter@corenova.com
+  license:
+    name: Apache-2.0
+router:
+  - name: ietf-yang-library
+  - name: xos-controller
+  - name: cord-tenant
+  - name: volt-service
+port: 5000
+hostname: zcore
 ```
 
 _An option `--port` is provided to specify the port to listen on, it can be used with:_
@@ -49,11 +55,60 @@ _An option `--port` is provided to specify the port to listen on, it can be used
 npm start -- --port 3000
 ```
 
-## Reference Guides
+You can also use the provided `bin/xos` CLI utility directly to start
+an instance of the XOS Controller.
 
-- [API Guide](./src/README.md) - provides a walkthrough on *interacting with the REST API endpoints*
-- [Modeler's Guide](./schema/README.md) - provides information on *current YANG models for XOS and CORD* and what's coming up next
-- [Developer's Guide](./src/README.md) - provides technical detail on *controller logic and dynamic interfaces* and how to best leverage YANG model-driven developer tools for getting things done *fast*.
+```bash
+$ bin/xos -h
+  Usage: xos [options]
+
+  Options:
+      -p, --port <number>        Run XOS Controller on <port>
+      -I, --include [module...]  Add YANG module to XOS runtime
+```
+
+You can optionally load various YANG modules dynamically during
+runtime, such as `cord-tenant`, `volt-service`, `vsg-service`,
+`xos-slice`, etc. By default, it runs with `xos-controller` only. If a
+given target module requires other dependency modules, they will be
+loaded dynamically (such as `xos-slice` which is a dependency to
+`vsg-service`).
+
+The `bin/xos` CLI utility uses default configurations found in
+`config` directory. To run it with *test data* and expose some
+*runtime debug output* you can use environmental variables as follows:
+
+```bash
+$ NODE_ENV=test DEBUG=yang:model,yang:express bin/xos -I cord-tenant -I volt-service -I vsg-service
+```
+
+The current implementation auto-generates **200** unique REST API
+endpoints providing dynamic `POST/GET/PUT/PATCH/DELETE/OPTIONS`
+operations on each endpoint. Please refer to
+[yang-express](http://github.com/corenova/yang-express) to learn more
+about *YANG model-driven REST API middleware routing* framework.
+
+## YANG Models
+
+### XOS Core Models
+
+- [xos-controller.yang](./schema/xos-controller.yang)
+- [xos-types.yang](./schema/xos-types.yang)
+- [xos-topology.yang](./schema/xos-topology.yang)
+- [xos-slice.yang](./schema/xos-slice.yang)
+- [xos-package.yang](./schema/xos-package.yang)
+
+### CORD Models
+
+- [cord-tenant.yang](./schema/cord-tenant.yang)
+
+### Service Models
+
+- [volt-service.yang](./services/yang-volt/volt-service.yang)
+- [vsg-service.yang](./services/yang-vsg/vsg-service.yang)
+
+For additional information on working with YANG Models, please refer
+to [Modeler's Guide](./schema/README.md).
 
 ## Tests
 

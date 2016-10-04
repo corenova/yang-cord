@@ -63,8 +63,8 @@ volt-service:controller:
   description: |
     This is a sample demo VOLT controller with mock data
   
-  view-url: 'http://some-url'
-  icon-url: 'http://some-url'
+  view-url: 'http://some-url-to-volt'
+  icon-url: 'http://some-url-to-volt.icon'
 
   # list of OLT devices
   device: 
@@ -102,3 +102,39 @@ volt-service:controller:
         outer: 222
         inner: 450
       outflow: 0293a880-38a0-4cbe-b737-30b4202d522e
+
+vsg-service:controller:
+  id: 2000
+  name: demo-vsg-controller
+  description: |
+    This is a sample demo VSG controller with mock data
+
+  view-url: 'http://some-url-to-vsg'
+  icon-url: 'http://some-url-to-vsg.icon'
+
+  slice: 
+    id: 1
+    name: Test Slice for VSG
+    policy:
+      max-instances:  10
+      default-flavor: 10
+      default-image:  20
+
+  gateway:
+    - id: 1212
+      features:
+        firewall:
+          enabled: true
+        url-filter:
+          enabled: true
+      uplink:
+        network: 
+        port: 
+      flow:
+
+  # list of unique VSG subscribers
+  subscriber:
+    - id: 1
+      inflow: 605faceb-f5af-4e6d-b205-b67c5ddbc582
+      outflow: 
+      

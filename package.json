@@ -45,7 +45,8 @@
     "superagent": "^2.0.0",
     "yang-express": "^0.4.0",
     "yang-js": "^0.16.2",
-    "yang-volt": "file:./services/yang-volt"
+    "yang-volt": "file:./services/yang-volt",
+    "yang-vsg": "file:./services/yang-vsg"
   },
   "devDependencies": {
     "coffee-script": ">=1.7.0",
@@ -60,10 +61,11 @@
     "prebuild": "npm run clean -s && mkdir -p dist",
     "build:src": "coffee -o lib -c src",
     "build:web": "webpack -p",
-    "build": "npm run build:src",
+    "build:api": "yang2swagger -f yaml -o swagger.yaml",
+    "build": "npm run build:src && npm run build:api",
     "prepublish": "npm run build",
     "pretest": "npm run build",
     "test": "mocha",
-    "start": "bin/xos -I cord-tenant -I volt-service"
+    "start": "bin/xos -I cord-tenant -I volt-service -I vsg-service"
   }
 }
