@@ -325,6 +325,7 @@ paths:
       - name: token
         in: path
         required: true
+        description: A key uniquely identifying credential item
         type: string
         format: string
   '/xos-controller:core/template':
@@ -431,6 +432,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying template item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:core/deployment':
@@ -537,6 +539,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying deployment item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:core/deployment/{id}/credential':
@@ -670,6 +673,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying deployment item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:core/deployment/{id}/credential/{token}':
@@ -789,11 +793,13 @@ paths:
       - name: token
         in: path
         required: true
+        description: A key uniquely identifying credential item
         type: string
         format: string
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying deployment item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:core/site':
@@ -900,6 +906,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying site item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:core/site/{id}/location':
@@ -999,6 +1006,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying site item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:core/site/{id}/credential':
@@ -1132,6 +1140,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying site item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:core/site/{id}/credential/{token}':
@@ -1251,11 +1260,13 @@ paths:
       - name: token
         in: path
         required: true
+        description: A key uniquely identifying credential item
         type: string
         format: string
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying site item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:core/node':
@@ -1362,6 +1373,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying node item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:core/user':
@@ -1468,6 +1480,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying user item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:core/user/{id}/credential':
@@ -1617,6 +1630,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying user item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:core/slice':
@@ -1723,6 +1737,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying slice item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:core/slice/{id}/policy':
@@ -1892,6 +1907,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying slice item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:core/slice/{id}/credential':
@@ -2025,6 +2041,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying slice item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:core/slice/{id}/credential/{token}':
@@ -2144,11 +2161,13 @@ paths:
       - name: token
         in: path
         required: true
+        description: A key uniquely identifying credential item
         type: string
         format: string
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying slice item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:service':
@@ -2455,6 +2474,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying subscriber item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:tenant/cord/subscriber/{id}/volt':
@@ -2579,6 +2599,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying subscriber item
         type: string
         format: 'xtype:unique-identifier'
   '/xos-controller:tenant/cord/subscriber/{id}/vsg':
@@ -2708,6 +2729,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying subscriber item
         type: string
         format: 'xtype:unique-identifier'
   '/volt-service:controller':
@@ -3411,6 +3433,7 @@ paths:
       - name: token
         in: path
         required: true
+        description: A key uniquely identifying credential item
         type: string
         format: string
   '/volt-service:controller/port':
@@ -4062,6 +4085,7 @@ paths:
       - name: name
         in: path
         required: true
+        description: A key uniquely identifying attribute item
         type: string
         format: string
   '/volt-service:controller/subscriber':
@@ -5101,6 +5125,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying subscriber item
         type: string
         format: 'xtype:unique-identifier'
   '/volt-service:controller/credential':
@@ -5347,6 +5372,7 @@ paths:
       - name: token
         in: path
         required: true
+        description: A key uniquely identifying credential item
         type: string
         format: string
   '/volt-service:controller/device':
@@ -6040,6 +6066,7 @@ paths:
       - name: mac
         in: path
         required: true
+        description: A key uniquely identifying device item
         type: string
         format: 'yang:mac-address'
   '/volt-service:controller/device/{mac}/uplink':
@@ -6157,6 +6184,7 @@ paths:
       - name: mac
         in: path
         required: true
+        description: A key uniquely identifying device item
         type: string
         format: 'yang:mac-address'
   '/volt-service:controller/device/{mac}/link':
@@ -6373,6 +6401,7 @@ paths:
       - name: mac
         in: path
         required: true
+        description: A key uniquely identifying device item
         type: string
         format: 'yang:mac-address'
   '/volt-service:controller/device/{mac}/link/{serial}':
@@ -6570,11 +6599,13 @@ paths:
       - name: serial
         in: path
         required: true
+        description: A key uniquely identifying link item
         type: string
         format: string
       - name: mac
         in: path
         required: true
+        description: A key uniquely identifying device item
         type: string
         format: 'yang:mac-address'
   '/vsg-service:controller':
@@ -7278,6 +7309,7 @@ paths:
       - name: token
         in: path
         required: true
+        description: A key uniquely identifying credential item
         type: string
         format: string
   '/vsg-service:controller/port':
@@ -7933,6 +7965,7 @@ paths:
       - name: name
         in: path
         required: true
+        description: A key uniquely identifying attribute item
         type: string
         format: string
   '/vsg-service:controller/subscriber':
@@ -8972,6 +9005,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying subscriber item
         type: string
         format: 'xtype:unique-identifier'
   '/vsg-service:controller/credential':
@@ -9218,6 +9252,7 @@ paths:
       - name: token
         in: path
         required: true
+        description: A key uniquely identifying credential item
         type: string
         format: string
   '/vsg-service:controller/gateway':
@@ -9881,6 +9916,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying gateway item
         type: string
         format: 'xtype:unique-identifier'
   '/vsg-service:controller/gateway/{id}/features':
@@ -10113,6 +10149,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying gateway item
         type: string
         format: 'xtype:unique-identifier'
   '/vsg-service:controller/gateway/{id}/flow':
@@ -10205,6 +10242,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying gateway item
         type: string
         format: 'xtype:unique-identifier'
   '/vsg-service:controller/gateway/{id}/flow/{index}':
@@ -10288,6 +10326,7 @@ paths:
       - name: id
         in: path
         required: true
+        description: A key uniquely identifying gateway item
         type: string
         format: 'xtype:unique-identifier'
 definitions:
