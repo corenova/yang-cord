@@ -1,7 +1,8 @@
 swagger: '2.0'
 info:
-  title: CORD (Central Office Re-architected as a Datacenter)
-  description: YANG model-driven CORD/XOS
+  title: YANG for CORD
+  description: |
+    YANG model-driven XOS Controller with CORD Tenant models
   version: '1.0'
   contact:
     name: Peter Lee
@@ -52,348 +53,6 @@ paths:
       responses:
         '204':
           description: Expected response for delete
-  '/xos-controller:core/record':
-    get:
-      summary: View detail on record
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of record
-          schema:
-            allOf:
-              - $ref: '#/definitions/xos:record'
-              - properties:
-                  created:
-                    type: string
-                    format: 'yang:date-and-time'
-                  updated:
-                    type: string
-                    format: 'yang:date-and-time'
-                  enacted:
-                    type: string
-                    format: 'yang:date-and-time'
-                  policed:
-                    type: string
-                    format: 'yang:date-and-time'
-                  writable:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  locked:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  deleted:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  dirty:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  sync:
-                    type: object
-                    properties:
-                      progress:
-                        type: string
-                        format: enumeration
-                      disabled:
-                        default: 'false'
-                        type: string
-                        format: boolean
-                      enforced:
-                        default: 'true'
-                        type: string
-                        format: boolean
-                      policy:
-                        type: array
-                        items:
-                          type: object
-                  diff:
-                    description: retrieve diff of model state if dirty
-                    type: object
-                  save:
-                    description: trigger save into data store via synchronizer
-                    type: object
-    put:
-      summary: Update details on record
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of record
-          schema:
-            allOf:
-              - $ref: '#/definitions/xos:record'
-              - properties:
-                  created:
-                    type: string
-                    format: 'yang:date-and-time'
-                  updated:
-                    type: string
-                    format: 'yang:date-and-time'
-                  enacted:
-                    type: string
-                    format: 'yang:date-and-time'
-                  policed:
-                    type: string
-                    format: 'yang:date-and-time'
-                  writable:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  locked:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  deleted:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  dirty:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  sync:
-                    type: object
-                    properties:
-                      progress:
-                        type: string
-                        format: enumeration
-                      disabled:
-                        default: 'false'
-                        type: string
-                        format: boolean
-                      enforced:
-                        default: 'true'
-                        type: string
-                        format: boolean
-                      policy:
-                        type: array
-                        items:
-                          type: object
-                  diff:
-                    description: retrieve diff of model state if dirty
-                    type: object
-                  save:
-                    description: trigger save into data store via synchronizer
-                    type: object
-    patch:
-      summary: Merge details on record
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of record
-          schema:
-            allOf:
-              - $ref: '#/definitions/xos:record'
-              - properties:
-                  created:
-                    type: string
-                    format: 'yang:date-and-time'
-                  updated:
-                    type: string
-                    format: 'yang:date-and-time'
-                  enacted:
-                    type: string
-                    format: 'yang:date-and-time'
-                  policed:
-                    type: string
-                    format: 'yang:date-and-time'
-                  writable:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  locked:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  deleted:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  dirty:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  sync:
-                    type: object
-                    properties:
-                      progress:
-                        type: string
-                        format: enumeration
-                      disabled:
-                        default: 'false'
-                        type: string
-                        format: boolean
-                      enforced:
-                        default: 'true'
-                        type: string
-                        format: boolean
-                      policy:
-                        type: array
-                        items:
-                          type: object
-                  diff:
-                    description: retrieve diff of model state if dirty
-                    type: object
-                  save:
-                    description: trigger save into data store via synchronizer
-                    type: object
-    delete:
-      summary: Delete record from provider.
-      deprecated: false
-      responses:
-        '204':
-          description: Expected response for delete
-  '/xos-controller:core/record/sync':
-    get:
-      summary: View detail on sync
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of sync
-          schema:
-            type: object
-            properties:
-              progress:
-                type: string
-                format: enumeration
-              disabled:
-                default: 'false'
-                type: string
-                format: boolean
-              enforced:
-                default: 'true'
-                type: string
-                format: boolean
-              policy:
-                type: array
-                items:
-                  type: object
-    put:
-      summary: Update details on sync
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of sync
-          schema:
-            type: object
-            properties:
-              progress:
-                type: string
-                format: enumeration
-              disabled:
-                default: 'false'
-                type: string
-                format: boolean
-              enforced:
-                default: 'true'
-                type: string
-                format: boolean
-              policy:
-                type: array
-                items:
-                  type: object
-    patch:
-      summary: Merge details on sync
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of sync
-          schema:
-            type: object
-            properties:
-              progress:
-                type: string
-                format: enumeration
-              disabled:
-                default: 'false'
-                type: string
-                format: boolean
-              enforced:
-                default: 'true'
-                type: string
-                format: boolean
-              policy:
-                type: array
-                items:
-                  type: object
-    delete:
-      summary: Delete sync from record.
-      deprecated: false
-      responses:
-        '204':
-          description: Expected response for delete
-  '/xos-controller:core/record/sync/policy':
-    post:
-      summary: Creates one or more new policy in sync.
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response for creating policy(s) in collection
-          schema:
-            type: array
-            items:
-              type: object
-    get:
-      summary: List all policys from sync
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of policys
-          schema:
-            type: array
-            items:
-              type: object
-    put:
-      summary: Replace the entire policy collection
-      deprecated: false
-      responses:
-        '201':
-          description: Expected response for replacing collection
-    patch:
-      summary: Merge items into the policy collection
-      deprecated: false
-      responses:
-        '201':
-          description: Expected response for merging into collection
-  '/xos-controller:core/record/sync/policy/{index}':
-    get:
-      summary: View detail on policy
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of policy
-          schema:
-            type: object
-    put:
-      summary: Update details on policy
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of policy
-          schema:
-            type: object
-    patch:
-      summary: Merge details on policy
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of policy
-          schema:
-            type: object
-    delete:
-      summary: Delete policy from sync.
-      deprecated: false
-      responses:
-        '204':
-          description: Expected response for delete
-    parameters:
-      - name: index
-        in: path
-        required: true
-        type: integer
-        format: int64
   '/xos-controller:core/credential':
     post:
       summary: Creates one or more new credential in provider.
@@ -534,6 +193,1152 @@ paths:
         required: true
         type: string
         format: string
+  '/xos-controller:core/template':
+    post:
+      summary: 'Creates one or more new template in /xos:core.'
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating template(s) in collection
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:network-template'
+    get:
+      summary: 'List all templates from /xos:core'
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of templates
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:network-template'
+    put:
+      summary: Replace the entire template collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the template collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/xos-controller:core/template/{id}':
+    get:
+      summary: View detail on template
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of template
+          schema:
+            $ref: '#/definitions/xtop:network-template'
+    put:
+      summary: Update details on template
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of template
+          schema:
+            $ref: '#/definitions/xtop:network-template'
+    patch:
+      summary: Merge details on template
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of template
+          schema:
+            $ref: '#/definitions/xtop:network-template'
+    delete:
+      summary: 'Delete template from /xos:core.'
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/deployment':
+    post:
+      summary: 'Creates one or more new deployment in /xos:core.'
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating deployment(s) in collection
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:deployment'
+    get:
+      summary: 'List all deployments from /xos:core'
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of deployments
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:deployment'
+    put:
+      summary: Replace the entire deployment collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the deployment collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/xos-controller:core/deployment/{id}':
+    get:
+      summary: View detail on deployment
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of deployment
+          schema:
+            $ref: '#/definitions/xtop:deployment'
+    put:
+      summary: Update details on deployment
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of deployment
+          schema:
+            $ref: '#/definitions/xtop:deployment'
+    patch:
+      summary: Merge details on deployment
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of deployment
+          schema:
+            $ref: '#/definitions/xtop:deployment'
+    delete:
+      summary: 'Delete deployment from /xos:core.'
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/deployment/{id}/credential':
+    post:
+      summary: Creates one or more new credential in deployment.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating credential(s) in collection
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    get:
+      summary: List all credentials from deployment
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credentials
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    put:
+      summary: Replace the entire credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/deployment/{id}/credential/{token}':
+    get:
+      summary: View detail on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    put:
+      summary: Update details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    patch:
+      summary: Merge details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    delete:
+      summary: Delete credential from deployment.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: token
+        in: path
+        required: true
+        type: string
+        format: string
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/site':
+    post:
+      summary: 'Creates one or more new site in /xos:core.'
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating site(s) in collection
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:site'
+    get:
+      summary: 'List all sites from /xos:core'
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of sites
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:site'
+    put:
+      summary: Replace the entire site collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the site collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/xos-controller:core/site/{id}':
+    get:
+      summary: View detail on site
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of site
+          schema:
+            $ref: '#/definitions/xtop:site'
+    put:
+      summary: Update details on site
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of site
+          schema:
+            $ref: '#/definitions/xtop:site'
+    patch:
+      summary: Merge details on site
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of site
+          schema:
+            $ref: '#/definitions/xtop:site'
+    delete:
+      summary: 'Delete site from /xos:core.'
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/site/{id}/location':
+    get:
+      summary: View detail on location
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of location
+          schema:
+            type: object
+            properties:
+              geoposition:
+                type: string
+                format: string
+              longitude:
+                type: string
+                format: decimal64
+              latitude:
+                type: string
+                format: decimal64
+    put:
+      summary: Update details on location
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of location
+          schema:
+            type: object
+            properties:
+              geoposition:
+                type: string
+                format: string
+              longitude:
+                type: string
+                format: decimal64
+              latitude:
+                type: string
+                format: decimal64
+    patch:
+      summary: Merge details on location
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of location
+          schema:
+            type: object
+            properties:
+              geoposition:
+                type: string
+                format: string
+              longitude:
+                type: string
+                format: decimal64
+              latitude:
+                type: string
+                format: decimal64
+    delete:
+      summary: Delete location from site.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/site/{id}/credential':
+    post:
+      summary: Creates one or more new credential in site.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating credential(s) in collection
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    get:
+      summary: List all credentials from site
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credentials
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    put:
+      summary: Replace the entire credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/site/{id}/credential/{token}':
+    get:
+      summary: View detail on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    put:
+      summary: Update details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    patch:
+      summary: Merge details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    delete:
+      summary: Delete credential from site.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: token
+        in: path
+        required: true
+        type: string
+        format: string
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/node':
+    post:
+      summary: 'Creates one or more new node in /xos:core.'
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating node(s) in collection
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:node'
+    get:
+      summary: 'List all nodes from /xos:core'
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of nodes
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:node'
+    put:
+      summary: Replace the entire node collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the node collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/xos-controller:core/node/{id}':
+    get:
+      summary: View detail on node
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of node
+          schema:
+            $ref: '#/definitions/xtop:node'
+    put:
+      summary: Update details on node
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of node
+          schema:
+            $ref: '#/definitions/xtop:node'
+    patch:
+      summary: Merge details on node
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of node
+          schema:
+            $ref: '#/definitions/xtop:node'
+    delete:
+      summary: 'Delete node from /xos:core.'
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/user':
+    post:
+      summary: 'Creates one or more new user in /xos:core.'
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating user(s) in collection
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:user'
+    get:
+      summary: 'List all users from /xos:core'
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of users
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:user'
+    put:
+      summary: Replace the entire user collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the user collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/xos-controller:core/user/{id}':
+    get:
+      summary: View detail on user
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of user
+          schema:
+            $ref: '#/definitions/xtop:user'
+    put:
+      summary: Update details on user
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of user
+          schema:
+            $ref: '#/definitions/xtop:user'
+    patch:
+      summary: Merge details on user
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of user
+          schema:
+            $ref: '#/definitions/xtop:user'
+    delete:
+      summary: 'Delete user from /xos:core.'
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/user/{id}/credential':
+    get:
+      summary: View detail on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                format: 'yang:yang-identifier'
+              password:
+                type: string
+                format: 'meta:password'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+              public-key:
+                type: string
+                format: string
+              login-page:
+                type: string
+                format: 'inet:uri'
+              last-login:
+                type: string
+                format: 'yang:date-and-time'
+    put:
+      summary: Update details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                format: 'yang:yang-identifier'
+              password:
+                type: string
+                format: 'meta:password'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+              public-key:
+                type: string
+                format: string
+              login-page:
+                type: string
+                format: 'inet:uri'
+              last-login:
+                type: string
+                format: 'yang:date-and-time'
+    patch:
+      summary: Merge details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                format: 'yang:yang-identifier'
+              password:
+                type: string
+                format: 'meta:password'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+              public-key:
+                type: string
+                format: string
+              login-page:
+                type: string
+                format: 'inet:uri'
+              last-login:
+                type: string
+                format: 'yang:date-and-time'
+    delete:
+      summary: Delete credential from user.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/slice':
+    post:
+      summary: 'Creates one or more new slice in /xos:core.'
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating slice(s) in collection
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xslice:slice'
+    get:
+      summary: 'List all slices from /xos:core'
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of slices
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xslice:slice'
+    put:
+      summary: Replace the entire slice collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the slice collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/xos-controller:core/slice/{id}':
+    get:
+      summary: View detail on slice
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of slice
+          schema:
+            $ref: '#/definitions/xslice:slice'
+    put:
+      summary: Update details on slice
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of slice
+          schema:
+            $ref: '#/definitions/xslice:slice'
+    patch:
+      summary: Merge details on slice
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of slice
+          schema:
+            $ref: '#/definitions/xslice:slice'
+    delete:
+      summary: 'Delete slice from /xos:core.'
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/slice/{id}/policy':
+    get:
+      summary: View detail on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+    put:
+      summary: Update details on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+    patch:
+      summary: Merge details on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+    delete:
+      summary: Delete policy from slice.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/slice/{id}/credential':
+    post:
+      summary: Creates one or more new credential in slice.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating credential(s) in collection
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    get:
+      summary: List all credentials from slice
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credentials
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    put:
+      summary: Replace the entire credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/slice/{id}/credential/{token}':
+    get:
+      summary: View detail on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    put:
+      summary: Update details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    patch:
+      summary: Merge details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    delete:
+      summary: Delete credential from slice.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: token
+        in: path
+        required: true
+        type: string
+        format: string
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
   '/xos-controller:service':
     get:
       description: Primary endpoint for services to augment
@@ -749,371 +1554,6 @@ paths:
         required: true
         type: string
         format: 'xtype:unique-identifier'
-  '/xos-controller:tenant/cord/subscriber/{id}/record':
-    get:
-      summary: View detail on record
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of record
-          schema:
-            allOf:
-              - $ref: '#/definitions/xos:record'
-              - properties:
-                  created:
-                    type: string
-                    format: 'yang:date-and-time'
-                  updated:
-                    type: string
-                    format: 'yang:date-and-time'
-                  enacted:
-                    type: string
-                    format: 'yang:date-and-time'
-                  policed:
-                    type: string
-                    format: 'yang:date-and-time'
-                  writable:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  locked:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  deleted:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  dirty:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  sync:
-                    type: object
-                    properties:
-                      progress:
-                        type: string
-                        format: enumeration
-                      disabled:
-                        default: 'false'
-                        type: string
-                        format: boolean
-                      enforced:
-                        default: 'true'
-                        type: string
-                        format: boolean
-                      policy:
-                        type: array
-                        items:
-                          type: object
-                  diff:
-                    description: retrieve diff of model state if dirty
-                    type: object
-                  save:
-                    description: trigger save into data store via synchronizer
-                    type: object
-    put:
-      summary: Update details on record
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of record
-          schema:
-            allOf:
-              - $ref: '#/definitions/xos:record'
-              - properties:
-                  created:
-                    type: string
-                    format: 'yang:date-and-time'
-                  updated:
-                    type: string
-                    format: 'yang:date-and-time'
-                  enacted:
-                    type: string
-                    format: 'yang:date-and-time'
-                  policed:
-                    type: string
-                    format: 'yang:date-and-time'
-                  writable:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  locked:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  deleted:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  dirty:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  sync:
-                    type: object
-                    properties:
-                      progress:
-                        type: string
-                        format: enumeration
-                      disabled:
-                        default: 'false'
-                        type: string
-                        format: boolean
-                      enforced:
-                        default: 'true'
-                        type: string
-                        format: boolean
-                      policy:
-                        type: array
-                        items:
-                          type: object
-                  diff:
-                    description: retrieve diff of model state if dirty
-                    type: object
-                  save:
-                    description: trigger save into data store via synchronizer
-                    type: object
-    patch:
-      summary: Merge details on record
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of record
-          schema:
-            allOf:
-              - $ref: '#/definitions/xos:record'
-              - properties:
-                  created:
-                    type: string
-                    format: 'yang:date-and-time'
-                  updated:
-                    type: string
-                    format: 'yang:date-and-time'
-                  enacted:
-                    type: string
-                    format: 'yang:date-and-time'
-                  policed:
-                    type: string
-                    format: 'yang:date-and-time'
-                  writable:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  locked:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  deleted:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  dirty:
-                    default: 'false'
-                    type: string
-                    format: boolean
-                  sync:
-                    type: object
-                    properties:
-                      progress:
-                        type: string
-                        format: enumeration
-                      disabled:
-                        default: 'false'
-                        type: string
-                        format: boolean
-                      enforced:
-                        default: 'true'
-                        type: string
-                        format: boolean
-                      policy:
-                        type: array
-                        items:
-                          type: object
-                  diff:
-                    description: retrieve diff of model state if dirty
-                    type: object
-                  save:
-                    description: trigger save into data store via synchronizer
-                    type: object
-    delete:
-      summary: Delete record from subscriber.
-      deprecated: false
-      responses:
-        '204':
-          description: Expected response for delete
-    parameters:
-      - name: id
-        in: path
-        required: true
-        type: string
-        format: 'xtype:unique-identifier'
-  '/xos-controller:tenant/cord/subscriber/{id}/record/sync':
-    get:
-      summary: View detail on sync
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of sync
-          schema:
-            type: object
-            properties:
-              progress:
-                type: string
-                format: enumeration
-              disabled:
-                default: 'false'
-                type: string
-                format: boolean
-              enforced:
-                default: 'true'
-                type: string
-                format: boolean
-              policy:
-                type: array
-                items:
-                  type: object
-    put:
-      summary: Update details on sync
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of sync
-          schema:
-            type: object
-            properties:
-              progress:
-                type: string
-                format: enumeration
-              disabled:
-                default: 'false'
-                type: string
-                format: boolean
-              enforced:
-                default: 'true'
-                type: string
-                format: boolean
-              policy:
-                type: array
-                items:
-                  type: object
-    patch:
-      summary: Merge details on sync
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of sync
-          schema:
-            type: object
-            properties:
-              progress:
-                type: string
-                format: enumeration
-              disabled:
-                default: 'false'
-                type: string
-                format: boolean
-              enforced:
-                default: 'true'
-                type: string
-                format: boolean
-              policy:
-                type: array
-                items:
-                  type: object
-    delete:
-      summary: Delete sync from record.
-      deprecated: false
-      responses:
-        '204':
-          description: Expected response for delete
-    parameters:
-      - name: id
-        in: path
-        required: true
-        type: string
-        format: 'xtype:unique-identifier'
-  '/xos-controller:tenant/cord/subscriber/{id}/record/sync/policy':
-    post:
-      summary: Creates one or more new policy in sync.
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response for creating policy(s) in collection
-          schema:
-            type: array
-            items:
-              type: object
-    get:
-      summary: List all policys from sync
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of policys
-          schema:
-            type: array
-            items:
-              type: object
-    put:
-      summary: Replace the entire policy collection
-      deprecated: false
-      responses:
-        '201':
-          description: Expected response for replacing collection
-    patch:
-      summary: Merge items into the policy collection
-      deprecated: false
-      responses:
-        '201':
-          description: Expected response for merging into collection
-    parameters:
-      - name: id
-        in: path
-        required: true
-        type: string
-        format: 'xtype:unique-identifier'
-  '/xos-controller:tenant/cord/subscriber/{id}/record/sync/policy/{index}':
-    get:
-      summary: View detail on policy
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of policy
-          schema:
-            type: object
-    put:
-      summary: Update details on policy
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of policy
-          schema:
-            type: object
-    patch:
-      summary: Merge details on policy
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of policy
-          schema:
-            type: object
-    delete:
-      summary: Delete policy from sync.
-      deprecated: false
-      responses:
-        '204':
-          description: Expected response for delete
-    parameters:
-      - name: index
-        in: path
-        required: true
-        type: integer
-        format: int64
-      - name: id
-        in: path
-        required: true
-        type: string
-        format: 'xtype:unique-identifier'
 definitions:
   'xos:provider':
     allOf:
@@ -1225,6 +1665,262 @@ definitions:
                 - admin
                 - staff
                 - user
+  'xtop:network-template':
+    allOf:
+      - $ref: '#/definitions/xos:tenant'
+      - properties:
+          guaranteed-bandwidth:
+            type: integer
+            format: uint32
+          visibility:
+            type: string
+            format: string
+          translation:
+            type: string
+            format: string
+          access:
+            type: string
+            format: string
+          shared-network-name:
+            type: string
+            format: string
+          shared-network-id:
+            type: string
+            format: string
+          topology-kind:
+            type: string
+            format: string
+          controller-kind:
+            type: string
+            format: string
+  'xos:tenant':
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        format: 'xtype:unique-identifier'
+      name:
+        type: string
+        format: string
+      kind:
+        type: string
+        format: identityref
+      description:
+        type: string
+        format: 'meta:description'
+      enabled:
+        default: 'true'
+        type: boolean
+        format: boolean
+      record:
+        $ref: '#/definitions/xos:record'
+  'xtop:deployment':
+    allOf:
+      - $ref: '#/definitions/xos:provider'
+      - properties:
+          sites:
+            type: array
+            items:
+              type: string
+              format: leafref
+          templates:
+            type: array
+            items:
+              type: string
+              format: leafref
+  'xtop:site':
+    allOf:
+      - $ref: '#/definitions/xos:provider'
+      - properties:
+          site-url:
+            description: A URL describing the purpose of this site
+            type: string
+            format: 'inet:uri'
+          is-public:
+            type: boolean
+            format: boolean
+          login-base:
+            type: string
+            format: string
+          deployment:
+            type: string
+            format: leafref
+          hosts-nodes:
+            type: boolean
+            format: boolean
+          hosts-users:
+            type: boolean
+            format: boolean
+          location:
+            type: object
+            properties:
+              geoposition:
+                type: string
+                format: string
+              longitude:
+                type: number
+                format: double
+              latitude:
+                type: number
+                format: double
+          synchronizer:
+            type: object
+            properties:
+              availability-zone:
+                type: string
+                format: string
+          nodes:
+            type: array
+            items:
+              type: string
+              format: leafref
+          users:
+            type: array
+            items:
+              type: string
+              format: leafref
+  'xtop:node':
+    allOf:
+      - $ref: '#/definitions/xos:tenant'
+      - properties:
+          site:
+            type: string
+            format: leafref
+          deployment:
+            type: string
+            format: leafref
+  'xtop:user':
+    allOf:
+      - $ref: '#/definitions/xos:tenant'
+      - properties:
+          firstname:
+            type: string
+            format: 'meta:person-name'
+          lastname:
+            type: string
+            format: 'meta:person-name'
+          email:
+            type: string
+            format: 'meta:email-address'
+          phone:
+            type: string
+            format: 'meta:phone-number'
+          timezone:
+            type: string
+            format: 'meta:timezone'
+          site:
+            type: string
+            format: leafref
+          credential:
+            type: object
+            properties:
+              username:
+                type: string
+                format: 'yang:yang-identifier'
+              password:
+                type: string
+                format: 'meta:password'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
+              public-key:
+                type: string
+                format: string
+              login-page:
+                type: string
+                format: 'inet:uri'
+              last-login:
+                type: string
+                format: 'yang:date-and-time'
+  'xslice:slice':
+    description: >-
+      A slice is a logically centralized container for network and compute
+      resources
+    allOf:
+      - $ref: '#/definitions/xos:provider'
+      - properties:
+          slice-url:
+            description: A URL describing the purpose of this slice
+            type: string
+            format: 'inet:uri'
+          network:
+            description: >-
+              The network that the slice uses to connect to other slices and to
+              the Internet.
+            default: none
+            type: string
+            format: enumeration
+            enum:
+              - none
+              - host
+              - bridged
+              - noauto
+          creator:
+            type: string
+            format: leafref
+          service:
+            description: The service that runs in this slice
+          instances:
+            type: array
+            items:
+              type: string
+              format: leafref
+          networks:
+            type: array
+            items:
+              type: string
+              format: leafref
+          ports:
+            type: array
+            items:
+              description: The ports to be exposed for other slices to connect to
+              type: integer
+              format: uint16
+          tags:
+            type: array
+            items:
+              type: string
+              format: string
+          policy:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: integer
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+                enum:
+                  - vm
+                  - lxc
+                  - hybrid
+          scale:
+            description: Adjust scale for slice(s)
+            type: object
   'cord:subscriber':
     allOf:
       - $ref: '#/definitions/xos:subscriber'

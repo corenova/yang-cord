@@ -7,8 +7,9 @@ yang-express:server:
     - name: ietf-yang-library
 
 yang-openapi:info:
-  title: CORD (Central Office Re-architected as a Datacenter)
-  description: YANG model-driven CORD/XOS
+  title: YANG for CORD
+  description: |
+    YANG model-driven XOS Controller with CORD Tenant models
   version: '1.0'
   contact:
     name: Peter Lee
