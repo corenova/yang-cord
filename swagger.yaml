@@ -357,7 +357,7 @@ paths:
       responses:
         '201':
           description: Expected response for merging into collection
-  '/xos-controller:core/record/sync/policy/{id}':
+  '/xos-controller:core/record/sync/policy/{index}':
     get:
       summary: View detail on policy
       deprecated: false
@@ -388,6 +388,12 @@ paths:
       responses:
         '204':
           description: Expected response for delete
+    parameters:
+      - name: index
+        in: path
+        required: true
+        type: integer
+        format: int64
   '/xos-controller:core/credential':
     post:
       summary: Creates one or more new credential in provider.
@@ -522,6 +528,12 @@ paths:
       responses:
         '204':
           description: Expected response for delete
+    parameters:
+      - name: token
+        in: path
+        required: true
+        type: string
+        format: string
   '/xos-controller:service':
     get:
       description: Primary endpoint for services to augment
@@ -731,6 +743,12 @@ paths:
       responses:
         '204':
           description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
   '/xos-controller:tenant/cord/subscriber/{id}/record':
     get:
       summary: View detail on record
@@ -924,6 +942,12 @@ paths:
       responses:
         '204':
           description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
   '/xos-controller:tenant/cord/subscriber/{id}/record/sync':
     get:
       summary: View detail on sync
@@ -1003,6 +1027,12 @@ paths:
       responses:
         '204':
           description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
   '/xos-controller:tenant/cord/subscriber/{id}/record/sync/policy':
     post:
       summary: Creates one or more new policy in sync.
@@ -1036,7 +1066,13 @@ paths:
       responses:
         '201':
           description: Expected response for merging into collection
-  '/xos-controller:tenant/cord/subscriber/{id}/record/sync/policy/{id}':
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:tenant/cord/subscriber/{id}/record/sync/policy/{index}':
     get:
       summary: View detail on policy
       deprecated: false
@@ -1067,6 +1103,17 @@ paths:
       responses:
         '204':
           description: Expected response for delete
+    parameters:
+      - name: index
+        in: path
+        required: true
+        type: integer
+        format: int64
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
 definitions:
   'xos:provider':
     allOf:
