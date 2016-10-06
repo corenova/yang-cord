@@ -60,7 +60,7 @@ paths:
             description: Primary endpoint for additional core entities to augment
             $ref: '#/definitions/xos:provider'
     delete:
-      summary: Delete core from xos-controller.
+      summary: Delete core from xos-controller
       deprecated: false
       responses:
         '204':
@@ -194,7 +194,7 @@ paths:
                 type: string
                 format: 'xtype:access-role'
     delete:
-      summary: Delete credential from provider.
+      summary: Delete credential from provider
       deprecated: false
       responses:
         '204':
@@ -264,7 +264,7 @@ paths:
           schema:
             $ref: '#/definitions/xtop:network-template'
     delete:
-      summary: 'Delete template from /xos:core.'
+      summary: 'Delete template from /xos:core'
       deprecated: false
       responses:
         '204':
@@ -334,7 +334,7 @@ paths:
           schema:
             $ref: '#/definitions/xtop:deployment'
     delete:
-      summary: 'Delete deployment from /xos:core.'
+      summary: 'Delete deployment from /xos:core'
       deprecated: false
       responses:
         '204':
@@ -480,7 +480,7 @@ paths:
                 type: string
                 format: 'xtype:access-role'
     delete:
-      summary: Delete credential from deployment.
+      summary: Delete credential from deployment
       deprecated: false
       responses:
         '204':
@@ -555,7 +555,7 @@ paths:
           schema:
             $ref: '#/definitions/xtop:site'
     delete:
-      summary: 'Delete site from /xos:core.'
+      summary: 'Delete site from /xos:core'
       deprecated: false
       responses:
         '204':
@@ -622,7 +622,7 @@ paths:
                 type: string
                 format: decimal64
     delete:
-      summary: Delete location from site.
+      summary: Delete location from site
       deprecated: false
       responses:
         '204':
@@ -768,7 +768,7 @@ paths:
                 type: string
                 format: 'xtype:access-role'
     delete:
-      summary: Delete credential from site.
+      summary: Delete credential from site
       deprecated: false
       responses:
         '204':
@@ -843,7 +843,7 @@ paths:
           schema:
             $ref: '#/definitions/xtop:node'
     delete:
-      summary: 'Delete node from /xos:core.'
+      summary: 'Delete node from /xos:core'
       deprecated: false
       responses:
         '204':
@@ -913,7 +913,7 @@ paths:
           schema:
             $ref: '#/definitions/xtop:user'
     delete:
-      summary: 'Delete user from /xos:core.'
+      summary: 'Delete user from /xos:core'
       deprecated: false
       responses:
         '204':
@@ -1010,7 +1010,7 @@ paths:
                 type: string
                 format: 'yang:date-and-time'
     delete:
-      summary: Delete credential from user.
+      summary: Delete credential from user
       deprecated: false
       responses:
         '204':
@@ -1080,7 +1080,7 @@ paths:
           schema:
             $ref: '#/definitions/xslice:slice'
     delete:
-      summary: 'Delete slice from /xos:core.'
+      summary: 'Delete slice from /xos:core'
       deprecated: false
       responses:
         '204':
@@ -1189,7 +1189,7 @@ paths:
                 type: string
                 format: 'xtype:isolation'
     delete:
-      summary: Delete policy from slice.
+      summary: Delete policy from slice
       deprecated: false
       responses:
         '204':
@@ -1335,7 +1335,7 @@ paths:
                 type: string
                 format: 'xtype:access-role'
     delete:
-      summary: Delete credential from slice.
+      summary: Delete credential from slice
       deprecated: false
       responses:
         '204':
@@ -1381,7 +1381,7 @@ paths:
             description: Primary endpoint for services to augment
             type: object
     delete:
-      summary: Delete service from xos-controller.
+      summary: Delete service from xos-controller
       deprecated: false
       responses:
         '204':
@@ -1416,7 +1416,7 @@ paths:
             description: Primary endpoint for tenants to augment
             type: object
     delete:
-      summary: Delete tenant from xos-controller.
+      summary: Delete tenant from xos-controller
       deprecated: false
       responses:
         '204':
@@ -1469,7 +1469,7 @@ paths:
                   description: Each entry represents a unique CORD subscriber.
                   $ref: '#/definitions/cord:subscriber'
     delete:
-      summary: 'Delete cord from /xos:tenant.'
+      summary: 'Delete cord from /xos:tenant'
       deprecated: false
       responses:
         '204':
@@ -1540,7 +1540,7 @@ paths:
             description: Each entry represents a unique CORD subscriber.
             $ref: '#/definitions/cord:subscriber'
     delete:
-      summary: Delete subscriber from cord.
+      summary: Delete subscriber from cord
       deprecated: false
       responses:
         '204':
@@ -1622,7 +1622,7 @@ paths:
                 type: integer
                 format: uint32
     delete:
-      summary: 'Delete volt from /xos:tenant/cord/subscriber.'
+      summary: 'Delete volt from /xos:tenant/cord/subscriber'
       deprecated: false
       responses:
         '204':
@@ -1707,7 +1707,7 @@ paths:
                 type: boolean
                 format: boolean
     delete:
-      summary: 'Delete vsg from /xos:tenant/cord/subscriber.'
+      summary: 'Delete vsg from /xos:tenant/cord/subscriber'
       deprecated: false
       responses:
         '204':
@@ -1858,7 +1858,7 @@ paths:
                           type: string
                           format: leafref
     delete:
-      summary: Delete controller from volt-service.
+      summary: Delete controller from volt-service
       deprecated: false
       responses:
         '204':
@@ -1889,7 +1889,7 @@ paths:
           schema:
             $ref: '#/definitions/xslice:slice'
     delete:
-      summary: Delete slice from controller.
+      summary: Delete slice from controller
       deprecated: false
       responses:
         '204':
@@ -1992,7 +1992,7 @@ paths:
                 type: string
                 format: 'xtype:isolation'
     delete:
-      summary: Delete policy from slice.
+      summary: Delete policy from slice
       deprecated: false
       responses:
         '204':
@@ -2126,7 +2126,7 @@ paths:
                 type: string
                 format: 'xtype:access-role'
     delete:
-      summary: Delete credential from slice.
+      summary: Delete credential from slice
       deprecated: false
       responses:
         '204':
@@ -2268,7 +2268,7 @@ paths:
                 type: string
                 format: leafref
     delete:
-      summary: Delete port from controller.
+      summary: Delete port from controller
       deprecated: false
       responses:
         '204':
@@ -2381,7 +2381,7 @@ paths:
                 type: string
                 format: string
     delete:
-      summary: Delete keypair from service.
+      summary: Delete keypair from service
       deprecated: false
       responses:
         '204':
@@ -2493,7 +2493,7 @@ paths:
                 type: string
                 format: string
     delete:
-      summary: Delete attribute from service.
+      summary: Delete attribute from service
       deprecated: true
       responses:
         '204':
@@ -3016,7 +3016,7 @@ paths:
                             description: trigger save into data store via synchronizer
                             type: object
     delete:
-      summary: Delete subscriber from service.
+      summary: Delete subscriber from service
       deprecated: false
       responses:
         '204':
@@ -3156,7 +3156,7 @@ paths:
                 type: string
                 format: 'xtype:access-role'
     delete:
-      summary: Delete credential from service.
+      summary: Delete credential from service
       deprecated: false
       responses:
         '204':
@@ -3518,7 +3518,7 @@ paths:
                           type: string
                           format: 'xtype:vlan'
     delete:
-      summary: Delete device from devices-list.
+      summary: Delete device from devices-list
       deprecated: false
       responses:
         '204':
@@ -3595,7 +3595,7 @@ paths:
                 type: string
                 format: 'xtype:vlan'
     delete:
-      summary: Delete uplink from device.
+      summary: Delete uplink from device
       deprecated: false
       responses:
         '204':
@@ -3812,7 +3812,7 @@ paths:
                 type: string
                 format: 'xtype:vlan'
     delete:
-      summary: Delete link from device.
+      summary: Delete link from device
       deprecated: false
       responses:
         '204':
@@ -3968,7 +3968,7 @@ paths:
                           type: string
                           format: leafref
     delete:
-      summary: Delete controller from vsg-service.
+      summary: Delete controller from vsg-service
       deprecated: false
       responses:
         '204':
@@ -3999,7 +3999,7 @@ paths:
           schema:
             $ref: '#/definitions/xslice:slice'
     delete:
-      summary: Delete slice from controller.
+      summary: Delete slice from controller
       deprecated: false
       responses:
         '204':
@@ -4102,7 +4102,7 @@ paths:
                 type: string
                 format: 'xtype:isolation'
     delete:
-      summary: Delete policy from slice.
+      summary: Delete policy from slice
       deprecated: false
       responses:
         '204':
@@ -4236,7 +4236,7 @@ paths:
                 type: string
                 format: 'xtype:access-role'
     delete:
-      summary: Delete credential from slice.
+      summary: Delete credential from slice
       deprecated: false
       responses:
         '204':
@@ -4382,7 +4382,7 @@ paths:
                 type: string
                 format: leafref
     delete:
-      summary: Delete port from controller.
+      summary: Delete port from controller
       deprecated: false
       responses:
         '204':
@@ -4495,7 +4495,7 @@ paths:
                 type: string
                 format: string
     delete:
-      summary: Delete keypair from service.
+      summary: Delete keypair from service
       deprecated: false
       responses:
         '204':
@@ -4607,7 +4607,7 @@ paths:
                 type: string
                 format: string
     delete:
-      summary: Delete attribute from service.
+      summary: Delete attribute from service
       deprecated: true
       responses:
         '204':
@@ -5130,7 +5130,7 @@ paths:
                             description: trigger save into data store via synchronizer
                             type: object
     delete:
-      summary: Delete subscriber from service.
+      summary: Delete subscriber from service
       deprecated: false
       responses:
         '204':
@@ -5270,7 +5270,7 @@ paths:
                 type: string
                 format: 'xtype:access-role'
     delete:
-      summary: Delete credential from service.
+      summary: Delete credential from service
       deprecated: false
       responses:
         '204':
@@ -5617,7 +5617,7 @@ paths:
                           type: string
                           format: 'yang:uuid'
     delete:
-      summary: Delete gateway from gateways-list.
+      summary: Delete gateway from gateways-list
       deprecated: false
       responses:
         '204':
@@ -5763,7 +5763,7 @@ paths:
                     type: string
                     format: boolean
     delete:
-      summary: Delete features from gateway.
+      summary: Delete features from gateway
       deprecated: false
       responses:
         '204':
@@ -5866,7 +5866,7 @@ paths:
                 type: string
                 format: 'yang:uuid'
     delete:
-      summary: Delete flow from gateway.
+      summary: Delete flow from gateway
       deprecated: false
       responses:
         '204':
