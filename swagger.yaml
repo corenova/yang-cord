@@ -2,7 +2,22 @@ swagger: '2.0'
 info:
   title: YANG for CORD
   description: |
-    YANG model-driven XOS Controller with CORD Tenant models
+    YANG model-driven XOS Controller with CORD Tenant
+
+    XOS Core Models
+    * Template
+    * Deployment
+    * Site
+    * Node
+    * User
+    * Slice
+
+    CORD Tenant
+    * Subscriber
+
+    XOS Service Models
+    * VOLT Service Controller
+    * VSG Service Controller
   version: '1.0'
   contact:
     name: Peter Lee
@@ -27,7 +42,6 @@ paths:
             description: Primary endpoint for additional core entities to augment
             $ref: '#/definitions/xos:provider'
     put:
-      description: Primary endpoint for additional core entities to augment
       summary: Update details on core
       deprecated: false
       responses:
@@ -37,7 +51,6 @@ paths:
             description: Primary endpoint for additional core entities to augment
             $ref: '#/definitions/xos:provider'
     patch:
-      description: Primary endpoint for additional core entities to augment
       summary: Merge details on core
       deprecated: false
       responses:
@@ -47,7 +60,6 @@ paths:
             description: Primary endpoint for additional core entities to augment
             $ref: '#/definitions/xos:provider'
     delete:
-      description: Primary endpoint for additional core entities to augment
       summary: Delete core from xos-controller.
       deprecated: false
       responses:
@@ -1351,7 +1363,6 @@ paths:
             description: Primary endpoint for services to augment
             type: object
     put:
-      description: Primary endpoint for services to augment
       summary: Update details on service
       deprecated: false
       responses:
@@ -1361,7 +1372,6 @@ paths:
             description: Primary endpoint for services to augment
             type: object
     patch:
-      description: Primary endpoint for services to augment
       summary: Merge details on service
       deprecated: false
       responses:
@@ -1371,7 +1381,6 @@ paths:
             description: Primary endpoint for services to augment
             type: object
     delete:
-      description: Primary endpoint for services to augment
       summary: Delete service from xos-controller.
       deprecated: false
       responses:
@@ -1389,7 +1398,6 @@ paths:
             description: Primary endpoint for tenants to augment
             type: object
     put:
-      description: Primary endpoint for tenants to augment
       summary: Update details on tenant
       deprecated: false
       responses:
@@ -1399,7 +1407,6 @@ paths:
             description: Primary endpoint for tenants to augment
             type: object
     patch:
-      description: Primary endpoint for tenants to augment
       summary: Merge details on tenant
       deprecated: false
       responses:
@@ -1409,7 +1416,6 @@ paths:
             description: Primary endpoint for tenants to augment
             type: object
     delete:
-      description: Primary endpoint for tenants to augment
       summary: Delete tenant from xos-controller.
       deprecated: false
       responses:
@@ -1433,7 +1439,6 @@ paths:
                   description: Each entry represents a unique CORD subscriber.
                   $ref: '#/definitions/cord:subscriber'
     put:
-      description: Register cord as a tenant into XOS
       summary: Update details on cord
       deprecated: false
       responses:
@@ -1449,7 +1454,6 @@ paths:
                   description: Each entry represents a unique CORD subscriber.
                   $ref: '#/definitions/cord:subscriber'
     patch:
-      description: Register cord as a tenant into XOS
       summary: Merge details on cord
       deprecated: false
       responses:
@@ -1465,7 +1469,6 @@ paths:
                   description: Each entry represents a unique CORD subscriber.
                   $ref: '#/definitions/cord:subscriber'
     delete:
-      description: Register cord as a tenant into XOS
       summary: 'Delete cord from /xos:tenant.'
       deprecated: false
       responses:
@@ -1485,7 +1488,6 @@ paths:
               description: Each entry represents a unique CORD subscriber.
               $ref: '#/definitions/cord:subscriber'
     get:
-      description: Each entry represents a unique CORD subscriber.
       summary: List all subscribers from cord
       deprecated: false
       responses:
@@ -1497,14 +1499,12 @@ paths:
               description: Each entry represents a unique CORD subscriber.
               $ref: '#/definitions/cord:subscriber'
     put:
-      description: Each entry represents a unique CORD subscriber.
       summary: Replace the entire subscriber collection
       deprecated: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
-      description: Each entry represents a unique CORD subscriber.
       summary: Merge items into the subscriber collection
       deprecated: false
       responses:
@@ -1522,7 +1522,6 @@ paths:
             description: Each entry represents a unique CORD subscriber.
             $ref: '#/definitions/cord:subscriber'
     put:
-      description: Each entry represents a unique CORD subscriber.
       summary: Update details on subscriber
       deprecated: false
       responses:
@@ -1532,7 +1531,6 @@ paths:
             description: Each entry represents a unique CORD subscriber.
             $ref: '#/definitions/cord:subscriber'
     patch:
-      description: Each entry represents a unique CORD subscriber.
       summary: Merge details on subscriber
       deprecated: false
       responses:
@@ -1542,7 +1540,6 @@ paths:
             description: Each entry represents a unique CORD subscriber.
             $ref: '#/definitions/cord:subscriber'
     delete:
-      description: Each entry represents a unique CORD subscriber.
       summary: Delete subscriber from cord.
       deprecated: false
       responses:
@@ -1773,12 +1770,6 @@ paths:
                           type: string
                           format: leafref
     put:
-      description: |-
-        The controller configuration block represents a VOLT agent/controller
-        which manages multiple OLT devices. The VOLT agent provides
-        aggregate abstraction of the entire PON as a sigle switch to
-        the controller. Each port entry of the agent represents each
-        ONU/ONT endpoint as a separate openflow port.
       summary: Update details on controller
       deprecated: false
       responses:
@@ -1823,12 +1814,6 @@ paths:
                           type: string
                           format: leafref
     patch:
-      description: |-
-        The controller configuration block represents a VOLT agent/controller
-        which manages multiple OLT devices. The VOLT agent provides
-        aggregate abstraction of the entire PON as a sigle switch to
-        the controller. Each port entry of the agent represents each
-        ONU/ONT endpoint as a separate openflow port.
       summary: Merge details on controller
       deprecated: false
       responses:
@@ -1873,12 +1858,6 @@ paths:
                           type: string
                           format: leafref
     delete:
-      description: |-
-        The controller configuration block represents a VOLT agent/controller
-        which manages multiple OLT devices. The VOLT agent provides
-        aggregate abstraction of the entire PON as a sigle switch to
-        the controller. Each port entry of the agent represents each
-        ONU/ONT endpoint as a separate openflow port.
       summary: Delete controller from volt-service.
       deprecated: false
       responses:
@@ -2185,7 +2164,6 @@ paths:
                   type: string
                   format: leafref
     get:
-      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
       summary: List all ports from controller
       deprecated: false
       responses:
@@ -2210,14 +2188,12 @@ paths:
                   type: string
                   format: leafref
     put:
-      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
       summary: Replace the entire port collection
       deprecated: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
-      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
       summary: Merge items into the port collection
       deprecated: false
       responses:
@@ -2248,7 +2224,6 @@ paths:
                 type: string
                 format: leafref
     put:
-      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
       summary: Update details on port
       deprecated: false
       responses:
@@ -2271,7 +2246,6 @@ paths:
                 type: string
                 format: leafref
     patch:
-      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
       summary: Merge details on port
       deprecated: false
       responses:
@@ -2294,7 +2268,6 @@ paths:
                 type: string
                 format: leafref
     delete:
-      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
       summary: Delete port from controller.
       deprecated: false
       responses:
@@ -2328,7 +2301,6 @@ paths:
                   type: string
                   format: string
     get:
-      description: collection of public/private key pair(s)
       summary: List all keypairs from service
       deprecated: false
       responses:
@@ -2347,14 +2319,12 @@ paths:
                   type: string
                   format: string
     put:
-      description: collection of public/private key pair(s)
       summary: Replace the entire keypair collection
       deprecated: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
-      description: collection of public/private key pair(s)
       summary: Merge items into the keypair collection
       deprecated: false
       responses:
@@ -2379,7 +2349,6 @@ paths:
                 type: string
                 format: string
     put:
-      description: collection of public/private key pair(s)
       summary: Update details on keypair
       deprecated: false
       responses:
@@ -2396,7 +2365,6 @@ paths:
                 type: string
                 format: string
     patch:
-      description: collection of public/private key pair(s)
       summary: Merge details on keypair
       deprecated: false
       responses:
@@ -2413,7 +2381,6 @@ paths:
                 type: string
                 format: string
     delete:
-      description: collection of public/private key pair(s)
       summary: Delete keypair from service.
       deprecated: false
       responses:
@@ -2446,7 +2413,6 @@ paths:
                   type: string
                   format: string
     get:
-      description: backwards-compatible attribute association
       summary: List all attributes from service
       deprecated: true
       responses:
@@ -2465,14 +2431,12 @@ paths:
                   type: string
                   format: string
     put:
-      description: backwards-compatible attribute association
       summary: Replace the entire attribute collection
       deprecated: true
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
-      description: backwards-compatible attribute association
       summary: Merge items into the attribute collection
       deprecated: true
       responses:
@@ -2497,7 +2461,6 @@ paths:
                 type: string
                 format: string
     put:
-      description: backwards-compatible attribute association
       summary: Update details on attribute
       deprecated: true
       responses:
@@ -2514,7 +2477,6 @@ paths:
                 type: string
                 format: string
     patch:
-      description: backwards-compatible attribute association
       summary: Merge details on attribute
       deprecated: true
       responses:
@@ -2531,7 +2493,6 @@ paths:
                 type: string
                 format: string
     delete:
-      description: backwards-compatible attribute association
       summary: Delete attribute from service.
       deprecated: true
       responses:
@@ -2648,10 +2609,6 @@ paths:
                               description: trigger save into data store via synchronizer
                               type: object
     get:
-      description: |-
-        Each entry represents a subscriber of the service. Each unique service
-        provider should augment this block with service specific
-        attributes.
       summary: List all subscribers from service
       deprecated: false
       responses:
@@ -2751,20 +2708,12 @@ paths:
                               description: trigger save into data store via synchronizer
                               type: object
     put:
-      description: |-
-        Each entry represents a subscriber of the service. Each unique service
-        provider should augment this block with service specific
-        attributes.
       summary: Replace the entire subscriber collection
       deprecated: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
-      description: |-
-        Each entry represents a subscriber of the service. Each unique service
-        provider should augment this block with service specific
-        attributes.
       summary: Merge items into the subscriber collection
       deprecated: false
       responses:
@@ -2873,10 +2822,6 @@ paths:
                             description: trigger save into data store via synchronizer
                             type: object
     put:
-      description: |-
-        Each entry represents a subscriber of the service. Each unique service
-        provider should augment this block with service specific
-        attributes.
       summary: Update details on subscriber
       deprecated: false
       responses:
@@ -2974,10 +2919,6 @@ paths:
                             description: trigger save into data store via synchronizer
                             type: object
     patch:
-      description: |-
-        Each entry represents a subscriber of the service. Each unique service
-        provider should augment this block with service specific
-        attributes.
       summary: Merge details on subscriber
       deprecated: false
       responses:
@@ -3075,10 +3016,6 @@ paths:
                             description: trigger save into data store via synchronizer
                             type: object
     delete:
-      description: |-
-        Each entry represents a subscriber of the service. Each unique service
-        provider should augment this block with service specific
-        attributes.
       summary: Delete subscriber from service.
       deprecated: false
       responses:
@@ -3301,7 +3238,6 @@ paths:
                             type: string
                             format: 'xtype:vlan'
     get:
-      description: Each entry represents an OLT device.
       summary: List all devices from devices-list
       deprecated: false
       responses:
@@ -3370,14 +3306,12 @@ paths:
                             type: string
                             format: 'xtype:vlan'
     put:
-      description: Each entry represents an OLT device.
       summary: Replace the entire device collection
       deprecated: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
-      description: Each entry represents an OLT device.
       summary: Merge items into the device collection
       deprecated: false
       responses:
@@ -3452,7 +3386,6 @@ paths:
                           type: string
                           format: 'xtype:vlan'
     put:
-      description: Each entry represents an OLT device.
       summary: Update details on device
       deprecated: false
       responses:
@@ -3519,7 +3452,6 @@ paths:
                           type: string
                           format: 'xtype:vlan'
     patch:
-      description: Each entry represents an OLT device.
       summary: Merge details on device
       deprecated: false
       responses:
@@ -3586,7 +3518,6 @@ paths:
                           type: string
                           format: 'xtype:vlan'
     delete:
-      description: Each entry represents an OLT device.
       summary: Delete device from devices-list.
       deprecated: false
       responses:
@@ -3622,7 +3553,6 @@ paths:
                 type: string
                 format: 'xtype:vlan'
     put:
-      description: Uplink description of the OLT device.
       summary: Update details on uplink
       deprecated: false
       responses:
@@ -3644,7 +3574,6 @@ paths:
                 type: string
                 format: 'xtype:vlan'
     patch:
-      description: Uplink description of the OLT device.
       summary: Merge details on uplink
       deprecated: false
       responses:
@@ -3666,7 +3595,6 @@ paths:
                 type: string
                 format: 'xtype:vlan'
     delete:
-      description: Uplink description of the OLT device.
       summary: Delete uplink from device.
       deprecated: false
       responses:
@@ -3720,9 +3648,6 @@ paths:
                   type: string
                   format: 'xtype:vlan'
     get:
-      description: |-
-        Each link represents an ONU/ONT (Optical Network Termination) endpoint
-        connection.
       summary: List all links from device
       deprecated: false
       responses:
@@ -3760,18 +3685,12 @@ paths:
                   type: string
                   format: 'xtype:vlan'
     put:
-      description: |-
-        Each link represents an ONU/ONT (Optical Network Termination) endpoint
-        connection.
       summary: Replace the entire link collection
       deprecated: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
-      description: |-
-        Each link represents an ONU/ONT (Optical Network Termination) endpoint
-        connection.
       summary: Merge items into the link collection
       deprecated: false
       responses:
@@ -3823,9 +3742,6 @@ paths:
                 type: string
                 format: 'xtype:vlan'
     put:
-      description: |-
-        Each link represents an ONU/ONT (Optical Network Termination) endpoint
-        connection.
       summary: Update details on link
       deprecated: false
       responses:
@@ -3861,9 +3777,6 @@ paths:
                 type: string
                 format: 'xtype:vlan'
     patch:
-      description: |-
-        Each link represents an ONU/ONT (Optical Network Termination) endpoint
-        connection.
       summary: Merge details on link
       deprecated: false
       responses:
@@ -3899,9 +3812,6 @@ paths:
                 type: string
                 format: 'xtype:vlan'
     delete:
-      description: |-
-        Each link represents an ONU/ONT (Optical Network Termination) endpoint
-        connection.
       summary: Delete link from device.
       deprecated: false
       responses:
@@ -3970,12 +3880,6 @@ paths:
                           type: string
                           format: leafref
     put:
-      description: |-
-        The controller configuration represents a VSG controller which manages
-        multiple VSG gateways. The VSG controller provides agregate
-        abstraction of the entire NFaaS as a single switch to the
-        network fabric. Each port entry of the controller represents
-        each VSG subscriber flow as a distinct openflow port.
       summary: Update details on controller
       deprecated: false
       responses:
@@ -4020,12 +3924,6 @@ paths:
                           type: string
                           format: leafref
     patch:
-      description: |-
-        The controller configuration represents a VSG controller which manages
-        multiple VSG gateways. The VSG controller provides agregate
-        abstraction of the entire NFaaS as a single switch to the
-        network fabric. Each port entry of the controller represents
-        each VSG subscriber flow as a distinct openflow port.
       summary: Merge details on controller
       deprecated: false
       responses:
@@ -4070,12 +3968,6 @@ paths:
                           type: string
                           format: leafref
     delete:
-      description: |-
-        The controller configuration represents a VSG controller which manages
-        multiple VSG gateways. The VSG controller provides agregate
-        abstraction of the entire NFaaS as a single switch to the
-        network fabric. Each port entry of the controller represents
-        each VSG subscriber flow as a distinct openflow port.
       summary: Delete controller from vsg-service.
       deprecated: false
       responses:
@@ -4384,9 +4276,6 @@ paths:
                   type: string
                   format: leafref
     get:
-      description: |-
-        Each entry represents a VSG subscriber flow connected across VSG
-        gateways.
       summary: List all ports from controller
       deprecated: false
       responses:
@@ -4411,18 +4300,12 @@ paths:
                   type: string
                   format: leafref
     put:
-      description: |-
-        Each entry represents a VSG subscriber flow connected across VSG
-        gateways.
       summary: Replace the entire port collection
       deprecated: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
-      description: |-
-        Each entry represents a VSG subscriber flow connected across VSG
-        gateways.
       summary: Merge items into the port collection
       deprecated: false
       responses:
@@ -4455,9 +4338,6 @@ paths:
                 type: string
                 format: leafref
     put:
-      description: |-
-        Each entry represents a VSG subscriber flow connected across VSG
-        gateways.
       summary: Update details on port
       deprecated: false
       responses:
@@ -4480,9 +4360,6 @@ paths:
                 type: string
                 format: leafref
     patch:
-      description: |-
-        Each entry represents a VSG subscriber flow connected across VSG
-        gateways.
       summary: Merge details on port
       deprecated: false
       responses:
@@ -4505,9 +4382,6 @@ paths:
                 type: string
                 format: leafref
     delete:
-      description: |-
-        Each entry represents a VSG subscriber flow connected across VSG
-        gateways.
       summary: Delete port from controller.
       deprecated: false
       responses:
@@ -4541,7 +4415,6 @@ paths:
                   type: string
                   format: string
     get:
-      description: collection of public/private key pair(s)
       summary: List all keypairs from service
       deprecated: false
       responses:
@@ -4560,14 +4433,12 @@ paths:
                   type: string
                   format: string
     put:
-      description: collection of public/private key pair(s)
       summary: Replace the entire keypair collection
       deprecated: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
-      description: collection of public/private key pair(s)
       summary: Merge items into the keypair collection
       deprecated: false
       responses:
@@ -4592,7 +4463,6 @@ paths:
                 type: string
                 format: string
     put:
-      description: collection of public/private key pair(s)
       summary: Update details on keypair
       deprecated: false
       responses:
@@ -4609,7 +4479,6 @@ paths:
                 type: string
                 format: string
     patch:
-      description: collection of public/private key pair(s)
       summary: Merge details on keypair
       deprecated: false
       responses:
@@ -4626,7 +4495,6 @@ paths:
                 type: string
                 format: string
     delete:
-      description: collection of public/private key pair(s)
       summary: Delete keypair from service.
       deprecated: false
       responses:
@@ -4659,7 +4527,6 @@ paths:
                   type: string
                   format: string
     get:
-      description: backwards-compatible attribute association
       summary: List all attributes from service
       deprecated: true
       responses:
@@ -4678,14 +4545,12 @@ paths:
                   type: string
                   format: string
     put:
-      description: backwards-compatible attribute association
       summary: Replace the entire attribute collection
       deprecated: true
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
-      description: backwards-compatible attribute association
       summary: Merge items into the attribute collection
       deprecated: true
       responses:
@@ -4710,7 +4575,6 @@ paths:
                 type: string
                 format: string
     put:
-      description: backwards-compatible attribute association
       summary: Update details on attribute
       deprecated: true
       responses:
@@ -4727,7 +4591,6 @@ paths:
                 type: string
                 format: string
     patch:
-      description: backwards-compatible attribute association
       summary: Merge details on attribute
       deprecated: true
       responses:
@@ -4744,7 +4607,6 @@ paths:
                 type: string
                 format: string
     delete:
-      description: backwards-compatible attribute association
       summary: Delete attribute from service.
       deprecated: true
       responses:
@@ -4861,10 +4723,6 @@ paths:
                               description: trigger save into data store via synchronizer
                               type: object
     get:
-      description: |-
-        Each entry represents a subscriber of the service. Each unique service
-        provider should augment this block with service specific
-        attributes.
       summary: List all subscribers from service
       deprecated: false
       responses:
@@ -4964,20 +4822,12 @@ paths:
                               description: trigger save into data store via synchronizer
                               type: object
     put:
-      description: |-
-        Each entry represents a subscriber of the service. Each unique service
-        provider should augment this block with service specific
-        attributes.
       summary: Replace the entire subscriber collection
       deprecated: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
-      description: |-
-        Each entry represents a subscriber of the service. Each unique service
-        provider should augment this block with service specific
-        attributes.
       summary: Merge items into the subscriber collection
       deprecated: false
       responses:
@@ -5086,10 +4936,6 @@ paths:
                             description: trigger save into data store via synchronizer
                             type: object
     put:
-      description: |-
-        Each entry represents a subscriber of the service. Each unique service
-        provider should augment this block with service specific
-        attributes.
       summary: Update details on subscriber
       deprecated: false
       responses:
@@ -5187,10 +5033,6 @@ paths:
                             description: trigger save into data store via synchronizer
                             type: object
     patch:
-      description: |-
-        Each entry represents a subscriber of the service. Each unique service
-        provider should augment this block with service specific
-        attributes.
       summary: Merge details on subscriber
       deprecated: false
       responses:
@@ -5288,10 +5130,6 @@ paths:
                             description: trigger save into data store via synchronizer
                             type: object
     delete:
-      description: |-
-        Each entry represents a subscriber of the service. Each unique service
-        provider should augment this block with service specific
-        attributes.
       summary: Delete subscriber from service.
       deprecated: false
       responses:
@@ -5511,7 +5349,6 @@ paths:
                             type: string
                             format: 'yang:uuid'
     get:
-      description: Each entry represents a VSG instance.
       summary: List all gateways from gateways-list
       deprecated: false
       responses:
@@ -5577,14 +5414,12 @@ paths:
                             type: string
                             format: 'yang:uuid'
     put:
-      description: Each entry represents a VSG instance.
       summary: Replace the entire gateway collection
       deprecated: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
-      description: Each entry represents a VSG instance.
       summary: Merge items into the gateway collection
       deprecated: false
       responses:
@@ -5656,7 +5491,6 @@ paths:
                           type: string
                           format: 'yang:uuid'
     put:
-      description: Each entry represents a VSG instance.
       summary: Update details on gateway
       deprecated: false
       responses:
@@ -5720,7 +5554,6 @@ paths:
                           type: string
                           format: 'yang:uuid'
     patch:
-      description: Each entry represents a VSG instance.
       summary: Merge details on gateway
       deprecated: false
       responses:
@@ -5784,7 +5617,6 @@ paths:
                           type: string
                           format: 'yang:uuid'
     delete:
-      description: Each entry represents a VSG instance.
       summary: Delete gateway from gateways-list.
       deprecated: false
       responses:
@@ -5843,7 +5675,6 @@ paths:
                     type: string
                     format: boolean
     put:
-      description: Contains various features provided by the gateway.
       summary: Update details on features
       deprecated: false
       responses:
@@ -5888,7 +5719,6 @@ paths:
                     type: string
                     format: boolean
     patch:
-      description: Contains various features provided by the gateway.
       summary: Merge details on features
       deprecated: false
       responses:
@@ -5933,7 +5763,6 @@ paths:
                     type: string
                     format: boolean
     delete:
-      description: Contains various features provided by the gateway.
       summary: Delete features from gateway.
       deprecated: false
       responses:
@@ -5963,7 +5792,6 @@ paths:
                   type: string
                   format: 'yang:uuid'
     get:
-      description: Each flow represents a subscriber flow into the VSG instance.
       summary: List all flows from gateway
       deprecated: false
       responses:
@@ -5979,14 +5807,12 @@ paths:
                   type: string
                   format: 'yang:uuid'
     put:
-      description: Each flow represents a subscriber flow into the VSG instance.
       summary: Replace the entire flow collection
       deprecated: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
-      description: Each flow represents a subscriber flow into the VSG instance.
       summary: Merge items into the flow collection
       deprecated: false
       responses:
@@ -6014,7 +5840,6 @@ paths:
                 type: string
                 format: 'yang:uuid'
     put:
-      description: Each flow represents a subscriber flow into the VSG instance.
       summary: Update details on flow
       deprecated: false
       responses:
@@ -6028,7 +5853,6 @@ paths:
                 type: string
                 format: 'yang:uuid'
     patch:
-      description: Each flow represents a subscriber flow into the VSG instance.
       summary: Merge details on flow
       deprecated: false
       responses:
@@ -6042,7 +5866,6 @@ paths:
                 type: string
                 format: 'yang:uuid'
     delete:
-      description: Each flow represents a subscriber flow into the VSG instance.
       summary: Delete flow from gateway.
       deprecated: false
       responses:
