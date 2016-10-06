@@ -45,6 +45,7 @@
     "superagent": "^2.0.0",
     "yang-express": "^0.4.0",
     "yang-js": "^0.16.2",
+    "yang-swagger": "^1.0.3",
     "yang-volt": "file:./services/yang-volt",
     "yang-vsg": "file:./services/yang-vsg"
   },
