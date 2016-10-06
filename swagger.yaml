@@ -44,6 +44,14 @@ paths:
     put:
       summary: Update details on core
       deprecated: false
+      parameters:
+        - name: core
+          in: body
+          description: Primary endpoint for additional core entities to augment
+          schema:
+            description: Primary endpoint for additional core entities to augment
+            $ref: '#/definitions/xos:provider'
+          required: false
       responses:
         '200':
           description: Expected response of core
@@ -53,6 +61,14 @@ paths:
     patch:
       summary: Merge details on core
       deprecated: false
+      parameters:
+        - name: core
+          in: body
+          description: Primary endpoint for additional core entities to augment
+          schema:
+            description: Primary endpoint for additional core entities to augment
+            $ref: '#/definitions/xos:provider'
+          required: false
       responses:
         '200':
           description: Expected response of core
@@ -67,8 +83,30 @@ paths:
           description: Expected response for delete
   '/xos-controller:core/credential':
     post:
-      summary: Creates one or more new credential in provider.
+      summary: Creates one or more new credential in provider
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response for creating credential(s) in collection
@@ -117,12 +155,56 @@ paths:
     put:
       summary: Replace the entire credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -152,6 +234,26 @@ paths:
     put:
       summary: Update details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -174,6 +276,26 @@ paths:
     patch:
       summary: Merge details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -207,8 +329,16 @@ paths:
         format: string
   '/xos-controller:core/template':
     post:
-      summary: 'Creates one or more new template in /xos:core.'
+      summary: 'Creates one or more new template in /xos:core'
       deprecated: false
+      parameters:
+        - name: template
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:network-template'
+          required: false
       responses:
         '200':
           description: Expected response for creating template(s) in collection
@@ -229,12 +359,28 @@ paths:
     put:
       summary: Replace the entire template collection
       deprecated: false
+      parameters:
+        - name: template
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:network-template'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the template collection
       deprecated: false
+      parameters:
+        - name: template
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:network-template'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -250,6 +396,12 @@ paths:
     put:
       summary: Update details on template
       deprecated: false
+      parameters:
+        - name: template
+          in: body
+          schema:
+            $ref: '#/definitions/xtop:network-template'
+          required: false
       responses:
         '200':
           description: Expected response of template
@@ -258,6 +410,12 @@ paths:
     patch:
       summary: Merge details on template
       deprecated: false
+      parameters:
+        - name: template
+          in: body
+          schema:
+            $ref: '#/definitions/xtop:network-template'
+          required: false
       responses:
         '200':
           description: Expected response of template
@@ -277,8 +435,16 @@ paths:
         format: 'xtype:unique-identifier'
   '/xos-controller:core/deployment':
     post:
-      summary: 'Creates one or more new deployment in /xos:core.'
+      summary: 'Creates one or more new deployment in /xos:core'
       deprecated: false
+      parameters:
+        - name: deployment
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:deployment'
+          required: false
       responses:
         '200':
           description: Expected response for creating deployment(s) in collection
@@ -299,12 +465,28 @@ paths:
     put:
       summary: Replace the entire deployment collection
       deprecated: false
+      parameters:
+        - name: deployment
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:deployment'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the deployment collection
       deprecated: false
+      parameters:
+        - name: deployment
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:deployment'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -320,6 +502,12 @@ paths:
     put:
       summary: Update details on deployment
       deprecated: false
+      parameters:
+        - name: deployment
+          in: body
+          schema:
+            $ref: '#/definitions/xtop:deployment'
+          required: false
       responses:
         '200':
           description: Expected response of deployment
@@ -328,6 +516,12 @@ paths:
     patch:
       summary: Merge details on deployment
       deprecated: false
+      parameters:
+        - name: deployment
+          in: body
+          schema:
+            $ref: '#/definitions/xtop:deployment'
+          required: false
       responses:
         '200':
           description: Expected response of deployment
@@ -347,8 +541,30 @@ paths:
         format: 'xtype:unique-identifier'
   '/xos-controller:core/deployment/{id}/credential':
     post:
-      summary: Creates one or more new credential in deployment.
+      summary: Creates one or more new credential in deployment
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response for creating credential(s) in collection
@@ -397,12 +613,56 @@ paths:
     put:
       summary: Replace the entire credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -438,6 +698,26 @@ paths:
     put:
       summary: Update details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -460,6 +740,26 @@ paths:
     patch:
       summary: Merge details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -498,8 +798,16 @@ paths:
         format: 'xtype:unique-identifier'
   '/xos-controller:core/site':
     post:
-      summary: 'Creates one or more new site in /xos:core.'
+      summary: 'Creates one or more new site in /xos:core'
       deprecated: false
+      parameters:
+        - name: site
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:site'
+          required: false
       responses:
         '200':
           description: Expected response for creating site(s) in collection
@@ -520,12 +828,28 @@ paths:
     put:
       summary: Replace the entire site collection
       deprecated: false
+      parameters:
+        - name: site
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:site'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the site collection
       deprecated: false
+      parameters:
+        - name: site
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:site'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -541,6 +865,12 @@ paths:
     put:
       summary: Update details on site
       deprecated: false
+      parameters:
+        - name: site
+          in: body
+          schema:
+            $ref: '#/definitions/xtop:site'
+          required: false
       responses:
         '200':
           description: Expected response of site
@@ -549,6 +879,12 @@ paths:
     patch:
       summary: Merge details on site
       deprecated: false
+      parameters:
+        - name: site
+          in: body
+          schema:
+            $ref: '#/definitions/xtop:site'
+          required: false
       responses:
         '200':
           description: Expected response of site
@@ -588,6 +924,22 @@ paths:
     put:
       summary: Update details on location
       deprecated: false
+      parameters:
+        - name: location
+          in: body
+          schema:
+            type: object
+            properties:
+              geoposition:
+                type: string
+                format: string
+              longitude:
+                type: string
+                format: decimal64
+              latitude:
+                type: string
+                format: decimal64
+          required: false
       responses:
         '200':
           description: Expected response of location
@@ -606,6 +958,22 @@ paths:
     patch:
       summary: Merge details on location
       deprecated: false
+      parameters:
+        - name: location
+          in: body
+          schema:
+            type: object
+            properties:
+              geoposition:
+                type: string
+                format: string
+              longitude:
+                type: string
+                format: decimal64
+              latitude:
+                type: string
+                format: decimal64
+          required: false
       responses:
         '200':
           description: Expected response of location
@@ -635,8 +1003,30 @@ paths:
         format: 'xtype:unique-identifier'
   '/xos-controller:core/site/{id}/credential':
     post:
-      summary: Creates one or more new credential in site.
+      summary: Creates one or more new credential in site
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response for creating credential(s) in collection
@@ -685,12 +1075,56 @@ paths:
     put:
       summary: Replace the entire credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -726,6 +1160,26 @@ paths:
     put:
       summary: Update details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -748,6 +1202,26 @@ paths:
     patch:
       summary: Merge details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -786,8 +1260,16 @@ paths:
         format: 'xtype:unique-identifier'
   '/xos-controller:core/node':
     post:
-      summary: 'Creates one or more new node in /xos:core.'
+      summary: 'Creates one or more new node in /xos:core'
       deprecated: false
+      parameters:
+        - name: node
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:node'
+          required: false
       responses:
         '200':
           description: Expected response for creating node(s) in collection
@@ -808,12 +1290,28 @@ paths:
     put:
       summary: Replace the entire node collection
       deprecated: false
+      parameters:
+        - name: node
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:node'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the node collection
       deprecated: false
+      parameters:
+        - name: node
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:node'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -829,6 +1327,12 @@ paths:
     put:
       summary: Update details on node
       deprecated: false
+      parameters:
+        - name: node
+          in: body
+          schema:
+            $ref: '#/definitions/xtop:node'
+          required: false
       responses:
         '200':
           description: Expected response of node
@@ -837,6 +1341,12 @@ paths:
     patch:
       summary: Merge details on node
       deprecated: false
+      parameters:
+        - name: node
+          in: body
+          schema:
+            $ref: '#/definitions/xtop:node'
+          required: false
       responses:
         '200':
           description: Expected response of node
@@ -856,8 +1366,16 @@ paths:
         format: 'xtype:unique-identifier'
   '/xos-controller:core/user':
     post:
-      summary: 'Creates one or more new user in /xos:core.'
+      summary: 'Creates one or more new user in /xos:core'
       deprecated: false
+      parameters:
+        - name: user
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:user'
+          required: false
       responses:
         '200':
           description: Expected response for creating user(s) in collection
@@ -878,12 +1396,28 @@ paths:
     put:
       summary: Replace the entire user collection
       deprecated: false
+      parameters:
+        - name: user
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:user'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the user collection
       deprecated: false
+      parameters:
+        - name: user
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xtop:user'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -899,6 +1433,12 @@ paths:
     put:
       summary: Update details on user
       deprecated: false
+      parameters:
+        - name: user
+          in: body
+          schema:
+            $ref: '#/definitions/xtop:user'
+          required: false
       responses:
         '200':
           description: Expected response of user
@@ -907,6 +1447,12 @@ paths:
     patch:
       summary: Merge details on user
       deprecated: false
+      parameters:
+        - name: user
+          in: body
+          schema:
+            $ref: '#/definitions/xtop:user'
+          required: false
       responses:
         '200':
           description: Expected response of user
@@ -956,6 +1502,32 @@ paths:
     put:
       summary: Update details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                format: 'yang:yang-identifier'
+              password:
+                type: string
+                format: 'meta:password'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+              public-key:
+                type: string
+                format: string
+              login-page:
+                type: string
+                format: 'inet:uri'
+              last-login:
+                type: string
+                format: 'yang:date-and-time'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -984,6 +1556,32 @@ paths:
     patch:
       summary: Merge details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                format: 'yang:yang-identifier'
+              password:
+                type: string
+                format: 'meta:password'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+              public-key:
+                type: string
+                format: string
+              login-page:
+                type: string
+                format: 'inet:uri'
+              last-login:
+                type: string
+                format: 'yang:date-and-time'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -1023,8 +1621,16 @@ paths:
         format: 'xtype:unique-identifier'
   '/xos-controller:core/slice':
     post:
-      summary: 'Creates one or more new slice in /xos:core.'
+      summary: 'Creates one or more new slice in /xos:core'
       deprecated: false
+      parameters:
+        - name: slice
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xslice:slice'
+          required: false
       responses:
         '200':
           description: Expected response for creating slice(s) in collection
@@ -1045,12 +1651,28 @@ paths:
     put:
       summary: Replace the entire slice collection
       deprecated: false
+      parameters:
+        - name: slice
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xslice:slice'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the slice collection
       deprecated: false
+      parameters:
+        - name: slice
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/xslice:slice'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -1066,6 +1688,12 @@ paths:
     put:
       summary: Update details on slice
       deprecated: false
+      parameters:
+        - name: slice
+          in: body
+          schema:
+            $ref: '#/definitions/xslice:slice'
+          required: false
       responses:
         '200':
           description: Expected response of slice
@@ -1074,6 +1702,12 @@ paths:
     patch:
       summary: Merge details on slice
       deprecated: false
+      parameters:
+        - name: slice
+          in: body
+          schema:
+            $ref: '#/definitions/xslice:slice'
+          required: false
       responses:
         '200':
           description: Expected response of slice
@@ -1127,6 +1761,36 @@ paths:
     put:
       summary: Update details on policy
       deprecated: false
+      parameters:
+        - name: policy
+          in: body
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+          required: false
       responses:
         '200':
           description: Expected response of policy
@@ -1159,6 +1823,36 @@ paths:
     patch:
       summary: Merge details on policy
       deprecated: false
+      parameters:
+        - name: policy
+          in: body
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+          required: false
       responses:
         '200':
           description: Expected response of policy
@@ -1202,8 +1896,30 @@ paths:
         format: 'xtype:unique-identifier'
   '/xos-controller:core/slice/{id}/credential':
     post:
-      summary: Creates one or more new credential in slice.
+      summary: Creates one or more new credential in slice
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response for creating credential(s) in collection
@@ -1252,12 +1968,56 @@ paths:
     put:
       summary: Replace the entire credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -1293,6 +2053,26 @@ paths:
     put:
       summary: Update details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -1315,6 +2095,26 @@ paths:
     patch:
       summary: Merge details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -1365,6 +2165,14 @@ paths:
     put:
       summary: Update details on service
       deprecated: false
+      parameters:
+        - name: service
+          in: body
+          description: Primary endpoint for services to augment
+          schema:
+            description: Primary endpoint for services to augment
+            type: object
+          required: false
       responses:
         '200':
           description: Expected response of service
@@ -1374,6 +2182,14 @@ paths:
     patch:
       summary: Merge details on service
       deprecated: false
+      parameters:
+        - name: service
+          in: body
+          description: Primary endpoint for services to augment
+          schema:
+            description: Primary endpoint for services to augment
+            type: object
+          required: false
       responses:
         '200':
           description: Expected response of service
@@ -1400,6 +2216,14 @@ paths:
     put:
       summary: Update details on tenant
       deprecated: false
+      parameters:
+        - name: tenant
+          in: body
+          description: Primary endpoint for tenants to augment
+          schema:
+            description: Primary endpoint for tenants to augment
+            type: object
+          required: false
       responses:
         '200':
           description: Expected response of tenant
@@ -1409,6 +2233,14 @@ paths:
     patch:
       summary: Merge details on tenant
       deprecated: false
+      parameters:
+        - name: tenant
+          in: body
+          description: Primary endpoint for tenants to augment
+          schema:
+            description: Primary endpoint for tenants to augment
+            type: object
+          required: false
       responses:
         '200':
           description: Expected response of tenant
@@ -1441,6 +2273,20 @@ paths:
     put:
       summary: Update details on cord
       deprecated: false
+      parameters:
+        - name: cord
+          in: body
+          description: Register cord as a tenant into XOS
+          schema:
+            description: Register cord as a tenant into XOS
+            type: object
+            properties:
+              subscriber:
+                type: array
+                items:
+                  description: Each entry represents a unique CORD subscriber.
+                  $ref: '#/definitions/cord:subscriber'
+          required: false
       responses:
         '200':
           description: Expected response of cord
@@ -1456,6 +2302,20 @@ paths:
     patch:
       summary: Merge details on cord
       deprecated: false
+      parameters:
+        - name: cord
+          in: body
+          description: Register cord as a tenant into XOS
+          schema:
+            description: Register cord as a tenant into XOS
+            type: object
+            properties:
+              subscriber:
+                type: array
+                items:
+                  description: Each entry represents a unique CORD subscriber.
+                  $ref: '#/definitions/cord:subscriber'
+          required: false
       responses:
         '200':
           description: Expected response of cord
@@ -1477,8 +2337,18 @@ paths:
   '/xos-controller:tenant/cord/subscriber':
     post:
       description: Each entry represents a unique CORD subscriber.
-      summary: Creates one or more new subscriber in cord.
+      summary: Creates one or more new subscriber in cord
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: Each entry represents a unique CORD subscriber.
+          schema:
+            type: array
+            items:
+              description: Each entry represents a unique CORD subscriber.
+              $ref: '#/definitions/cord:subscriber'
+          required: false
       responses:
         '200':
           description: Expected response for creating subscriber(s) in collection
@@ -1501,12 +2371,32 @@ paths:
     put:
       summary: Replace the entire subscriber collection
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: Each entry represents a unique CORD subscriber.
+          schema:
+            type: array
+            items:
+              description: Each entry represents a unique CORD subscriber.
+              $ref: '#/definitions/cord:subscriber'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the subscriber collection
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: Each entry represents a unique CORD subscriber.
+          schema:
+            type: array
+            items:
+              description: Each entry represents a unique CORD subscriber.
+              $ref: '#/definitions/cord:subscriber'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -1524,6 +2414,14 @@ paths:
     put:
       summary: Update details on subscriber
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: Each entry represents a unique CORD subscriber.
+          schema:
+            description: Each entry represents a unique CORD subscriber.
+            $ref: '#/definitions/cord:subscriber'
+          required: false
       responses:
         '200':
           description: Expected response of subscriber
@@ -1533,6 +2431,14 @@ paths:
     patch:
       summary: Merge details on subscriber
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: Each entry represents a unique CORD subscriber.
+          schema:
+            description: Each entry represents a unique CORD subscriber.
+            $ref: '#/definitions/cord:subscriber'
+          required: false
       responses:
         '200':
           description: Expected response of subscriber
@@ -1578,6 +2484,27 @@ paths:
     put:
       summary: Update details on volt
       deprecated: false
+      parameters:
+        - name: volt
+          in: body
+          schema:
+            type: object
+            properties:
+              c-tag:
+                type: string
+                format: leafref
+              s-tag:
+                type: string
+                format: leafref
+              uplink-speed:
+                default: '1000000000'
+                type: integer
+                format: uint32
+              downlink-speed:
+                default: '1000000000'
+                type: integer
+                format: uint32
+          required: false
       responses:
         '200':
           description: Expected response of volt
@@ -1601,6 +2528,27 @@ paths:
     patch:
       summary: Merge details on volt
       deprecated: false
+      parameters:
+        - name: volt
+          in: body
+          schema:
+            type: object
+            properties:
+              c-tag:
+                type: string
+                format: leafref
+              s-tag:
+                type: string
+                format: leafref
+              uplink-speed:
+                default: '1000000000'
+                type: integer
+                format: uint32
+              downlink-speed:
+                default: '1000000000'
+                type: integer
+                format: uint32
+          required: false
       responses:
         '200':
           description: Expected response of volt
@@ -1661,6 +2609,28 @@ paths:
     put:
       summary: Update details on vsg
       deprecated: false
+      parameters:
+        - name: vsg
+          in: body
+          schema:
+            type: object
+            properties:
+              gateway:
+                type: string
+                format: leafref
+              firewall:
+                default: 'false'
+                type: boolean
+                format: boolean
+              url-filter:
+                default: 'false'
+                type: boolean
+                format: boolean
+              uverse:
+                default: 'false'
+                type: boolean
+                format: boolean
+          required: false
       responses:
         '200':
           description: Expected response of vsg
@@ -1685,6 +2655,28 @@ paths:
     patch:
       summary: Merge details on vsg
       deprecated: false
+      parameters:
+        - name: vsg
+          in: body
+          schema:
+            type: object
+            properties:
+              gateway:
+                type: string
+                format: leafref
+              firewall:
+                default: 'false'
+                type: boolean
+                format: boolean
+              url-filter:
+                default: 'false'
+                type: boolean
+                format: boolean
+              uverse:
+                default: 'false'
+                type: boolean
+                format: boolean
+          required: false
       responses:
         '200':
           description: Expected response of vsg
@@ -1772,6 +2764,59 @@ paths:
     put:
       summary: Update details on controller
       deprecated: false
+      parameters:
+        - name: controller
+          in: body
+          description: >-
+            The controller configuration block represents a VOLT
+            agent/controller
+
+            which manages multiple OLT devices. The VOLT agent provides
+
+            aggregate abstraction of the entire PON as a sigle switch to
+
+            the controller. Each port entry of the agent represents each
+
+            ONU/ONT endpoint as a separate openflow port.
+          schema:
+            description: >-
+              The controller configuration block represents a VOLT
+              agent/controller
+
+              which manages multiple OLT devices. The VOLT agent provides
+
+              aggregate abstraction of the entire PON as a sigle switch to
+
+              the controller. Each port entry of the agent represents each
+
+              ONU/ONT endpoint as a separate openflow port.
+            allOf:
+              - $ref: '#/definitions/xos:service'
+              - $ref: '#/definitions/devices-list'
+              - properties:
+                  slice:
+                    $ref: '#/definitions/xslice:slice'
+                  radius:
+                    type: object
+                  port:
+                    type: array
+                    items:
+                      description: >-
+                        Each entry represents an ONU/ONT endpoint connected
+                        across OLT devices.
+                      type: object
+                      required:
+                        - id
+                        - link
+                      properties:
+                        id:
+                          description: OpenFlow Port ID
+                          type: string
+                          format: 'yang:uuid'
+                        link:
+                          type: string
+                          format: leafref
+          required: false
       responses:
         '200':
           description: Expected response of controller
@@ -1816,6 +2861,59 @@ paths:
     patch:
       summary: Merge details on controller
       deprecated: false
+      parameters:
+        - name: controller
+          in: body
+          description: >-
+            The controller configuration block represents a VOLT
+            agent/controller
+
+            which manages multiple OLT devices. The VOLT agent provides
+
+            aggregate abstraction of the entire PON as a sigle switch to
+
+            the controller. Each port entry of the agent represents each
+
+            ONU/ONT endpoint as a separate openflow port.
+          schema:
+            description: >-
+              The controller configuration block represents a VOLT
+              agent/controller
+
+              which manages multiple OLT devices. The VOLT agent provides
+
+              aggregate abstraction of the entire PON as a sigle switch to
+
+              the controller. Each port entry of the agent represents each
+
+              ONU/ONT endpoint as a separate openflow port.
+            allOf:
+              - $ref: '#/definitions/xos:service'
+              - $ref: '#/definitions/devices-list'
+              - properties:
+                  slice:
+                    $ref: '#/definitions/xslice:slice'
+                  radius:
+                    type: object
+                  port:
+                    type: array
+                    items:
+                      description: >-
+                        Each entry represents an ONU/ONT endpoint connected
+                        across OLT devices.
+                      type: object
+                      required:
+                        - id
+                        - link
+                      properties:
+                        id:
+                          description: OpenFlow Port ID
+                          type: string
+                          format: 'yang:uuid'
+                        link:
+                          type: string
+                          format: leafref
+          required: false
       responses:
         '200':
           description: Expected response of controller
@@ -1875,6 +2973,12 @@ paths:
     put:
       summary: Update details on slice
       deprecated: false
+      parameters:
+        - name: slice
+          in: body
+          schema:
+            $ref: '#/definitions/xslice:slice'
+          required: false
       responses:
         '200':
           description: Expected response of slice
@@ -1883,6 +2987,12 @@ paths:
     patch:
       summary: Merge details on slice
       deprecated: false
+      parameters:
+        - name: slice
+          in: body
+          schema:
+            $ref: '#/definitions/xslice:slice'
+          required: false
       responses:
         '200':
           description: Expected response of slice
@@ -1930,6 +3040,36 @@ paths:
     put:
       summary: Update details on policy
       deprecated: false
+      parameters:
+        - name: policy
+          in: body
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+          required: false
       responses:
         '200':
           description: Expected response of policy
@@ -1962,6 +3102,36 @@ paths:
     patch:
       summary: Merge details on policy
       deprecated: false
+      parameters:
+        - name: policy
+          in: body
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+          required: false
       responses:
         '200':
           description: Expected response of policy
@@ -1999,8 +3169,30 @@ paths:
           description: Expected response for delete
   '/volt-service:controller/slice/credential':
     post:
-      summary: Creates one or more new credential in slice.
+      summary: Creates one or more new credential in slice
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response for creating credential(s) in collection
@@ -2049,12 +3241,56 @@ paths:
     put:
       summary: Replace the entire credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -2084,6 +3320,26 @@ paths:
     put:
       summary: Update details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -2106,6 +3362,26 @@ paths:
     patch:
       summary: Merge details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -2140,8 +3416,33 @@ paths:
   '/volt-service:controller/port':
     post:
       description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
-      summary: Creates one or more new port in controller.
+      summary: Creates one or more new port in controller
       deprecated: false
+      parameters:
+        - name: port
+          in: body
+          description: >-
+            Each entry represents an ONU/ONT endpoint connected across OLT
+            devices.
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents an ONU/ONT endpoint connected across OLT
+                devices.
+              type: object
+              required:
+                - id
+                - link
+              properties:
+                id:
+                  description: OpenFlow Port ID
+                  type: string
+                  format: 'yang:uuid'
+                link:
+                  type: string
+                  format: leafref
+          required: false
       responses:
         '200':
           description: Expected response for creating port(s) in collection
@@ -2190,12 +3491,62 @@ paths:
     put:
       summary: Replace the entire port collection
       deprecated: false
+      parameters:
+        - name: port
+          in: body
+          description: >-
+            Each entry represents an ONU/ONT endpoint connected across OLT
+            devices.
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents an ONU/ONT endpoint connected across OLT
+                devices.
+              type: object
+              required:
+                - id
+                - link
+              properties:
+                id:
+                  description: OpenFlow Port ID
+                  type: string
+                  format: 'yang:uuid'
+                link:
+                  type: string
+                  format: leafref
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the port collection
       deprecated: false
+      parameters:
+        - name: port
+          in: body
+          description: >-
+            Each entry represents an ONU/ONT endpoint connected across OLT
+            devices.
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents an ONU/ONT endpoint connected across OLT
+                devices.
+              type: object
+              required:
+                - id
+                - link
+              properties:
+                id:
+                  description: OpenFlow Port ID
+                  type: string
+                  format: 'yang:uuid'
+                link:
+                  type: string
+                  format: leafref
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -2226,6 +3577,29 @@ paths:
     put:
       summary: Update details on port
       deprecated: false
+      parameters:
+        - name: port
+          in: body
+          description: >-
+            Each entry represents an ONU/ONT endpoint connected across OLT
+            devices.
+          schema:
+            description: >-
+              Each entry represents an ONU/ONT endpoint connected across OLT
+              devices.
+            type: object
+            required:
+              - id
+              - link
+            properties:
+              id:
+                description: OpenFlow Port ID
+                type: string
+                format: 'yang:uuid'
+              link:
+                type: string
+                format: leafref
+          required: false
       responses:
         '200':
           description: Expected response of port
@@ -2248,6 +3622,29 @@ paths:
     patch:
       summary: Merge details on port
       deprecated: false
+      parameters:
+        - name: port
+          in: body
+          description: >-
+            Each entry represents an ONU/ONT endpoint connected across OLT
+            devices.
+          schema:
+            description: >-
+              Each entry represents an ONU/ONT endpoint connected across OLT
+              devices.
+            type: object
+            required:
+              - id
+              - link
+            properties:
+              id:
+                description: OpenFlow Port ID
+                type: string
+                format: 'yang:uuid'
+              link:
+                type: string
+                format: leafref
+          required: false
       responses:
         '200':
           description: Expected response of port
@@ -2283,8 +3680,25 @@ paths:
   '/volt-service:controller/keypair':
     post:
       description: collection of public/private key pair(s)
-      summary: Creates one or more new keypair in service.
+      summary: Creates one or more new keypair in service
       deprecated: false
+      parameters:
+        - name: keypair
+          in: body
+          description: collection of public/private key pair(s)
+          schema:
+            type: array
+            items:
+              description: collection of public/private key pair(s)
+              type: object
+              properties:
+                public:
+                  type: string
+                  format: string
+                private:
+                  type: string
+                  format: string
+          required: false
       responses:
         '200':
           description: Expected response for creating keypair(s) in collection
@@ -2321,12 +3735,46 @@ paths:
     put:
       summary: Replace the entire keypair collection
       deprecated: false
+      parameters:
+        - name: keypair
+          in: body
+          description: collection of public/private key pair(s)
+          schema:
+            type: array
+            items:
+              description: collection of public/private key pair(s)
+              type: object
+              properties:
+                public:
+                  type: string
+                  format: string
+                private:
+                  type: string
+                  format: string
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the keypair collection
       deprecated: false
+      parameters:
+        - name: keypair
+          in: body
+          description: collection of public/private key pair(s)
+          schema:
+            type: array
+            items:
+              description: collection of public/private key pair(s)
+              type: object
+              properties:
+                public:
+                  type: string
+                  format: string
+                private:
+                  type: string
+                  format: string
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -2351,6 +3799,21 @@ paths:
     put:
       summary: Update details on keypair
       deprecated: false
+      parameters:
+        - name: keypair
+          in: body
+          description: collection of public/private key pair(s)
+          schema:
+            description: collection of public/private key pair(s)
+            type: object
+            properties:
+              public:
+                type: string
+                format: string
+              private:
+                type: string
+                format: string
+          required: false
       responses:
         '200':
           description: Expected response of keypair
@@ -2367,6 +3830,21 @@ paths:
     patch:
       summary: Merge details on keypair
       deprecated: false
+      parameters:
+        - name: keypair
+          in: body
+          description: collection of public/private key pair(s)
+          schema:
+            description: collection of public/private key pair(s)
+            type: object
+            properties:
+              public:
+                type: string
+                format: string
+              private:
+                type: string
+                format: string
+          required: false
       responses:
         '200':
           description: Expected response of keypair
@@ -2392,11 +3870,29 @@ paths:
         required: true
         type: integer
         format: int64
+        description: An index key identifying keypair item (may change over time)
   '/volt-service:controller/attribute':
     post:
       description: backwards-compatible attribute association
-      summary: Creates one or more new attribute in service.
+      summary: Creates one or more new attribute in service
       deprecated: true
+      parameters:
+        - name: attribute
+          in: body
+          description: backwards-compatible attribute association
+          schema:
+            type: array
+            items:
+              description: backwards-compatible attribute association
+              type: object
+              properties:
+                name:
+                  type: string
+                  format: string
+                value:
+                  type: string
+                  format: string
+          required: false
       responses:
         '200':
           description: Expected response for creating attribute(s) in collection
@@ -2433,12 +3929,46 @@ paths:
     put:
       summary: Replace the entire attribute collection
       deprecated: true
+      parameters:
+        - name: attribute
+          in: body
+          description: backwards-compatible attribute association
+          schema:
+            type: array
+            items:
+              description: backwards-compatible attribute association
+              type: object
+              properties:
+                name:
+                  type: string
+                  format: string
+                value:
+                  type: string
+                  format: string
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the attribute collection
       deprecated: true
+      parameters:
+        - name: attribute
+          in: body
+          description: backwards-compatible attribute association
+          schema:
+            type: array
+            items:
+              description: backwards-compatible attribute association
+              type: object
+              properties:
+                name:
+                  type: string
+                  format: string
+                value:
+                  type: string
+                  format: string
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -2463,6 +3993,21 @@ paths:
     put:
       summary: Update details on attribute
       deprecated: true
+      parameters:
+        - name: attribute
+          in: body
+          description: backwards-compatible attribute association
+          schema:
+            description: backwards-compatible attribute association
+            type: object
+            properties:
+              name:
+                type: string
+                format: string
+              value:
+                type: string
+                format: string
+          required: false
       responses:
         '200':
           description: Expected response of attribute
@@ -2479,6 +4024,21 @@ paths:
     patch:
       summary: Merge details on attribute
       deprecated: true
+      parameters:
+        - name: attribute
+          in: body
+          description: backwards-compatible attribute association
+          schema:
+            description: backwards-compatible attribute association
+            type: object
+            properties:
+              name:
+                type: string
+                format: string
+              value:
+                type: string
+                format: string
+          required: false
       responses:
         '200':
           description: Expected response of attribute
@@ -2510,8 +4070,112 @@ paths:
         Each entry represents a subscriber of the service. Each unique service
         provider should augment this block with service specific
         attributes.
-      summary: Creates one or more new subscriber in service.
+      summary: Creates one or more new subscriber in service
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: >-
+            Each entry represents a subscriber of the service. Each unique
+            service
+
+            provider should augment this block with service specific
+
+            attributes.
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents a subscriber of the service. Each unique
+                service
+
+                provider should augment this block with service specific
+
+                attributes.
+              allOf:
+                - $ref: '#/definitions/subscriber'
+                - $ref: '#/definitions/tenant'
+                - required:
+                    - id
+                  properties:
+                    connectivity:
+                      default: na
+                      type: string
+                      format: enumeration
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      type: string
+                      format: string
+                    kind:
+                      default: subscriber
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+          required: false
       responses:
         '200':
           description: Expected response for creating subscriber(s) in collection
@@ -2710,12 +4374,220 @@ paths:
     put:
       summary: Replace the entire subscriber collection
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: >-
+            Each entry represents a subscriber of the service. Each unique
+            service
+
+            provider should augment this block with service specific
+
+            attributes.
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents a subscriber of the service. Each unique
+                service
+
+                provider should augment this block with service specific
+
+                attributes.
+              allOf:
+                - $ref: '#/definitions/subscriber'
+                - $ref: '#/definitions/tenant'
+                - required:
+                    - id
+                  properties:
+                    connectivity:
+                      default: na
+                      type: string
+                      format: enumeration
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      type: string
+                      format: string
+                    kind:
+                      default: subscriber
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the subscriber collection
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: >-
+            Each entry represents a subscriber of the service. Each unique
+            service
+
+            provider should augment this block with service specific
+
+            attributes.
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents a subscriber of the service. Each unique
+                service
+
+                provider should augment this block with service specific
+
+                attributes.
+              allOf:
+                - $ref: '#/definitions/subscriber'
+                - $ref: '#/definitions/tenant'
+                - required:
+                    - id
+                  properties:
+                    connectivity:
+                      default: na
+                      type: string
+                      format: enumeration
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      type: string
+                      format: string
+                    kind:
+                      default: subscriber
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -2824,6 +4696,108 @@ paths:
     put:
       summary: Update details on subscriber
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: >-
+            Each entry represents a subscriber of the service. Each unique
+            service
+
+            provider should augment this block with service specific
+
+            attributes.
+          schema:
+            description: >-
+              Each entry represents a subscriber of the service. Each unique
+              service
+
+              provider should augment this block with service specific
+
+              attributes.
+            allOf:
+              - $ref: '#/definitions/subscriber'
+              - $ref: '#/definitions/tenant'
+              - required:
+                  - id
+                properties:
+                  connectivity:
+                    default: na
+                    type: string
+                    format: enumeration
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    type: string
+                    format: string
+                  kind:
+                    default: subscriber
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+          required: false
       responses:
         '200':
           description: Expected response of subscriber
@@ -2921,6 +4895,108 @@ paths:
     patch:
       summary: Merge details on subscriber
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: >-
+            Each entry represents a subscriber of the service. Each unique
+            service
+
+            provider should augment this block with service specific
+
+            attributes.
+          schema:
+            description: >-
+              Each entry represents a subscriber of the service. Each unique
+              service
+
+              provider should augment this block with service specific
+
+              attributes.
+            allOf:
+              - $ref: '#/definitions/subscriber'
+              - $ref: '#/definitions/tenant'
+              - required:
+                  - id
+                properties:
+                  connectivity:
+                    default: na
+                    type: string
+                    format: enumeration
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    type: string
+                    format: string
+                  kind:
+                    default: subscriber
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+          required: false
       responses:
         '200':
           description: Expected response of subscriber
@@ -3029,8 +5105,30 @@ paths:
         format: 'xtype:unique-identifier'
   '/volt-service:controller/credential':
     post:
-      summary: Creates one or more new credential in service.
+      summary: Creates one or more new credential in service
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response for creating credential(s) in collection
@@ -3079,12 +5177,56 @@ paths:
     put:
       summary: Replace the entire credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -3114,6 +5256,26 @@ paths:
     put:
       summary: Update details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -3136,6 +5298,26 @@ paths:
     patch:
       summary: Merge details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -3170,8 +5352,75 @@ paths:
   '/volt-service:controller/device':
     post:
       description: Each entry represents an OLT device.
-      summary: Creates one or more new device in devices-list.
+      summary: Creates one or more new device in devices-list
       deprecated: false
+      parameters:
+        - name: device
+          in: body
+          description: Each entry represents an OLT device.
+          schema:
+            type: array
+            items:
+              description: Each entry represents an OLT device.
+              allOf:
+                - $ref: '#/definitions/olt-device'
+                - required:
+                    - mac
+                  properties:
+                    name:
+                      description: name of OLT device
+                      type: string
+                      format: string
+                    mac:
+                      type: string
+                      format: 'yang:mac-address'
+                    uplink:
+                      description: Uplink description of the OLT device.
+                      type: object
+                      properties:
+                        network:
+                          type: string
+                          format: 'yang:uuid'
+                        tag:
+                          description: >-
+                            Represents S-Tag for instructing OLT to associate a
+                            VLAN tag for
+
+                            traffic originating from OLT device.
+                          type: string
+                          format: 'xtype:vlan'
+                    link:
+                      type: array
+                      items:
+                        description: >-
+                          Each link represents an ONU/ONT (Optical Network
+                          Termination) endpoint
+
+                          connection.
+                        type: object
+                        required:
+                          - mac
+                          - serial
+                        properties:
+                          mac:
+                            type: string
+                            format: 'yang:mac-address'
+                          serial:
+                            type: string
+                            format: string
+                          active:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          tag:
+                            description: >-
+                              Represents C-Tag for instructing ONT to add/remove
+                              vlan tag for
+
+                              traffic within OLT device.
+                            type: string
+                            format: 'xtype:vlan'
+          required: false
       responses:
         '200':
           description: Expected response for creating device(s) in collection
@@ -3308,12 +5557,146 @@ paths:
     put:
       summary: Replace the entire device collection
       deprecated: false
+      parameters:
+        - name: device
+          in: body
+          description: Each entry represents an OLT device.
+          schema:
+            type: array
+            items:
+              description: Each entry represents an OLT device.
+              allOf:
+                - $ref: '#/definitions/olt-device'
+                - required:
+                    - mac
+                  properties:
+                    name:
+                      description: name of OLT device
+                      type: string
+                      format: string
+                    mac:
+                      type: string
+                      format: 'yang:mac-address'
+                    uplink:
+                      description: Uplink description of the OLT device.
+                      type: object
+                      properties:
+                        network:
+                          type: string
+                          format: 'yang:uuid'
+                        tag:
+                          description: >-
+                            Represents S-Tag for instructing OLT to associate a
+                            VLAN tag for
+
+                            traffic originating from OLT device.
+                          type: string
+                          format: 'xtype:vlan'
+                    link:
+                      type: array
+                      items:
+                        description: >-
+                          Each link represents an ONU/ONT (Optical Network
+                          Termination) endpoint
+
+                          connection.
+                        type: object
+                        required:
+                          - mac
+                          - serial
+                        properties:
+                          mac:
+                            type: string
+                            format: 'yang:mac-address'
+                          serial:
+                            type: string
+                            format: string
+                          active:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          tag:
+                            description: >-
+                              Represents C-Tag for instructing ONT to add/remove
+                              vlan tag for
+
+                              traffic within OLT device.
+                            type: string
+                            format: 'xtype:vlan'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the device collection
       deprecated: false
+      parameters:
+        - name: device
+          in: body
+          description: Each entry represents an OLT device.
+          schema:
+            type: array
+            items:
+              description: Each entry represents an OLT device.
+              allOf:
+                - $ref: '#/definitions/olt-device'
+                - required:
+                    - mac
+                  properties:
+                    name:
+                      description: name of OLT device
+                      type: string
+                      format: string
+                    mac:
+                      type: string
+                      format: 'yang:mac-address'
+                    uplink:
+                      description: Uplink description of the OLT device.
+                      type: object
+                      properties:
+                        network:
+                          type: string
+                          format: 'yang:uuid'
+                        tag:
+                          description: >-
+                            Represents S-Tag for instructing OLT to associate a
+                            VLAN tag for
+
+                            traffic originating from OLT device.
+                          type: string
+                          format: 'xtype:vlan'
+                    link:
+                      type: array
+                      items:
+                        description: >-
+                          Each link represents an ONU/ONT (Optical Network
+                          Termination) endpoint
+
+                          connection.
+                        type: object
+                        required:
+                          - mac
+                          - serial
+                        properties:
+                          mac:
+                            type: string
+                            format: 'yang:mac-address'
+                          serial:
+                            type: string
+                            format: string
+                          active:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          tag:
+                            description: >-
+                              Represents C-Tag for instructing ONT to add/remove
+                              vlan tag for
+
+                              traffic within OLT device.
+                            type: string
+                            format: 'xtype:vlan'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -3388,6 +5771,71 @@ paths:
     put:
       summary: Update details on device
       deprecated: false
+      parameters:
+        - name: device
+          in: body
+          description: Each entry represents an OLT device.
+          schema:
+            description: Each entry represents an OLT device.
+            allOf:
+              - $ref: '#/definitions/olt-device'
+              - required:
+                  - mac
+                properties:
+                  name:
+                    description: name of OLT device
+                    type: string
+                    format: string
+                  mac:
+                    type: string
+                    format: 'yang:mac-address'
+                  uplink:
+                    description: Uplink description of the OLT device.
+                    type: object
+                    properties:
+                      network:
+                        type: string
+                        format: 'yang:uuid'
+                      tag:
+                        description: >-
+                          Represents S-Tag for instructing OLT to associate a
+                          VLAN tag for
+
+                          traffic originating from OLT device.
+                        type: string
+                        format: 'xtype:vlan'
+                  link:
+                    type: array
+                    items:
+                      description: >-
+                        Each link represents an ONU/ONT (Optical Network
+                        Termination) endpoint
+
+                        connection.
+                      type: object
+                      required:
+                        - mac
+                        - serial
+                      properties:
+                        mac:
+                          type: string
+                          format: 'yang:mac-address'
+                        serial:
+                          type: string
+                          format: string
+                        active:
+                          default: 'false'
+                          type: string
+                          format: boolean
+                        tag:
+                          description: >-
+                            Represents C-Tag for instructing ONT to add/remove
+                            vlan tag for
+
+                            traffic within OLT device.
+                          type: string
+                          format: 'xtype:vlan'
+          required: false
       responses:
         '200':
           description: Expected response of device
@@ -3454,6 +5902,71 @@ paths:
     patch:
       summary: Merge details on device
       deprecated: false
+      parameters:
+        - name: device
+          in: body
+          description: Each entry represents an OLT device.
+          schema:
+            description: Each entry represents an OLT device.
+            allOf:
+              - $ref: '#/definitions/olt-device'
+              - required:
+                  - mac
+                properties:
+                  name:
+                    description: name of OLT device
+                    type: string
+                    format: string
+                  mac:
+                    type: string
+                    format: 'yang:mac-address'
+                  uplink:
+                    description: Uplink description of the OLT device.
+                    type: object
+                    properties:
+                      network:
+                        type: string
+                        format: 'yang:uuid'
+                      tag:
+                        description: >-
+                          Represents S-Tag for instructing OLT to associate a
+                          VLAN tag for
+
+                          traffic originating from OLT device.
+                        type: string
+                        format: 'xtype:vlan'
+                  link:
+                    type: array
+                    items:
+                      description: >-
+                        Each link represents an ONU/ONT (Optical Network
+                        Termination) endpoint
+
+                        connection.
+                      type: object
+                      required:
+                        - mac
+                        - serial
+                      properties:
+                        mac:
+                          type: string
+                          format: 'yang:mac-address'
+                        serial:
+                          type: string
+                          format: string
+                        active:
+                          default: 'false'
+                          type: string
+                          format: boolean
+                        tag:
+                          description: >-
+                            Represents C-Tag for instructing ONT to add/remove
+                            vlan tag for
+
+                            traffic within OLT device.
+                          type: string
+                          format: 'xtype:vlan'
+          required: false
       responses:
         '200':
           description: Expected response of device
@@ -3555,6 +6068,26 @@ paths:
     put:
       summary: Update details on uplink
       deprecated: false
+      parameters:
+        - name: uplink
+          in: body
+          description: Uplink description of the OLT device.
+          schema:
+            description: Uplink description of the OLT device.
+            type: object
+            properties:
+              network:
+                type: string
+                format: 'yang:uuid'
+              tag:
+                description: >-
+                  Represents S-Tag for instructing OLT to associate a VLAN tag
+                  for
+
+                  traffic originating from OLT device.
+                type: string
+                format: 'xtype:vlan'
+          required: false
       responses:
         '200':
           description: Expected response of uplink
@@ -3576,6 +6109,26 @@ paths:
     patch:
       summary: Merge details on uplink
       deprecated: false
+      parameters:
+        - name: uplink
+          in: body
+          description: Uplink description of the OLT device.
+          schema:
+            description: Uplink description of the OLT device.
+            type: object
+            properties:
+              network:
+                type: string
+                format: 'yang:uuid'
+              tag:
+                description: >-
+                  Represents S-Tag for instructing OLT to associate a VLAN tag
+                  for
+
+                  traffic originating from OLT device.
+                type: string
+                format: 'xtype:vlan'
+          required: false
       responses:
         '200':
           description: Expected response of uplink
@@ -3611,8 +6164,48 @@ paths:
       description: |-
         Each link represents an ONU/ONT (Optical Network Termination) endpoint
         connection.
-      summary: Creates one or more new link in device.
+      summary: Creates one or more new link in device
       deprecated: false
+      parameters:
+        - name: link
+          in: body
+          description: >-
+            Each link represents an ONU/ONT (Optical Network Termination)
+            endpoint
+
+            connection.
+          schema:
+            type: array
+            items:
+              description: >-
+                Each link represents an ONU/ONT (Optical Network Termination)
+                endpoint
+
+                connection.
+              type: object
+              required:
+                - mac
+                - serial
+              properties:
+                mac:
+                  type: string
+                  format: 'yang:mac-address'
+                serial:
+                  type: string
+                  format: string
+                active:
+                  default: 'false'
+                  type: string
+                  format: boolean
+                tag:
+                  description: >-
+                    Represents C-Tag for instructing ONT to add/remove vlan tag
+                    for
+
+                    traffic within OLT device.
+                  type: string
+                  format: 'xtype:vlan'
+          required: false
       responses:
         '200':
           description: Expected response for creating link(s) in collection
@@ -3687,12 +6280,92 @@ paths:
     put:
       summary: Replace the entire link collection
       deprecated: false
+      parameters:
+        - name: link
+          in: body
+          description: >-
+            Each link represents an ONU/ONT (Optical Network Termination)
+            endpoint
+
+            connection.
+          schema:
+            type: array
+            items:
+              description: >-
+                Each link represents an ONU/ONT (Optical Network Termination)
+                endpoint
+
+                connection.
+              type: object
+              required:
+                - mac
+                - serial
+              properties:
+                mac:
+                  type: string
+                  format: 'yang:mac-address'
+                serial:
+                  type: string
+                  format: string
+                active:
+                  default: 'false'
+                  type: string
+                  format: boolean
+                tag:
+                  description: >-
+                    Represents C-Tag for instructing ONT to add/remove vlan tag
+                    for
+
+                    traffic within OLT device.
+                  type: string
+                  format: 'xtype:vlan'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the link collection
       deprecated: false
+      parameters:
+        - name: link
+          in: body
+          description: >-
+            Each link represents an ONU/ONT (Optical Network Termination)
+            endpoint
+
+            connection.
+          schema:
+            type: array
+            items:
+              description: >-
+                Each link represents an ONU/ONT (Optical Network Termination)
+                endpoint
+
+                connection.
+              type: object
+              required:
+                - mac
+                - serial
+              properties:
+                mac:
+                  type: string
+                  format: 'yang:mac-address'
+                serial:
+                  type: string
+                  format: string
+                active:
+                  default: 'false'
+                  type: string
+                  format: boolean
+                tag:
+                  description: >-
+                    Represents C-Tag for instructing ONT to add/remove vlan tag
+                    for
+
+                    traffic within OLT device.
+                  type: string
+                  format: 'xtype:vlan'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -3744,6 +6417,44 @@ paths:
     put:
       summary: Update details on link
       deprecated: false
+      parameters:
+        - name: link
+          in: body
+          description: >-
+            Each link represents an ONU/ONT (Optical Network Termination)
+            endpoint
+
+            connection.
+          schema:
+            description: >-
+              Each link represents an ONU/ONT (Optical Network Termination)
+              endpoint
+
+              connection.
+            type: object
+            required:
+              - mac
+              - serial
+            properties:
+              mac:
+                type: string
+                format: 'yang:mac-address'
+              serial:
+                type: string
+                format: string
+              active:
+                default: 'false'
+                type: string
+                format: boolean
+              tag:
+                description: >-
+                  Represents C-Tag for instructing ONT to add/remove vlan tag
+                  for
+
+                  traffic within OLT device.
+                type: string
+                format: 'xtype:vlan'
+          required: false
       responses:
         '200':
           description: Expected response of link
@@ -3779,6 +6490,44 @@ paths:
     patch:
       summary: Merge details on link
       deprecated: false
+      parameters:
+        - name: link
+          in: body
+          description: >-
+            Each link represents an ONU/ONT (Optical Network Termination)
+            endpoint
+
+            connection.
+          schema:
+            description: >-
+              Each link represents an ONU/ONT (Optical Network Termination)
+              endpoint
+
+              connection.
+            type: object
+            required:
+              - mac
+              - serial
+            properties:
+              mac:
+                type: string
+                format: 'yang:mac-address'
+              serial:
+                type: string
+                format: string
+              active:
+                default: 'false'
+                type: string
+                format: boolean
+              tag:
+                description: >-
+                  Represents C-Tag for instructing ONT to add/remove vlan tag
+                  for
+
+                  traffic within OLT device.
+                type: string
+                format: 'xtype:vlan'
+          required: false
       responses:
         '200':
           description: Expected response of link
@@ -3882,6 +6631,59 @@ paths:
     put:
       summary: Update details on controller
       deprecated: false
+      parameters:
+        - name: controller
+          in: body
+          description: >-
+            The controller configuration represents a VSG controller which
+            manages
+
+            multiple VSG gateways. The VSG controller provides agregate
+
+            abstraction of the entire NFaaS as a single switch to the
+
+            network fabric. Each port entry of the controller represents
+
+            each VSG subscriber flow as a distinct openflow port.
+          schema:
+            description: >-
+              The controller configuration represents a VSG controller which
+              manages
+
+              multiple VSG gateways. The VSG controller provides agregate
+
+              abstraction of the entire NFaaS as a single switch to the
+
+              network fabric. Each port entry of the controller represents
+
+              each VSG subscriber flow as a distinct openflow port.
+            allOf:
+              - $ref: '#/definitions/xos:service'
+              - $ref: '#/definitions/gateways-list'
+              - properties:
+                  slice:
+                    $ref: '#/definitions/xslice:slice'
+                  port:
+                    type: array
+                    items:
+                      description: >-
+                        Each entry represents a VSG subscriber flow connected
+                        across VSG
+
+                        gateways.
+                      type: object
+                      required:
+                        - id
+                        - link
+                      properties:
+                        id:
+                          description: OpenFlow Port ID
+                          type: string
+                          format: 'yang:uuid'
+                        link:
+                          type: string
+                          format: leafref
+          required: false
       responses:
         '200':
           description: Expected response of controller
@@ -3926,6 +6728,59 @@ paths:
     patch:
       summary: Merge details on controller
       deprecated: false
+      parameters:
+        - name: controller
+          in: body
+          description: >-
+            The controller configuration represents a VSG controller which
+            manages
+
+            multiple VSG gateways. The VSG controller provides agregate
+
+            abstraction of the entire NFaaS as a single switch to the
+
+            network fabric. Each port entry of the controller represents
+
+            each VSG subscriber flow as a distinct openflow port.
+          schema:
+            description: >-
+              The controller configuration represents a VSG controller which
+              manages
+
+              multiple VSG gateways. The VSG controller provides agregate
+
+              abstraction of the entire NFaaS as a single switch to the
+
+              network fabric. Each port entry of the controller represents
+
+              each VSG subscriber flow as a distinct openflow port.
+            allOf:
+              - $ref: '#/definitions/xos:service'
+              - $ref: '#/definitions/gateways-list'
+              - properties:
+                  slice:
+                    $ref: '#/definitions/xslice:slice'
+                  port:
+                    type: array
+                    items:
+                      description: >-
+                        Each entry represents a VSG subscriber flow connected
+                        across VSG
+
+                        gateways.
+                      type: object
+                      required:
+                        - id
+                        - link
+                      properties:
+                        id:
+                          description: OpenFlow Port ID
+                          type: string
+                          format: 'yang:uuid'
+                        link:
+                          type: string
+                          format: leafref
+          required: false
       responses:
         '200':
           description: Expected response of controller
@@ -3985,6 +6840,12 @@ paths:
     put:
       summary: Update details on slice
       deprecated: false
+      parameters:
+        - name: slice
+          in: body
+          schema:
+            $ref: '#/definitions/xslice:slice'
+          required: false
       responses:
         '200':
           description: Expected response of slice
@@ -3993,6 +6854,12 @@ paths:
     patch:
       summary: Merge details on slice
       deprecated: false
+      parameters:
+        - name: slice
+          in: body
+          schema:
+            $ref: '#/definitions/xslice:slice'
+          required: false
       responses:
         '200':
           description: Expected response of slice
@@ -4040,6 +6907,36 @@ paths:
     put:
       summary: Update details on policy
       deprecated: false
+      parameters:
+        - name: policy
+          in: body
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+          required: false
       responses:
         '200':
           description: Expected response of policy
@@ -4072,6 +6969,36 @@ paths:
     patch:
       summary: Merge details on policy
       deprecated: false
+      parameters:
+        - name: policy
+          in: body
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+          required: false
       responses:
         '200':
           description: Expected response of policy
@@ -4109,8 +7036,30 @@ paths:
           description: Expected response for delete
   '/vsg-service:controller/slice/credential':
     post:
-      summary: Creates one or more new credential in slice.
+      summary: Creates one or more new credential in slice
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response for creating credential(s) in collection
@@ -4159,12 +7108,56 @@ paths:
     put:
       summary: Replace the entire credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -4194,6 +7187,26 @@ paths:
     put:
       summary: Update details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -4216,6 +7229,26 @@ paths:
     patch:
       summary: Merge details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -4252,8 +7285,33 @@ paths:
       description: |-
         Each entry represents a VSG subscriber flow connected across VSG
         gateways.
-      summary: Creates one or more new port in controller.
+      summary: Creates one or more new port in controller
       deprecated: false
+      parameters:
+        - name: port
+          in: body
+          description: |-
+            Each entry represents a VSG subscriber flow connected across VSG
+            gateways.
+          schema:
+            type: array
+            items:
+              description: |-
+                Each entry represents a VSG subscriber flow connected across VSG
+                gateways.
+              type: object
+              required:
+                - id
+                - link
+              properties:
+                id:
+                  description: OpenFlow Port ID
+                  type: string
+                  format: 'yang:uuid'
+                link:
+                  type: string
+                  format: leafref
+          required: false
       responses:
         '200':
           description: Expected response for creating port(s) in collection
@@ -4302,12 +7360,62 @@ paths:
     put:
       summary: Replace the entire port collection
       deprecated: false
+      parameters:
+        - name: port
+          in: body
+          description: |-
+            Each entry represents a VSG subscriber flow connected across VSG
+            gateways.
+          schema:
+            type: array
+            items:
+              description: |-
+                Each entry represents a VSG subscriber flow connected across VSG
+                gateways.
+              type: object
+              required:
+                - id
+                - link
+              properties:
+                id:
+                  description: OpenFlow Port ID
+                  type: string
+                  format: 'yang:uuid'
+                link:
+                  type: string
+                  format: leafref
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the port collection
       deprecated: false
+      parameters:
+        - name: port
+          in: body
+          description: |-
+            Each entry represents a VSG subscriber flow connected across VSG
+            gateways.
+          schema:
+            type: array
+            items:
+              description: |-
+                Each entry represents a VSG subscriber flow connected across VSG
+                gateways.
+              type: object
+              required:
+                - id
+                - link
+              properties:
+                id:
+                  description: OpenFlow Port ID
+                  type: string
+                  format: 'yang:uuid'
+                link:
+                  type: string
+                  format: leafref
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -4340,6 +7448,29 @@ paths:
     put:
       summary: Update details on port
       deprecated: false
+      parameters:
+        - name: port
+          in: body
+          description: |-
+            Each entry represents a VSG subscriber flow connected across VSG
+            gateways.
+          schema:
+            description: |-
+              Each entry represents a VSG subscriber flow connected across VSG
+              gateways.
+            type: object
+            required:
+              - id
+              - link
+            properties:
+              id:
+                description: OpenFlow Port ID
+                type: string
+                format: 'yang:uuid'
+              link:
+                type: string
+                format: leafref
+          required: false
       responses:
         '200':
           description: Expected response of port
@@ -4362,6 +7493,29 @@ paths:
     patch:
       summary: Merge details on port
       deprecated: false
+      parameters:
+        - name: port
+          in: body
+          description: |-
+            Each entry represents a VSG subscriber flow connected across VSG
+            gateways.
+          schema:
+            description: |-
+              Each entry represents a VSG subscriber flow connected across VSG
+              gateways.
+            type: object
+            required:
+              - id
+              - link
+            properties:
+              id:
+                description: OpenFlow Port ID
+                type: string
+                format: 'yang:uuid'
+              link:
+                type: string
+                format: leafref
+          required: false
       responses:
         '200':
           description: Expected response of port
@@ -4397,8 +7551,25 @@ paths:
   '/vsg-service:controller/keypair':
     post:
       description: collection of public/private key pair(s)
-      summary: Creates one or more new keypair in service.
+      summary: Creates one or more new keypair in service
       deprecated: false
+      parameters:
+        - name: keypair
+          in: body
+          description: collection of public/private key pair(s)
+          schema:
+            type: array
+            items:
+              description: collection of public/private key pair(s)
+              type: object
+              properties:
+                public:
+                  type: string
+                  format: string
+                private:
+                  type: string
+                  format: string
+          required: false
       responses:
         '200':
           description: Expected response for creating keypair(s) in collection
@@ -4435,12 +7606,46 @@ paths:
     put:
       summary: Replace the entire keypair collection
       deprecated: false
+      parameters:
+        - name: keypair
+          in: body
+          description: collection of public/private key pair(s)
+          schema:
+            type: array
+            items:
+              description: collection of public/private key pair(s)
+              type: object
+              properties:
+                public:
+                  type: string
+                  format: string
+                private:
+                  type: string
+                  format: string
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the keypair collection
       deprecated: false
+      parameters:
+        - name: keypair
+          in: body
+          description: collection of public/private key pair(s)
+          schema:
+            type: array
+            items:
+              description: collection of public/private key pair(s)
+              type: object
+              properties:
+                public:
+                  type: string
+                  format: string
+                private:
+                  type: string
+                  format: string
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -4465,6 +7670,21 @@ paths:
     put:
       summary: Update details on keypair
       deprecated: false
+      parameters:
+        - name: keypair
+          in: body
+          description: collection of public/private key pair(s)
+          schema:
+            description: collection of public/private key pair(s)
+            type: object
+            properties:
+              public:
+                type: string
+                format: string
+              private:
+                type: string
+                format: string
+          required: false
       responses:
         '200':
           description: Expected response of keypair
@@ -4481,6 +7701,21 @@ paths:
     patch:
       summary: Merge details on keypair
       deprecated: false
+      parameters:
+        - name: keypair
+          in: body
+          description: collection of public/private key pair(s)
+          schema:
+            description: collection of public/private key pair(s)
+            type: object
+            properties:
+              public:
+                type: string
+                format: string
+              private:
+                type: string
+                format: string
+          required: false
       responses:
         '200':
           description: Expected response of keypair
@@ -4506,11 +7741,29 @@ paths:
         required: true
         type: integer
         format: int64
+        description: An index key identifying keypair item (may change over time)
   '/vsg-service:controller/attribute':
     post:
       description: backwards-compatible attribute association
-      summary: Creates one or more new attribute in service.
+      summary: Creates one or more new attribute in service
       deprecated: true
+      parameters:
+        - name: attribute
+          in: body
+          description: backwards-compatible attribute association
+          schema:
+            type: array
+            items:
+              description: backwards-compatible attribute association
+              type: object
+              properties:
+                name:
+                  type: string
+                  format: string
+                value:
+                  type: string
+                  format: string
+          required: false
       responses:
         '200':
           description: Expected response for creating attribute(s) in collection
@@ -4547,12 +7800,46 @@ paths:
     put:
       summary: Replace the entire attribute collection
       deprecated: true
+      parameters:
+        - name: attribute
+          in: body
+          description: backwards-compatible attribute association
+          schema:
+            type: array
+            items:
+              description: backwards-compatible attribute association
+              type: object
+              properties:
+                name:
+                  type: string
+                  format: string
+                value:
+                  type: string
+                  format: string
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the attribute collection
       deprecated: true
+      parameters:
+        - name: attribute
+          in: body
+          description: backwards-compatible attribute association
+          schema:
+            type: array
+            items:
+              description: backwards-compatible attribute association
+              type: object
+              properties:
+                name:
+                  type: string
+                  format: string
+                value:
+                  type: string
+                  format: string
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -4577,6 +7864,21 @@ paths:
     put:
       summary: Update details on attribute
       deprecated: true
+      parameters:
+        - name: attribute
+          in: body
+          description: backwards-compatible attribute association
+          schema:
+            description: backwards-compatible attribute association
+            type: object
+            properties:
+              name:
+                type: string
+                format: string
+              value:
+                type: string
+                format: string
+          required: false
       responses:
         '200':
           description: Expected response of attribute
@@ -4593,6 +7895,21 @@ paths:
     patch:
       summary: Merge details on attribute
       deprecated: true
+      parameters:
+        - name: attribute
+          in: body
+          description: backwards-compatible attribute association
+          schema:
+            description: backwards-compatible attribute association
+            type: object
+            properties:
+              name:
+                type: string
+                format: string
+              value:
+                type: string
+                format: string
+          required: false
       responses:
         '200':
           description: Expected response of attribute
@@ -4624,8 +7941,112 @@ paths:
         Each entry represents a subscriber of the service. Each unique service
         provider should augment this block with service specific
         attributes.
-      summary: Creates one or more new subscriber in service.
+      summary: Creates one or more new subscriber in service
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: >-
+            Each entry represents a subscriber of the service. Each unique
+            service
+
+            provider should augment this block with service specific
+
+            attributes.
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents a subscriber of the service. Each unique
+                service
+
+                provider should augment this block with service specific
+
+                attributes.
+              allOf:
+                - $ref: '#/definitions/subscriber'
+                - $ref: '#/definitions/tenant'
+                - required:
+                    - id
+                  properties:
+                    connectivity:
+                      default: na
+                      type: string
+                      format: enumeration
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      type: string
+                      format: string
+                    kind:
+                      default: subscriber
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+          required: false
       responses:
         '200':
           description: Expected response for creating subscriber(s) in collection
@@ -4824,12 +8245,220 @@ paths:
     put:
       summary: Replace the entire subscriber collection
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: >-
+            Each entry represents a subscriber of the service. Each unique
+            service
+
+            provider should augment this block with service specific
+
+            attributes.
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents a subscriber of the service. Each unique
+                service
+
+                provider should augment this block with service specific
+
+                attributes.
+              allOf:
+                - $ref: '#/definitions/subscriber'
+                - $ref: '#/definitions/tenant'
+                - required:
+                    - id
+                  properties:
+                    connectivity:
+                      default: na
+                      type: string
+                      format: enumeration
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      type: string
+                      format: string
+                    kind:
+                      default: subscriber
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the subscriber collection
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: >-
+            Each entry represents a subscriber of the service. Each unique
+            service
+
+            provider should augment this block with service specific
+
+            attributes.
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents a subscriber of the service. Each unique
+                service
+
+                provider should augment this block with service specific
+
+                attributes.
+              allOf:
+                - $ref: '#/definitions/subscriber'
+                - $ref: '#/definitions/tenant'
+                - required:
+                    - id
+                  properties:
+                    connectivity:
+                      default: na
+                      type: string
+                      format: enumeration
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      type: string
+                      format: string
+                    kind:
+                      default: subscriber
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -4938,6 +8567,108 @@ paths:
     put:
       summary: Update details on subscriber
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: >-
+            Each entry represents a subscriber of the service. Each unique
+            service
+
+            provider should augment this block with service specific
+
+            attributes.
+          schema:
+            description: >-
+              Each entry represents a subscriber of the service. Each unique
+              service
+
+              provider should augment this block with service specific
+
+              attributes.
+            allOf:
+              - $ref: '#/definitions/subscriber'
+              - $ref: '#/definitions/tenant'
+              - required:
+                  - id
+                properties:
+                  connectivity:
+                    default: na
+                    type: string
+                    format: enumeration
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    type: string
+                    format: string
+                  kind:
+                    default: subscriber
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+          required: false
       responses:
         '200':
           description: Expected response of subscriber
@@ -5035,6 +8766,108 @@ paths:
     patch:
       summary: Merge details on subscriber
       deprecated: false
+      parameters:
+        - name: subscriber
+          in: body
+          description: >-
+            Each entry represents a subscriber of the service. Each unique
+            service
+
+            provider should augment this block with service specific
+
+            attributes.
+          schema:
+            description: >-
+              Each entry represents a subscriber of the service. Each unique
+              service
+
+              provider should augment this block with service specific
+
+              attributes.
+            allOf:
+              - $ref: '#/definitions/subscriber'
+              - $ref: '#/definitions/tenant'
+              - required:
+                  - id
+                properties:
+                  connectivity:
+                    default: na
+                    type: string
+                    format: enumeration
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    type: string
+                    format: string
+                  kind:
+                    default: subscriber
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+          required: false
       responses:
         '200':
           description: Expected response of subscriber
@@ -5143,8 +8976,30 @@ paths:
         format: 'xtype:unique-identifier'
   '/vsg-service:controller/credential':
     post:
-      summary: Creates one or more new credential in service.
+      summary: Creates one or more new credential in service
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response for creating credential(s) in collection
@@ -5193,12 +9048,56 @@ paths:
     put:
       summary: Replace the entire credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the credential collection
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -5228,6 +9127,26 @@ paths:
     put:
       summary: Update details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -5250,6 +9169,26 @@ paths:
     patch:
       summary: Merge details on credential
       deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
       responses:
         '200':
           description: Expected response of credential
@@ -5284,8 +9223,72 @@ paths:
   '/vsg-service:controller/gateway':
     post:
       description: Each entry represents a VSG instance.
-      summary: Creates one or more new gateway in gateways-list.
+      summary: Creates one or more new gateway in gateways-list
       deprecated: false
+      parameters:
+        - name: gateway
+          in: body
+          description: Each entry represents a VSG instance.
+          schema:
+            type: array
+            items:
+              description: Each entry represents a VSG instance.
+              allOf:
+                - $ref: '#/definitions/subscriber-gateway'
+                - properties:
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    features:
+                      description: Contains various features provided by the gateway.
+                      type: object
+                      properties:
+                        firewall:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            rules:
+                              type: array
+                              items:
+                                type: string
+                                format: string
+                        url-filter:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            level:
+                              type: string
+                              format: enumeration
+                            rules:
+                              type: array
+                              items:
+                                type: string
+                                format: string
+                        uverse:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                    flow:
+                      type: array
+                      items:
+                        description: >-
+                          Each flow represents a subscriber flow into the VSG
+                          instance.
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            format: 'yang:uuid'
+          required: false
       responses:
         '200':
           description: Expected response for creating gateway(s) in collection
@@ -5416,12 +9419,140 @@ paths:
     put:
       summary: Replace the entire gateway collection
       deprecated: false
+      parameters:
+        - name: gateway
+          in: body
+          description: Each entry represents a VSG instance.
+          schema:
+            type: array
+            items:
+              description: Each entry represents a VSG instance.
+              allOf:
+                - $ref: '#/definitions/subscriber-gateway'
+                - properties:
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    features:
+                      description: Contains various features provided by the gateway.
+                      type: object
+                      properties:
+                        firewall:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            rules:
+                              type: array
+                              items:
+                                type: string
+                                format: string
+                        url-filter:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            level:
+                              type: string
+                              format: enumeration
+                            rules:
+                              type: array
+                              items:
+                                type: string
+                                format: string
+                        uverse:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                    flow:
+                      type: array
+                      items:
+                        description: >-
+                          Each flow represents a subscriber flow into the VSG
+                          instance.
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            format: 'yang:uuid'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the gateway collection
       deprecated: false
+      parameters:
+        - name: gateway
+          in: body
+          description: Each entry represents a VSG instance.
+          schema:
+            type: array
+            items:
+              description: Each entry represents a VSG instance.
+              allOf:
+                - $ref: '#/definitions/subscriber-gateway'
+                - properties:
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    features:
+                      description: Contains various features provided by the gateway.
+                      type: object
+                      properties:
+                        firewall:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            rules:
+                              type: array
+                              items:
+                                type: string
+                                format: string
+                        url-filter:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            level:
+                              type: string
+                              format: enumeration
+                            rules:
+                              type: array
+                              items:
+                                type: string
+                                format: string
+                        uverse:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                    flow:
+                      type: array
+                      items:
+                        description: >-
+                          Each flow represents a subscriber flow into the VSG
+                          instance.
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            format: 'yang:uuid'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -5493,6 +9624,68 @@ paths:
     put:
       summary: Update details on gateway
       deprecated: false
+      parameters:
+        - name: gateway
+          in: body
+          description: Each entry represents a VSG instance.
+          schema:
+            description: Each entry represents a VSG instance.
+            allOf:
+              - $ref: '#/definitions/subscriber-gateway'
+              - properties:
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  features:
+                    description: Contains various features provided by the gateway.
+                    type: object
+                    properties:
+                      firewall:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          rules:
+                            type: array
+                            items:
+                              type: string
+                              format: string
+                      url-filter:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          level:
+                            type: string
+                            format: enumeration
+                          rules:
+                            type: array
+                            items:
+                              type: string
+                              format: string
+                      uverse:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                  flow:
+                    type: array
+                    items:
+                      description: >-
+                        Each flow represents a subscriber flow into the VSG
+                        instance.
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: 'yang:uuid'
+          required: false
       responses:
         '200':
           description: Expected response of gateway
@@ -5556,6 +9749,68 @@ paths:
     patch:
       summary: Merge details on gateway
       deprecated: false
+      parameters:
+        - name: gateway
+          in: body
+          description: Each entry represents a VSG instance.
+          schema:
+            description: Each entry represents a VSG instance.
+            allOf:
+              - $ref: '#/definitions/subscriber-gateway'
+              - properties:
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  features:
+                    description: Contains various features provided by the gateway.
+                    type: object
+                    properties:
+                      firewall:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          rules:
+                            type: array
+                            items:
+                              type: string
+                              format: string
+                      url-filter:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          level:
+                            type: string
+                            format: enumeration
+                          rules:
+                            type: array
+                            items:
+                              type: string
+                              format: string
+                      uverse:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                  flow:
+                    type: array
+                    items:
+                      description: >-
+                        Each flow represents a subscriber flow into the VSG
+                        instance.
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: 'yang:uuid'
+          required: false
       responses:
         '200':
           description: Expected response of gateway
@@ -5677,6 +9932,49 @@ paths:
     put:
       summary: Update details on features
       deprecated: false
+      parameters:
+        - name: features
+          in: body
+          description: Contains various features provided by the gateway.
+          schema:
+            description: Contains various features provided by the gateway.
+            type: object
+            properties:
+              firewall:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  rules:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+              url-filter:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  level:
+                    type: string
+                    format: enumeration
+                  rules:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+              uverse:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+          required: false
       responses:
         '200':
           description: Expected response of features
@@ -5721,6 +10019,49 @@ paths:
     patch:
       summary: Merge details on features
       deprecated: false
+      parameters:
+        - name: features
+          in: body
+          description: Contains various features provided by the gateway.
+          schema:
+            description: Contains various features provided by the gateway.
+            type: object
+            properties:
+              firewall:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  rules:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+              url-filter:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  level:
+                    type: string
+                    format: enumeration
+                  rules:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+              uverse:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+          required: false
       responses:
         '200':
           description: Expected response of features
@@ -5777,8 +10118,22 @@ paths:
   '/vsg-service:controller/gateway/{id}/flow':
     post:
       description: Each flow represents a subscriber flow into the VSG instance.
-      summary: Creates one or more new flow in gateway.
+      summary: Creates one or more new flow in gateway
       deprecated: false
+      parameters:
+        - name: flow
+          in: body
+          description: Each flow represents a subscriber flow into the VSG instance.
+          schema:
+            type: array
+            items:
+              description: Each flow represents a subscriber flow into the VSG instance.
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: 'yang:uuid'
+          required: false
       responses:
         '200':
           description: Expected response for creating flow(s) in collection
@@ -5809,12 +10164,40 @@ paths:
     put:
       summary: Replace the entire flow collection
       deprecated: false
+      parameters:
+        - name: flow
+          in: body
+          description: Each flow represents a subscriber flow into the VSG instance.
+          schema:
+            type: array
+            items:
+              description: Each flow represents a subscriber flow into the VSG instance.
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: 'yang:uuid'
+          required: false
       responses:
         '201':
           description: Expected response for replacing collection
     patch:
       summary: Merge items into the flow collection
       deprecated: false
+      parameters:
+        - name: flow
+          in: body
+          description: Each flow represents a subscriber flow into the VSG instance.
+          schema:
+            type: array
+            items:
+              description: Each flow represents a subscriber flow into the VSG instance.
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: 'yang:uuid'
+          required: false
       responses:
         '201':
           description: Expected response for merging into collection
@@ -5842,6 +10225,18 @@ paths:
     put:
       summary: Update details on flow
       deprecated: false
+      parameters:
+        - name: flow
+          in: body
+          description: Each flow represents a subscriber flow into the VSG instance.
+          schema:
+            description: Each flow represents a subscriber flow into the VSG instance.
+            type: object
+            properties:
+              id:
+                type: string
+                format: 'yang:uuid'
+          required: false
       responses:
         '200':
           description: Expected response of flow
@@ -5855,6 +10250,18 @@ paths:
     patch:
       summary: Merge details on flow
       deprecated: false
+      parameters:
+        - name: flow
+          in: body
+          description: Each flow represents a subscriber flow into the VSG instance.
+          schema:
+            description: Each flow represents a subscriber flow into the VSG instance.
+            type: object
+            properties:
+              id:
+                type: string
+                format: 'yang:uuid'
+          required: false
       responses:
         '200':
           description: Expected response of flow
@@ -5877,6 +10284,7 @@ paths:
         required: true
         type: integer
         format: int64
+        description: An index key identifying flow item (may change over time)
       - name: id
         in: path
         required: true
