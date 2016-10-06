@@ -3,15 +3,16 @@ xos-controller:core:
   description: The primary entity for managing the XOS platform
   
 yang-express:server:
-  info:
-    title: CORD (Central Office Re-architected as a Datacenter)
-    description: YANG model-driven CORD
-    version: '1.0'
-    contact:
-      name: Peter Lee
-      url: 'http://github.com/corenova/yang-cord'
-      email: peter@corenova.com
-    license:
-      name: 'Apache-2.0'
   router:
     - name: ietf-yang-library
+
+yang-openapi:info:
+  title: CORD (Central Office Re-architected as a Datacenter)
+  description: YANG model-driven CORD/XOS
+  version: '1.0'
+  contact:
+    name: Peter Lee
+    url: 'http://github.com/corenova/yang-cord'
+    email: peter@corenova.com
+  license:
+    name: 'Apache-2.0'

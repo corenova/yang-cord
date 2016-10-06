@@ -1,139 +1,1213 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 1.0.0
-  title: YANG CORD
-  description: A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification
-  termsOfService: http://swagger.io/terms/
+  title: CORD (Central Office Re-architected as a Datacenter)
+  description: YANG model-driven CORD/XOS
+  version: '1.0'
   contact:
-    name: Swagger API Team
-    email: foo@example.com
-    url: http://madskristensen.net
+    name: Peter Lee
+    url: 'http://github.com/corenova/yang-cord'
+    email: peter@corenova.com
   license:
-    name: MIT
-    url: http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
-host: petstore.swagger.io
-basePath: /api
-schemes:
-  - http
+    name: Apache-2.0
 consumes:
   - application/json
 produces:
   - application/json
 paths:
-  /pets:
+  '/xos-controller:core':
     get:
-      description: |
-        Returns all pets from the system that the user has access to
-        Nam sed condimentum est. Maecenas tempor sagittis sapien, nec rhoncus sem sagittis sit amet. Aenean at gravida augue, ac iaculis sem. Curabitur odio lorem, ornare eget elementum nec, cursus id lectus. Duis mi turpis, pulvinar ac eros ac, tincidunt varius justo. In hac habitasse platea dictumst. Integer at adipiscing ante, a sagittis ligula. Aenean pharetra tempor ante molestie imperdiet. Vivamus id aliquam diam. Cras quis velit non tortor eleifend sagittis. Praesent at enim pharetra urna volutpat venenatis eget eget mauris. In eleifend fermentum facilisis. Praesent enim enim, gravida ac sodales sed, placerat id erat. Suspendisse lacus dolor, consectetur non augue vel, vehicula interdum libero. Morbi euismod sagittis libero sed lacinia.
-        Sed tempus felis lobortis leo pulvinar rutrum. Nam mattis velit nisl, eu condimentum ligula luctus nec. Phasellus semper velit eget aliquet faucibus. In a mattis elit. Phasellus vel urna viverra, condimentum lorem id, rhoncus nibh. Ut pellentesque posuere elementum. Sed a varius odio. Morbi rhoncus ligula libero, vel eleifend nunc tristique vitae. Fusce et sem dui. Aenean nec scelerisque tortor. Fusce malesuada accumsan magna vel tempus. Quisque mollis felis eu dolor tristique, sit amet auctor felis gravida. Sed libero lorem, molestie sed nisl in, accumsan tempor nisi. Fusce sollicitudin massa ut lacinia mattis. Sed vel eleifend lorem. Pellentesque vitae felis pretium, pulvinar elit eu, euismod sapien.
-      operationId: findPets
-      parameters:
-        - name: tags
-          in: query
-          description: tags to filter by
-          required: false
-          type: array
-          collectionFormat: csv
-          items:
-            type: string
-        - name: limit
-          in: query
-          description: maximum number of results to return
-          required: false
-          type: integer
-          format: int32
+      description: Primary endpoint for additional core entities to augment
+      summary: View detail on core
+      deprecated: false
       responses:
-        200:
-          description: pet response
+        '200':
+          description: Expected response of core
+          schema:
+            description: Primary endpoint for additional core entities to augment
+            $ref: '#/definitions/xos:provider'
+    put:
+      description: Primary endpoint for additional core entities to augment
+      summary: Update details on core
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of core
+          schema:
+            description: Primary endpoint for additional core entities to augment
+            $ref: '#/definitions/xos:provider'
+    patch:
+      description: Primary endpoint for additional core entities to augment
+      summary: Merge details on core
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of core
+          schema:
+            description: Primary endpoint for additional core entities to augment
+            $ref: '#/definitions/xos:provider'
+    delete:
+      description: Primary endpoint for additional core entities to augment
+      summary: Delete core from xos-controller.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/xos-controller:core/record':
+    get:
+      summary: View detail on record
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of record
+          schema:
+            allOf:
+              - $ref: '#/definitions/xos:record'
+              - properties:
+                  created:
+                    type: string
+                    format: 'yang:date-and-time'
+                  updated:
+                    type: string
+                    format: 'yang:date-and-time'
+                  enacted:
+                    type: string
+                    format: 'yang:date-and-time'
+                  policed:
+                    type: string
+                    format: 'yang:date-and-time'
+                  writable:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  locked:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  deleted:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  dirty:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  sync:
+                    type: object
+                    properties:
+                      progress:
+                        type: string
+                        format: enumeration
+                      disabled:
+                        default: 'false'
+                        type: string
+                        format: boolean
+                      enforced:
+                        default: 'true'
+                        type: string
+                        format: boolean
+                      policy:
+                        type: array
+                        items:
+                          type: object
+                  diff:
+                    description: retrieve diff of model state if dirty
+                    type: object
+                  save:
+                    description: trigger save into data store via synchronizer
+                    type: object
+    put:
+      summary: Update details on record
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of record
+          schema:
+            allOf:
+              - $ref: '#/definitions/xos:record'
+              - properties:
+                  created:
+                    type: string
+                    format: 'yang:date-and-time'
+                  updated:
+                    type: string
+                    format: 'yang:date-and-time'
+                  enacted:
+                    type: string
+                    format: 'yang:date-and-time'
+                  policed:
+                    type: string
+                    format: 'yang:date-and-time'
+                  writable:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  locked:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  deleted:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  dirty:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  sync:
+                    type: object
+                    properties:
+                      progress:
+                        type: string
+                        format: enumeration
+                      disabled:
+                        default: 'false'
+                        type: string
+                        format: boolean
+                      enforced:
+                        default: 'true'
+                        type: string
+                        format: boolean
+                      policy:
+                        type: array
+                        items:
+                          type: object
+                  diff:
+                    description: retrieve diff of model state if dirty
+                    type: object
+                  save:
+                    description: trigger save into data store via synchronizer
+                    type: object
+    patch:
+      summary: Merge details on record
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of record
+          schema:
+            allOf:
+              - $ref: '#/definitions/xos:record'
+              - properties:
+                  created:
+                    type: string
+                    format: 'yang:date-and-time'
+                  updated:
+                    type: string
+                    format: 'yang:date-and-time'
+                  enacted:
+                    type: string
+                    format: 'yang:date-and-time'
+                  policed:
+                    type: string
+                    format: 'yang:date-and-time'
+                  writable:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  locked:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  deleted:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  dirty:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  sync:
+                    type: object
+                    properties:
+                      progress:
+                        type: string
+                        format: enumeration
+                      disabled:
+                        default: 'false'
+                        type: string
+                        format: boolean
+                      enforced:
+                        default: 'true'
+                        type: string
+                        format: boolean
+                      policy:
+                        type: array
+                        items:
+                          type: object
+                  diff:
+                    description: retrieve diff of model state if dirty
+                    type: object
+                  save:
+                    description: trigger save into data store via synchronizer
+                    type: object
+    delete:
+      summary: Delete record from provider.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/xos-controller:core/record/sync':
+    get:
+      summary: View detail on sync
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of sync
+          schema:
+            type: object
+            properties:
+              progress:
+                type: string
+                format: enumeration
+              disabled:
+                default: 'false'
+                type: string
+                format: boolean
+              enforced:
+                default: 'true'
+                type: string
+                format: boolean
+              policy:
+                type: array
+                items:
+                  type: object
+    put:
+      summary: Update details on sync
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of sync
+          schema:
+            type: object
+            properties:
+              progress:
+                type: string
+                format: enumeration
+              disabled:
+                default: 'false'
+                type: string
+                format: boolean
+              enforced:
+                default: 'true'
+                type: string
+                format: boolean
+              policy:
+                type: array
+                items:
+                  type: object
+    patch:
+      summary: Merge details on sync
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of sync
+          schema:
+            type: object
+            properties:
+              progress:
+                type: string
+                format: enumeration
+              disabled:
+                default: 'false'
+                type: string
+                format: boolean
+              enforced:
+                default: 'true'
+                type: string
+                format: boolean
+              policy:
+                type: array
+                items:
+                  type: object
+    delete:
+      summary: Delete sync from record.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/xos-controller:core/record/sync/policy':
+    post:
+      summary: Creates one or more new policy in sync.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating policy(s) in collection
           schema:
             type: array
             items:
-              $ref: '#/definitions/Pet'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-    post:
-      description: Creates a new pet in the store.  Duplicates are allowed
-      operationId: addPet
-      parameters:
-        - name: pet
-          in: body
-          description: Pet to add to the store
-          required: true
-          schema:
-            $ref: '#/definitions/NewPet'
-      responses:
-        200:
-          description: pet response
-          schema:
-            $ref: '#/definitions/Pet'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /pets/{id}:
+              type: object
     get:
-      description: Returns a user based on a single ID, if the user does not have access to the pet
-      operationId: find pet by id
-      parameters:
-        - name: id
-          in: path
-          description: ID of pet to fetch
-          required: true
-          type: integer
-          format: int64
+      summary: List all policys from sync
+      deprecated: false
       responses:
-        200:
-          description: pet response
+        '200':
+          description: Expected response of policys
           schema:
-            $ref: '#/definitions/Pet'
-        default:
-          description: unexpected error
+            type: array
+            items:
+              type: object
+    put:
+      summary: Replace the entire policy collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the policy collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/xos-controller:core/record/sync/policy/{id}':
+    get:
+      summary: View detail on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
           schema:
-            $ref: '#/definitions/Error'
+            type: object
+    put:
+      summary: Update details on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+    patch:
+      summary: Merge details on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
     delete:
-      description: deletes a single pet based on the ID supplied
-      operationId: deletePet
-      parameters:
-        - name: id
-          in: path
-          description: ID of pet to delete
-          required: true
-          type: integer
-          format: int64
+      summary: Delete policy from sync.
+      deprecated: false
       responses:
-        204:
-          description: pet deleted
-        default:
-          description: unexpected error
+        '204':
+          description: Expected response for delete
+  '/xos-controller:core/credential':
+    post:
+      summary: Creates one or more new credential in provider.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating credential(s) in collection
           schema:
-            $ref: '#/definitions/Error'
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    get:
+      summary: List all credentials from provider
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credentials
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    put:
+      summary: Replace the entire credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/xos-controller:core/credential/{token}':
+    get:
+      summary: View detail on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    put:
+      summary: Update details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    patch:
+      summary: Merge details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    delete:
+      summary: Delete credential from provider.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/xos-controller:service':
+    get:
+      description: Primary endpoint for services to augment
+      summary: View detail on service
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of service
+          schema:
+            description: Primary endpoint for services to augment
+            type: object
+    put:
+      description: Primary endpoint for services to augment
+      summary: Update details on service
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of service
+          schema:
+            description: Primary endpoint for services to augment
+            type: object
+    patch:
+      description: Primary endpoint for services to augment
+      summary: Merge details on service
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of service
+          schema:
+            description: Primary endpoint for services to augment
+            type: object
+    delete:
+      description: Primary endpoint for services to augment
+      summary: Delete service from xos-controller.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/xos-controller:tenant':
+    get:
+      description: Primary endpoint for tenants to augment
+      summary: View detail on tenant
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of tenant
+          schema:
+            description: Primary endpoint for tenants to augment
+            type: object
+    put:
+      description: Primary endpoint for tenants to augment
+      summary: Update details on tenant
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of tenant
+          schema:
+            description: Primary endpoint for tenants to augment
+            type: object
+    patch:
+      description: Primary endpoint for tenants to augment
+      summary: Merge details on tenant
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of tenant
+          schema:
+            description: Primary endpoint for tenants to augment
+            type: object
+    delete:
+      description: Primary endpoint for tenants to augment
+      summary: Delete tenant from xos-controller.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/xos-controller:tenant/cord':
+    get:
+      description: Register cord as a tenant into XOS
+      summary: View detail on cord
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of cord
+          schema:
+            description: Register cord as a tenant into XOS
+            type: object
+            properties:
+              subscriber:
+                type: array
+                items:
+                  description: Each entry represents a unique CORD subscriber.
+                  $ref: '#/definitions/cord:subscriber'
+    put:
+      description: Register cord as a tenant into XOS
+      summary: Update details on cord
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of cord
+          schema:
+            description: Register cord as a tenant into XOS
+            type: object
+            properties:
+              subscriber:
+                type: array
+                items:
+                  description: Each entry represents a unique CORD subscriber.
+                  $ref: '#/definitions/cord:subscriber'
+    patch:
+      description: Register cord as a tenant into XOS
+      summary: Merge details on cord
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of cord
+          schema:
+            description: Register cord as a tenant into XOS
+            type: object
+            properties:
+              subscriber:
+                type: array
+                items:
+                  description: Each entry represents a unique CORD subscriber.
+                  $ref: '#/definitions/cord:subscriber'
+    delete:
+      description: Register cord as a tenant into XOS
+      summary: 'Delete cord from /xos:tenant.'
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/xos-controller:tenant/cord/subscriber':
+    post:
+      description: Each entry represents a unique CORD subscriber.
+      summary: Creates one or more new subscriber in cord.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating subscriber(s) in collection
+          schema:
+            type: array
+            items:
+              description: Each entry represents a unique CORD subscriber.
+              $ref: '#/definitions/cord:subscriber'
+    get:
+      description: Each entry represents a unique CORD subscriber.
+      summary: List all subscribers from cord
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of subscribers
+          schema:
+            type: array
+            items:
+              description: Each entry represents a unique CORD subscriber.
+              $ref: '#/definitions/cord:subscriber'
+    put:
+      description: Each entry represents a unique CORD subscriber.
+      summary: Replace the entire subscriber collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      description: Each entry represents a unique CORD subscriber.
+      summary: Merge items into the subscriber collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/xos-controller:tenant/cord/subscriber/{id}':
+    get:
+      description: Each entry represents a unique CORD subscriber.
+      summary: View detail on subscriber
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of subscriber
+          schema:
+            description: Each entry represents a unique CORD subscriber.
+            $ref: '#/definitions/cord:subscriber'
+    put:
+      description: Each entry represents a unique CORD subscriber.
+      summary: Update details on subscriber
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of subscriber
+          schema:
+            description: Each entry represents a unique CORD subscriber.
+            $ref: '#/definitions/cord:subscriber'
+    patch:
+      description: Each entry represents a unique CORD subscriber.
+      summary: Merge details on subscriber
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of subscriber
+          schema:
+            description: Each entry represents a unique CORD subscriber.
+            $ref: '#/definitions/cord:subscriber'
+    delete:
+      description: Each entry represents a unique CORD subscriber.
+      summary: Delete subscriber from cord.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/xos-controller:tenant/cord/subscriber/{id}/record':
+    get:
+      summary: View detail on record
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of record
+          schema:
+            allOf:
+              - $ref: '#/definitions/xos:record'
+              - properties:
+                  created:
+                    type: string
+                    format: 'yang:date-and-time'
+                  updated:
+                    type: string
+                    format: 'yang:date-and-time'
+                  enacted:
+                    type: string
+                    format: 'yang:date-and-time'
+                  policed:
+                    type: string
+                    format: 'yang:date-and-time'
+                  writable:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  locked:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  deleted:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  dirty:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  sync:
+                    type: object
+                    properties:
+                      progress:
+                        type: string
+                        format: enumeration
+                      disabled:
+                        default: 'false'
+                        type: string
+                        format: boolean
+                      enforced:
+                        default: 'true'
+                        type: string
+                        format: boolean
+                      policy:
+                        type: array
+                        items:
+                          type: object
+                  diff:
+                    description: retrieve diff of model state if dirty
+                    type: object
+                  save:
+                    description: trigger save into data store via synchronizer
+                    type: object
+    put:
+      summary: Update details on record
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of record
+          schema:
+            allOf:
+              - $ref: '#/definitions/xos:record'
+              - properties:
+                  created:
+                    type: string
+                    format: 'yang:date-and-time'
+                  updated:
+                    type: string
+                    format: 'yang:date-and-time'
+                  enacted:
+                    type: string
+                    format: 'yang:date-and-time'
+                  policed:
+                    type: string
+                    format: 'yang:date-and-time'
+                  writable:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  locked:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  deleted:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  dirty:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  sync:
+                    type: object
+                    properties:
+                      progress:
+                        type: string
+                        format: enumeration
+                      disabled:
+                        default: 'false'
+                        type: string
+                        format: boolean
+                      enforced:
+                        default: 'true'
+                        type: string
+                        format: boolean
+                      policy:
+                        type: array
+                        items:
+                          type: object
+                  diff:
+                    description: retrieve diff of model state if dirty
+                    type: object
+                  save:
+                    description: trigger save into data store via synchronizer
+                    type: object
+    patch:
+      summary: Merge details on record
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of record
+          schema:
+            allOf:
+              - $ref: '#/definitions/xos:record'
+              - properties:
+                  created:
+                    type: string
+                    format: 'yang:date-and-time'
+                  updated:
+                    type: string
+                    format: 'yang:date-and-time'
+                  enacted:
+                    type: string
+                    format: 'yang:date-and-time'
+                  policed:
+                    type: string
+                    format: 'yang:date-and-time'
+                  writable:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  locked:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  deleted:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  dirty:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  sync:
+                    type: object
+                    properties:
+                      progress:
+                        type: string
+                        format: enumeration
+                      disabled:
+                        default: 'false'
+                        type: string
+                        format: boolean
+                      enforced:
+                        default: 'true'
+                        type: string
+                        format: boolean
+                      policy:
+                        type: array
+                        items:
+                          type: object
+                  diff:
+                    description: retrieve diff of model state if dirty
+                    type: object
+                  save:
+                    description: trigger save into data store via synchronizer
+                    type: object
+    delete:
+      summary: Delete record from subscriber.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/xos-controller:tenant/cord/subscriber/{id}/record/sync':
+    get:
+      summary: View detail on sync
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of sync
+          schema:
+            type: object
+            properties:
+              progress:
+                type: string
+                format: enumeration
+              disabled:
+                default: 'false'
+                type: string
+                format: boolean
+              enforced:
+                default: 'true'
+                type: string
+                format: boolean
+              policy:
+                type: array
+                items:
+                  type: object
+    put:
+      summary: Update details on sync
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of sync
+          schema:
+            type: object
+            properties:
+              progress:
+                type: string
+                format: enumeration
+              disabled:
+                default: 'false'
+                type: string
+                format: boolean
+              enforced:
+                default: 'true'
+                type: string
+                format: boolean
+              policy:
+                type: array
+                items:
+                  type: object
+    patch:
+      summary: Merge details on sync
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of sync
+          schema:
+            type: object
+            properties:
+              progress:
+                type: string
+                format: enumeration
+              disabled:
+                default: 'false'
+                type: string
+                format: boolean
+              enforced:
+                default: 'true'
+                type: string
+                format: boolean
+              policy:
+                type: array
+                items:
+                  type: object
+    delete:
+      summary: Delete sync from record.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/xos-controller:tenant/cord/subscriber/{id}/record/sync/policy':
+    post:
+      summary: Creates one or more new policy in sync.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating policy(s) in collection
+          schema:
+            type: array
+            items:
+              type: object
+    get:
+      summary: List all policys from sync
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policys
+          schema:
+            type: array
+            items:
+              type: object
+    put:
+      summary: Replace the entire policy collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the policy collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/xos-controller:tenant/cord/subscriber/{id}/record/sync/policy/{id}':
+    get:
+      summary: View detail on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+    put:
+      summary: Update details on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+    patch:
+      summary: Merge details on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+    delete:
+      summary: Delete policy from sync.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
 definitions:
-  Pet:
+  'xos:provider':
     allOf:
-      - $ref: '#/definitions/NewPet'
-      - required:
-        - id
-        properties:
-          id:
-            type: integer
-            format: int64
-  NewPet:
+      - $ref: '#/definitions/tenant'
+      - $ref: '#/definitions/credentials-list'
+  tenant:
+    type: object
     required:
-      - name
+      - id
     properties:
+      id:
+        type: string
+        format: 'xtype:unique-identifier'
       name:
         type: string
-      tag:
+        format: string
+      kind:
         type: string
-  Error:
-    required:
-      - code
-      - message
+        format: identityref
+      description:
+        type: string
+        format: 'meta:description'
+      enabled:
+        default: 'true'
+        type: boolean
+        format: boolean
+      record:
+        $ref: '#/definitions/xos:record'
+  'xos:record':
+    description: Synchronizer-specific properties for model entities
+    type: object
     properties:
-      code:
-        type: integer
-        format: int32
-      message:
+      created:
         type: string
+        format: 'yang:date-and-time'
+      updated:
+        type: string
+        format: 'yang:date-and-time'
+      enacted:
+        type: string
+        format: 'yang:date-and-time'
+      policed:
+        type: string
+        format: 'yang:date-and-time'
+      writable:
+        default: 'true'
+        type: boolean
+        format: boolean
+      locked:
+        default: 'false'
+        type: boolean
+        format: boolean
+      deleted:
+        default: 'false'
+        type: boolean
+        format: boolean
+      dirty:
+        default: 'false'
+        type: boolean
+        format: boolean
+      sync:
+        type: object
+        properties:
+          progress:
+            type: string
+            format: enumeration
+            enum:
+              - provisioning
+          disabled:
+            default: 'false'
+            type: boolean
+            format: boolean
+          enforced:
+            default: 'true'
+            type: boolean
+            format: boolean
+          policy:
+            type: array
+            items:
+              type: object
+      diff:
+        description: retrieve diff of model state if dirty
+        type: object
+      save:
+        description: trigger save into data store via synchronizer
+        type: object
+  credentials-list:
+    type: object
+    properties:
+      credential:
+        type: array
+        items:
+          type: object
+          properties:
+            token:
+              type: string
+              format: string
+            password:
+              type: string
+              format: 'meta:password'
+            user:
+              type: string
+              format: 'xtype:unique-identifier'
+            role:
+              default: user
+              type: string
+              format: 'xtype:access-role'
+              enum:
+                - admin
+                - staff
+                - user
+  'cord:subscriber':
+    allOf:
+      - $ref: '#/definitions/xos:subscriber'
+      - properties:
+          label:
+            type: string
+            format: string
+          status:
+            default: enabled
+            type: string
+            format: enumeration
+            enum:
+              - enabled
+              - suspended
+              - delinquent
+              - violation
+          demo:
+            default: 'false'
+            type: boolean
+            format: boolean
+  'xos:subscriber':
+    allOf:
+      - $ref: '#/definitions/tenant'
+      - properties:
+          connectivity:
+            default: na
+            type: string
+            format: enumeration
+            enum:
+              - public
+              - private
+              - private-unidirectional
+              - na
