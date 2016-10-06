@@ -9,7 +9,23 @@ yang-express:server:
 yang-openapi:info:
   title: YANG for CORD
   description: |
-    YANG model-driven XOS Controller with CORD Tenant models
+    YANG model-driven XOS Controller with CORD Tenant
+    
+    XOS Core Models
+    * Template
+    * Deployment
+    * Site
+    * Node
+    * User
+    * Slice
+
+    CORD Tenant
+    * Subscriber
+
+    XOS Service Models
+    * VOLT Service Controller
+    * VSG Service Controller
+    
   version: '1.0'
   contact:
     name: Peter Lee

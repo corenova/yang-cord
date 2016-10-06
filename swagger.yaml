@@ -1554,6 +1554,4511 @@ paths:
         required: true
         type: string
         format: 'xtype:unique-identifier'
+  '/xos-controller:tenant/cord/subscriber/{id}/volt':
+    get:
+      summary: View detail on volt
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of volt
+          schema:
+            type: object
+            properties:
+              c-tag:
+                type: string
+                format: leafref
+              s-tag:
+                type: string
+                format: leafref
+              uplink-speed:
+                default: '1000000000'
+                type: integer
+                format: uint32
+              downlink-speed:
+                default: '1000000000'
+                type: integer
+                format: uint32
+    put:
+      summary: Update details on volt
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of volt
+          schema:
+            type: object
+            properties:
+              c-tag:
+                type: string
+                format: leafref
+              s-tag:
+                type: string
+                format: leafref
+              uplink-speed:
+                default: '1000000000'
+                type: integer
+                format: uint32
+              downlink-speed:
+                default: '1000000000'
+                type: integer
+                format: uint32
+    patch:
+      summary: Merge details on volt
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of volt
+          schema:
+            type: object
+            properties:
+              c-tag:
+                type: string
+                format: leafref
+              s-tag:
+                type: string
+                format: leafref
+              uplink-speed:
+                default: '1000000000'
+                type: integer
+                format: uint32
+              downlink-speed:
+                default: '1000000000'
+                type: integer
+                format: uint32
+    delete:
+      summary: 'Delete volt from /xos:tenant/cord/subscriber.'
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:tenant/cord/subscriber/{id}/vsg':
+    get:
+      summary: View detail on vsg
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of vsg
+          schema:
+            type: object
+            properties:
+              gateway:
+                type: string
+                format: leafref
+              firewall:
+                default: 'false'
+                type: boolean
+                format: boolean
+              url-filter:
+                default: 'false'
+                type: boolean
+                format: boolean
+              uverse:
+                default: 'false'
+                type: boolean
+                format: boolean
+    put:
+      summary: Update details on vsg
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of vsg
+          schema:
+            type: object
+            properties:
+              gateway:
+                type: string
+                format: leafref
+              firewall:
+                default: 'false'
+                type: boolean
+                format: boolean
+              url-filter:
+                default: 'false'
+                type: boolean
+                format: boolean
+              uverse:
+                default: 'false'
+                type: boolean
+                format: boolean
+    patch:
+      summary: Merge details on vsg
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of vsg
+          schema:
+            type: object
+            properties:
+              gateway:
+                type: string
+                format: leafref
+              firewall:
+                default: 'false'
+                type: boolean
+                format: boolean
+              url-filter:
+                default: 'false'
+                type: boolean
+                format: boolean
+              uverse:
+                default: 'false'
+                type: boolean
+                format: boolean
+    delete:
+      summary: 'Delete vsg from /xos:tenant/cord/subscriber.'
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/volt-service:controller':
+    get:
+      description: |-
+        The controller configuration block represents a VOLT agent/controller
+        which manages multiple OLT devices. The VOLT agent provides
+        aggregate abstraction of the entire PON as a sigle switch to
+        the controller. Each port entry of the agent represents each
+        ONU/ONT endpoint as a separate openflow port.
+      summary: View detail on controller
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of controller
+          schema:
+            description: >-
+              The controller configuration block represents a VOLT
+              agent/controller
+
+              which manages multiple OLT devices. The VOLT agent provides
+
+              aggregate abstraction of the entire PON as a sigle switch to
+
+              the controller. Each port entry of the agent represents each
+
+              ONU/ONT endpoint as a separate openflow port.
+            allOf:
+              - $ref: '#/definitions/xos:service'
+              - $ref: '#/definitions/devices-list'
+              - properties:
+                  slice:
+                    $ref: '#/definitions/xslice:slice'
+                  radius:
+                    type: object
+                  port:
+                    type: array
+                    items:
+                      description: >-
+                        Each entry represents an ONU/ONT endpoint connected
+                        across OLT devices.
+                      type: object
+                      required:
+                        - id
+                        - link
+                      properties:
+                        id:
+                          description: OpenFlow Port ID
+                          type: string
+                          format: 'yang:uuid'
+                        link:
+                          type: string
+                          format: leafref
+    put:
+      description: |-
+        The controller configuration block represents a VOLT agent/controller
+        which manages multiple OLT devices. The VOLT agent provides
+        aggregate abstraction of the entire PON as a sigle switch to
+        the controller. Each port entry of the agent represents each
+        ONU/ONT endpoint as a separate openflow port.
+      summary: Update details on controller
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of controller
+          schema:
+            description: >-
+              The controller configuration block represents a VOLT
+              agent/controller
+
+              which manages multiple OLT devices. The VOLT agent provides
+
+              aggregate abstraction of the entire PON as a sigle switch to
+
+              the controller. Each port entry of the agent represents each
+
+              ONU/ONT endpoint as a separate openflow port.
+            allOf:
+              - $ref: '#/definitions/xos:service'
+              - $ref: '#/definitions/devices-list'
+              - properties:
+                  slice:
+                    $ref: '#/definitions/xslice:slice'
+                  radius:
+                    type: object
+                  port:
+                    type: array
+                    items:
+                      description: >-
+                        Each entry represents an ONU/ONT endpoint connected
+                        across OLT devices.
+                      type: object
+                      required:
+                        - id
+                        - link
+                      properties:
+                        id:
+                          description: OpenFlow Port ID
+                          type: string
+                          format: 'yang:uuid'
+                        link:
+                          type: string
+                          format: leafref
+    patch:
+      description: |-
+        The controller configuration block represents a VOLT agent/controller
+        which manages multiple OLT devices. The VOLT agent provides
+        aggregate abstraction of the entire PON as a sigle switch to
+        the controller. Each port entry of the agent represents each
+        ONU/ONT endpoint as a separate openflow port.
+      summary: Merge details on controller
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of controller
+          schema:
+            description: >-
+              The controller configuration block represents a VOLT
+              agent/controller
+
+              which manages multiple OLT devices. The VOLT agent provides
+
+              aggregate abstraction of the entire PON as a sigle switch to
+
+              the controller. Each port entry of the agent represents each
+
+              ONU/ONT endpoint as a separate openflow port.
+            allOf:
+              - $ref: '#/definitions/xos:service'
+              - $ref: '#/definitions/devices-list'
+              - properties:
+                  slice:
+                    $ref: '#/definitions/xslice:slice'
+                  radius:
+                    type: object
+                  port:
+                    type: array
+                    items:
+                      description: >-
+                        Each entry represents an ONU/ONT endpoint connected
+                        across OLT devices.
+                      type: object
+                      required:
+                        - id
+                        - link
+                      properties:
+                        id:
+                          description: OpenFlow Port ID
+                          type: string
+                          format: 'yang:uuid'
+                        link:
+                          type: string
+                          format: leafref
+    delete:
+      description: |-
+        The controller configuration block represents a VOLT agent/controller
+        which manages multiple OLT devices. The VOLT agent provides
+        aggregate abstraction of the entire PON as a sigle switch to
+        the controller. Each port entry of the agent represents each
+        ONU/ONT endpoint as a separate openflow port.
+      summary: Delete controller from volt-service.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/volt-service:controller/slice':
+    get:
+      summary: View detail on slice
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of slice
+          schema:
+            $ref: '#/definitions/xslice:slice'
+    put:
+      summary: Update details on slice
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of slice
+          schema:
+            $ref: '#/definitions/xslice:slice'
+    patch:
+      summary: Merge details on slice
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of slice
+          schema:
+            $ref: '#/definitions/xslice:slice'
+    delete:
+      summary: Delete slice from controller.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/volt-service:controller/slice/policy':
+    get:
+      summary: View detail on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+    put:
+      summary: Update details on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+    patch:
+      summary: Merge details on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+    delete:
+      summary: Delete policy from slice.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/volt-service:controller/slice/credential':
+    post:
+      summary: Creates one or more new credential in slice.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating credential(s) in collection
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    get:
+      summary: List all credentials from slice
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credentials
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    put:
+      summary: Replace the entire credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/volt-service:controller/slice/credential/{token}':
+    get:
+      summary: View detail on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    put:
+      summary: Update details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    patch:
+      summary: Merge details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    delete:
+      summary: Delete credential from slice.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: token
+        in: path
+        required: true
+        type: string
+        format: string
+  '/volt-service:controller/port':
+    post:
+      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
+      summary: Creates one or more new port in controller.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating port(s) in collection
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents an ONU/ONT endpoint connected across OLT
+                devices.
+              type: object
+              required:
+                - id
+                - link
+              properties:
+                id:
+                  description: OpenFlow Port ID
+                  type: string
+                  format: 'yang:uuid'
+                link:
+                  type: string
+                  format: leafref
+    get:
+      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
+      summary: List all ports from controller
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of ports
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents an ONU/ONT endpoint connected across OLT
+                devices.
+              type: object
+              required:
+                - id
+                - link
+              properties:
+                id:
+                  description: OpenFlow Port ID
+                  type: string
+                  format: 'yang:uuid'
+                link:
+                  type: string
+                  format: leafref
+    put:
+      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
+      summary: Replace the entire port collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
+      summary: Merge items into the port collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/volt-service:controller/port/{id}':
+    get:
+      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
+      summary: View detail on port
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of port
+          schema:
+            description: >-
+              Each entry represents an ONU/ONT endpoint connected across OLT
+              devices.
+            type: object
+            required:
+              - id
+              - link
+            properties:
+              id:
+                description: OpenFlow Port ID
+                type: string
+                format: 'yang:uuid'
+              link:
+                type: string
+                format: leafref
+    put:
+      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
+      summary: Update details on port
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of port
+          schema:
+            description: >-
+              Each entry represents an ONU/ONT endpoint connected across OLT
+              devices.
+            type: object
+            required:
+              - id
+              - link
+            properties:
+              id:
+                description: OpenFlow Port ID
+                type: string
+                format: 'yang:uuid'
+              link:
+                type: string
+                format: leafref
+    patch:
+      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
+      summary: Merge details on port
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of port
+          schema:
+            description: >-
+              Each entry represents an ONU/ONT endpoint connected across OLT
+              devices.
+            type: object
+            required:
+              - id
+              - link
+            properties:
+              id:
+                description: OpenFlow Port ID
+                type: string
+                format: 'yang:uuid'
+              link:
+                type: string
+                format: leafref
+    delete:
+      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
+      summary: Delete port from controller.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: OpenFlow Port ID
+        type: string
+        format: 'yang:uuid'
+  '/volt-service:controller/keypair':
+    post:
+      description: collection of public/private key pair(s)
+      summary: Creates one or more new keypair in service.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating keypair(s) in collection
+          schema:
+            type: array
+            items:
+              description: collection of public/private key pair(s)
+              type: object
+              properties:
+                public:
+                  type: string
+                  format: string
+                private:
+                  type: string
+                  format: string
+    get:
+      description: collection of public/private key pair(s)
+      summary: List all keypairs from service
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of keypairs
+          schema:
+            type: array
+            items:
+              description: collection of public/private key pair(s)
+              type: object
+              properties:
+                public:
+                  type: string
+                  format: string
+                private:
+                  type: string
+                  format: string
+    put:
+      description: collection of public/private key pair(s)
+      summary: Replace the entire keypair collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      description: collection of public/private key pair(s)
+      summary: Merge items into the keypair collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/volt-service:controller/keypair/{index}':
+    get:
+      description: collection of public/private key pair(s)
+      summary: View detail on keypair
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of keypair
+          schema:
+            description: collection of public/private key pair(s)
+            type: object
+            properties:
+              public:
+                type: string
+                format: string
+              private:
+                type: string
+                format: string
+    put:
+      description: collection of public/private key pair(s)
+      summary: Update details on keypair
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of keypair
+          schema:
+            description: collection of public/private key pair(s)
+            type: object
+            properties:
+              public:
+                type: string
+                format: string
+              private:
+                type: string
+                format: string
+    patch:
+      description: collection of public/private key pair(s)
+      summary: Merge details on keypair
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of keypair
+          schema:
+            description: collection of public/private key pair(s)
+            type: object
+            properties:
+              public:
+                type: string
+                format: string
+              private:
+                type: string
+                format: string
+    delete:
+      description: collection of public/private key pair(s)
+      summary: Delete keypair from service.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: index
+        in: path
+        required: true
+        type: integer
+        format: int64
+  '/volt-service:controller/attribute':
+    post:
+      description: backwards-compatible attribute association
+      summary: Creates one or more new attribute in service.
+      deprecated: true
+      responses:
+        '200':
+          description: Expected response for creating attribute(s) in collection
+          schema:
+            type: array
+            items:
+              description: backwards-compatible attribute association
+              type: object
+              properties:
+                name:
+                  type: string
+                  format: string
+                value:
+                  type: string
+                  format: string
+    get:
+      description: backwards-compatible attribute association
+      summary: List all attributes from service
+      deprecated: true
+      responses:
+        '200':
+          description: Expected response of attributes
+          schema:
+            type: array
+            items:
+              description: backwards-compatible attribute association
+              type: object
+              properties:
+                name:
+                  type: string
+                  format: string
+                value:
+                  type: string
+                  format: string
+    put:
+      description: backwards-compatible attribute association
+      summary: Replace the entire attribute collection
+      deprecated: true
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      description: backwards-compatible attribute association
+      summary: Merge items into the attribute collection
+      deprecated: true
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/volt-service:controller/attribute/{name}':
+    get:
+      description: backwards-compatible attribute association
+      summary: View detail on attribute
+      deprecated: true
+      responses:
+        '200':
+          description: Expected response of attribute
+          schema:
+            description: backwards-compatible attribute association
+            type: object
+            properties:
+              name:
+                type: string
+                format: string
+              value:
+                type: string
+                format: string
+    put:
+      description: backwards-compatible attribute association
+      summary: Update details on attribute
+      deprecated: true
+      responses:
+        '200':
+          description: Expected response of attribute
+          schema:
+            description: backwards-compatible attribute association
+            type: object
+            properties:
+              name:
+                type: string
+                format: string
+              value:
+                type: string
+                format: string
+    patch:
+      description: backwards-compatible attribute association
+      summary: Merge details on attribute
+      deprecated: true
+      responses:
+        '200':
+          description: Expected response of attribute
+          schema:
+            description: backwards-compatible attribute association
+            type: object
+            properties:
+              name:
+                type: string
+                format: string
+              value:
+                type: string
+                format: string
+    delete:
+      description: backwards-compatible attribute association
+      summary: Delete attribute from service.
+      deprecated: true
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+        format: string
+  '/volt-service:controller/subscriber':
+    post:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: Creates one or more new subscriber in service.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating subscriber(s) in collection
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents a subscriber of the service. Each unique
+                service
+
+                provider should augment this block with service specific
+
+                attributes.
+              allOf:
+                - $ref: '#/definitions/subscriber'
+                - $ref: '#/definitions/tenant'
+                - required:
+                    - id
+                  properties:
+                    connectivity:
+                      default: na
+                      type: string
+                      format: enumeration
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      type: string
+                      format: string
+                    kind:
+                      default: subscriber
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+    get:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: List all subscribers from service
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of subscribers
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents a subscriber of the service. Each unique
+                service
+
+                provider should augment this block with service specific
+
+                attributes.
+              allOf:
+                - $ref: '#/definitions/subscriber'
+                - $ref: '#/definitions/tenant'
+                - required:
+                    - id
+                  properties:
+                    connectivity:
+                      default: na
+                      type: string
+                      format: enumeration
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      type: string
+                      format: string
+                    kind:
+                      default: subscriber
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+    put:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: Replace the entire subscriber collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: Merge items into the subscriber collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/volt-service:controller/subscriber/{id}':
+    get:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: View detail on subscriber
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of subscriber
+          schema:
+            description: >-
+              Each entry represents a subscriber of the service. Each unique
+              service
+
+              provider should augment this block with service specific
+
+              attributes.
+            allOf:
+              - $ref: '#/definitions/subscriber'
+              - $ref: '#/definitions/tenant'
+              - required:
+                  - id
+                properties:
+                  connectivity:
+                    default: na
+                    type: string
+                    format: enumeration
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    type: string
+                    format: string
+                  kind:
+                    default: subscriber
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+    put:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: Update details on subscriber
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of subscriber
+          schema:
+            description: >-
+              Each entry represents a subscriber of the service. Each unique
+              service
+
+              provider should augment this block with service specific
+
+              attributes.
+            allOf:
+              - $ref: '#/definitions/subscriber'
+              - $ref: '#/definitions/tenant'
+              - required:
+                  - id
+                properties:
+                  connectivity:
+                    default: na
+                    type: string
+                    format: enumeration
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    type: string
+                    format: string
+                  kind:
+                    default: subscriber
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+    patch:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: Merge details on subscriber
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of subscriber
+          schema:
+            description: >-
+              Each entry represents a subscriber of the service. Each unique
+              service
+
+              provider should augment this block with service specific
+
+              attributes.
+            allOf:
+              - $ref: '#/definitions/subscriber'
+              - $ref: '#/definitions/tenant'
+              - required:
+                  - id
+                properties:
+                  connectivity:
+                    default: na
+                    type: string
+                    format: enumeration
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    type: string
+                    format: string
+                  kind:
+                    default: subscriber
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+    delete:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: Delete subscriber from service.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/volt-service:controller/credential':
+    post:
+      summary: Creates one or more new credential in service.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating credential(s) in collection
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    get:
+      summary: List all credentials from service
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credentials
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    put:
+      summary: Replace the entire credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/volt-service:controller/credential/{token}':
+    get:
+      summary: View detail on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    put:
+      summary: Update details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    patch:
+      summary: Merge details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    delete:
+      summary: Delete credential from service.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: token
+        in: path
+        required: true
+        type: string
+        format: string
+  '/volt-service:controller/device':
+    post:
+      description: Each entry represents an OLT device.
+      summary: Creates one or more new device in devices-list.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating device(s) in collection
+          schema:
+            type: array
+            items:
+              description: Each entry represents an OLT device.
+              allOf:
+                - $ref: '#/definitions/olt-device'
+                - required:
+                    - mac
+                  properties:
+                    name:
+                      description: name of OLT device
+                      type: string
+                      format: string
+                    mac:
+                      type: string
+                      format: 'yang:mac-address'
+                    uplink:
+                      description: Uplink description of the OLT device.
+                      type: object
+                      properties:
+                        network:
+                          type: string
+                          format: 'yang:uuid'
+                        tag:
+                          description: >-
+                            Represents S-Tag for instructing OLT to associate a
+                            VLAN tag for
+
+                            traffic originating from OLT device.
+                          type: string
+                          format: 'xtype:vlan'
+                    link:
+                      type: array
+                      items:
+                        description: >-
+                          Each link represents an ONU/ONT (Optical Network
+                          Termination) endpoint
+
+                          connection.
+                        type: object
+                        required:
+                          - mac
+                          - serial
+                        properties:
+                          mac:
+                            type: string
+                            format: 'yang:mac-address'
+                          serial:
+                            type: string
+                            format: string
+                          active:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          tag:
+                            description: >-
+                              Represents C-Tag for instructing ONT to add/remove
+                              vlan tag for
+
+                              traffic within OLT device.
+                            type: string
+                            format: 'xtype:vlan'
+    get:
+      description: Each entry represents an OLT device.
+      summary: List all devices from devices-list
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of devices
+          schema:
+            type: array
+            items:
+              description: Each entry represents an OLT device.
+              allOf:
+                - $ref: '#/definitions/olt-device'
+                - required:
+                    - mac
+                  properties:
+                    name:
+                      description: name of OLT device
+                      type: string
+                      format: string
+                    mac:
+                      type: string
+                      format: 'yang:mac-address'
+                    uplink:
+                      description: Uplink description of the OLT device.
+                      type: object
+                      properties:
+                        network:
+                          type: string
+                          format: 'yang:uuid'
+                        tag:
+                          description: >-
+                            Represents S-Tag for instructing OLT to associate a
+                            VLAN tag for
+
+                            traffic originating from OLT device.
+                          type: string
+                          format: 'xtype:vlan'
+                    link:
+                      type: array
+                      items:
+                        description: >-
+                          Each link represents an ONU/ONT (Optical Network
+                          Termination) endpoint
+
+                          connection.
+                        type: object
+                        required:
+                          - mac
+                          - serial
+                        properties:
+                          mac:
+                            type: string
+                            format: 'yang:mac-address'
+                          serial:
+                            type: string
+                            format: string
+                          active:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          tag:
+                            description: >-
+                              Represents C-Tag for instructing ONT to add/remove
+                              vlan tag for
+
+                              traffic within OLT device.
+                            type: string
+                            format: 'xtype:vlan'
+    put:
+      description: Each entry represents an OLT device.
+      summary: Replace the entire device collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      description: Each entry represents an OLT device.
+      summary: Merge items into the device collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/volt-service:controller/device/{mac}':
+    get:
+      description: Each entry represents an OLT device.
+      summary: View detail on device
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of device
+          schema:
+            description: Each entry represents an OLT device.
+            allOf:
+              - $ref: '#/definitions/olt-device'
+              - required:
+                  - mac
+                properties:
+                  name:
+                    description: name of OLT device
+                    type: string
+                    format: string
+                  mac:
+                    type: string
+                    format: 'yang:mac-address'
+                  uplink:
+                    description: Uplink description of the OLT device.
+                    type: object
+                    properties:
+                      network:
+                        type: string
+                        format: 'yang:uuid'
+                      tag:
+                        description: >-
+                          Represents S-Tag for instructing OLT to associate a
+                          VLAN tag for
+
+                          traffic originating from OLT device.
+                        type: string
+                        format: 'xtype:vlan'
+                  link:
+                    type: array
+                    items:
+                      description: >-
+                        Each link represents an ONU/ONT (Optical Network
+                        Termination) endpoint
+
+                        connection.
+                      type: object
+                      required:
+                        - mac
+                        - serial
+                      properties:
+                        mac:
+                          type: string
+                          format: 'yang:mac-address'
+                        serial:
+                          type: string
+                          format: string
+                        active:
+                          default: 'false'
+                          type: string
+                          format: boolean
+                        tag:
+                          description: >-
+                            Represents C-Tag for instructing ONT to add/remove
+                            vlan tag for
+
+                            traffic within OLT device.
+                          type: string
+                          format: 'xtype:vlan'
+    put:
+      description: Each entry represents an OLT device.
+      summary: Update details on device
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of device
+          schema:
+            description: Each entry represents an OLT device.
+            allOf:
+              - $ref: '#/definitions/olt-device'
+              - required:
+                  - mac
+                properties:
+                  name:
+                    description: name of OLT device
+                    type: string
+                    format: string
+                  mac:
+                    type: string
+                    format: 'yang:mac-address'
+                  uplink:
+                    description: Uplink description of the OLT device.
+                    type: object
+                    properties:
+                      network:
+                        type: string
+                        format: 'yang:uuid'
+                      tag:
+                        description: >-
+                          Represents S-Tag for instructing OLT to associate a
+                          VLAN tag for
+
+                          traffic originating from OLT device.
+                        type: string
+                        format: 'xtype:vlan'
+                  link:
+                    type: array
+                    items:
+                      description: >-
+                        Each link represents an ONU/ONT (Optical Network
+                        Termination) endpoint
+
+                        connection.
+                      type: object
+                      required:
+                        - mac
+                        - serial
+                      properties:
+                        mac:
+                          type: string
+                          format: 'yang:mac-address'
+                        serial:
+                          type: string
+                          format: string
+                        active:
+                          default: 'false'
+                          type: string
+                          format: boolean
+                        tag:
+                          description: >-
+                            Represents C-Tag for instructing ONT to add/remove
+                            vlan tag for
+
+                            traffic within OLT device.
+                          type: string
+                          format: 'xtype:vlan'
+    patch:
+      description: Each entry represents an OLT device.
+      summary: Merge details on device
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of device
+          schema:
+            description: Each entry represents an OLT device.
+            allOf:
+              - $ref: '#/definitions/olt-device'
+              - required:
+                  - mac
+                properties:
+                  name:
+                    description: name of OLT device
+                    type: string
+                    format: string
+                  mac:
+                    type: string
+                    format: 'yang:mac-address'
+                  uplink:
+                    description: Uplink description of the OLT device.
+                    type: object
+                    properties:
+                      network:
+                        type: string
+                        format: 'yang:uuid'
+                      tag:
+                        description: >-
+                          Represents S-Tag for instructing OLT to associate a
+                          VLAN tag for
+
+                          traffic originating from OLT device.
+                        type: string
+                        format: 'xtype:vlan'
+                  link:
+                    type: array
+                    items:
+                      description: >-
+                        Each link represents an ONU/ONT (Optical Network
+                        Termination) endpoint
+
+                        connection.
+                      type: object
+                      required:
+                        - mac
+                        - serial
+                      properties:
+                        mac:
+                          type: string
+                          format: 'yang:mac-address'
+                        serial:
+                          type: string
+                          format: string
+                        active:
+                          default: 'false'
+                          type: string
+                          format: boolean
+                        tag:
+                          description: >-
+                            Represents C-Tag for instructing ONT to add/remove
+                            vlan tag for
+
+                            traffic within OLT device.
+                          type: string
+                          format: 'xtype:vlan'
+    delete:
+      description: Each entry represents an OLT device.
+      summary: Delete device from devices-list.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: mac
+        in: path
+        required: true
+        type: string
+        format: 'yang:mac-address'
+  '/volt-service:controller/device/{mac}/uplink':
+    get:
+      description: Uplink description of the OLT device.
+      summary: View detail on uplink
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of uplink
+          schema:
+            description: Uplink description of the OLT device.
+            type: object
+            properties:
+              network:
+                type: string
+                format: 'yang:uuid'
+              tag:
+                description: >-
+                  Represents S-Tag for instructing OLT to associate a VLAN tag
+                  for
+
+                  traffic originating from OLT device.
+                type: string
+                format: 'xtype:vlan'
+    put:
+      description: Uplink description of the OLT device.
+      summary: Update details on uplink
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of uplink
+          schema:
+            description: Uplink description of the OLT device.
+            type: object
+            properties:
+              network:
+                type: string
+                format: 'yang:uuid'
+              tag:
+                description: >-
+                  Represents S-Tag for instructing OLT to associate a VLAN tag
+                  for
+
+                  traffic originating from OLT device.
+                type: string
+                format: 'xtype:vlan'
+    patch:
+      description: Uplink description of the OLT device.
+      summary: Merge details on uplink
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of uplink
+          schema:
+            description: Uplink description of the OLT device.
+            type: object
+            properties:
+              network:
+                type: string
+                format: 'yang:uuid'
+              tag:
+                description: >-
+                  Represents S-Tag for instructing OLT to associate a VLAN tag
+                  for
+
+                  traffic originating from OLT device.
+                type: string
+                format: 'xtype:vlan'
+    delete:
+      description: Uplink description of the OLT device.
+      summary: Delete uplink from device.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: mac
+        in: path
+        required: true
+        type: string
+        format: 'yang:mac-address'
+  '/volt-service:controller/device/{mac}/link':
+    post:
+      description: |-
+        Each link represents an ONU/ONT (Optical Network Termination) endpoint
+        connection.
+      summary: Creates one or more new link in device.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating link(s) in collection
+          schema:
+            type: array
+            items:
+              description: >-
+                Each link represents an ONU/ONT (Optical Network Termination)
+                endpoint
+
+                connection.
+              type: object
+              required:
+                - mac
+                - serial
+              properties:
+                mac:
+                  type: string
+                  format: 'yang:mac-address'
+                serial:
+                  type: string
+                  format: string
+                active:
+                  default: 'false'
+                  type: string
+                  format: boolean
+                tag:
+                  description: >-
+                    Represents C-Tag for instructing ONT to add/remove vlan tag
+                    for
+
+                    traffic within OLT device.
+                  type: string
+                  format: 'xtype:vlan'
+    get:
+      description: |-
+        Each link represents an ONU/ONT (Optical Network Termination) endpoint
+        connection.
+      summary: List all links from device
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of links
+          schema:
+            type: array
+            items:
+              description: >-
+                Each link represents an ONU/ONT (Optical Network Termination)
+                endpoint
+
+                connection.
+              type: object
+              required:
+                - mac
+                - serial
+              properties:
+                mac:
+                  type: string
+                  format: 'yang:mac-address'
+                serial:
+                  type: string
+                  format: string
+                active:
+                  default: 'false'
+                  type: string
+                  format: boolean
+                tag:
+                  description: >-
+                    Represents C-Tag for instructing ONT to add/remove vlan tag
+                    for
+
+                    traffic within OLT device.
+                  type: string
+                  format: 'xtype:vlan'
+    put:
+      description: |-
+        Each link represents an ONU/ONT (Optical Network Termination) endpoint
+        connection.
+      summary: Replace the entire link collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      description: |-
+        Each link represents an ONU/ONT (Optical Network Termination) endpoint
+        connection.
+      summary: Merge items into the link collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+    parameters:
+      - name: mac
+        in: path
+        required: true
+        type: string
+        format: 'yang:mac-address'
+  '/volt-service:controller/device/{mac}/link/{serial}':
+    get:
+      description: |-
+        Each link represents an ONU/ONT (Optical Network Termination) endpoint
+        connection.
+      summary: View detail on link
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of link
+          schema:
+            description: >-
+              Each link represents an ONU/ONT (Optical Network Termination)
+              endpoint
+
+              connection.
+            type: object
+            required:
+              - mac
+              - serial
+            properties:
+              mac:
+                type: string
+                format: 'yang:mac-address'
+              serial:
+                type: string
+                format: string
+              active:
+                default: 'false'
+                type: string
+                format: boolean
+              tag:
+                description: >-
+                  Represents C-Tag for instructing ONT to add/remove vlan tag
+                  for
+
+                  traffic within OLT device.
+                type: string
+                format: 'xtype:vlan'
+    put:
+      description: |-
+        Each link represents an ONU/ONT (Optical Network Termination) endpoint
+        connection.
+      summary: Update details on link
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of link
+          schema:
+            description: >-
+              Each link represents an ONU/ONT (Optical Network Termination)
+              endpoint
+
+              connection.
+            type: object
+            required:
+              - mac
+              - serial
+            properties:
+              mac:
+                type: string
+                format: 'yang:mac-address'
+              serial:
+                type: string
+                format: string
+              active:
+                default: 'false'
+                type: string
+                format: boolean
+              tag:
+                description: >-
+                  Represents C-Tag for instructing ONT to add/remove vlan tag
+                  for
+
+                  traffic within OLT device.
+                type: string
+                format: 'xtype:vlan'
+    patch:
+      description: |-
+        Each link represents an ONU/ONT (Optical Network Termination) endpoint
+        connection.
+      summary: Merge details on link
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of link
+          schema:
+            description: >-
+              Each link represents an ONU/ONT (Optical Network Termination)
+              endpoint
+
+              connection.
+            type: object
+            required:
+              - mac
+              - serial
+            properties:
+              mac:
+                type: string
+                format: 'yang:mac-address'
+              serial:
+                type: string
+                format: string
+              active:
+                default: 'false'
+                type: string
+                format: boolean
+              tag:
+                description: >-
+                  Represents C-Tag for instructing ONT to add/remove vlan tag
+                  for
+
+                  traffic within OLT device.
+                type: string
+                format: 'xtype:vlan'
+    delete:
+      description: |-
+        Each link represents an ONU/ONT (Optical Network Termination) endpoint
+        connection.
+      summary: Delete link from device.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: serial
+        in: path
+        required: true
+        type: string
+        format: string
+      - name: mac
+        in: path
+        required: true
+        type: string
+        format: 'yang:mac-address'
+  '/vsg-service:controller':
+    get:
+      description: |-
+        The controller configuration represents a VSG controller which manages
+        multiple VSG gateways. The VSG controller provides agregate
+        abstraction of the entire NFaaS as a single switch to the
+        network fabric. Each port entry of the controller represents
+        each VSG subscriber flow as a distinct openflow port.
+      summary: View detail on controller
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of controller
+          schema:
+            description: >-
+              The controller configuration represents a VSG controller which
+              manages
+
+              multiple VSG gateways. The VSG controller provides agregate
+
+              abstraction of the entire NFaaS as a single switch to the
+
+              network fabric. Each port entry of the controller represents
+
+              each VSG subscriber flow as a distinct openflow port.
+            allOf:
+              - $ref: '#/definitions/xos:service'
+              - $ref: '#/definitions/gateways-list'
+              - properties:
+                  slice:
+                    $ref: '#/definitions/xslice:slice'
+                  port:
+                    type: array
+                    items:
+                      description: >-
+                        Each entry represents a VSG subscriber flow connected
+                        across VSG
+
+                        gateways.
+                      type: object
+                      required:
+                        - id
+                        - link
+                      properties:
+                        id:
+                          description: OpenFlow Port ID
+                          type: string
+                          format: 'yang:uuid'
+                        link:
+                          type: string
+                          format: leafref
+    put:
+      description: |-
+        The controller configuration represents a VSG controller which manages
+        multiple VSG gateways. The VSG controller provides agregate
+        abstraction of the entire NFaaS as a single switch to the
+        network fabric. Each port entry of the controller represents
+        each VSG subscriber flow as a distinct openflow port.
+      summary: Update details on controller
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of controller
+          schema:
+            description: >-
+              The controller configuration represents a VSG controller which
+              manages
+
+              multiple VSG gateways. The VSG controller provides agregate
+
+              abstraction of the entire NFaaS as a single switch to the
+
+              network fabric. Each port entry of the controller represents
+
+              each VSG subscriber flow as a distinct openflow port.
+            allOf:
+              - $ref: '#/definitions/xos:service'
+              - $ref: '#/definitions/gateways-list'
+              - properties:
+                  slice:
+                    $ref: '#/definitions/xslice:slice'
+                  port:
+                    type: array
+                    items:
+                      description: >-
+                        Each entry represents a VSG subscriber flow connected
+                        across VSG
+
+                        gateways.
+                      type: object
+                      required:
+                        - id
+                        - link
+                      properties:
+                        id:
+                          description: OpenFlow Port ID
+                          type: string
+                          format: 'yang:uuid'
+                        link:
+                          type: string
+                          format: leafref
+    patch:
+      description: |-
+        The controller configuration represents a VSG controller which manages
+        multiple VSG gateways. The VSG controller provides agregate
+        abstraction of the entire NFaaS as a single switch to the
+        network fabric. Each port entry of the controller represents
+        each VSG subscriber flow as a distinct openflow port.
+      summary: Merge details on controller
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of controller
+          schema:
+            description: >-
+              The controller configuration represents a VSG controller which
+              manages
+
+              multiple VSG gateways. The VSG controller provides agregate
+
+              abstraction of the entire NFaaS as a single switch to the
+
+              network fabric. Each port entry of the controller represents
+
+              each VSG subscriber flow as a distinct openflow port.
+            allOf:
+              - $ref: '#/definitions/xos:service'
+              - $ref: '#/definitions/gateways-list'
+              - properties:
+                  slice:
+                    $ref: '#/definitions/xslice:slice'
+                  port:
+                    type: array
+                    items:
+                      description: >-
+                        Each entry represents a VSG subscriber flow connected
+                        across VSG
+
+                        gateways.
+                      type: object
+                      required:
+                        - id
+                        - link
+                      properties:
+                        id:
+                          description: OpenFlow Port ID
+                          type: string
+                          format: 'yang:uuid'
+                        link:
+                          type: string
+                          format: leafref
+    delete:
+      description: |-
+        The controller configuration represents a VSG controller which manages
+        multiple VSG gateways. The VSG controller provides agregate
+        abstraction of the entire NFaaS as a single switch to the
+        network fabric. Each port entry of the controller represents
+        each VSG subscriber flow as a distinct openflow port.
+      summary: Delete controller from vsg-service.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/vsg-service:controller/slice':
+    get:
+      summary: View detail on slice
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of slice
+          schema:
+            $ref: '#/definitions/xslice:slice'
+    put:
+      summary: Update details on slice
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of slice
+          schema:
+            $ref: '#/definitions/xslice:slice'
+    patch:
+      summary: Merge details on slice
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of slice
+          schema:
+            $ref: '#/definitions/xslice:slice'
+    delete:
+      summary: Delete slice from controller.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/vsg-service:controller/slice/policy':
+    get:
+      summary: View detail on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+    put:
+      summary: Update details on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+    patch:
+      summary: Merge details on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+    delete:
+      summary: Delete policy from slice.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+  '/vsg-service:controller/slice/credential':
+    post:
+      summary: Creates one or more new credential in slice.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating credential(s) in collection
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    get:
+      summary: List all credentials from slice
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credentials
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    put:
+      summary: Replace the entire credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/vsg-service:controller/slice/credential/{token}':
+    get:
+      summary: View detail on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    put:
+      summary: Update details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    patch:
+      summary: Merge details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    delete:
+      summary: Delete credential from slice.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: token
+        in: path
+        required: true
+        type: string
+        format: string
+  '/vsg-service:controller/port':
+    post:
+      description: |-
+        Each entry represents a VSG subscriber flow connected across VSG
+        gateways.
+      summary: Creates one or more new port in controller.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating port(s) in collection
+          schema:
+            type: array
+            items:
+              description: |-
+                Each entry represents a VSG subscriber flow connected across VSG
+                gateways.
+              type: object
+              required:
+                - id
+                - link
+              properties:
+                id:
+                  description: OpenFlow Port ID
+                  type: string
+                  format: 'yang:uuid'
+                link:
+                  type: string
+                  format: leafref
+    get:
+      description: |-
+        Each entry represents a VSG subscriber flow connected across VSG
+        gateways.
+      summary: List all ports from controller
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of ports
+          schema:
+            type: array
+            items:
+              description: |-
+                Each entry represents a VSG subscriber flow connected across VSG
+                gateways.
+              type: object
+              required:
+                - id
+                - link
+              properties:
+                id:
+                  description: OpenFlow Port ID
+                  type: string
+                  format: 'yang:uuid'
+                link:
+                  type: string
+                  format: leafref
+    put:
+      description: |-
+        Each entry represents a VSG subscriber flow connected across VSG
+        gateways.
+      summary: Replace the entire port collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      description: |-
+        Each entry represents a VSG subscriber flow connected across VSG
+        gateways.
+      summary: Merge items into the port collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/vsg-service:controller/port/{id}':
+    get:
+      description: |-
+        Each entry represents a VSG subscriber flow connected across VSG
+        gateways.
+      summary: View detail on port
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of port
+          schema:
+            description: |-
+              Each entry represents a VSG subscriber flow connected across VSG
+              gateways.
+            type: object
+            required:
+              - id
+              - link
+            properties:
+              id:
+                description: OpenFlow Port ID
+                type: string
+                format: 'yang:uuid'
+              link:
+                type: string
+                format: leafref
+    put:
+      description: |-
+        Each entry represents a VSG subscriber flow connected across VSG
+        gateways.
+      summary: Update details on port
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of port
+          schema:
+            description: |-
+              Each entry represents a VSG subscriber flow connected across VSG
+              gateways.
+            type: object
+            required:
+              - id
+              - link
+            properties:
+              id:
+                description: OpenFlow Port ID
+                type: string
+                format: 'yang:uuid'
+              link:
+                type: string
+                format: leafref
+    patch:
+      description: |-
+        Each entry represents a VSG subscriber flow connected across VSG
+        gateways.
+      summary: Merge details on port
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of port
+          schema:
+            description: |-
+              Each entry represents a VSG subscriber flow connected across VSG
+              gateways.
+            type: object
+            required:
+              - id
+              - link
+            properties:
+              id:
+                description: OpenFlow Port ID
+                type: string
+                format: 'yang:uuid'
+              link:
+                type: string
+                format: leafref
+    delete:
+      description: |-
+        Each entry represents a VSG subscriber flow connected across VSG
+        gateways.
+      summary: Delete port from controller.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: OpenFlow Port ID
+        type: string
+        format: 'yang:uuid'
+  '/vsg-service:controller/keypair':
+    post:
+      description: collection of public/private key pair(s)
+      summary: Creates one or more new keypair in service.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating keypair(s) in collection
+          schema:
+            type: array
+            items:
+              description: collection of public/private key pair(s)
+              type: object
+              properties:
+                public:
+                  type: string
+                  format: string
+                private:
+                  type: string
+                  format: string
+    get:
+      description: collection of public/private key pair(s)
+      summary: List all keypairs from service
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of keypairs
+          schema:
+            type: array
+            items:
+              description: collection of public/private key pair(s)
+              type: object
+              properties:
+                public:
+                  type: string
+                  format: string
+                private:
+                  type: string
+                  format: string
+    put:
+      description: collection of public/private key pair(s)
+      summary: Replace the entire keypair collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      description: collection of public/private key pair(s)
+      summary: Merge items into the keypair collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/vsg-service:controller/keypair/{index}':
+    get:
+      description: collection of public/private key pair(s)
+      summary: View detail on keypair
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of keypair
+          schema:
+            description: collection of public/private key pair(s)
+            type: object
+            properties:
+              public:
+                type: string
+                format: string
+              private:
+                type: string
+                format: string
+    put:
+      description: collection of public/private key pair(s)
+      summary: Update details on keypair
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of keypair
+          schema:
+            description: collection of public/private key pair(s)
+            type: object
+            properties:
+              public:
+                type: string
+                format: string
+              private:
+                type: string
+                format: string
+    patch:
+      description: collection of public/private key pair(s)
+      summary: Merge details on keypair
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of keypair
+          schema:
+            description: collection of public/private key pair(s)
+            type: object
+            properties:
+              public:
+                type: string
+                format: string
+              private:
+                type: string
+                format: string
+    delete:
+      description: collection of public/private key pair(s)
+      summary: Delete keypair from service.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: index
+        in: path
+        required: true
+        type: integer
+        format: int64
+  '/vsg-service:controller/attribute':
+    post:
+      description: backwards-compatible attribute association
+      summary: Creates one or more new attribute in service.
+      deprecated: true
+      responses:
+        '200':
+          description: Expected response for creating attribute(s) in collection
+          schema:
+            type: array
+            items:
+              description: backwards-compatible attribute association
+              type: object
+              properties:
+                name:
+                  type: string
+                  format: string
+                value:
+                  type: string
+                  format: string
+    get:
+      description: backwards-compatible attribute association
+      summary: List all attributes from service
+      deprecated: true
+      responses:
+        '200':
+          description: Expected response of attributes
+          schema:
+            type: array
+            items:
+              description: backwards-compatible attribute association
+              type: object
+              properties:
+                name:
+                  type: string
+                  format: string
+                value:
+                  type: string
+                  format: string
+    put:
+      description: backwards-compatible attribute association
+      summary: Replace the entire attribute collection
+      deprecated: true
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      description: backwards-compatible attribute association
+      summary: Merge items into the attribute collection
+      deprecated: true
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/vsg-service:controller/attribute/{name}':
+    get:
+      description: backwards-compatible attribute association
+      summary: View detail on attribute
+      deprecated: true
+      responses:
+        '200':
+          description: Expected response of attribute
+          schema:
+            description: backwards-compatible attribute association
+            type: object
+            properties:
+              name:
+                type: string
+                format: string
+              value:
+                type: string
+                format: string
+    put:
+      description: backwards-compatible attribute association
+      summary: Update details on attribute
+      deprecated: true
+      responses:
+        '200':
+          description: Expected response of attribute
+          schema:
+            description: backwards-compatible attribute association
+            type: object
+            properties:
+              name:
+                type: string
+                format: string
+              value:
+                type: string
+                format: string
+    patch:
+      description: backwards-compatible attribute association
+      summary: Merge details on attribute
+      deprecated: true
+      responses:
+        '200':
+          description: Expected response of attribute
+          schema:
+            description: backwards-compatible attribute association
+            type: object
+            properties:
+              name:
+                type: string
+                format: string
+              value:
+                type: string
+                format: string
+    delete:
+      description: backwards-compatible attribute association
+      summary: Delete attribute from service.
+      deprecated: true
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+        format: string
+  '/vsg-service:controller/subscriber':
+    post:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: Creates one or more new subscriber in service.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating subscriber(s) in collection
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents a subscriber of the service. Each unique
+                service
+
+                provider should augment this block with service specific
+
+                attributes.
+              allOf:
+                - $ref: '#/definitions/subscriber'
+                - $ref: '#/definitions/tenant'
+                - required:
+                    - id
+                  properties:
+                    connectivity:
+                      default: na
+                      type: string
+                      format: enumeration
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      type: string
+                      format: string
+                    kind:
+                      default: subscriber
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+    get:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: List all subscribers from service
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of subscribers
+          schema:
+            type: array
+            items:
+              description: >-
+                Each entry represents a subscriber of the service. Each unique
+                service
+
+                provider should augment this block with service specific
+
+                attributes.
+              allOf:
+                - $ref: '#/definitions/subscriber'
+                - $ref: '#/definitions/tenant'
+                - required:
+                    - id
+                  properties:
+                    connectivity:
+                      default: na
+                      type: string
+                      format: enumeration
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      type: string
+                      format: string
+                    kind:
+                      default: subscriber
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+    put:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: Replace the entire subscriber collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: Merge items into the subscriber collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/vsg-service:controller/subscriber/{id}':
+    get:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: View detail on subscriber
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of subscriber
+          schema:
+            description: >-
+              Each entry represents a subscriber of the service. Each unique
+              service
+
+              provider should augment this block with service specific
+
+              attributes.
+            allOf:
+              - $ref: '#/definitions/subscriber'
+              - $ref: '#/definitions/tenant'
+              - required:
+                  - id
+                properties:
+                  connectivity:
+                    default: na
+                    type: string
+                    format: enumeration
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    type: string
+                    format: string
+                  kind:
+                    default: subscriber
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+    put:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: Update details on subscriber
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of subscriber
+          schema:
+            description: >-
+              Each entry represents a subscriber of the service. Each unique
+              service
+
+              provider should augment this block with service specific
+
+              attributes.
+            allOf:
+              - $ref: '#/definitions/subscriber'
+              - $ref: '#/definitions/tenant'
+              - required:
+                  - id
+                properties:
+                  connectivity:
+                    default: na
+                    type: string
+                    format: enumeration
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    type: string
+                    format: string
+                  kind:
+                    default: subscriber
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+    patch:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: Merge details on subscriber
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of subscriber
+          schema:
+            description: >-
+              Each entry represents a subscriber of the service. Each unique
+              service
+
+              provider should augment this block with service specific
+
+              attributes.
+            allOf:
+              - $ref: '#/definitions/subscriber'
+              - $ref: '#/definitions/tenant'
+              - required:
+                  - id
+                properties:
+                  connectivity:
+                    default: na
+                    type: string
+                    format: enumeration
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    type: string
+                    format: string
+                  kind:
+                    default: subscriber
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+    delete:
+      description: |-
+        Each entry represents a subscriber of the service. Each unique service
+        provider should augment this block with service specific
+        attributes.
+      summary: Delete subscriber from service.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/vsg-service:controller/credential':
+    post:
+      summary: Creates one or more new credential in service.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating credential(s) in collection
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    get:
+      summary: List all credentials from service
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credentials
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    put:
+      summary: Replace the entire credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the credential collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/vsg-service:controller/credential/{token}':
+    get:
+      summary: View detail on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    put:
+      summary: Update details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    patch:
+      summary: Merge details on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    delete:
+      summary: Delete credential from service.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: token
+        in: path
+        required: true
+        type: string
+        format: string
+  '/vsg-service:controller/gateway':
+    post:
+      description: Each entry represents a VSG instance.
+      summary: Creates one or more new gateway in gateways-list.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating gateway(s) in collection
+          schema:
+            type: array
+            items:
+              description: Each entry represents a VSG instance.
+              allOf:
+                - $ref: '#/definitions/subscriber-gateway'
+                - properties:
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    features:
+                      description: Contains various features provided by the gateway.
+                      type: object
+                      properties:
+                        firewall:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            rules:
+                              type: array
+                              items:
+                                type: string
+                                format: string
+                        url-filter:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            level:
+                              type: string
+                              format: enumeration
+                            rules:
+                              type: array
+                              items:
+                                type: string
+                                format: string
+                        uverse:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                    flow:
+                      type: array
+                      items:
+                        description: >-
+                          Each flow represents a subscriber flow into the VSG
+                          instance.
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            format: 'yang:uuid'
+    get:
+      description: Each entry represents a VSG instance.
+      summary: List all gateways from gateways-list
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of gateways
+          schema:
+            type: array
+            items:
+              description: Each entry represents a VSG instance.
+              allOf:
+                - $ref: '#/definitions/subscriber-gateway'
+                - properties:
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    features:
+                      description: Contains various features provided by the gateway.
+                      type: object
+                      properties:
+                        firewall:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            rules:
+                              type: array
+                              items:
+                                type: string
+                                format: string
+                        url-filter:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            level:
+                              type: string
+                              format: enumeration
+                            rules:
+                              type: array
+                              items:
+                                type: string
+                                format: string
+                        uverse:
+                          type: object
+                          properties:
+                            enabled:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                    flow:
+                      type: array
+                      items:
+                        description: >-
+                          Each flow represents a subscriber flow into the VSG
+                          instance.
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            format: 'yang:uuid'
+    put:
+      description: Each entry represents a VSG instance.
+      summary: Replace the entire gateway collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      description: Each entry represents a VSG instance.
+      summary: Merge items into the gateway collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/vsg-service:controller/gateway/{id}':
+    get:
+      description: Each entry represents a VSG instance.
+      summary: View detail on gateway
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of gateway
+          schema:
+            description: Each entry represents a VSG instance.
+            allOf:
+              - $ref: '#/definitions/subscriber-gateway'
+              - properties:
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  features:
+                    description: Contains various features provided by the gateway.
+                    type: object
+                    properties:
+                      firewall:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          rules:
+                            type: array
+                            items:
+                              type: string
+                              format: string
+                      url-filter:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          level:
+                            type: string
+                            format: enumeration
+                          rules:
+                            type: array
+                            items:
+                              type: string
+                              format: string
+                      uverse:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                  flow:
+                    type: array
+                    items:
+                      description: >-
+                        Each flow represents a subscriber flow into the VSG
+                        instance.
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: 'yang:uuid'
+    put:
+      description: Each entry represents a VSG instance.
+      summary: Update details on gateway
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of gateway
+          schema:
+            description: Each entry represents a VSG instance.
+            allOf:
+              - $ref: '#/definitions/subscriber-gateway'
+              - properties:
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  features:
+                    description: Contains various features provided by the gateway.
+                    type: object
+                    properties:
+                      firewall:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          rules:
+                            type: array
+                            items:
+                              type: string
+                              format: string
+                      url-filter:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          level:
+                            type: string
+                            format: enumeration
+                          rules:
+                            type: array
+                            items:
+                              type: string
+                              format: string
+                      uverse:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                  flow:
+                    type: array
+                    items:
+                      description: >-
+                        Each flow represents a subscriber flow into the VSG
+                        instance.
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: 'yang:uuid'
+    patch:
+      description: Each entry represents a VSG instance.
+      summary: Merge details on gateway
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of gateway
+          schema:
+            description: Each entry represents a VSG instance.
+            allOf:
+              - $ref: '#/definitions/subscriber-gateway'
+              - properties:
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  features:
+                    description: Contains various features provided by the gateway.
+                    type: object
+                    properties:
+                      firewall:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          rules:
+                            type: array
+                            items:
+                              type: string
+                              format: string
+                      url-filter:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          level:
+                            type: string
+                            format: enumeration
+                          rules:
+                            type: array
+                            items:
+                              type: string
+                              format: string
+                      uverse:
+                        type: object
+                        properties:
+                          enabled:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                  flow:
+                    type: array
+                    items:
+                      description: >-
+                        Each flow represents a subscriber flow into the VSG
+                        instance.
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: 'yang:uuid'
+    delete:
+      description: Each entry represents a VSG instance.
+      summary: Delete gateway from gateways-list.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/vsg-service:controller/gateway/{id}/features':
+    get:
+      description: Contains various features provided by the gateway.
+      summary: View detail on features
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of features
+          schema:
+            description: Contains various features provided by the gateway.
+            type: object
+            properties:
+              firewall:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  rules:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+              url-filter:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  level:
+                    type: string
+                    format: enumeration
+                  rules:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+              uverse:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+    put:
+      description: Contains various features provided by the gateway.
+      summary: Update details on features
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of features
+          schema:
+            description: Contains various features provided by the gateway.
+            type: object
+            properties:
+              firewall:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  rules:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+              url-filter:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  level:
+                    type: string
+                    format: enumeration
+                  rules:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+              uverse:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+    patch:
+      description: Contains various features provided by the gateway.
+      summary: Merge details on features
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of features
+          schema:
+            description: Contains various features provided by the gateway.
+            type: object
+            properties:
+              firewall:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  rules:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+              url-filter:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+                  level:
+                    type: string
+                    format: enumeration
+                  rules:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+              uverse:
+                type: object
+                properties:
+                  enabled:
+                    default: 'false'
+                    type: string
+                    format: boolean
+    delete:
+      description: Contains various features provided by the gateway.
+      summary: Delete features from gateway.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/vsg-service:controller/gateway/{id}/flow':
+    post:
+      description: Each flow represents a subscriber flow into the VSG instance.
+      summary: Creates one or more new flow in gateway.
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response for creating flow(s) in collection
+          schema:
+            type: array
+            items:
+              description: Each flow represents a subscriber flow into the VSG instance.
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: 'yang:uuid'
+    get:
+      description: Each flow represents a subscriber flow into the VSG instance.
+      summary: List all flows from gateway
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of flows
+          schema:
+            type: array
+            items:
+              description: Each flow represents a subscriber flow into the VSG instance.
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: 'yang:uuid'
+    put:
+      description: Each flow represents a subscriber flow into the VSG instance.
+      summary: Replace the entire flow collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      description: Each flow represents a subscriber flow into the VSG instance.
+      summary: Merge items into the flow collection
+      deprecated: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
+  '/vsg-service:controller/gateway/{id}/flow/{index}':
+    get:
+      description: Each flow represents a subscriber flow into the VSG instance.
+      summary: View detail on flow
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of flow
+          schema:
+            description: Each flow represents a subscriber flow into the VSG instance.
+            type: object
+            properties:
+              id:
+                type: string
+                format: 'yang:uuid'
+    put:
+      description: Each flow represents a subscriber flow into the VSG instance.
+      summary: Update details on flow
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of flow
+          schema:
+            description: Each flow represents a subscriber flow into the VSG instance.
+            type: object
+            properties:
+              id:
+                type: string
+                format: 'yang:uuid'
+    patch:
+      description: Each flow represents a subscriber flow into the VSG instance.
+      summary: Merge details on flow
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of flow
+          schema:
+            description: Each flow represents a subscriber flow into the VSG instance.
+            type: object
+            properties:
+              id:
+                type: string
+                format: 'yang:uuid'
+    delete:
+      description: Each flow represents a subscriber flow into the VSG instance.
+      summary: Delete flow from gateway.
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: index
+        in: path
+        required: true
+        type: integer
+        format: int64
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: 'xtype:unique-identifier'
 definitions:
   'xos:provider':
     allOf:
@@ -1954,3 +6459,194 @@ definitions:
               - private
               - private-unidirectional
               - na
+  'xos:service':
+    allOf:
+      - $ref: '#/definitions/xos:provider'
+      - properties:
+          view-url:
+            type: string
+            format: 'inet:uri'
+          icon-url:
+            type: string
+            format: 'inet:uri'
+          published:
+            default: 'true'
+            type: boolean
+            format: boolean
+          service-specific-id:
+            type: string
+            format: 'xtype:unique-identifier'
+          keypair:
+            type: array
+            items:
+              description: collection of public/private key pair(s)
+              type: object
+              properties:
+                public:
+                  type: string
+                  format: string
+                private:
+                  type: string
+                  format: string
+          attribute:
+            type: array
+            items:
+              description: backwards-compatible attribute association
+              type: object
+              properties:
+                name:
+                  type: string
+                  format: string
+                value:
+                  type: string
+                  format: string
+          subscriber:
+            type: array
+            items:
+              description: >-
+                Each entry represents a subscriber of the service. Each unique
+                service
+
+                provider should augment this block with service specific
+
+                attributes.
+              $ref: '#/definitions/subscriber'
+  subscriber:
+    allOf:
+      - $ref: '#/definitions/tenant'
+      - properties:
+          connectivity:
+            default: na
+            type: string
+            format: enumeration
+            enum:
+              - public
+              - private
+              - private-unidirectional
+              - na
+  devices-list:
+    type: object
+    properties:
+      device:
+        type: array
+        items:
+          description: Each entry represents an OLT device.
+          $ref: '#/definitions/olt-device'
+  olt-device:
+    description: This grouping describes an OLT device which contains ODN link attachments.
+    type: object
+    required:
+      - mac
+    properties:
+      name:
+        description: name of OLT device
+        type: string
+        format: string
+      mac:
+        type: string
+        format: 'yang:mac-address'
+      uplink:
+        description: Uplink description of the OLT device.
+        type: object
+        properties:
+          network:
+            type: string
+            format: 'yang:uuid'
+          tag:
+            description: |-
+              Represents S-Tag for instructing OLT to associate a VLAN tag for
+              traffic originating from OLT device.
+            type: integer
+            format: uint16
+      link:
+        type: array
+        items:
+          description: >-
+            Each link represents an ONU/ONT (Optical Network Termination)
+            endpoint
+
+            connection.
+          type: object
+          required:
+            - mac
+            - serial
+          properties:
+            mac:
+              type: string
+              format: 'yang:mac-address'
+            serial:
+              type: string
+              format: string
+            active:
+              default: 'false'
+              type: boolean
+              format: boolean
+            tag:
+              description: |-
+                Represents C-Tag for instructing ONT to add/remove vlan tag for
+                traffic within OLT device.
+              type: integer
+              format: uint16
+  gateways-list:
+    type: object
+    properties:
+      gateway:
+        type: array
+        items:
+          description: Each entry represents a VSG instance.
+          $ref: '#/definitions/subscriber-gateway'
+  subscriber-gateway:
+    type: object
+    properties:
+      id:
+        type: string
+        format: 'xtype:unique-identifier'
+      features:
+        description: Contains various features provided by the gateway.
+        type: object
+        properties:
+          firewall:
+            type: object
+            properties:
+              enabled:
+                default: 'false'
+                type: boolean
+                format: boolean
+              rules:
+                type: array
+                items:
+                  type: string
+                  format: string
+          url-filter:
+            type: object
+            properties:
+              enabled:
+                default: 'false'
+                type: boolean
+                format: boolean
+              level:
+                type: string
+                format: enumeration
+                enum:
+                  - PG
+              rules:
+                type: array
+                items:
+                  type: string
+                  format: string
+          uverse:
+            type: object
+            properties:
+              enabled:
+                default: 'false'
+                type: boolean
+                format: boolean
+      flow:
+        type: array
+        items:
+          description: Each flow represents a subscriber flow into the VSG instance.
+          type: object
+          properties:
+            id:
+              type: string
+              format: 'yang:uuid'

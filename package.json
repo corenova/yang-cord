@@ -62,7 +62,7 @@
     "prebuild": "npm run clean -s && mkdir -p dist",
     "build:src": "coffee -o lib -c src",
     "build:web": "webpack -p",
-    "build:api": "yang2swagger -I xos-controller -I cord-tenant -I xos-slice -I xos-topology -f yaml -o swagger.yaml",
+    "build:api": "yang2swagger -I xos-controller -I cord-tenant -I volt-service -I vsg-service -f yaml -o swagger.yaml",
     "build": "npm run build:src && npm run build:api",
     "prepublish": "npm run build",
     "pretest": "npm run build",
