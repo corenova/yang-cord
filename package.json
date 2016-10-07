@@ -15,8 +15,13 @@
     "subscriber",
     "tenant",
     "device",
+    "topology",
+    "nfvi",
+    "slice",
     "yangjs",
     "express",
+    "swagger",
+    "openapi",
     "service"
   ],
   "models": {
@@ -37,15 +42,16 @@
   "bin": {
     "xos": "bin/xos"
   },
+  "preferGlobal": true,
   "dependencies": {
     "config": "^1.21.0",
+    "js-yaml": "^3.6.1",
     "minimist": "^1.2.0",
     "node-uuid": "^1.4.7",
     "opnfv-promise": "git://github.com/opnfv/promise#develop",
     "superagent": "^2.0.0",
-    "yang-express": "^0.4.0",
-    "yang-js": "^0.16.2",
-    "yang-swagger": "^1.0.3",
+    "yang-express": "^0.4.1",
+    "yang-js": "^0.16.5",
     "yang-volt": "file:./services/yang-volt",
     "yang-vsg": "file:./services/yang-vsg"
   },
@@ -56,7 +62,7 @@
     "rimraf": "^2.5.2",
     "should": "~3.1.3",
     "webpack": "^1.13.1",
-    "yang-swagger": "^1.0.2"
+    "yang-swagger": "^1.0.4"
   },
   "scripts": {
     "clean": "rimraf dist/* lib/*",
@@ -68,6 +74,6 @@
     "prepublish": "npm run build",
     "pretest": "npm run build",
     "test": "mocha",
-    "start": "bin/xos -I cord-tenant -I volt-service -I vsg-service"
+    "start": "bin/xos cord-tenant volt-service vsg-service"
   }
 }
