@@ -54,7 +54,7 @@ description | meta:description | false | description of the service function
 author | meta:person-name | false | name of the service designer
 keywords | leaf-list(meta:meta-identifier) | false | list of keywords for search
 models | list(model) | at least one | YANG schema name/file mappings
-controller | object([ControllerReference](#define-the-controller-reference)) | true | Service controller definitions
+controller | container([ControllerReference](#define-the-controller-reference)) | true | Service controller definitions
 
 ### Controller Reference
 

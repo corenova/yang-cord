@@ -18,10 +18,10 @@
   ],
   "controller": {
     "model": "example-service",
-    "config": "config",
+    "initializer": "config",
+    "synchronizer": "./example-synchronizer.py",
     "public-key": "./example-service.pub",
-    "private-key": "./example-service.key",
-    "synchronizer": "./example-synchronizer.py"
+    "private-key": "./example-service.key"
   },
   "models": {
     "ietf-yang-types": "yang-js",

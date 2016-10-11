@@ -6,8 +6,9 @@ This implementation is an on-going effort to create
 compositions.
 
 One of the key objectives is to provide an **emulation layer** of the
-CORD platform for service developers to experience the runtime
-environment and perform rapid integrations of their capabilities.
+CORD platform for service developers to experience the CORD/XOS
+runtime environment from their local systems and perform rapid
+integrations of their target service features.
 
 You may contact Larry Peterson <llp@onlab.us> and Peter Lee
 <peter@corenova.com> to learn more about this initiative and find out
@@ -65,7 +66,7 @@ The `bin/xos` CLI utility uses default configurations found in
 *runtime debug output* you can use environmental variables as follows:
 
 ```bash
-$ NODE_ENV=test DEBUG=yang:express bin/xos cord-tenant cord-volt-service cord-vsg-service
+$ NODE_ENV=test DEBUG=yang-express bin/xos cord-tenant cord-volt-service cord-vsg-service
 ```
 
 During troubleshooting/debugging, it may be helpful to turn on much
@@ -74,15 +75,15 @@ more verbose debug output via setting `DEBUG=yang:*` or even
 is recommended to only increase the verbosity to diagnose specific
 runtime errors.
 
-For more information on programmatic usage, be sure to take a look at
-the References listed below.
+For more information on advanced usage, be sure to take a look at the
+References listed below.
 
 ## References
 
 This module is a YANG model-driven data module, which is essentially a
 composition of the [YANG Schema](./schema/xos-controller.yang) and
-[Control Binding](./src/xos-controller.coffee). It is designed to
-model the XOS/CORD platform and can be utilized with or without any
+[Control Logic Binding](./src/xos-controller.coffee). It is designed
+to model the XOS/CORD platform and can be utilized with or without any
 actual infrastructure dependencies.
 
 - [Apiary Documentation](http://docs.yangcord.apiary.io)
@@ -100,7 +101,8 @@ There are a number of YANG modules inside this repository, with the
 [xos-controller.yang](./schema/xos-controller.yang) serving as the
 primary module. The other modules serve a supporting role by
 dynamically *augmenting* the XOS Controller with additional
-capabilties as they are conditionally loaded into the runtime.
+capabilties as they are conditionally loaded into the runtime XOS
+Controller instance.
 
 - [xos-controller.yang](./schema/xos-controller.yang)
 - [xos-topology.yang](./schema/xos-topology.yang)
