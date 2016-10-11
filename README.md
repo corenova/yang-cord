@@ -49,22 +49,23 @@ $ bin/xos -h
   Usage: xos [options]
 
   Options:
-      -p, --port <number>        Run XOS Controller on <port>
+      -p, --port <number>      Run XOS Controller on <port>
 ```
 
 Using the `bin/xos` CLI utility, you can have flexible control around
 loading additional YANG modules dynamically during runtime, such as
-`cord-tenant`, `volt-service`, `vsg-service`, `xos-slice`, etc. By
-default, it runs with `xos-controller` only. If a given target module
-requires other dependency modules, they will be loaded dynamically
-(such as `xos-slice` which is a dependency to `vsg-service`).
+`cord-tenant`, `cord-volt-service`, `cord-vsg-service`, `xos-slice`,
+etc. By default, it runs with `xos-controller` only. If a given target
+module requires other dependency modules, they will be loaded
+dynamically (such as `xos-slice` which is a dependency to
+`cord-vsg-service`).
 
 The `bin/xos` CLI utility uses default configurations found in
 `config` directory. To run it with *test data* and expose some
 *runtime debug output* you can use environmental variables as follows:
 
 ```bash
-$ NODE_ENV=test DEBUG=yang:express bin/xos cord-tenant volt-service vsg-service
+$ NODE_ENV=test DEBUG=yang:express bin/xos cord-tenant cord-volt-service cord-vsg-service
 ```
 
 During troubleshooting/debugging, it may be helpful to turn on much
@@ -85,12 +86,13 @@ model the XOS/CORD platform and can be utilized with or without any
 actual infrastructure dependencies.
 
 - [Apiary Documentation](http://docs.yangcord.apiary.io)
+- [Composing Services](./service/README.md)
+- [Modeling Conventions](./schema/README.md)
 - [Using YANG with JavaScript](http://github.com/corenova/yang-js)
 - [Using Model API](http://github.com/corenova/yang-js#model-instance)
 - [Storing Data](http://github.com/corenova/yang-store)
 - [Expressing Interfaces](http://github.com/corenova/yang-express)
 - [Automating Documentation](http://github.com/corenova/yang-swagger)
-- Creating Service Package (coming soon...)
 
 ## YANG Models
 
@@ -100,25 +102,21 @@ primary module. The other modules serve a supporting role by
 dynamically *augmenting* the XOS Controller with additional
 capabilties as they are conditionally loaded into the runtime.
 
-### XOS Core Models
-
 - [xos-controller.yang](./schema/xos-controller.yang)
-- [xos-types.yang](./schema/xos-types.yang)
 - [xos-topology.yang](./schema/xos-topology.yang)
 - [xos-slice.yang](./schema/xos-slice.yang)
 - [xos-package.yang](./schema/xos-package.yang)
-
-### CORD Models
-
+- [xos-types.yang](./schema/xos-types.yang)
 - [cord-tenant.yang](./schema/cord-tenant.yang)
 
-### Service Models
+For additional information on working with XOS/CORD YANG Models, please refer
+to the [Modeling Conventions](./schema/README.md) guide.
 
-- [volt-service.yang](./services/yang-volt/volt-service.yang)
-- [vsg-service.yang](./services/yang-vsg/vsg-service.yang)
+## Service Packages
 
-For additional information on working with YANG Models, please refer
-to [Modeler's Guide](./schema/README.md).
+- [cord-volt](./service/cord-volt)
+- [cord-vsg](./service/cord-vsg)
+- [example-service](./service/example-service)
 
 ## Tests
 

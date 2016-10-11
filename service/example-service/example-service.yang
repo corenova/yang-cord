@@ -1,0 +1,94 @@
+module example-service {
+  namespace "urn:ietf:params:xml:ns:yang:example-service";
+  prefix example;
+  yang-version 1.1;
+
+  import ietf-yang-types { prefix yang; }
+  import cord-tenant     { prefix cord; }
+  import xos-controller  { prefix xos; }
+  import xos-slice       { prefix xslice; }
+  import xos-types       { prefix xtype; }
+
+  organization
+    "Open Networking Lab (CORD) / Corenova Technologies";
+  contact
+    "Larry Peterson <llp@onlab.us>
+     Peter K. Lee <peter@corenova.com>";
+  description
+    "Example CORD/XOS Service Controller";
+
+  revision 2016-10-10 {
+    description "Initial revision.";
+  }
+
+  identity my-example-service {
+    base xos:service;
+  }
+  /*
+   * Type Definitions
+   */
+  typedef subscriber-inflow {
+    description
+      "Valid subscriber input flow for this service";
+    type yang:uuid;
+  }
+  typedef subscriber-outflow {
+    type leafref {
+      path "/example:controller/example:web-server/example:id";
+    }
+  }
+  /*
+   * Configuration data
+   */
+  container controller {
+    description
+      "The controller configuration represents an Example Service controller
+       which manages multiple web server instances on behalf of subscribers.";
+    uses xos:service {
+      refine kind { default virtual-subscriber-gateway; }
+      augment "subscriber" {
+        leaf example-service-message {
+          type string;
+        }
+      }
+    }
+    container slice {
+      description
+        "The Example Service uses XOS Slice to instantiate web server instances.";
+      uses xslice:slice;
+    }
+    list web-server {
+      description
+        "Each entry represents a unique instance of a web server managed by
+         this Example Service Controller.";
+      key "id";
+      leaf id {
+        type xtype:unique-identifier;
+      }
+      leaf instance {
+        type leafref {
+          path "/example:controller/slice/instances";
+        }
+      }
+    }
+  }
+  /*
+   * Augmentations to XOS
+   */
+  augment "/xos:tenant/cord/subscriber" {
+    leaf example-subscriber-id {
+      type leafref {
+        path "/example:controller/subscriber/id";
+      }
+    }
+    container example {
+      when "../example-subscriber-id";
+      leaf web-server {
+        config false;
+        type leafref {
+          path "/example:controller/web-server/id";
+        }
+      }
+    }
+  }
+}

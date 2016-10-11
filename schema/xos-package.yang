@@ -42,22 +42,31 @@ module xos-package {
    * Groupings
    */
   grouping package-info {
-    uses meta:yang-package-info;
+    uses meta:yang-package-info {
+      refine version {
+        description "Version of Service Definition";
+      }
+      refine description {
+        description "Description of the Service Package";
+      }
+    }
     container controller {
       leaf model {
-        type yang:yang-identifier;
+        type leafref {
+          path "../../model/name";
+        }
         mandatory true;
       }
-      leaf store {
-        type inet:uri;
+      leaf initializer {
+        type meta:filename;
+      }
+      leaf synchronizer {
+        type meta:filename;
       }
       leaf public-key {
         type meta:filename;
       }
       leaf private-key {
-        type meta:filename;
-      }
-      leaf synchronizer {
         type meta:filename;
       }
     }

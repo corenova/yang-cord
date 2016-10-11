@@ -1,0 +1,52 @@
+{
+  "name": "cord-vsg",
+  "version": "1.0.0",
+  "description": "Virtual Subscriber Gateway Controller for CORD",
+  "author": "Peter K. Lee <peter@corenova.com>",
+  "license": "Apache-2.0",
+  "homepage": "http://wiki.opencord.org/",
+  "repository": "corenova/yang-cord",
+  "private": true,
+  "keywords": [
+    "cord",
+    "opencord",
+    "onlab",
+    "xos",
+    "onos",
+    "service",
+    "vsg"
+  ],
+  "controller": {
+    "model": "cord-vsg-service",
+    "initializer": "config",
+    "synchronizer": "./vsg-synchronizer.py",
+    "public-key": "./vsg-service.pub",
+    "private-key": "./vsg-service.key"
+  },
+  "models": {
+    "ietf-yang-types": "yang-js",
+    "cord-tenant": "yang-cord",
+    "xos-controller": "yang-cord",
+    "xos-slice": "yang-cord",
+    "xos-types": "yang-cord",
+    "cord-volt-service": "cord-volt",
+    "cord-vsg-service": "./cord-vsg-service.yang"
+  },
+  "main": "./cord-vsg-service.js",
+  "dependencies": {
+    "yang-js": "^0.16.6",
+    "yang-cord": "../..",
+    "cord-volt": "../cord-volt"
+  },
+  "devDependencies": {
+    "config": "^1.21.0",
+    "js-yaml": "^3.6.1",
+    "yang-swagger": "^1.0.5"
+  },
+  "scripts": {
+    "build:api": "yang-swagger -f yaml -o swagger.yaml cord-vsg-service",
+    "build": "npm run build:api",
+    "prepublish": "npm run build",
+    "start": "xos cord-vsg-service"
+  }
+}

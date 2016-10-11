@@ -1,5 +1,5 @@
-module vsg-service {
-  namespace "urn:ietf:params:xml:ns:yang:vsg-service";
+module cord-vsg-service {
+  namespace "urn:ietf:params:xml:ns:yang:cord-vsg-service";
   prefix vsg;
   yang-version 1.1;
 
@@ -7,7 +7,7 @@ module vsg-service {
   import xos-controller  { prefix xos; }
   import xos-slice       { prefix xslice; }
   import xos-types       { prefix xtype; }
-  import volt-service    { prefix volt; }
+  import cord-volt-service { prefix volt; }
 
   organization
     "Open Networking Lab (CORD) / Corenova Technologies";

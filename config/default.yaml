@@ -22,10 +22,6 @@ yang-openapi:info:
     CORD Tenant
     * Subscriber
 
-    XOS Service Models
-    * VOLT Service Controller
-    * VSG Service Controller
-    
   version: '1.0'
   contact:
     name: Peter Lee

@@ -1,4 +1,4 @@
-# Modeler's Guide
+# Modeling Conventions
 
 This is also a **work-in-progress** documentation capturing current
 models for XOS and CORD. It's currently *exploratory* and contains
@@ -13,21 +13,20 @@ the coming days.
 
 ## XOS Data Models
 
-### xos-core 
+### xos-controller
 
-- YANG schema: [xos-core.yang](./xos-core.yang)
+- YANG schema: [xos-controller.yang](./xos-controller.yang)
 - Source reference: [opencord/xos](http://github.com/opencord/xos)
 
-This YANG module is the **primary** module that will house all XOS
-related data models going forward.  The models for these came from
-`xos/core/models` directory in the XOS repository.  It will eventually
-house the `Service` class, the `Tenant` class, etc.  One notable
-convention here is the existence of the `/api/tenant` and
-`/api/service` configuration tree inside this module.  In a sense,
-we're considering this YANG module to be the **master** module that
-all other modules derive from and augments into this module.  You can
-see this *augment* behavior in the
-[cord-core.yang](./cord-core.yang) schema.
+This YANG module is the **primary** module that houses all XOS related
+core data models.  The models for these came from `xos/core/models`
+directory in the XOS repository.  It will eventually house the
+`Service` class, the `Tenant` class, etc.  One notable convention here
+is the existence of the `/api/tenant` and `/api/service` configuration
+tree inside this module.  In a sense, we're considering this YANG
+module to be the **master** module that all other modules derive from
+and augments into this module.  You can see this *augment* behavior in
+the [cord-core.yang](./cord-core.yang) schema.
 
 As we capture more XOS data models, we will likely organize the
 additional models as separate YANG modules, such as `xos-service`,

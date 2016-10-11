@@ -1,0 +1,51 @@
+# Test configuration for VSG service controller
+#
+# Author: Peter K. Lee (peter@corenova.com)
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Apache License, Version 2.0
+# which accompanies this distribution, and is available at
+# http://www.apache.org/licenses/LICENSE-2.0
+
+cord-volt-service:controller:
+  id: 1000
+  name: demo-volt-controller
+  description: |
+    This is a sample demo VOLT controller with mock data
+  
+  # list of OLT devices
+  device: 
+    - name: Mock OLT Device
+      mac: 6c:b0:ce:fb:b1:39
+      uplink:
+        network: 02e6e31a-93f7-48ac-ac41-a043558ae446
+        tag: 222
+      link: # list of ONU connections to this OLT device
+        - serial: some-unique-onu-1
+          mac: 6c:b0:ce:fb:b1:40
+          active: true
+          tag: 432
+        - serial: some-unique-onu-2
+          mac: ff:b0:ce:fb:b1:40
+          active: true
+          tag: 450
+
+  # VOLT agent aggregates ONU connections to a big switch abstraction
+  port: 
+    - id: 605faceb-f5af-4e6d-b205-b67c5ddbc582
+      link: some-unique-onu-1
+    - id: 0293a880-38a0-4cbe-b737-30b4202d522e
+      link: some-unique-onu-2
+
+  # list of unique VOLT subscribers
+  subscriber: 
+    - id: 1
+      tags:
+        outer: 222
+        inner: 432
+      outflow: 605faceb-f5af-4e6d-b205-b67c5ddbc582
+    - id: 2
+      tags:
+        outer: 222
+        inner: 450
+      outflow: 0293a880-38a0-4cbe-b737-30b4202d522e

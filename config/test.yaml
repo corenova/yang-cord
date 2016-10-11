@@ -57,7 +57,7 @@ opnfv-iaas:controller:
 
 # This configuration models two separate ONU/ONT endpoint links
 # (subscribers) connected to a single OLT device.
-volt-service:controller:
+cord-volt-service:controller:
   id: 1000
   name: demo-volt-controller
   description: |
@@ -103,7 +103,7 @@ volt-service:controller:
         inner: 450
       outflow: 0293a880-38a0-4cbe-b737-30b4202d522e
 
-vsg-service:controller:
+cord-vsg-service:controller:
   id: 2000
   name: demo-vsg-controller
   description: |

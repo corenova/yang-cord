@@ -1,5 +1,5 @@
-module volt-service {
-  namespace "urn:ietf:params:xml:ns:yang:volt-service";
+module cord-volt-service {
+  namespace "urn:ietf:params:xml:ns:yang:cord-volt-service";
   prefix volt;
   yang-version 1.1;
 

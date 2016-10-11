@@ -10,15 +10,12 @@
 # which accompanies this distribution, and is available at
 # http://www.apache.org/licenses/LICENSE-2.0
 
-volt-service:controller:
+cord-volt-service:controller:
   id: 1000
   name: demo-volt-controller
   description: |
     This is a sample demo VOLT controller with mock data
   
-  view-url: 'http://some-url'
-  icon-url: 'http://some-url'
-
   # list of OLT devices
   device: 
     - name: Mock OLT Device

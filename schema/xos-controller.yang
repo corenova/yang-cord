@@ -141,7 +141,7 @@ module xos-controller {
     }
   }
   grouping subscriber {
-    uses tenant {
+    uses xos:tenant {
       refine kind { default subscriber; }
     }
     leaf connectivity {
@@ -155,10 +155,10 @@ module xos-controller {
     }
   }
   grouping provider {
-    uses tenant {
+    uses xos:tenant {
       refine kind { default provider; }
     }
-    uses credentials-list;
+    uses xos:credentials-list;
   }
   grouping service {
     uses xos:provider {
@@ -200,7 +200,7 @@ module xos-controller {
          provider should augment this block with service specific
          attributes.";
       key id;
-      uses subscriber;
+      uses xos:subscriber;
       notification subscriber-added;
       notification subscriber-deleted;
     }

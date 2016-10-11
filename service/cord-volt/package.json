@@ -1,0 +1,50 @@
+{
+  "name": "cord-volt",
+  "version": "1.0.0",
+  "description": "VOLT Service Controller for CORD",
+  "author": "Peter K. Lee <peter@corenova.com>",
+  "license": "Apache-2.0",
+  "homepage": "http://wiki.opencord.org/",
+  "repository": "corenova/yang-cord",
+  "private": true,
+  "keywords": [
+    "cord",
+    "opencord",
+    "onlab",
+    "xos",
+    "onos",
+    "service",
+    "volt"
+  ],
+  "controller": {
+    "model": "cord-volt-service",
+    "initializer": "config",
+    "synchronizer": "./volt-synchronizer.py",
+    "public-key": "./volt-service.pub",
+    "private-key": "./volt-service.key"
+  },
+  "models": {
+    "ietf-yang-types": "yang-js",
+    "cord-tenant": "yang-cord",
+    "xos-controller": "yang-cord",
+    "xos-slice": "yang-cord",
+    "xos-types": "yang-cord",
+    "cord-volt-service": "./cord-volt-service.yang"
+  },
+  "main": "./cord-volt-service.js",
+  "dependencies": {
+    "yang-cord": "../..",
+    "yang-js": "^0.16.6"
+  },
+  "devDependencies": {
+    "config": "^1.21.0",
+    "js-yaml": "^3.6.1",
+    "yang-swagger": "^1.0.5"
+  },
+  "scripts": {
+    "build:api": "yang-swagger -f yaml -o swagger.yaml cord-volt-service",
+    "build": "npm run build:api",
+    "prepublish": "npm run build",
+    "start": "xos cord-volt-service"
+  }
+}
