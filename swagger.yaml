@@ -2480,8 +2480,6 @@ definitions:
       - $ref: '#/definitions/xos:credentials-list'
   'xos:tenant':
     type: object
-    required:
-      - id
     properties:
       id:
         type: string
