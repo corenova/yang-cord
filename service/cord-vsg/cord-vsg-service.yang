@@ -7,6 +7,7 @@ module cord-vsg-service {
   import xos-controller  { prefix xos; }
   import xos-slice       { prefix xslice; }
   import xos-types       { prefix xtype; }
+  import cord-tenant     { prefix cord; }
   import cord-volt-service { prefix volt; }
 
   organization
@@ -162,7 +163,7 @@ module cord-vsg-service {
   /*
    * Augmentations to XOS
    */
-  augment "/xos:tenant/cord/subscriber" {
+  augment "/xos:tenant/cord:cord/cord:subscriber" {
     leaf vsg-id {
       type leafref {
         path "/vsg:controller/subscriber/id";
