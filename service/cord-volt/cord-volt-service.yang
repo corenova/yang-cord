@@ -3,10 +3,8 @@ module cord-volt-service {
   prefix volt;
   yang-version 1.1;
 
-  import ietf-yang-types { prefix yang; }
   import cord-tenant     { prefix cord; }
   import xos-controller  { prefix xos; }
-  import xos-slice       { prefix xslice; }
   import xos-types       { prefix xtype; }
   
   organization
@@ -28,7 +26,9 @@ module cord-volt-service {
   feature onos-app-aaa {
     description "System facility to broker authentication between CPE and Radius server.";
   }
-
+  /*
+   * Type definitions
+   */
   typedef bandwidth {
     type xtype:bandwidth;
     default 1000000000; // VOLT bandwidth default is 1Gbps
@@ -38,7 +38,6 @@ module cord-volt-service {
       path "/volt:controller/volt:port/volt:id";
     }
   }
-
   /*
    * Groupings
    */ 
@@ -53,11 +52,11 @@ module cord-volt-service {
           length 1..254;
         }
       }
-      leaf mac { type yang:mac-address; mandatory true; }
+      leaf mac { type xtype:mac-address; mandatory true; }
 
       container uplink {
         description "Uplink description of the OLT device.";
-        leaf network { type yang:uuid; }
+        leaf network { type xtype:network-identifier; }
         leaf tag {
           if-feature onos-app-olt;
           type xtype:vlan;
@@ -74,7 +73,7 @@ module cord-volt-service {
         key serial;
         unique tag;
       
-        leaf mac    { type yang:mac-address; mandatory true; }
+        leaf mac    { type xtype:mac-address; mandatory true; }
         leaf serial { type string; mandatory true; }
         leaf active { type boolean; default false; }
         leaf tag {
@@ -143,9 +142,6 @@ module cord-volt-service {
       augment "subscriber" { uses volt:subscriber; }
     }
     // additional service specific configurations
-    container slice {
-      uses xslice:slice;
-    }
     uses devices-list;
     list port {
       description
@@ -153,7 +149,7 @@ module cord-volt-service {
       key id;
       leaf id {
         description "OpenFlow Port ID";
-        type yang:uuid;
+        type xtype:flow-identifier;
         mandatory true;
       }
       leaf link {
@@ -169,16 +165,15 @@ module cord-volt-service {
     }
   }
   /*
-   * Augmentations to XOS
+   * Augmentations to CORD Tenant in XOS
    */
   augment "/xos:tenant/cord:cord/cord:subscriber" {
-    leaf volt-id {
-      type leafref {
-        path "/volt:controller/subscriber/id";
-      }
-    }
     container volt {
-      when "../volt-id";
+      leaf id {
+        type leafref {
+          path "/volt:controller/subscriber/id";
+        }
+      }
       leaf c-tag {
         config false;
         type leafref {

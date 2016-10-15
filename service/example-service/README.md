@@ -76,6 +76,9 @@ The key package attributes for customization are as follows:
 - controller*
 - models*
 
+The `dependencies` section should include `yang-cord` dependency
+mapping information, such as `"yang-cord": "1.3.0"`.
+
 ### Build the Package
 
 ```bash
@@ -89,7 +92,7 @@ specifications for the service controller. In the future, this step
 will likely be replaced with the
 [yang-forge](http://github.com/corenova/yang-forge) utility.
 
-### Test on XOS
+### Testing on XOS
 
 ```bash
 $ NODE_ENV=test npm start

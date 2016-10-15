@@ -1,17 +1,16 @@
-# Modeling Conventions
+# Modeling Guide
 
-This is also a **work-in-progress** documentation capturing current
-models for XOS and CORD. It's currently *exploratory* and contains
+This is a **work-in-progress** documentation capturing current models
+for XOS and CORD. It's currently *exploratory* and contains
 free-flowing commentary regarding observations from reviewing the
 originating reference code repository as well as any deviations and
 recommendations on expressing them as YANG models.
 
-The initial effort is centered around capturing the CORD Subscriber
-model and its dependent models.  We'll be reguarly updating this
-document as we capture additional models from XOS/CORD repository in
-the coming days.
+## Modeling Conventions
 
-## XOS Data Models
+TBD...
+
+## Platform Data Models
 
 ### xos-controller
 
@@ -20,156 +19,191 @@ the coming days.
 
 This YANG module is the **primary** module that houses all XOS related
 core data models.  The models for these came from `xos/core/models`
-directory in the XOS repository.  It will eventually house the
-`Service` class, the `Tenant` class, etc.  One notable convention here
-is the existence of the `/api/tenant` and `/api/service` configuration
-tree inside this module.  In a sense, we're considering this YANG
-module to be the **master** module that all other modules derive from
-and augments into this module.  You can see this *augment* behavior in
-the [cord-core.yang](./cord-core.yang) schema.
+directory in the XOS repository. It currently captures the `Tenant`,
+`Subscriber`, `Provider`, and `Service` models.
 
-As we capture more XOS data models, we will likely organize the
-additional models as separate YANG modules, such as `xos-service`,
-`xos-tenant`, `xos-slice`, etc. which will be *imported* by this
-module.
+This module also provides the `/core`, `/service`, and `/tenant`
+configuration trees which serve as *placeholder* containers for
+additional modules to *augment* additional configuration nodes.
 
-For now, we've captured the `TenantRoot` and `Subscriber` classes.
+When loaded by `xos` (by default) it routes following API endpoints:
 
-This module contains basic placeholder configuration data tree and
-passed into `yang-express`.
+Explicit | Prefixed | Implicit
+--- | --- | ---
+/xos-controller:core    | /xos:core    | /core
+/xos-controller:service | /xos:service | /service
+/xos-controller:tenant  | /xos:tenant  | /tenant
 
-## CORD Data Models
+The contents of these endpoints are dynamically composed based on
+whether additional YANG modules are loaded into the runtime
+environment.
 
-### cord-core
+### xos-slice
 
-- YANG schema: [cord-core.yang](./cord-core.yang)
-- Source reference: [opencord](http://github.com/opencord)
+- YANG schema: [xos-slice.yang](./xos-slice.yang)
+- Source reference: [opencord/xos](http://github.com/opencord/xos)
 
-This YANG module is the **primary** module that will house all CORD
-related data models going forward.  It currently captures the
-`cord-subscriber` configuration tree and *imports* the subscriber
-schema from the `cord-subscriber` YANG module. From a pure data
-modeling perspective, the current originating reference implementation
-has yet to achieve a clean functional separation between XOS and
-CORD. This will be a key area of focus as we attempt to define a clear
-degree of abstraction between the XOS models and CORD models.
+This YANG module provides the `Slice` abstraction and is dynamically
+loaded by the `Service` modules as needed. Internally, it utilizes the
+`opnfv-iaas` YANG module from the
+[OPNFV Promise](http://github.com/opnfv/promise) project for the
+various NFVI resource models.
 
-This module contains subscriber-related configuration data tree and
-passed into `yang-express`.
+It does not contain any configuration nodes at the module itself, but
+instead *augments* into `xos-controller:core` configuration tree as
+well as various `opnfv-iaas:controller` data tree across `compute` and
+`fabric` configuration trees.
 
-There are two main entry-points on the `subscriber` instances.  I've
-defined a `list subscriber` construct directly in the `module
-cord-core` which basically uses the `grouping subscriber-controller`
-data model.  This means that the `cord-core` YANG module itself will
-be the authorative holder of all subscriber instances.  Subsequently,
-I've augmented the `xos` module at the `/api/tenant` configuration
-tree to have a new `cord` tenant container along with a `node:link` to
-the subscriber list within the `cord-core` YANG module.  This
-convention makes it possible to access the `subscriber` instances by
-directly accessing the `cord-core` module, such as
-`/cord-core:subscriber` or via the `xos` module, such as
-`/xos-core:api/tenant/cord/subscriber`.
+When loaded by `xos` it provides the additional API endpoint:
 
-### cord-device
+Explicit | Prefixed | Implicit
+--- | --- | ---
+/xos-controller:core/xos-slice:slice | /xos:core/xslice:slice | /core/slice
 
-- YANG schema: [cord-device.yang](./cord-device.yang)
+### xos-topology
+
+- YANG schema: [xos-topology.yang](./xos-topology.yang)
+- Source reference: [opencord/xos](http://github.com/opencord/xos)
+
+This YANG module provides the `Deployment`, `Site`, `Node`, `User`,
+and `Template` models. They are currently available as conceptual
+entities that can be utilized for managing the topology model for
+a given platform deployment.
+
+It does not contain any configuration nodes at the module itself, but
+instead *augments* into `xos-controller:core` configuration tree.
+
+When loaded by `xos` it provides the additional API endpoints:
+
+Explicit | Prefixed | Implicit
+--- | --- | ---
+/xos-controller:core/xos-topology:deployment | /xos:core/xtop:deployment | /core/deployment
+/xos-controller:core/xos-topology:site       | /xos:core/xtop:site       | /core/site
+/xos-controller:core/xos-topology:node       | /xos:core/xtop:node       | /core/node
+/xos-controller:core/xos-topology:user       | /xos:core/xtop:user       | /core/user
+/xos-controller:core/xos-topology:template   | /xos:core/xtop:template   | /core/template
+
+### xos-types
+
+- YANG schema: [xos-types.yang](./xos-types.yang)
+- Source reference: [opencord/xos](http://github.com/opencord/xos)
+
+This YANG module provides various common type definitions used within
+XOS. The following definitions are provided:
+
+- unique-identifier
+- flow-identifier
+- network-identifier
+- mac-address
+- bandwidth
+- vlan
+- isoluation
+- access-role
+- certificate
+
+It is *imported* by various YANG modules within the project to ensure
+appropriate type validation mappings.
+
+It does not contain any configuration tree nodes within the module.
+
+### xos-package
+
+- YANG schema: [xos-package.yang](./xos-package.yang)
+- Source reference: [opencord/xos](http://github.com/opencord/xos)
+
+This YANG module provides the `Package` model for enabling XOS
+Controller to assemble and on-board various `Service` packages. It is
+still very much *work-in-progress* and currently not utilized in the
+project. Eventually, it will be integrated with
+[yang-forge](http://github.com/corenova/yang-forge) packaging tool and
+play an important role in building, deploying, and publishing the
+various XOS/CORD specific `Service` packages into a centralized
+repository.
+
+### cord-tenant
+
+- YANG schema: [cord-tenant.yang](./cord-tenant.yang)
 - Source reference: [opencord/olt](http://github.com/opencord/olt)
 
-This YANG module is based on the `CordDevice` class found inside the
-`subscriber.py` (API) module implementation.  I think this particular
-model is rather under-developed and currently not placed in the right
-place (shouldn't be inside `subscriber.py` which should really just be
-the controller definitions).  This module has a potential to be
-leveraged more effectively if the goal is for this to become one the
-the core CORD models from which other devices inherit from (which I'm
-guessing it will be).
+This YANG module provides the `Subscriber` model for representing the
+CORD Tenant. It contains basic properties for describing the CORD
+Subscriber but its main role is to serve as a *placeholder* entity for
+various `Service` packages to dynamically *augment* service-specific
+attributes into the CORD Subscriber entity.
 
-We will need to review its association with the `cord-subscriber`
-model and better understand its role in relation with other *device*
-oriented data models.
+It does not contain any configuration nodes at the module itself, but
+instead *augments* into `xos-controller:tenant` configuration tree.
 
-This module provides *export definitions* and does not contain any
-configuration data tree.
+When loaded by `xos` it provides the additional API endpoints:
 
-### cord-subscriber
+Explicit | Prefixed | Implicit
+--- | --- | ---
+/xos-controller:tenant/cord-tenant:cord | /xos:tenant/cord:cord | /tenant/cord
+/xos-controller:tenant/cord-tenant:cord/subscriber | /xos:tenant/cord:cord/subscriber | /tenant/cord/subscriber
 
-- YANG schema: [cord-subscriber.yang](./schema/cord-subscriber.yang)
+It essentially serves as the primary entity for mapping the CORD
+Subscriber to one or more `Service` subscriptions.
+
+## Service Data Models
+
+The following `Service` models are currently provided inside the
+`yang-cord` repository and demonstrates how to assemble/compose a new
+`Service` to be deployed into the XOS Controller. For additional
+information regarding [Composing Services](../service/README.md) be
+sure to review the documentation found inside the `service` folder.
+
+### cord-volt-service
+
+- YANG schema: [cord-volt-service.yang](../service/cord-volt/cord-volt-service.yang)
 - Source reference: [opencord/olt](http://github.com/opencord/olt)
 
-This module contains the heart of the initial modeling exercise.  It
-captures the CORD Subscriber data model (which extends XOS Subscriber
-model, which extends XOS TenantRoot model).  There are two primary
-models: `grouping subscriber` and `grouping subscriber-controller`.
+This YANG module implements the [XOS Service](./xos-controller.yang)
+model and provides the `controller` configuration tree for managing
+the VOLT agent. It currently does **not** augment into
+`xos-controller` but provides the `controller` configuration directly
+by the module.
 
-This module provides *export definitions* and does not contain any
-configuration data tree.
+It further *augments* into
+`xos-controller:tenant/cord/subscriber` entity to add additional
+service-specific attributes.
 
-#### grouping subscriber
+When loaded by `xos` it provides the additional API endpoints:
 
-The 'subscriber' model extends the `xos:subscriber` (from the
-[xos-core.yang](./xos-core.yang)) and mirrors as closely as possible
-the `CordSubscriberRoot` class.  Some deviations were largely around
-the variable name convention where I've replaced all underscore with a
-dash (*upload_speed* is now *upload-speed*).  This is largely to
-comply with YANG convention where the schema is used to model XML
-element structure and underscores are not really used in XML based
-representations (not even sure if it is valid...).
+Explicit | Prefixed | Implicit
+--- | --- | ---
+/cord-volt-service:controller | /volt:controller | N/A
+/cord-volt-service:controller/subscriber | /volt:controller/subscriber | N/A
+/cord-volt-service:controller/device | /volt:controller/device | N/A
+/cord-volt-service:controller/port | /volt:controller/port | N/A
+/xos-controller:tenant/cord-tenant:cord/cord-tenant:subscriber/cord-volt-service:volt | /xos:tenant/cord:cord/cord:subscriber/volt:volt | /tenant/cord/subscriber/volt
 
-The other key deviation is in the organization of the various
-attributes.  Instead of having a simple flat list of properties, I've
-grouped them into related 'services' (pseudo-JSON below):
+### cord-vsg-service
 
-```js
-services: {
-  cdn: {
-    enabled: true
-  },
-  firewall: {
-    enabled: true,
-    rules: []
-  },
-  url-filter: {
-    enabled: true,
-    level: 'PG',
-    rules: []
-  }
-  uverse: {
-    enabled: true
-  }
-}
-```
+- YANG schema: [cord-vsg-service.yang](../service/cord-volt/cord-vsg-service.yang)
+- Source reference: [opencord/vsg](http://github.com/opencord/vsg)
 
-Eventually, I think these four *hard-coded* services will be moved out
-of the `cord-subscriber` data model altogether.  I'm not sure what
-*on-boarded* services actually implement these features but it should
-be augmented by those individual service's YANG models into the
-cord-subscriber data model.
+This YANG module implements the [XOS Service](./xos-controller.yang)
+model and provides the `controller` configuration tree for managing
+per subscriber VSG instances. It currently does **not** augment into
+`xos-controller` but provides the `controller` configuration directly
+by the module.
 
-#### grouping subscriber-controller
+This YANG module has additional dependencies to the
+`cord-volt-service` as well as the `xos-slice` module. These
+dependencies are dynamicaly resolved during runtime so that the needed
+models are made available to this `Service` module on-demand.
 
-I've internally debated creating this controller model because I
-thought that the necessary attributes were rather effectively captured
-in the prior `grouping subscriber` schema definition.  But the
-presence of the `related` object container in the controller (that
-shouldn't be in the underlying model) convinced me to model it
-according to the `CordSubscriberNew` class found inside
-`api/tenant/cord/subscriber.py`.  This `subscriber-controller` model
-extends the `subscriber` model (inheriting all its attributes) and
-introduces the additional containers for `features`, `identity`, and
-`related`.  Since the main function of the `subscriber-controller`
-model is to essentially layer a *view-like* overlay on top of the
-underlying cord-subscriber model, I've introduced a new *custom
-extension* construct called `node:link`.  This is to capture the fact
-that the various attributes being expressed are simply a reference
-link to the exact same data that is located at a different place
-within the same object.
+It further *augments* into
+`xos-controller:tenant/cord/subscriber` entity to add additional
+service-specific attributes.
 
-One note on the `related` object, it is currently a placeholder
-container and I expect it will remain that way as part of the model.
-The reason is, the attributes that are currently mapped inside all
-come from the `VOLT` service (which then has other attributes from
-`VSG` service, etc.).  When we get to the step of modeling the various
-`Service` entities, we'll capture the necessary *augment* behavior in
-those separate YANG modules (i.e. cord-service-volt.yang,
-cord-service-vsg.yang, etc.).
+When loaded by `xos` it provides the additional API endpoints:
+
+Explicit | Prefixed | Implicit
+--- | --- | ---
+/cord-vsg-service:controller | /vsg:controller | N/A
+/cord-vsg-service:controller/subscriber | /vsg:controller/subscriber | N/A
+/cord-vsg-service:controller/gateway | /vsg:controller/gateway | N/A
+/cord-vsg-service:controller/port | /vsg:controller/port | N/A
+/xos-controller:tenant/cord-tenant:cord/cord-tenant:subscriber/cord-vsg-service:vsg | /xos:tenant/cord:cord/cord:subscriber/vsg:vsg | /tenant/cord/subscriber/vsg
 

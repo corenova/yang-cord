@@ -24,7 +24,6 @@
     "private-key": "./example-service.key"
   },
   "models": {
-    "ietf-yang-types": "yang-js",
     "cord-tenant": "yang-cord",
     "xos-controller": "yang-cord",
     "xos-slice": "yang-cord",
@@ -33,14 +32,13 @@
   },
   "main": "./example-service.js",
   "dependencies": {
-    "yang-js": "^0.16.6",
     "yang-cord": "../.."
   },
   "devDependencies": {
     "coffee-script": ">=1.7.0",
     "config": "^1.21.0",
     "js-yaml": "^3.6.1",
-    "yang-swagger": "^1.0.5"
+    "yang-swagger": "^1.1.0"
   },
   "scripts": {
     "build:src": "coffee -c *.coffee",

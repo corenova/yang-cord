@@ -40,6 +40,18 @@ module xos-types {
       type inet:uri;
     }
   }
+  typedef flow-identifier {
+    description "defines valid format for identifying a flow";
+    type yang:uuid;
+  }
+  typedef network-identifier {
+    description "defines valid format for identifying a network";
+    type yang:uuid;
+  }
+  typedef mac-address {
+    description "defines valid format for mac-address";
+    type yang:mac-address;
+  }
   typedef bandwidth {
     type uint32 {
       range 1000000..max; // should be at least 1 Mbps?  

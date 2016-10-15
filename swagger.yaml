@@ -324,6 +324,2214 @@ paths:
         description: A key uniquely identifying credential item
         type: string
         format: string
+  '/xos-controller:core/xos-slice:slice':
+    post:
+      summary: 'Creates one or more new xos-slice:slice in /xos:core'
+      deprecated: false
+      parameters:
+        - name: 'xos-slice:slice'
+          in: body
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/definitions/xslice:slice'
+                - $ref: '#/definitions/xos:provider'
+                - $ref: '#/definitions/xos:tenant'
+                - $ref: '#/definitions/xos:credentials-list'
+                - required:
+                    - id
+                  properties:
+                    slice-url:
+                      description: A URL describing the purpose of this slice
+                      type: string
+                      format: 'inet:uri'
+                    network:
+                      description: >-
+                        The network that the slice uses to connect to other
+                        slices and to the Internet.
+                      default: none
+                      type: string
+                      format: enumeration
+                    creator:
+                      type: string
+                      format: leafref
+                    service:
+                      description: The service that runs in this slice
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      description: Name of the slice
+                      type: string
+                      format: string
+                    kind:
+                      default: provider
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    instances:
+                      type: array
+                      items:
+                        type: string
+                        format: leafref
+                    networks:
+                      type: array
+                      items:
+                        type: string
+                        format: leafref
+                    ports:
+                      type: array
+                      items:
+                        description: The ports to be exposed for other slices to connect to
+                        type: string
+                        format: uint16
+                    tags:
+                      type: array
+                      items:
+                        type: string
+                        format: string
+                    policy:
+                      type: object
+                      properties:
+                        max-instances:
+                          description: >-
+                            The maximum number of VMs that this slice is allowed
+                            to allocate
+                          type: string
+                          format: uint16
+                        default-flavor:
+                          type: string
+                          format: leafref
+                        default-image:
+                          type: string
+                          format: leafref
+                        default-node:
+                          type: string
+                          format: leafref
+                        mount-data-sets:
+                          default: GenBank
+                          type: string
+                          format: string
+                        default-isolation:
+                          default: vm
+                          type: string
+                          format: 'xtype:isolation'
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+                    scale:
+                      description: Adjust scale for slice(s)
+                      type: object
+                    credential:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          token:
+                            type: string
+                            format: string
+                          password:
+                            type: string
+                            format: 'meta:password'
+                          user:
+                            type: string
+                            format: 'xtype:unique-identifier'
+                          role:
+                            default: user
+                            type: string
+                            format: 'xtype:access-role'
+          required: false
+      responses:
+        '200':
+          description: 'Expected response for creating xos-slice:slice(s) in collection'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/definitions/xslice:slice'
+                - $ref: '#/definitions/xos:provider'
+                - $ref: '#/definitions/xos:tenant'
+                - $ref: '#/definitions/xos:credentials-list'
+                - required:
+                    - id
+                  properties:
+                    slice-url:
+                      description: A URL describing the purpose of this slice
+                      type: string
+                      format: 'inet:uri'
+                    network:
+                      description: >-
+                        The network that the slice uses to connect to other
+                        slices and to the Internet.
+                      default: none
+                      type: string
+                      format: enumeration
+                    creator:
+                      type: string
+                      format: leafref
+                    service:
+                      description: The service that runs in this slice
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      description: Name of the slice
+                      type: string
+                      format: string
+                    kind:
+                      default: provider
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    instances:
+                      type: array
+                      items:
+                        type: string
+                        format: leafref
+                    networks:
+                      type: array
+                      items:
+                        type: string
+                        format: leafref
+                    ports:
+                      type: array
+                      items:
+                        description: The ports to be exposed for other slices to connect to
+                        type: string
+                        format: uint16
+                    tags:
+                      type: array
+                      items:
+                        type: string
+                        format: string
+                    policy:
+                      type: object
+                      properties:
+                        max-instances:
+                          description: >-
+                            The maximum number of VMs that this slice is allowed
+                            to allocate
+                          type: string
+                          format: uint16
+                        default-flavor:
+                          type: string
+                          format: leafref
+                        default-image:
+                          type: string
+                          format: leafref
+                        default-node:
+                          type: string
+                          format: leafref
+                        mount-data-sets:
+                          default: GenBank
+                          type: string
+                          format: string
+                        default-isolation:
+                          default: vm
+                          type: string
+                          format: 'xtype:isolation'
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+                    scale:
+                      description: Adjust scale for slice(s)
+                      type: object
+                    credential:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          token:
+                            type: string
+                            format: string
+                          password:
+                            type: string
+                            format: 'meta:password'
+                          user:
+                            type: string
+                            format: 'xtype:unique-identifier'
+                          role:
+                            default: user
+                            type: string
+                            format: 'xtype:access-role'
+    get:
+      summary: 'List all xos-slice:slices from /xos:core'
+      deprecated: false
+      responses:
+        '200':
+          description: 'Expected response of xos-slice:slices'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/definitions/xslice:slice'
+                - $ref: '#/definitions/xos:provider'
+                - $ref: '#/definitions/xos:tenant'
+                - $ref: '#/definitions/xos:credentials-list'
+                - required:
+                    - id
+                  properties:
+                    slice-url:
+                      description: A URL describing the purpose of this slice
+                      type: string
+                      format: 'inet:uri'
+                    network:
+                      description: >-
+                        The network that the slice uses to connect to other
+                        slices and to the Internet.
+                      default: none
+                      type: string
+                      format: enumeration
+                    creator:
+                      type: string
+                      format: leafref
+                    service:
+                      description: The service that runs in this slice
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      description: Name of the slice
+                      type: string
+                      format: string
+                    kind:
+                      default: provider
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    instances:
+                      type: array
+                      items:
+                        type: string
+                        format: leafref
+                    networks:
+                      type: array
+                      items:
+                        type: string
+                        format: leafref
+                    ports:
+                      type: array
+                      items:
+                        description: The ports to be exposed for other slices to connect to
+                        type: string
+                        format: uint16
+                    tags:
+                      type: array
+                      items:
+                        type: string
+                        format: string
+                    policy:
+                      type: object
+                      properties:
+                        max-instances:
+                          description: >-
+                            The maximum number of VMs that this slice is allowed
+                            to allocate
+                          type: string
+                          format: uint16
+                        default-flavor:
+                          type: string
+                          format: leafref
+                        default-image:
+                          type: string
+                          format: leafref
+                        default-node:
+                          type: string
+                          format: leafref
+                        mount-data-sets:
+                          default: GenBank
+                          type: string
+                          format: string
+                        default-isolation:
+                          default: vm
+                          type: string
+                          format: 'xtype:isolation'
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+                    scale:
+                      description: Adjust scale for slice(s)
+                      type: object
+                    credential:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          token:
+                            type: string
+                            format: string
+                          password:
+                            type: string
+                            format: 'meta:password'
+                          user:
+                            type: string
+                            format: 'xtype:unique-identifier'
+                          role:
+                            default: user
+                            type: string
+                            format: 'xtype:access-role'
+    put:
+      summary: 'Replace the entire xos-slice:slice collection'
+      deprecated: false
+      parameters:
+        - name: 'xos-slice:slice'
+          in: body
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/definitions/xslice:slice'
+                - $ref: '#/definitions/xos:provider'
+                - $ref: '#/definitions/xos:tenant'
+                - $ref: '#/definitions/xos:credentials-list'
+                - required:
+                    - id
+                  properties:
+                    slice-url:
+                      description: A URL describing the purpose of this slice
+                      type: string
+                      format: 'inet:uri'
+                    network:
+                      description: >-
+                        The network that the slice uses to connect to other
+                        slices and to the Internet.
+                      default: none
+                      type: string
+                      format: enumeration
+                    creator:
+                      type: string
+                      format: leafref
+                    service:
+                      description: The service that runs in this slice
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      description: Name of the slice
+                      type: string
+                      format: string
+                    kind:
+                      default: provider
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    instances:
+                      type: array
+                      items:
+                        type: string
+                        format: leafref
+                    networks:
+                      type: array
+                      items:
+                        type: string
+                        format: leafref
+                    ports:
+                      type: array
+                      items:
+                        description: The ports to be exposed for other slices to connect to
+                        type: string
+                        format: uint16
+                    tags:
+                      type: array
+                      items:
+                        type: string
+                        format: string
+                    policy:
+                      type: object
+                      properties:
+                        max-instances:
+                          description: >-
+                            The maximum number of VMs that this slice is allowed
+                            to allocate
+                          type: string
+                          format: uint16
+                        default-flavor:
+                          type: string
+                          format: leafref
+                        default-image:
+                          type: string
+                          format: leafref
+                        default-node:
+                          type: string
+                          format: leafref
+                        mount-data-sets:
+                          default: GenBank
+                          type: string
+                          format: string
+                        default-isolation:
+                          default: vm
+                          type: string
+                          format: 'xtype:isolation'
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+                    scale:
+                      description: Adjust scale for slice(s)
+                      type: object
+                    credential:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          token:
+                            type: string
+                            format: string
+                          password:
+                            type: string
+                            format: 'meta:password'
+                          user:
+                            type: string
+                            format: 'xtype:unique-identifier'
+                          role:
+                            default: user
+                            type: string
+                            format: 'xtype:access-role'
+          required: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: 'Merge items into the xos-slice:slice collection'
+      deprecated: false
+      parameters:
+        - name: 'xos-slice:slice'
+          in: body
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/definitions/xslice:slice'
+                - $ref: '#/definitions/xos:provider'
+                - $ref: '#/definitions/xos:tenant'
+                - $ref: '#/definitions/xos:credentials-list'
+                - required:
+                    - id
+                  properties:
+                    slice-url:
+                      description: A URL describing the purpose of this slice
+                      type: string
+                      format: 'inet:uri'
+                    network:
+                      description: >-
+                        The network that the slice uses to connect to other
+                        slices and to the Internet.
+                      default: none
+                      type: string
+                      format: enumeration
+                    creator:
+                      type: string
+                      format: leafref
+                    service:
+                      description: The service that runs in this slice
+                    id:
+                      type: string
+                      format: 'xtype:unique-identifier'
+                    name:
+                      description: Name of the slice
+                      type: string
+                      format: string
+                    kind:
+                      default: provider
+                      type: string
+                      format: identityref
+                    description:
+                      type: string
+                      format: 'meta:description'
+                    enabled:
+                      default: 'true'
+                      type: string
+                      format: boolean
+                    instances:
+                      type: array
+                      items:
+                        type: string
+                        format: leafref
+                    networks:
+                      type: array
+                      items:
+                        type: string
+                        format: leafref
+                    ports:
+                      type: array
+                      items:
+                        description: The ports to be exposed for other slices to connect to
+                        type: string
+                        format: uint16
+                    tags:
+                      type: array
+                      items:
+                        type: string
+                        format: string
+                    policy:
+                      type: object
+                      properties:
+                        max-instances:
+                          description: >-
+                            The maximum number of VMs that this slice is allowed
+                            to allocate
+                          type: string
+                          format: uint16
+                        default-flavor:
+                          type: string
+                          format: leafref
+                        default-image:
+                          type: string
+                          format: leafref
+                        default-node:
+                          type: string
+                          format: leafref
+                        mount-data-sets:
+                          default: GenBank
+                          type: string
+                          format: string
+                        default-isolation:
+                          default: vm
+                          type: string
+                          format: 'xtype:isolation'
+                    record:
+                      allOf:
+                        - $ref: '#/definitions/xos:record'
+                        - properties:
+                            created:
+                              type: string
+                              format: 'yang:date-and-time'
+                            updated:
+                              type: string
+                              format: 'yang:date-and-time'
+                            enacted:
+                              type: string
+                              format: 'yang:date-and-time'
+                            policed:
+                              type: string
+                              format: 'yang:date-and-time'
+                            writable:
+                              default: 'true'
+                              type: string
+                              format: boolean
+                            locked:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            deleted:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            dirty:
+                              default: 'false'
+                              type: string
+                              format: boolean
+                            sync:
+                              type: object
+                              properties:
+                                progress:
+                                  type: string
+                                  format: enumeration
+                                disabled:
+                                  default: 'false'
+                                  type: string
+                                  format: boolean
+                                enforced:
+                                  default: 'true'
+                                  type: string
+                                  format: boolean
+                                policy:
+                                  type: array
+                                  items:
+                                    type: object
+                            diff:
+                              description: retrieve diff of model state if dirty
+                              type: object
+                            save:
+                              description: trigger save into data store via synchronizer
+                              type: object
+                    scale:
+                      description: Adjust scale for slice(s)
+                      type: object
+                    credential:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          token:
+                            type: string
+                            format: string
+                          password:
+                            type: string
+                            format: 'meta:password'
+                          user:
+                            type: string
+                            format: 'xtype:unique-identifier'
+                          role:
+                            default: user
+                            type: string
+                            format: 'xtype:access-role'
+          required: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+  '/xos-controller:core/xos-slice:slice/{id}':
+    get:
+      summary: 'View detail on xos-slice:slice'
+      deprecated: false
+      responses:
+        '200':
+          description: 'Expected response of xos-slice:slice'
+          schema:
+            allOf:
+              - $ref: '#/definitions/xslice:slice'
+              - $ref: '#/definitions/xos:provider'
+              - $ref: '#/definitions/xos:tenant'
+              - $ref: '#/definitions/xos:credentials-list'
+              - required:
+                  - id
+                properties:
+                  slice-url:
+                    description: A URL describing the purpose of this slice
+                    type: string
+                    format: 'inet:uri'
+                  network:
+                    description: >-
+                      The network that the slice uses to connect to other slices
+                      and to the Internet.
+                    default: none
+                    type: string
+                    format: enumeration
+                  creator:
+                    type: string
+                    format: leafref
+                  service:
+                    description: The service that runs in this slice
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    description: Name of the slice
+                    type: string
+                    format: string
+                  kind:
+                    default: provider
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  instances:
+                    type: array
+                    items:
+                      type: string
+                      format: leafref
+                  networks:
+                    type: array
+                    items:
+                      type: string
+                      format: leafref
+                  ports:
+                    type: array
+                    items:
+                      description: The ports to be exposed for other slices to connect to
+                      type: string
+                      format: uint16
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+                  policy:
+                    type: object
+                    properties:
+                      max-instances:
+                        description: >-
+                          The maximum number of VMs that this slice is allowed
+                          to allocate
+                        type: string
+                        format: uint16
+                      default-flavor:
+                        type: string
+                        format: leafref
+                      default-image:
+                        type: string
+                        format: leafref
+                      default-node:
+                        type: string
+                        format: leafref
+                      mount-data-sets:
+                        default: GenBank
+                        type: string
+                        format: string
+                      default-isolation:
+                        default: vm
+                        type: string
+                        format: 'xtype:isolation'
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+                  scale:
+                    description: Adjust scale for slice(s)
+                    type: object
+                  credential:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        token:
+                          type: string
+                          format: string
+                        password:
+                          type: string
+                          format: 'meta:password'
+                        user:
+                          type: string
+                          format: 'xtype:unique-identifier'
+                        role:
+                          default: user
+                          type: string
+                          format: 'xtype:access-role'
+    put:
+      summary: 'Update details on xos-slice:slice'
+      deprecated: false
+      parameters:
+        - name: 'xos-slice:slice'
+          in: body
+          schema:
+            allOf:
+              - $ref: '#/definitions/xslice:slice'
+              - $ref: '#/definitions/xos:provider'
+              - $ref: '#/definitions/xos:tenant'
+              - $ref: '#/definitions/xos:credentials-list'
+              - required:
+                  - id
+                properties:
+                  slice-url:
+                    description: A URL describing the purpose of this slice
+                    type: string
+                    format: 'inet:uri'
+                  network:
+                    description: >-
+                      The network that the slice uses to connect to other slices
+                      and to the Internet.
+                    default: none
+                    type: string
+                    format: enumeration
+                  creator:
+                    type: string
+                    format: leafref
+                  service:
+                    description: The service that runs in this slice
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    description: Name of the slice
+                    type: string
+                    format: string
+                  kind:
+                    default: provider
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  instances:
+                    type: array
+                    items:
+                      type: string
+                      format: leafref
+                  networks:
+                    type: array
+                    items:
+                      type: string
+                      format: leafref
+                  ports:
+                    type: array
+                    items:
+                      description: The ports to be exposed for other slices to connect to
+                      type: string
+                      format: uint16
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+                  policy:
+                    type: object
+                    properties:
+                      max-instances:
+                        description: >-
+                          The maximum number of VMs that this slice is allowed
+                          to allocate
+                        type: string
+                        format: uint16
+                      default-flavor:
+                        type: string
+                        format: leafref
+                      default-image:
+                        type: string
+                        format: leafref
+                      default-node:
+                        type: string
+                        format: leafref
+                      mount-data-sets:
+                        default: GenBank
+                        type: string
+                        format: string
+                      default-isolation:
+                        default: vm
+                        type: string
+                        format: 'xtype:isolation'
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+                  scale:
+                    description: Adjust scale for slice(s)
+                    type: object
+                  credential:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        token:
+                          type: string
+                          format: string
+                        password:
+                          type: string
+                          format: 'meta:password'
+                        user:
+                          type: string
+                          format: 'xtype:unique-identifier'
+                        role:
+                          default: user
+                          type: string
+                          format: 'xtype:access-role'
+          required: false
+      responses:
+        '200':
+          description: 'Expected response of xos-slice:slice'
+          schema:
+            allOf:
+              - $ref: '#/definitions/xslice:slice'
+              - $ref: '#/definitions/xos:provider'
+              - $ref: '#/definitions/xos:tenant'
+              - $ref: '#/definitions/xos:credentials-list'
+              - required:
+                  - id
+                properties:
+                  slice-url:
+                    description: A URL describing the purpose of this slice
+                    type: string
+                    format: 'inet:uri'
+                  network:
+                    description: >-
+                      The network that the slice uses to connect to other slices
+                      and to the Internet.
+                    default: none
+                    type: string
+                    format: enumeration
+                  creator:
+                    type: string
+                    format: leafref
+                  service:
+                    description: The service that runs in this slice
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    description: Name of the slice
+                    type: string
+                    format: string
+                  kind:
+                    default: provider
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  instances:
+                    type: array
+                    items:
+                      type: string
+                      format: leafref
+                  networks:
+                    type: array
+                    items:
+                      type: string
+                      format: leafref
+                  ports:
+                    type: array
+                    items:
+                      description: The ports to be exposed for other slices to connect to
+                      type: string
+                      format: uint16
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+                  policy:
+                    type: object
+                    properties:
+                      max-instances:
+                        description: >-
+                          The maximum number of VMs that this slice is allowed
+                          to allocate
+                        type: string
+                        format: uint16
+                      default-flavor:
+                        type: string
+                        format: leafref
+                      default-image:
+                        type: string
+                        format: leafref
+                      default-node:
+                        type: string
+                        format: leafref
+                      mount-data-sets:
+                        default: GenBank
+                        type: string
+                        format: string
+                      default-isolation:
+                        default: vm
+                        type: string
+                        format: 'xtype:isolation'
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+                  scale:
+                    description: Adjust scale for slice(s)
+                    type: object
+                  credential:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        token:
+                          type: string
+                          format: string
+                        password:
+                          type: string
+                          format: 'meta:password'
+                        user:
+                          type: string
+                          format: 'xtype:unique-identifier'
+                        role:
+                          default: user
+                          type: string
+                          format: 'xtype:access-role'
+    patch:
+      summary: 'Merge details on xos-slice:slice'
+      deprecated: false
+      parameters:
+        - name: 'xos-slice:slice'
+          in: body
+          schema:
+            allOf:
+              - $ref: '#/definitions/xslice:slice'
+              - $ref: '#/definitions/xos:provider'
+              - $ref: '#/definitions/xos:tenant'
+              - $ref: '#/definitions/xos:credentials-list'
+              - required:
+                  - id
+                properties:
+                  slice-url:
+                    description: A URL describing the purpose of this slice
+                    type: string
+                    format: 'inet:uri'
+                  network:
+                    description: >-
+                      The network that the slice uses to connect to other slices
+                      and to the Internet.
+                    default: none
+                    type: string
+                    format: enumeration
+                  creator:
+                    type: string
+                    format: leafref
+                  service:
+                    description: The service that runs in this slice
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    description: Name of the slice
+                    type: string
+                    format: string
+                  kind:
+                    default: provider
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  instances:
+                    type: array
+                    items:
+                      type: string
+                      format: leafref
+                  networks:
+                    type: array
+                    items:
+                      type: string
+                      format: leafref
+                  ports:
+                    type: array
+                    items:
+                      description: The ports to be exposed for other slices to connect to
+                      type: string
+                      format: uint16
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+                  policy:
+                    type: object
+                    properties:
+                      max-instances:
+                        description: >-
+                          The maximum number of VMs that this slice is allowed
+                          to allocate
+                        type: string
+                        format: uint16
+                      default-flavor:
+                        type: string
+                        format: leafref
+                      default-image:
+                        type: string
+                        format: leafref
+                      default-node:
+                        type: string
+                        format: leafref
+                      mount-data-sets:
+                        default: GenBank
+                        type: string
+                        format: string
+                      default-isolation:
+                        default: vm
+                        type: string
+                        format: 'xtype:isolation'
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+                  scale:
+                    description: Adjust scale for slice(s)
+                    type: object
+                  credential:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        token:
+                          type: string
+                          format: string
+                        password:
+                          type: string
+                          format: 'meta:password'
+                        user:
+                          type: string
+                          format: 'xtype:unique-identifier'
+                        role:
+                          default: user
+                          type: string
+                          format: 'xtype:access-role'
+          required: false
+      responses:
+        '200':
+          description: 'Expected response of xos-slice:slice'
+          schema:
+            allOf:
+              - $ref: '#/definitions/xslice:slice'
+              - $ref: '#/definitions/xos:provider'
+              - $ref: '#/definitions/xos:tenant'
+              - $ref: '#/definitions/xos:credentials-list'
+              - required:
+                  - id
+                properties:
+                  slice-url:
+                    description: A URL describing the purpose of this slice
+                    type: string
+                    format: 'inet:uri'
+                  network:
+                    description: >-
+                      The network that the slice uses to connect to other slices
+                      and to the Internet.
+                    default: none
+                    type: string
+                    format: enumeration
+                  creator:
+                    type: string
+                    format: leafref
+                  service:
+                    description: The service that runs in this slice
+                  id:
+                    type: string
+                    format: 'xtype:unique-identifier'
+                  name:
+                    description: Name of the slice
+                    type: string
+                    format: string
+                  kind:
+                    default: provider
+                    type: string
+                    format: identityref
+                  description:
+                    type: string
+                    format: 'meta:description'
+                  enabled:
+                    default: 'true'
+                    type: string
+                    format: boolean
+                  instances:
+                    type: array
+                    items:
+                      type: string
+                      format: leafref
+                  networks:
+                    type: array
+                    items:
+                      type: string
+                      format: leafref
+                  ports:
+                    type: array
+                    items:
+                      description: The ports to be exposed for other slices to connect to
+                      type: string
+                      format: uint16
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                      format: string
+                  policy:
+                    type: object
+                    properties:
+                      max-instances:
+                        description: >-
+                          The maximum number of VMs that this slice is allowed
+                          to allocate
+                        type: string
+                        format: uint16
+                      default-flavor:
+                        type: string
+                        format: leafref
+                      default-image:
+                        type: string
+                        format: leafref
+                      default-node:
+                        type: string
+                        format: leafref
+                      mount-data-sets:
+                        default: GenBank
+                        type: string
+                        format: string
+                      default-isolation:
+                        default: vm
+                        type: string
+                        format: 'xtype:isolation'
+                  record:
+                    allOf:
+                      - $ref: '#/definitions/xos:record'
+                      - properties:
+                          created:
+                            type: string
+                            format: 'yang:date-and-time'
+                          updated:
+                            type: string
+                            format: 'yang:date-and-time'
+                          enacted:
+                            type: string
+                            format: 'yang:date-and-time'
+                          policed:
+                            type: string
+                            format: 'yang:date-and-time'
+                          writable:
+                            default: 'true'
+                            type: string
+                            format: boolean
+                          locked:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          deleted:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          dirty:
+                            default: 'false'
+                            type: string
+                            format: boolean
+                          sync:
+                            type: object
+                            properties:
+                              progress:
+                                type: string
+                                format: enumeration
+                              disabled:
+                                default: 'false'
+                                type: string
+                                format: boolean
+                              enforced:
+                                default: 'true'
+                                type: string
+                                format: boolean
+                              policy:
+                                type: array
+                                items:
+                                  type: object
+                          diff:
+                            description: retrieve diff of model state if dirty
+                            type: object
+                          save:
+                            description: trigger save into data store via synchronizer
+                            type: object
+                  scale:
+                    description: Adjust scale for slice(s)
+                    type: object
+                  credential:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        token:
+                          type: string
+                          format: string
+                        password:
+                          type: string
+                          format: 'meta:password'
+                        user:
+                          type: string
+                          format: 'xtype:unique-identifier'
+                        role:
+                          default: user
+                          type: string
+                          format: 'xtype:access-role'
+    delete:
+      summary: 'Delete xos-slice:slice from /xos:core'
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: 'A key uniquely identifying xos-slice:slice item'
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/xos-slice:slice/{id}/policy':
+    get:
+      summary: View detail on policy
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+    put:
+      summary: Update details on policy
+      deprecated: false
+      parameters:
+        - name: policy
+          in: body
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+          required: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+    patch:
+      summary: Merge details on policy
+      deprecated: false
+      parameters:
+        - name: policy
+          in: body
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+          required: false
+      responses:
+        '200':
+          description: Expected response of policy
+          schema:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: string
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+    delete:
+      summary: 'Delete policy from xos-slice:slice'
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: 'A key uniquely identifying xos-slice:slice item'
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/xos-slice:slice/{id}/scale':
+    post:
+      description: Adjust scale for slice(s)
+      summary: 'Invokes scale in xos-slice:slice'
+      deprecated: false
+      parameters:
+        - name: 'scale:input'
+          in: body
+          schema: {}
+          required: false
+      responses:
+        '200':
+          description: Expected response of scale
+          schema: {}
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: 'A key uniquely identifying xos-slice:slice item'
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/xos-slice:slice/{id}/credential':
+    post:
+      summary: 'Creates one or more new credential in xos-slice:slice'
+      deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
+      responses:
+        '200':
+          description: Expected response for creating credential(s) in collection
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    get:
+      summary: 'List all credentials from xos-slice:slice'
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credentials
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+    put:
+      summary: Replace the entire credential collection
+      deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
+      responses:
+        '201':
+          description: Expected response for replacing collection
+    patch:
+      summary: Merge items into the credential collection
+      deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                token:
+                  type: string
+                  format: string
+                password:
+                  type: string
+                  format: 'meta:password'
+                user:
+                  type: string
+                  format: 'xtype:unique-identifier'
+                role:
+                  default: user
+                  type: string
+                  format: 'xtype:access-role'
+          required: false
+      responses:
+        '201':
+          description: Expected response for merging into collection
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: 'A key uniquely identifying xos-slice:slice item'
+        type: string
+        format: 'xtype:unique-identifier'
+  '/xos-controller:core/xos-slice:slice/{id}/credential/{token}':
+    get:
+      summary: View detail on credential
+      deprecated: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    put:
+      summary: Update details on credential
+      deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    patch:
+      summary: Merge details on credential
+      deprecated: false
+      parameters:
+        - name: credential
+          in: body
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+          required: false
+      responses:
+        '200':
+          description: Expected response of credential
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                format: string
+              password:
+                type: string
+                format: 'meta:password'
+              user:
+                type: string
+                format: 'xtype:unique-identifier'
+              role:
+                default: user
+                type: string
+                format: 'xtype:access-role'
+    delete:
+      summary: 'Delete credential from xos-slice:slice'
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: token
+        in: path
+        required: true
+        description: A key uniquely identifying credential item
+        type: string
+        format: string
+      - name: id
+        in: path
+        required: true
+        description: 'A key uniquely identifying xos-slice:slice item'
+        type: string
+        format: 'xtype:unique-identifier'
   '/xos-controller:core/xos-topology:template':
     post:
       summary: 'Creates one or more new xos-topology:template in /xos:core'
@@ -7203,2193 +9411,6 @@ paths:
         description: 'A key uniquely identifying xos-topology:user item'
         type: string
         format: 'xtype:unique-identifier'
-  '/xos-controller:core/xos-slice:slice':
-    post:
-      summary: 'Creates one or more new xos-slice:slice in /xos:core'
-      deprecated: false
-      parameters:
-        - name: 'xos-slice:slice'
-          in: body
-          schema:
-            type: array
-            items:
-              allOf:
-                - $ref: '#/definitions/xslice:slice'
-                - $ref: '#/definitions/xos:provider'
-                - $ref: '#/definitions/xos:tenant'
-                - $ref: '#/definitions/xos:credentials-list'
-                - required:
-                    - id
-                  properties:
-                    slice-url:
-                      description: A URL describing the purpose of this slice
-                      type: string
-                      format: 'inet:uri'
-                    network:
-                      description: >-
-                        The network that the slice uses to connect to other
-                        slices and to the Internet.
-                      default: none
-                      type: string
-                      format: enumeration
-                    creator:
-                      type: string
-                      format: leafref
-                    service:
-                      description: The service that runs in this slice
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      description: Name of the slice
-                      type: string
-                      format: string
-                    kind:
-                      default: provider
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    instances:
-                      type: array
-                      items:
-                        type: string
-                        format: leafref
-                    networks:
-                      type: array
-                      items:
-                        type: string
-                        format: leafref
-                    ports:
-                      type: array
-                      items:
-                        description: The ports to be exposed for other slices to connect to
-                        type: string
-                        format: uint16
-                    tags:
-                      type: array
-                      items:
-                        type: string
-                        format: string
-                    policy:
-                      type: object
-                      properties:
-                        max-instances:
-                          description: >-
-                            The maximum number of VMs that this slice is allowed
-                            to allocate
-                          type: string
-                          format: uint16
-                        default-flavor:
-                          type: string
-                          format: leafref
-                        default-image:
-                          type: string
-                          format: leafref
-                        default-node:
-                          type: string
-                          format: leafref
-                        mount-data-sets:
-                          default: GenBank
-                          type: string
-                          format: string
-                        default-isolation:
-                          default: vm
-                          type: string
-                          format: 'xtype:isolation'
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
-                    scale:
-                      description: Adjust scale for slice(s)
-                      type: object
-                    credential:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          token:
-                            type: string
-                            format: string
-                          password:
-                            type: string
-                            format: 'meta:password'
-                          user:
-                            type: string
-                            format: 'xtype:unique-identifier'
-                          role:
-                            default: user
-                            type: string
-                            format: 'xtype:access-role'
-          required: false
-      responses:
-        '200':
-          description: 'Expected response for creating xos-slice:slice(s) in collection'
-          schema:
-            type: array
-            items:
-              allOf:
-                - $ref: '#/definitions/xslice:slice'
-                - $ref: '#/definitions/xos:provider'
-                - $ref: '#/definitions/xos:tenant'
-                - $ref: '#/definitions/xos:credentials-list'
-                - required:
-                    - id
-                  properties:
-                    slice-url:
-                      description: A URL describing the purpose of this slice
-                      type: string
-                      format: 'inet:uri'
-                    network:
-                      description: >-
-                        The network that the slice uses to connect to other
-                        slices and to the Internet.
-                      default: none
-                      type: string
-                      format: enumeration
-                    creator:
-                      type: string
-                      format: leafref
-                    service:
-                      description: The service that runs in this slice
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      description: Name of the slice
-                      type: string
-                      format: string
-                    kind:
-                      default: provider
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    instances:
-                      type: array
-                      items:
-                        type: string
-                        format: leafref
-                    networks:
-                      type: array
-                      items:
-                        type: string
-                        format: leafref
-                    ports:
-                      type: array
-                      items:
-                        description: The ports to be exposed for other slices to connect to
-                        type: string
-                        format: uint16
-                    tags:
-                      type: array
-                      items:
-                        type: string
-                        format: string
-                    policy:
-                      type: object
-                      properties:
-                        max-instances:
-                          description: >-
-                            The maximum number of VMs that this slice is allowed
-                            to allocate
-                          type: string
-                          format: uint16
-                        default-flavor:
-                          type: string
-                          format: leafref
-                        default-image:
-                          type: string
-                          format: leafref
-                        default-node:
-                          type: string
-                          format: leafref
-                        mount-data-sets:
-                          default: GenBank
-                          type: string
-                          format: string
-                        default-isolation:
-                          default: vm
-                          type: string
-                          format: 'xtype:isolation'
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
-                    scale:
-                      description: Adjust scale for slice(s)
-                      type: object
-                    credential:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          token:
-                            type: string
-                            format: string
-                          password:
-                            type: string
-                            format: 'meta:password'
-                          user:
-                            type: string
-                            format: 'xtype:unique-identifier'
-                          role:
-                            default: user
-                            type: string
-                            format: 'xtype:access-role'
-    get:
-      summary: 'List all xos-slice:slices from /xos:core'
-      deprecated: false
-      responses:
-        '200':
-          description: 'Expected response of xos-slice:slices'
-          schema:
-            type: array
-            items:
-              allOf:
-                - $ref: '#/definitions/xslice:slice'
-                - $ref: '#/definitions/xos:provider'
-                - $ref: '#/definitions/xos:tenant'
-                - $ref: '#/definitions/xos:credentials-list'
-                - required:
-                    - id
-                  properties:
-                    slice-url:
-                      description: A URL describing the purpose of this slice
-                      type: string
-                      format: 'inet:uri'
-                    network:
-                      description: >-
-                        The network that the slice uses to connect to other
-                        slices and to the Internet.
-                      default: none
-                      type: string
-                      format: enumeration
-                    creator:
-                      type: string
-                      format: leafref
-                    service:
-                      description: The service that runs in this slice
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      description: Name of the slice
-                      type: string
-                      format: string
-                    kind:
-                      default: provider
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    instances:
-                      type: array
-                      items:
-                        type: string
-                        format: leafref
-                    networks:
-                      type: array
-                      items:
-                        type: string
-                        format: leafref
-                    ports:
-                      type: array
-                      items:
-                        description: The ports to be exposed for other slices to connect to
-                        type: string
-                        format: uint16
-                    tags:
-                      type: array
-                      items:
-                        type: string
-                        format: string
-                    policy:
-                      type: object
-                      properties:
-                        max-instances:
-                          description: >-
-                            The maximum number of VMs that this slice is allowed
-                            to allocate
-                          type: string
-                          format: uint16
-                        default-flavor:
-                          type: string
-                          format: leafref
-                        default-image:
-                          type: string
-                          format: leafref
-                        default-node:
-                          type: string
-                          format: leafref
-                        mount-data-sets:
-                          default: GenBank
-                          type: string
-                          format: string
-                        default-isolation:
-                          default: vm
-                          type: string
-                          format: 'xtype:isolation'
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
-                    scale:
-                      description: Adjust scale for slice(s)
-                      type: object
-                    credential:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          token:
-                            type: string
-                            format: string
-                          password:
-                            type: string
-                            format: 'meta:password'
-                          user:
-                            type: string
-                            format: 'xtype:unique-identifier'
-                          role:
-                            default: user
-                            type: string
-                            format: 'xtype:access-role'
-    put:
-      summary: 'Replace the entire xos-slice:slice collection'
-      deprecated: false
-      parameters:
-        - name: 'xos-slice:slice'
-          in: body
-          schema:
-            type: array
-            items:
-              allOf:
-                - $ref: '#/definitions/xslice:slice'
-                - $ref: '#/definitions/xos:provider'
-                - $ref: '#/definitions/xos:tenant'
-                - $ref: '#/definitions/xos:credentials-list'
-                - required:
-                    - id
-                  properties:
-                    slice-url:
-                      description: A URL describing the purpose of this slice
-                      type: string
-                      format: 'inet:uri'
-                    network:
-                      description: >-
-                        The network that the slice uses to connect to other
-                        slices and to the Internet.
-                      default: none
-                      type: string
-                      format: enumeration
-                    creator:
-                      type: string
-                      format: leafref
-                    service:
-                      description: The service that runs in this slice
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      description: Name of the slice
-                      type: string
-                      format: string
-                    kind:
-                      default: provider
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    instances:
-                      type: array
-                      items:
-                        type: string
-                        format: leafref
-                    networks:
-                      type: array
-                      items:
-                        type: string
-                        format: leafref
-                    ports:
-                      type: array
-                      items:
-                        description: The ports to be exposed for other slices to connect to
-                        type: string
-                        format: uint16
-                    tags:
-                      type: array
-                      items:
-                        type: string
-                        format: string
-                    policy:
-                      type: object
-                      properties:
-                        max-instances:
-                          description: >-
-                            The maximum number of VMs that this slice is allowed
-                            to allocate
-                          type: string
-                          format: uint16
-                        default-flavor:
-                          type: string
-                          format: leafref
-                        default-image:
-                          type: string
-                          format: leafref
-                        default-node:
-                          type: string
-                          format: leafref
-                        mount-data-sets:
-                          default: GenBank
-                          type: string
-                          format: string
-                        default-isolation:
-                          default: vm
-                          type: string
-                          format: 'xtype:isolation'
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
-                    scale:
-                      description: Adjust scale for slice(s)
-                      type: object
-                    credential:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          token:
-                            type: string
-                            format: string
-                          password:
-                            type: string
-                            format: 'meta:password'
-                          user:
-                            type: string
-                            format: 'xtype:unique-identifier'
-                          role:
-                            default: user
-                            type: string
-                            format: 'xtype:access-role'
-          required: false
-      responses:
-        '201':
-          description: Expected response for replacing collection
-    patch:
-      summary: 'Merge items into the xos-slice:slice collection'
-      deprecated: false
-      parameters:
-        - name: 'xos-slice:slice'
-          in: body
-          schema:
-            type: array
-            items:
-              allOf:
-                - $ref: '#/definitions/xslice:slice'
-                - $ref: '#/definitions/xos:provider'
-                - $ref: '#/definitions/xos:tenant'
-                - $ref: '#/definitions/xos:credentials-list'
-                - required:
-                    - id
-                  properties:
-                    slice-url:
-                      description: A URL describing the purpose of this slice
-                      type: string
-                      format: 'inet:uri'
-                    network:
-                      description: >-
-                        The network that the slice uses to connect to other
-                        slices and to the Internet.
-                      default: none
-                      type: string
-                      format: enumeration
-                    creator:
-                      type: string
-                      format: leafref
-                    service:
-                      description: The service that runs in this slice
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      description: Name of the slice
-                      type: string
-                      format: string
-                    kind:
-                      default: provider
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    instances:
-                      type: array
-                      items:
-                        type: string
-                        format: leafref
-                    networks:
-                      type: array
-                      items:
-                        type: string
-                        format: leafref
-                    ports:
-                      type: array
-                      items:
-                        description: The ports to be exposed for other slices to connect to
-                        type: string
-                        format: uint16
-                    tags:
-                      type: array
-                      items:
-                        type: string
-                        format: string
-                    policy:
-                      type: object
-                      properties:
-                        max-instances:
-                          description: >-
-                            The maximum number of VMs that this slice is allowed
-                            to allocate
-                          type: string
-                          format: uint16
-                        default-flavor:
-                          type: string
-                          format: leafref
-                        default-image:
-                          type: string
-                          format: leafref
-                        default-node:
-                          type: string
-                          format: leafref
-                        mount-data-sets:
-                          default: GenBank
-                          type: string
-                          format: string
-                        default-isolation:
-                          default: vm
-                          type: string
-                          format: 'xtype:isolation'
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
-                    scale:
-                      description: Adjust scale for slice(s)
-                      type: object
-                    credential:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          token:
-                            type: string
-                            format: string
-                          password:
-                            type: string
-                            format: 'meta:password'
-                          user:
-                            type: string
-                            format: 'xtype:unique-identifier'
-                          role:
-                            default: user
-                            type: string
-                            format: 'xtype:access-role'
-          required: false
-      responses:
-        '201':
-          description: Expected response for merging into collection
-  '/xos-controller:core/xos-slice:slice/{id}':
-    get:
-      summary: 'View detail on xos-slice:slice'
-      deprecated: false
-      responses:
-        '200':
-          description: 'Expected response of xos-slice:slice'
-          schema:
-            allOf:
-              - $ref: '#/definitions/xslice:slice'
-              - $ref: '#/definitions/xos:provider'
-              - $ref: '#/definitions/xos:tenant'
-              - $ref: '#/definitions/xos:credentials-list'
-              - required:
-                  - id
-                properties:
-                  slice-url:
-                    description: A URL describing the purpose of this slice
-                    type: string
-                    format: 'inet:uri'
-                  network:
-                    description: >-
-                      The network that the slice uses to connect to other slices
-                      and to the Internet.
-                    default: none
-                    type: string
-                    format: enumeration
-                  creator:
-                    type: string
-                    format: leafref
-                  service:
-                    description: The service that runs in this slice
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    description: Name of the slice
-                    type: string
-                    format: string
-                  kind:
-                    default: provider
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  instances:
-                    type: array
-                    items:
-                      type: string
-                      format: leafref
-                  networks:
-                    type: array
-                    items:
-                      type: string
-                      format: leafref
-                  ports:
-                    type: array
-                    items:
-                      description: The ports to be exposed for other slices to connect to
-                      type: string
-                      format: uint16
-                  tags:
-                    type: array
-                    items:
-                      type: string
-                      format: string
-                  policy:
-                    type: object
-                    properties:
-                      max-instances:
-                        description: >-
-                          The maximum number of VMs that this slice is allowed
-                          to allocate
-                        type: string
-                        format: uint16
-                      default-flavor:
-                        type: string
-                        format: leafref
-                      default-image:
-                        type: string
-                        format: leafref
-                      default-node:
-                        type: string
-                        format: leafref
-                      mount-data-sets:
-                        default: GenBank
-                        type: string
-                        format: string
-                      default-isolation:
-                        default: vm
-                        type: string
-                        format: 'xtype:isolation'
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
-                  scale:
-                    description: Adjust scale for slice(s)
-                    type: object
-                  credential:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        token:
-                          type: string
-                          format: string
-                        password:
-                          type: string
-                          format: 'meta:password'
-                        user:
-                          type: string
-                          format: 'xtype:unique-identifier'
-                        role:
-                          default: user
-                          type: string
-                          format: 'xtype:access-role'
-    put:
-      summary: 'Update details on xos-slice:slice'
-      deprecated: false
-      parameters:
-        - name: 'xos-slice:slice'
-          in: body
-          schema:
-            allOf:
-              - $ref: '#/definitions/xslice:slice'
-              - $ref: '#/definitions/xos:provider'
-              - $ref: '#/definitions/xos:tenant'
-              - $ref: '#/definitions/xos:credentials-list'
-              - required:
-                  - id
-                properties:
-                  slice-url:
-                    description: A URL describing the purpose of this slice
-                    type: string
-                    format: 'inet:uri'
-                  network:
-                    description: >-
-                      The network that the slice uses to connect to other slices
-                      and to the Internet.
-                    default: none
-                    type: string
-                    format: enumeration
-                  creator:
-                    type: string
-                    format: leafref
-                  service:
-                    description: The service that runs in this slice
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    description: Name of the slice
-                    type: string
-                    format: string
-                  kind:
-                    default: provider
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  instances:
-                    type: array
-                    items:
-                      type: string
-                      format: leafref
-                  networks:
-                    type: array
-                    items:
-                      type: string
-                      format: leafref
-                  ports:
-                    type: array
-                    items:
-                      description: The ports to be exposed for other slices to connect to
-                      type: string
-                      format: uint16
-                  tags:
-                    type: array
-                    items:
-                      type: string
-                      format: string
-                  policy:
-                    type: object
-                    properties:
-                      max-instances:
-                        description: >-
-                          The maximum number of VMs that this slice is allowed
-                          to allocate
-                        type: string
-                        format: uint16
-                      default-flavor:
-                        type: string
-                        format: leafref
-                      default-image:
-                        type: string
-                        format: leafref
-                      default-node:
-                        type: string
-                        format: leafref
-                      mount-data-sets:
-                        default: GenBank
-                        type: string
-                        format: string
-                      default-isolation:
-                        default: vm
-                        type: string
-                        format: 'xtype:isolation'
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
-                  scale:
-                    description: Adjust scale for slice(s)
-                    type: object
-                  credential:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        token:
-                          type: string
-                          format: string
-                        password:
-                          type: string
-                          format: 'meta:password'
-                        user:
-                          type: string
-                          format: 'xtype:unique-identifier'
-                        role:
-                          default: user
-                          type: string
-                          format: 'xtype:access-role'
-          required: false
-      responses:
-        '200':
-          description: 'Expected response of xos-slice:slice'
-          schema:
-            allOf:
-              - $ref: '#/definitions/xslice:slice'
-              - $ref: '#/definitions/xos:provider'
-              - $ref: '#/definitions/xos:tenant'
-              - $ref: '#/definitions/xos:credentials-list'
-              - required:
-                  - id
-                properties:
-                  slice-url:
-                    description: A URL describing the purpose of this slice
-                    type: string
-                    format: 'inet:uri'
-                  network:
-                    description: >-
-                      The network that the slice uses to connect to other slices
-                      and to the Internet.
-                    default: none
-                    type: string
-                    format: enumeration
-                  creator:
-                    type: string
-                    format: leafref
-                  service:
-                    description: The service that runs in this slice
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    description: Name of the slice
-                    type: string
-                    format: string
-                  kind:
-                    default: provider
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  instances:
-                    type: array
-                    items:
-                      type: string
-                      format: leafref
-                  networks:
-                    type: array
-                    items:
-                      type: string
-                      format: leafref
-                  ports:
-                    type: array
-                    items:
-                      description: The ports to be exposed for other slices to connect to
-                      type: string
-                      format: uint16
-                  tags:
-                    type: array
-                    items:
-                      type: string
-                      format: string
-                  policy:
-                    type: object
-                    properties:
-                      max-instances:
-                        description: >-
-                          The maximum number of VMs that this slice is allowed
-                          to allocate
-                        type: string
-                        format: uint16
-                      default-flavor:
-                        type: string
-                        format: leafref
-                      default-image:
-                        type: string
-                        format: leafref
-                      default-node:
-                        type: string
-                        format: leafref
-                      mount-data-sets:
-                        default: GenBank
-                        type: string
-                        format: string
-                      default-isolation:
-                        default: vm
-                        type: string
-                        format: 'xtype:isolation'
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
-                  scale:
-                    description: Adjust scale for slice(s)
-                    type: object
-                  credential:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        token:
-                          type: string
-                          format: string
-                        password:
-                          type: string
-                          format: 'meta:password'
-                        user:
-                          type: string
-                          format: 'xtype:unique-identifier'
-                        role:
-                          default: user
-                          type: string
-                          format: 'xtype:access-role'
-    patch:
-      summary: 'Merge details on xos-slice:slice'
-      deprecated: false
-      parameters:
-        - name: 'xos-slice:slice'
-          in: body
-          schema:
-            allOf:
-              - $ref: '#/definitions/xslice:slice'
-              - $ref: '#/definitions/xos:provider'
-              - $ref: '#/definitions/xos:tenant'
-              - $ref: '#/definitions/xos:credentials-list'
-              - required:
-                  - id
-                properties:
-                  slice-url:
-                    description: A URL describing the purpose of this slice
-                    type: string
-                    format: 'inet:uri'
-                  network:
-                    description: >-
-                      The network that the slice uses to connect to other slices
-                      and to the Internet.
-                    default: none
-                    type: string
-                    format: enumeration
-                  creator:
-                    type: string
-                    format: leafref
-                  service:
-                    description: The service that runs in this slice
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    description: Name of the slice
-                    type: string
-                    format: string
-                  kind:
-                    default: provider
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  instances:
-                    type: array
-                    items:
-                      type: string
-                      format: leafref
-                  networks:
-                    type: array
-                    items:
-                      type: string
-                      format: leafref
-                  ports:
-                    type: array
-                    items:
-                      description: The ports to be exposed for other slices to connect to
-                      type: string
-                      format: uint16
-                  tags:
-                    type: array
-                    items:
-                      type: string
-                      format: string
-                  policy:
-                    type: object
-                    properties:
-                      max-instances:
-                        description: >-
-                          The maximum number of VMs that this slice is allowed
-                          to allocate
-                        type: string
-                        format: uint16
-                      default-flavor:
-                        type: string
-                        format: leafref
-                      default-image:
-                        type: string
-                        format: leafref
-                      default-node:
-                        type: string
-                        format: leafref
-                      mount-data-sets:
-                        default: GenBank
-                        type: string
-                        format: string
-                      default-isolation:
-                        default: vm
-                        type: string
-                        format: 'xtype:isolation'
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
-                  scale:
-                    description: Adjust scale for slice(s)
-                    type: object
-                  credential:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        token:
-                          type: string
-                          format: string
-                        password:
-                          type: string
-                          format: 'meta:password'
-                        user:
-                          type: string
-                          format: 'xtype:unique-identifier'
-                        role:
-                          default: user
-                          type: string
-                          format: 'xtype:access-role'
-          required: false
-      responses:
-        '200':
-          description: 'Expected response of xos-slice:slice'
-          schema:
-            allOf:
-              - $ref: '#/definitions/xslice:slice'
-              - $ref: '#/definitions/xos:provider'
-              - $ref: '#/definitions/xos:tenant'
-              - $ref: '#/definitions/xos:credentials-list'
-              - required:
-                  - id
-                properties:
-                  slice-url:
-                    description: A URL describing the purpose of this slice
-                    type: string
-                    format: 'inet:uri'
-                  network:
-                    description: >-
-                      The network that the slice uses to connect to other slices
-                      and to the Internet.
-                    default: none
-                    type: string
-                    format: enumeration
-                  creator:
-                    type: string
-                    format: leafref
-                  service:
-                    description: The service that runs in this slice
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    description: Name of the slice
-                    type: string
-                    format: string
-                  kind:
-                    default: provider
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  instances:
-                    type: array
-                    items:
-                      type: string
-                      format: leafref
-                  networks:
-                    type: array
-                    items:
-                      type: string
-                      format: leafref
-                  ports:
-                    type: array
-                    items:
-                      description: The ports to be exposed for other slices to connect to
-                      type: string
-                      format: uint16
-                  tags:
-                    type: array
-                    items:
-                      type: string
-                      format: string
-                  policy:
-                    type: object
-                    properties:
-                      max-instances:
-                        description: >-
-                          The maximum number of VMs that this slice is allowed
-                          to allocate
-                        type: string
-                        format: uint16
-                      default-flavor:
-                        type: string
-                        format: leafref
-                      default-image:
-                        type: string
-                        format: leafref
-                      default-node:
-                        type: string
-                        format: leafref
-                      mount-data-sets:
-                        default: GenBank
-                        type: string
-                        format: string
-                      default-isolation:
-                        default: vm
-                        type: string
-                        format: 'xtype:isolation'
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
-                  scale:
-                    description: Adjust scale for slice(s)
-                    type: object
-                  credential:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        token:
-                          type: string
-                          format: string
-                        password:
-                          type: string
-                          format: 'meta:password'
-                        user:
-                          type: string
-                          format: 'xtype:unique-identifier'
-                        role:
-                          default: user
-                          type: string
-                          format: 'xtype:access-role'
-    delete:
-      summary: 'Delete xos-slice:slice from /xos:core'
-      deprecated: false
-      responses:
-        '204':
-          description: Expected response for delete
-    parameters:
-      - name: id
-        in: path
-        required: true
-        description: 'A key uniquely identifying xos-slice:slice item'
-        type: string
-        format: 'xtype:unique-identifier'
-  '/xos-controller:core/xos-slice:slice/{id}/policy':
-    get:
-      summary: View detail on policy
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of policy
-          schema:
-            type: object
-            properties:
-              max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
-                format: uint16
-              default-flavor:
-                type: string
-                format: leafref
-              default-image:
-                type: string
-                format: leafref
-              default-node:
-                type: string
-                format: leafref
-              mount-data-sets:
-                default: GenBank
-                type: string
-                format: string
-              default-isolation:
-                default: vm
-                type: string
-                format: 'xtype:isolation'
-    put:
-      summary: Update details on policy
-      deprecated: false
-      parameters:
-        - name: policy
-          in: body
-          schema:
-            type: object
-            properties:
-              max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
-                format: uint16
-              default-flavor:
-                type: string
-                format: leafref
-              default-image:
-                type: string
-                format: leafref
-              default-node:
-                type: string
-                format: leafref
-              mount-data-sets:
-                default: GenBank
-                type: string
-                format: string
-              default-isolation:
-                default: vm
-                type: string
-                format: 'xtype:isolation'
-          required: false
-      responses:
-        '200':
-          description: Expected response of policy
-          schema:
-            type: object
-            properties:
-              max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
-                format: uint16
-              default-flavor:
-                type: string
-                format: leafref
-              default-image:
-                type: string
-                format: leafref
-              default-node:
-                type: string
-                format: leafref
-              mount-data-sets:
-                default: GenBank
-                type: string
-                format: string
-              default-isolation:
-                default: vm
-                type: string
-                format: 'xtype:isolation'
-    patch:
-      summary: Merge details on policy
-      deprecated: false
-      parameters:
-        - name: policy
-          in: body
-          schema:
-            type: object
-            properties:
-              max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
-                format: uint16
-              default-flavor:
-                type: string
-                format: leafref
-              default-image:
-                type: string
-                format: leafref
-              default-node:
-                type: string
-                format: leafref
-              mount-data-sets:
-                default: GenBank
-                type: string
-                format: string
-              default-isolation:
-                default: vm
-                type: string
-                format: 'xtype:isolation'
-          required: false
-      responses:
-        '200':
-          description: Expected response of policy
-          schema:
-            type: object
-            properties:
-              max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
-                format: uint16
-              default-flavor:
-                type: string
-                format: leafref
-              default-image:
-                type: string
-                format: leafref
-              default-node:
-                type: string
-                format: leafref
-              mount-data-sets:
-                default: GenBank
-                type: string
-                format: string
-              default-isolation:
-                default: vm
-                type: string
-                format: 'xtype:isolation'
-    delete:
-      summary: 'Delete policy from xos-slice:slice'
-      deprecated: false
-      responses:
-        '204':
-          description: Expected response for delete
-    parameters:
-      - name: id
-        in: path
-        required: true
-        description: 'A key uniquely identifying xos-slice:slice item'
-        type: string
-        format: 'xtype:unique-identifier'
-  '/xos-controller:core/xos-slice:slice/{id}/credential':
-    post:
-      summary: 'Creates one or more new credential in xos-slice:slice'
-      deprecated: false
-      parameters:
-        - name: credential
-          in: body
-          schema:
-            type: array
-            items:
-              type: object
-              properties:
-                token:
-                  type: string
-                  format: string
-                password:
-                  type: string
-                  format: 'meta:password'
-                user:
-                  type: string
-                  format: 'xtype:unique-identifier'
-                role:
-                  default: user
-                  type: string
-                  format: 'xtype:access-role'
-          required: false
-      responses:
-        '200':
-          description: Expected response for creating credential(s) in collection
-          schema:
-            type: array
-            items:
-              type: object
-              properties:
-                token:
-                  type: string
-                  format: string
-                password:
-                  type: string
-                  format: 'meta:password'
-                user:
-                  type: string
-                  format: 'xtype:unique-identifier'
-                role:
-                  default: user
-                  type: string
-                  format: 'xtype:access-role'
-    get:
-      summary: 'List all credentials from xos-slice:slice'
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of credentials
-          schema:
-            type: array
-            items:
-              type: object
-              properties:
-                token:
-                  type: string
-                  format: string
-                password:
-                  type: string
-                  format: 'meta:password'
-                user:
-                  type: string
-                  format: 'xtype:unique-identifier'
-                role:
-                  default: user
-                  type: string
-                  format: 'xtype:access-role'
-    put:
-      summary: Replace the entire credential collection
-      deprecated: false
-      parameters:
-        - name: credential
-          in: body
-          schema:
-            type: array
-            items:
-              type: object
-              properties:
-                token:
-                  type: string
-                  format: string
-                password:
-                  type: string
-                  format: 'meta:password'
-                user:
-                  type: string
-                  format: 'xtype:unique-identifier'
-                role:
-                  default: user
-                  type: string
-                  format: 'xtype:access-role'
-          required: false
-      responses:
-        '201':
-          description: Expected response for replacing collection
-    patch:
-      summary: Merge items into the credential collection
-      deprecated: false
-      parameters:
-        - name: credential
-          in: body
-          schema:
-            type: array
-            items:
-              type: object
-              properties:
-                token:
-                  type: string
-                  format: string
-                password:
-                  type: string
-                  format: 'meta:password'
-                user:
-                  type: string
-                  format: 'xtype:unique-identifier'
-                role:
-                  default: user
-                  type: string
-                  format: 'xtype:access-role'
-          required: false
-      responses:
-        '201':
-          description: Expected response for merging into collection
-    parameters:
-      - name: id
-        in: path
-        required: true
-        description: 'A key uniquely identifying xos-slice:slice item'
-        type: string
-        format: 'xtype:unique-identifier'
-  '/xos-controller:core/xos-slice:slice/{id}/credential/{token}':
-    get:
-      summary: View detail on credential
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of credential
-          schema:
-            type: object
-            properties:
-              token:
-                type: string
-                format: string
-              password:
-                type: string
-                format: 'meta:password'
-              user:
-                type: string
-                format: 'xtype:unique-identifier'
-              role:
-                default: user
-                type: string
-                format: 'xtype:access-role'
-    put:
-      summary: Update details on credential
-      deprecated: false
-      parameters:
-        - name: credential
-          in: body
-          schema:
-            type: object
-            properties:
-              token:
-                type: string
-                format: string
-              password:
-                type: string
-                format: 'meta:password'
-              user:
-                type: string
-                format: 'xtype:unique-identifier'
-              role:
-                default: user
-                type: string
-                format: 'xtype:access-role'
-          required: false
-      responses:
-        '200':
-          description: Expected response of credential
-          schema:
-            type: object
-            properties:
-              token:
-                type: string
-                format: string
-              password:
-                type: string
-                format: 'meta:password'
-              user:
-                type: string
-                format: 'xtype:unique-identifier'
-              role:
-                default: user
-                type: string
-                format: 'xtype:access-role'
-    patch:
-      summary: Merge details on credential
-      deprecated: false
-      parameters:
-        - name: credential
-          in: body
-          schema:
-            type: object
-            properties:
-              token:
-                type: string
-                format: string
-              password:
-                type: string
-                format: 'meta:password'
-              user:
-                type: string
-                format: 'xtype:unique-identifier'
-              role:
-                default: user
-                type: string
-                format: 'xtype:access-role'
-          required: false
-      responses:
-        '200':
-          description: Expected response of credential
-          schema:
-            type: object
-            properties:
-              token:
-                type: string
-                format: string
-              password:
-                type: string
-                format: 'meta:password'
-              user:
-                type: string
-                format: 'xtype:unique-identifier'
-              role:
-                default: user
-                type: string
-                format: 'xtype:access-role'
-    delete:
-      summary: 'Delete credential from xos-slice:slice'
-      deprecated: false
-      responses:
-        '204':
-          description: Expected response for delete
-    parameters:
-      - name: token
-        in: path
-        required: true
-        description: A key uniquely identifying credential item
-        type: string
-        format: string
-      - name: id
-        in: path
-        required: true
-        description: 'A key uniquely identifying xos-slice:slice item'
-        type: string
-        format: 'xtype:unique-identifier'
   '/xos-controller:service':
     get:
       description: Primary endpoint for services to augment
@@ -11124,6 +11145,8 @@ definitions:
       - $ref: '#/definitions/xos:credentials-list'
   'xos:tenant':
     type: object
+    required:
+      - id
     properties:
       id:
         type: string
@@ -11226,6 +11249,88 @@ definitions:
                 - admin
                 - staff
                 - user
+  'xslice:slice':
+    description: >-
+      A slice is a logically centralized container for network and compute
+      resources
+    allOf:
+      - $ref: '#/definitions/xos:provider'
+      - properties:
+          slice-url:
+            description: A URL describing the purpose of this slice
+            type: string
+            format: 'inet:uri'
+          network:
+            description: >-
+              The network that the slice uses to connect to other slices and to
+              the Internet.
+            default: none
+            type: string
+            format: enumeration
+            enum:
+              - none
+              - host
+              - bridged
+              - noauto
+          creator:
+            type: string
+            format: leafref
+          service:
+            description: The service that runs in this slice
+          instances:
+            type: array
+            items:
+              type: string
+              format: leafref
+          networks:
+            type: array
+            items:
+              type: string
+              format: leafref
+          ports:
+            type: array
+            items:
+              description: The ports to be exposed for other slices to connect to
+              type: integer
+              format: uint16
+          tags:
+            type: array
+            items:
+              type: string
+              format: string
+          policy:
+            type: object
+            properties:
+              max-instances:
+                description: >-
+                  The maximum number of VMs that this slice is allowed to
+                  allocate
+                type: integer
+                format: uint16
+              default-flavor:
+                type: string
+                format: leafref
+              default-image:
+                type: string
+                format: leafref
+              default-node:
+                type: string
+                format: leafref
+              mount-data-sets:
+                default: GenBank
+                type: string
+                format: string
+              default-isolation:
+                default: vm
+                type: string
+                format: 'xtype:isolation'
+                enum:
+                  - vm
+                  - lxc
+                  - hybrid
+          scale:
+            description: Adjust scale for slice(s)
+            type: object
   'xtop:network-template':
     allOf:
       - $ref: '#/definitions/xos:tenant'
@@ -11377,88 +11482,6 @@ definitions:
               last-login:
                 type: string
                 format: 'yang:date-and-time'
-  'xslice:slice':
-    description: >-
-      A slice is a logically centralized container for network and compute
-      resources
-    allOf:
-      - $ref: '#/definitions/xos:provider'
-      - properties:
-          slice-url:
-            description: A URL describing the purpose of this slice
-            type: string
-            format: 'inet:uri'
-          network:
-            description: >-
-              The network that the slice uses to connect to other slices and to
-              the Internet.
-            default: none
-            type: string
-            format: enumeration
-            enum:
-              - none
-              - host
-              - bridged
-              - noauto
-          creator:
-            type: string
-            format: leafref
-          service:
-            description: The service that runs in this slice
-          instances:
-            type: array
-            items:
-              type: string
-              format: leafref
-          networks:
-            type: array
-            items:
-              type: string
-              format: leafref
-          ports:
-            type: array
-            items:
-              description: The ports to be exposed for other slices to connect to
-              type: integer
-              format: uint16
-          tags:
-            type: array
-            items:
-              type: string
-              format: string
-          policy:
-            type: object
-            properties:
-              max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: integer
-                format: uint16
-              default-flavor:
-                type: string
-                format: leafref
-              default-image:
-                type: string
-                format: leafref
-              default-node:
-                type: string
-                format: leafref
-              mount-data-sets:
-                default: GenBank
-                type: string
-                format: string
-              default-isolation:
-                default: vm
-                type: string
-                format: 'xtype:isolation'
-                enum:
-                  - vm
-                  - lxc
-                  - hybrid
-          scale:
-            description: Adjust scale for slice(s)
-            type: object
   'cord:subscriber':
     allOf:
       - $ref: '#/definitions/xos:subscriber'

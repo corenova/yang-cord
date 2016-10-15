@@ -7,7 +7,6 @@ module xos-slice {
   import ietf-inet-types { prefix inet; }
   import opnfv-iaas      { prefix nfvi; }
   import xos-controller  { prefix xos; }
-  import xos-topology    { prefix xtop; }
   import xos-types       { prefix xtype; }
 
   organization

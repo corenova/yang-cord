@@ -4,20 +4,27 @@ var argv = require('minimist')(process.argv.slice(2), {
   boolean: [ 'help' ],
   alias: {
     help: 'h',
+	config: 'c',
 	port: 'p',
-  }
+  },
+  string: [ 'config' ]
 });
 
 if (argv.h === true) {
   var help;
   help  = "  Usage: xos [options] modules...\n\n";
   help += "  Options:\n";
-  help += "    -p, --port <number>   Run XOS Controller on <port>\n";
+  help += "    -c, --config <filename>  Use <filename> to retrieve configuration data (default: uses 'config' directory)\n";
+  help += "    -p, --port <number>      Run XOS Controller on <port>\n";
   console.info(help);
   process.exit();
 }
 
 var config = require('config');
+if (argv.config) {
+  var path = require('path');
+  config = config.util.parseFile(path.resolve(argv.config));
+}
 var express = require('yang-express').eval(config);
 var yaml = require('js-yaml');
 

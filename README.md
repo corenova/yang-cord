@@ -38,19 +38,27 @@ enabled.
 
 _An option `--port` is provided to specify the port to listen on, it can be used with:_
 
+```bash
+$ npm start -- --port 3000
 ```
-npm start -- --port 3000
+
+To run with [test data/config](./config/test.yaml), you can set the
+`NODE_ENV=test` environmental variable:
+
+```bash
+$ NODE_ENV=test npm start
 ```
 
 You can also use the provided `bin/xos` CLI utility directly to start
-an instance of the XOS Controller.
+an instance of the XOS Controller (it's implicitly used in `npm start`).
 
 ```bash
 $ bin/xos -h
   Usage: xos [options]
 
   Options:
-      -p, --port <number>      Run XOS Controller on <port>
+    -c, --config <filename>  Use <filename> to retrieve configuration data (default: uses 'config' directory)
+    -p, --port <number>      Run XOS Controller on <port>
 ```
 
 Using the `bin/xos` CLI utility, you can have flexible control around
@@ -68,6 +76,9 @@ The `bin/xos` CLI utility uses default configurations found in
 ```bash
 $ NODE_ENV=test DEBUG=yang-express bin/xos cord-tenant cord-volt-service cord-vsg-service
 ```
+
+Alternatively, you can specify the `--config` option and load any
+arbitrary configuration data.
 
 During troubleshooting/debugging, it may be helpful to turn on much
 more verbose debug output via setting `DEBUG=yang:*` or even
@@ -88,7 +99,10 @@ actual infrastructure dependencies.
 
 - [Apiary Documentation](http://docs.yangcord.apiary.io)
 - [Composing Services](./service/README.md)
-- [Modeling Conventions](./schema/README.md)
+- [Modeling Guide](./schema/README.md)
+
+For Developers:
+
 - [Using YANG with JavaScript](http://github.com/corenova/yang-js)
 - [Using Model API](http://github.com/corenova/yang-js#model-instance)
 - [Storing Data](http://github.com/corenova/yang-store)
@@ -115,6 +129,15 @@ For additional information on working with XOS/CORD YANG Models, please refer
 to the [Modeling Conventions](./schema/README.md) guide.
 
 ## Service Packages
+
+This repository contains several pre-integrated packages as reference
+examples. Although they are available inside this repository tree,
+they have been fully packaged as independent modules and you can
+perform dev/test/deploy workflows within each of their respective
+package folders. It's recommended to first read the
+[Composing Services](./service/README.md) documentation before
+browsing the various packages to better understand the contained
+assets.
 
 - [cord-volt](./service/cord-volt)
 - [cord-vsg](./service/cord-vsg)

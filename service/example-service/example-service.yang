@@ -3,7 +3,6 @@ module example-service {
   prefix example;
   yang-version 1.1;
 
-  import ietf-yang-types { prefix yang; }
   import cord-tenant     { prefix cord; }
   import xos-controller  { prefix xos; }
   import xos-slice       { prefix xslice; }
@@ -30,7 +29,7 @@ module example-service {
   typedef subscriber-inflow {
     description
       "Valid subscriber input flow for this service";
-    type yang:uuid;
+    type xtype:flow-identifier;
   }
   typedef subscriber-outflow {
     type leafref {
@@ -76,13 +75,12 @@ module example-service {
    * Augmentations to XOS
    */
   augment "/xos:tenant/cord/subscriber" {
-    leaf example-subscriber-id {
-      type leafref {
-        path "/example:controller/subscriber/id";
-      }
-    }
     container example {
-      when "../example-subscriber-id";
+      leaf id {
+        type leafref {
+          path "/example:controller/subscriber/id";
+        }
+      }
       leaf web-server {
         config false;
         type leafref {

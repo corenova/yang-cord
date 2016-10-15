@@ -62,7 +62,7 @@ paths:
                         id:
                           description: OpenFlow Port ID
                           type: string
-                          format: 'yang:uuid'
+                          format: 'xtype:flow-identifier'
                         link:
                           type: string
                           format: leafref
@@ -117,7 +117,7 @@ paths:
                         id:
                           description: OpenFlow Port ID
                           type: string
-                          format: 'yang:uuid'
+                          format: 'xtype:flow-identifier'
                         link:
                           type: string
                           format: leafref
@@ -159,7 +159,7 @@ paths:
                         id:
                           description: OpenFlow Port ID
                           type: string
-                          format: 'yang:uuid'
+                          format: 'xtype:flow-identifier'
                         link:
                           type: string
                           format: leafref
@@ -214,7 +214,7 @@ paths:
                         id:
                           description: OpenFlow Port ID
                           type: string
-                          format: 'yang:uuid'
+                          format: 'xtype:flow-identifier'
                         link:
                           type: string
                           format: leafref
@@ -256,7 +256,7 @@ paths:
                         id:
                           description: OpenFlow Port ID
                           type: string
-                          format: 'yang:uuid'
+                          format: 'xtype:flow-identifier'
                         link:
                           type: string
                           format: leafref
@@ -472,6 +472,20 @@ paths:
       responses:
         '204':
           description: Expected response for delete
+  '/cord-volt-service:controller/slice/scale':
+    post:
+      description: Adjust scale for slice(s)
+      summary: Invokes scale in slice
+      deprecated: false
+      parameters:
+        - name: 'scale:input'
+          in: body
+          schema: {}
+          required: false
+      responses:
+        '200':
+          description: Expected response of scale
+          schema: {}
   '/cord-volt-service:controller/slice/credential':
     post:
       summary: Creates one or more new credential in slice
@@ -744,7 +758,7 @@ paths:
                 id:
                   description: OpenFlow Port ID
                   type: string
-                  format: 'yang:uuid'
+                  format: 'xtype:flow-identifier'
                 link:
                   type: string
                   format: leafref
@@ -766,7 +780,7 @@ paths:
                 id:
                   description: OpenFlow Port ID
                   type: string
-                  format: 'yang:uuid'
+                  format: 'xtype:flow-identifier'
                 link:
                   type: string
                   format: leafref
@@ -790,7 +804,7 @@ paths:
                 id:
                   description: OpenFlow Port ID
                   type: string
-                  format: 'yang:uuid'
+                  format: 'xtype:flow-identifier'
                 link:
                   type: string
                   format: leafref
@@ -817,7 +831,7 @@ paths:
                 id:
                   description: OpenFlow Port ID
                   type: string
-                  format: 'yang:uuid'
+                  format: 'xtype:flow-identifier'
                 link:
                   type: string
                   format: leafref
@@ -848,7 +862,7 @@ paths:
                 id:
                   description: OpenFlow Port ID
                   type: string
-                  format: 'yang:uuid'
+                  format: 'xtype:flow-identifier'
                 link:
                   type: string
                   format: leafref
@@ -876,7 +890,7 @@ paths:
               id:
                 description: OpenFlow Port ID
                 type: string
-                format: 'yang:uuid'
+                format: 'xtype:flow-identifier'
               link:
                 type: string
                 format: leafref
@@ -901,7 +915,7 @@ paths:
               id:
                 description: OpenFlow Port ID
                 type: string
-                format: 'yang:uuid'
+                format: 'xtype:flow-identifier'
               link:
                 type: string
                 format: leafref
@@ -921,7 +935,7 @@ paths:
               id:
                 description: OpenFlow Port ID
                 type: string
-                format: 'yang:uuid'
+                format: 'xtype:flow-identifier'
               link:
                 type: string
                 format: leafref
@@ -946,7 +960,7 @@ paths:
               id:
                 description: OpenFlow Port ID
                 type: string
-                format: 'yang:uuid'
+                format: 'xtype:flow-identifier'
               link:
                 type: string
                 format: leafref
@@ -966,7 +980,7 @@ paths:
               id:
                 description: OpenFlow Port ID
                 type: string
-                format: 'yang:uuid'
+                format: 'xtype:flow-identifier'
               link:
                 type: string
                 format: leafref
@@ -982,7 +996,7 @@ paths:
         required: true
         description: OpenFlow Port ID
         type: string
-        format: 'yang:uuid'
+        format: 'xtype:flow-identifier'
   '/cord-volt-service:controller/keypair':
     post:
       description: collection of public/private key pair(s)
@@ -2411,6 +2425,123 @@ paths:
         description: A key uniquely identifying subscriber item
         type: string
         format: 'xtype:unique-identifier'
+  '/cord-volt-service:controller/subscriber/{id}/cord-volt-service:tags':
+    get:
+      description: |-
+        Each entry represents a unique combination of the OLT uplink VLAN
+        (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+        into the fabric for the subscriber.
+      summary: 'View detail on cord-volt-service:tags'
+      deprecated: false
+      responses:
+        '200':
+          description: 'Expected response of cord-volt-service:tags'
+          schema:
+            description: |-
+              Each entry represents a unique combination of the OLT uplink VLAN
+              (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+              into the fabric for the subscriber.
+            type: object
+            properties:
+              outer:
+                type: string
+                format: leafref
+              inner:
+                type: string
+                format: leafref
+    put:
+      summary: 'Update details on cord-volt-service:tags'
+      deprecated: false
+      parameters:
+        - name: 'cord-volt-service:tags'
+          in: body
+          description: |-
+            Each entry represents a unique combination of the OLT uplink VLAN
+            (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+            into the fabric for the subscriber.
+          schema:
+            description: |-
+              Each entry represents a unique combination of the OLT uplink VLAN
+              (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+              into the fabric for the subscriber.
+            type: object
+            properties:
+              outer:
+                type: string
+                format: leafref
+              inner:
+                type: string
+                format: leafref
+          required: false
+      responses:
+        '200':
+          description: 'Expected response of cord-volt-service:tags'
+          schema:
+            description: |-
+              Each entry represents a unique combination of the OLT uplink VLAN
+              (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+              into the fabric for the subscriber.
+            type: object
+            properties:
+              outer:
+                type: string
+                format: leafref
+              inner:
+                type: string
+                format: leafref
+    patch:
+      summary: 'Merge details on cord-volt-service:tags'
+      deprecated: false
+      parameters:
+        - name: 'cord-volt-service:tags'
+          in: body
+          description: |-
+            Each entry represents a unique combination of the OLT uplink VLAN
+            (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+            into the fabric for the subscriber.
+          schema:
+            description: |-
+              Each entry represents a unique combination of the OLT uplink VLAN
+              (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+              into the fabric for the subscriber.
+            type: object
+            properties:
+              outer:
+                type: string
+                format: leafref
+              inner:
+                type: string
+                format: leafref
+          required: false
+      responses:
+        '200':
+          description: 'Expected response of cord-volt-service:tags'
+          schema:
+            description: |-
+              Each entry represents a unique combination of the OLT uplink VLAN
+              (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+              into the fabric for the subscriber.
+            type: object
+            properties:
+              outer:
+                type: string
+                format: leafref
+              inner:
+                type: string
+                format: leafref
+    delete:
+      summary: 'Delete cord-volt-service:tags from subscriber'
+      deprecated: false
+      responses:
+        '204':
+          description: Expected response for delete
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: A key uniquely identifying subscriber item
+        type: string
+        format: 'xtype:unique-identifier'
   '/cord-volt-service:controller/credential':
     post:
       summary: Creates one or more new credential in service
@@ -2682,14 +2813,14 @@ paths:
                       format: string
                     mac:
                       type: string
-                      format: 'yang:mac-address'
+                      format: 'xtype:mac-address'
                     uplink:
                       description: Uplink description of the OLT device.
                       type: object
                       properties:
                         network:
                           type: string
-                          format: 'yang:uuid'
+                          format: 'xtype:network-identifier'
                         tag:
                           description: >-
                             Represents S-Tag for instructing OLT to associate a
@@ -2713,7 +2844,7 @@ paths:
                         properties:
                           mac:
                             type: string
-                            format: 'yang:mac-address'
+                            format: 'xtype:mac-address'
                           serial:
                             type: string
                             format: string
@@ -2748,14 +2879,14 @@ paths:
                       format: string
                     mac:
                       type: string
-                      format: 'yang:mac-address'
+                      format: 'xtype:mac-address'
                     uplink:
                       description: Uplink description of the OLT device.
                       type: object
                       properties:
                         network:
                           type: string
-                          format: 'yang:uuid'
+                          format: 'xtype:network-identifier'
                         tag:
                           description: >-
                             Represents S-Tag for instructing OLT to associate a
@@ -2779,7 +2910,7 @@ paths:
                         properties:
                           mac:
                             type: string
-                            format: 'yang:mac-address'
+                            format: 'xtype:mac-address'
                           serial:
                             type: string
                             format: string
@@ -2816,14 +2947,14 @@ paths:
                       format: string
                     mac:
                       type: string
-                      format: 'yang:mac-address'
+                      format: 'xtype:mac-address'
                     uplink:
                       description: Uplink description of the OLT device.
                       type: object
                       properties:
                         network:
                           type: string
-                          format: 'yang:uuid'
+                          format: 'xtype:network-identifier'
                         tag:
                           description: >-
                             Represents S-Tag for instructing OLT to associate a
@@ -2847,7 +2978,7 @@ paths:
                         properties:
                           mac:
                             type: string
-                            format: 'yang:mac-address'
+                            format: 'xtype:mac-address'
                           serial:
                             type: string
                             format: string
@@ -2885,14 +3016,14 @@ paths:
                       format: string
                     mac:
                       type: string
-                      format: 'yang:mac-address'
+                      format: 'xtype:mac-address'
                     uplink:
                       description: Uplink description of the OLT device.
                       type: object
                       properties:
                         network:
                           type: string
-                          format: 'yang:uuid'
+                          format: 'xtype:network-identifier'
                         tag:
                           description: >-
                             Represents S-Tag for instructing OLT to associate a
@@ -2916,7 +3047,7 @@ paths:
                         properties:
                           mac:
                             type: string
-                            format: 'yang:mac-address'
+                            format: 'xtype:mac-address'
                           serial:
                             type: string
                             format: string
@@ -2958,14 +3089,14 @@ paths:
                       format: string
                     mac:
                       type: string
-                      format: 'yang:mac-address'
+                      format: 'xtype:mac-address'
                     uplink:
                       description: Uplink description of the OLT device.
                       type: object
                       properties:
                         network:
                           type: string
-                          format: 'yang:uuid'
+                          format: 'xtype:network-identifier'
                         tag:
                           description: >-
                             Represents S-Tag for instructing OLT to associate a
@@ -2989,7 +3120,7 @@ paths:
                         properties:
                           mac:
                             type: string
-                            format: 'yang:mac-address'
+                            format: 'xtype:mac-address'
                           serial:
                             type: string
                             format: string
@@ -3030,14 +3161,14 @@ paths:
                     format: string
                   mac:
                     type: string
-                    format: 'yang:mac-address'
+                    format: 'xtype:mac-address'
                   uplink:
                     description: Uplink description of the OLT device.
                     type: object
                     properties:
                       network:
                         type: string
-                        format: 'yang:uuid'
+                        format: 'xtype:network-identifier'
                       tag:
                         description: >-
                           Represents S-Tag for instructing OLT to associate a
@@ -3061,7 +3192,7 @@ paths:
                       properties:
                         mac:
                           type: string
-                          format: 'yang:mac-address'
+                          format: 'xtype:mac-address'
                         serial:
                           type: string
                           format: string
@@ -3097,14 +3228,14 @@ paths:
                     format: string
                   mac:
                     type: string
-                    format: 'yang:mac-address'
+                    format: 'xtype:mac-address'
                   uplink:
                     description: Uplink description of the OLT device.
                     type: object
                     properties:
                       network:
                         type: string
-                        format: 'yang:uuid'
+                        format: 'xtype:network-identifier'
                       tag:
                         description: >-
                           Represents S-Tag for instructing OLT to associate a
@@ -3128,7 +3259,7 @@ paths:
                       properties:
                         mac:
                           type: string
-                          format: 'yang:mac-address'
+                          format: 'xtype:mac-address'
                         serial:
                           type: string
                           format: string
@@ -3161,14 +3292,14 @@ paths:
                     format: string
                   mac:
                     type: string
-                    format: 'yang:mac-address'
+                    format: 'xtype:mac-address'
                   uplink:
                     description: Uplink description of the OLT device.
                     type: object
                     properties:
                       network:
                         type: string
-                        format: 'yang:uuid'
+                        format: 'xtype:network-identifier'
                       tag:
                         description: >-
                           Represents S-Tag for instructing OLT to associate a
@@ -3192,7 +3323,7 @@ paths:
                       properties:
                         mac:
                           type: string
-                          format: 'yang:mac-address'
+                          format: 'xtype:mac-address'
                         serial:
                           type: string
                           format: string
@@ -3228,14 +3359,14 @@ paths:
                     format: string
                   mac:
                     type: string
-                    format: 'yang:mac-address'
+                    format: 'xtype:mac-address'
                   uplink:
                     description: Uplink description of the OLT device.
                     type: object
                     properties:
                       network:
                         type: string
-                        format: 'yang:uuid'
+                        format: 'xtype:network-identifier'
                       tag:
                         description: >-
                           Represents S-Tag for instructing OLT to associate a
@@ -3259,7 +3390,7 @@ paths:
                       properties:
                         mac:
                           type: string
-                          format: 'yang:mac-address'
+                          format: 'xtype:mac-address'
                         serial:
                           type: string
                           format: string
@@ -3292,14 +3423,14 @@ paths:
                     format: string
                   mac:
                     type: string
-                    format: 'yang:mac-address'
+                    format: 'xtype:mac-address'
                   uplink:
                     description: Uplink description of the OLT device.
                     type: object
                     properties:
                       network:
                         type: string
-                        format: 'yang:uuid'
+                        format: 'xtype:network-identifier'
                       tag:
                         description: >-
                           Represents S-Tag for instructing OLT to associate a
@@ -3323,7 +3454,7 @@ paths:
                       properties:
                         mac:
                           type: string
-                          format: 'yang:mac-address'
+                          format: 'xtype:mac-address'
                         serial:
                           type: string
                           format: string
@@ -3351,7 +3482,7 @@ paths:
         required: true
         description: A key uniquely identifying device item
         type: string
-        format: 'yang:mac-address'
+        format: 'xtype:mac-address'
   '/cord-volt-service:controller/device/{mac}/uplink':
     get:
       description: Uplink description of the OLT device.
@@ -3366,7 +3497,7 @@ paths:
             properties:
               network:
                 type: string
-                format: 'yang:uuid'
+                format: 'xtype:network-identifier'
               tag:
                 description: >-
                   Represents S-Tag for instructing OLT to associate a VLAN tag
@@ -3388,7 +3519,7 @@ paths:
             properties:
               network:
                 type: string
-                format: 'yang:uuid'
+                format: 'xtype:network-identifier'
               tag:
                 description: >-
                   Represents S-Tag for instructing OLT to associate a VLAN tag
@@ -3407,7 +3538,7 @@ paths:
             properties:
               network:
                 type: string
-                format: 'yang:uuid'
+                format: 'xtype:network-identifier'
               tag:
                 description: >-
                   Represents S-Tag for instructing OLT to associate a VLAN tag
@@ -3429,7 +3560,7 @@ paths:
             properties:
               network:
                 type: string
-                format: 'yang:uuid'
+                format: 'xtype:network-identifier'
               tag:
                 description: >-
                   Represents S-Tag for instructing OLT to associate a VLAN tag
@@ -3448,7 +3579,7 @@ paths:
             properties:
               network:
                 type: string
-                format: 'yang:uuid'
+                format: 'xtype:network-identifier'
               tag:
                 description: >-
                   Represents S-Tag for instructing OLT to associate a VLAN tag
@@ -3469,7 +3600,7 @@ paths:
         required: true
         description: A key uniquely identifying device item
         type: string
-        format: 'yang:mac-address'
+        format: 'xtype:mac-address'
   '/cord-volt-service:controller/device/{mac}/link':
     post:
       description: |-
@@ -3500,7 +3631,7 @@ paths:
               properties:
                 mac:
                   type: string
-                  format: 'yang:mac-address'
+                  format: 'xtype:mac-address'
                 serial:
                   type: string
                   format: string
@@ -3535,7 +3666,7 @@ paths:
               properties:
                 mac:
                   type: string
-                  format: 'yang:mac-address'
+                  format: 'xtype:mac-address'
                 serial:
                   type: string
                   format: string
@@ -3572,7 +3703,7 @@ paths:
               properties:
                 mac:
                   type: string
-                  format: 'yang:mac-address'
+                  format: 'xtype:mac-address'
                 serial:
                   type: string
                   format: string
@@ -3614,7 +3745,7 @@ paths:
               properties:
                 mac:
                   type: string
-                  format: 'yang:mac-address'
+                  format: 'xtype:mac-address'
                 serial:
                   type: string
                   format: string
@@ -3660,7 +3791,7 @@ paths:
               properties:
                 mac:
                   type: string
-                  format: 'yang:mac-address'
+                  format: 'xtype:mac-address'
                 serial:
                   type: string
                   format: string
@@ -3686,7 +3817,7 @@ paths:
         required: true
         description: A key uniquely identifying device item
         type: string
-        format: 'yang:mac-address'
+        format: 'xtype:mac-address'
   '/cord-volt-service:controller/device/{mac}/link/{serial}':
     get:
       description: |-
@@ -3710,7 +3841,7 @@ paths:
             properties:
               mac:
                 type: string
-                format: 'yang:mac-address'
+                format: 'xtype:mac-address'
               serial:
                 type: string
                 format: string
@@ -3750,7 +3881,7 @@ paths:
             properties:
               mac:
                 type: string
-                format: 'yang:mac-address'
+                format: 'xtype:mac-address'
               serial:
                 type: string
                 format: string
@@ -3783,7 +3914,7 @@ paths:
             properties:
               mac:
                 type: string
-                format: 'yang:mac-address'
+                format: 'xtype:mac-address'
               serial:
                 type: string
                 format: string
@@ -3823,7 +3954,7 @@ paths:
             properties:
               mac:
                 type: string
-                format: 'yang:mac-address'
+                format: 'xtype:mac-address'
               serial:
                 type: string
                 format: string
@@ -3856,7 +3987,7 @@ paths:
             properties:
               mac:
                 type: string
-                format: 'yang:mac-address'
+                format: 'xtype:mac-address'
               serial:
                 type: string
                 format: string
@@ -3890,7 +4021,7 @@ paths:
         required: true
         description: A key uniquely identifying device item
         type: string
-        format: 'yang:mac-address'
+        format: 'xtype:mac-address'
 definitions:
   'xslice:slice':
     description: >-
@@ -4169,14 +4300,14 @@ definitions:
         format: string
       mac:
         type: string
-        format: 'yang:mac-address'
+        format: 'xtype:mac-address'
       uplink:
         description: Uplink description of the OLT device.
         type: object
         properties:
           network:
             type: string
-            format: 'yang:uuid'
+            format: 'xtype:network-identifier'
           tag:
             description: |-
               Represents S-Tag for instructing OLT to associate a VLAN tag for
@@ -4198,7 +4329,7 @@ definitions:
           properties:
             mac:
               type: string
-              format: 'yang:mac-address'
+              format: 'xtype:mac-address'
             serial:
               type: string
               format: string

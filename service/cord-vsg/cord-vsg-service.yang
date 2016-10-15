@@ -3,11 +3,10 @@ module cord-vsg-service {
   prefix vsg;
   yang-version 1.1;
 
-  import ietf-yang-types { prefix yang; }
-  import xos-controller  { prefix xos; }
-  import xos-slice       { prefix xslice; }
-  import xos-types       { prefix xtype; }
-  import cord-tenant     { prefix cord; }
+  import xos-controller    { prefix xos; }
+  import xos-slice         { prefix xslice; }
+  import xos-types         { prefix xtype; }
+  import cord-tenant       { prefix cord; }
   import cord-volt-service { prefix volt; }
 
   organization
@@ -23,6 +22,9 @@ module cord-vsg-service {
 
   identity virtual-subscriber-gateway { base xos:service; }
 
+  /*
+   * Type definitions
+   */
   typedef subscriber-inflow {
     description
       "Valid subscriber input flow for VSG service can be:
@@ -32,7 +34,7 @@ module cord-vsg-service {
     type union {
       type volt:subscriber-outflow;
       type vsg:subscriber-outflow;
-      type yang:uuid;
+      type xtype:flow-identifier;
     }
   }
   typedef subscriber-outflow {
@@ -85,7 +87,7 @@ module cord-vsg-service {
         description
           "Each flow represents a subscriber flow into the VSG instance.";
         leaf id {
-          type yang:uuid;
+          type xtype:flow-identifier;
         }
       }
     }
@@ -149,7 +151,7 @@ module cord-vsg-service {
       key id;
       leaf id {
         description "OpenFlow Port ID";
-        type yang:uuid;
+        type xtype:flow-identifier;
         mandatory true;
       }
       leaf link {
@@ -164,13 +166,12 @@ module cord-vsg-service {
    * Augmentations to XOS
    */
   augment "/xos:tenant/cord:cord/cord:subscriber" {
-    leaf vsg-id {
-      type leafref {
-        path "/vsg:controller/subscriber/id";
-      }
-    }
     container vsg {
-      when "../vsg-id";
+      leaf id {
+        type leafref {
+          path "/vsg:controller/subscriber/id";
+        }
+      }
       leaf gateway {
         config false;
         type leafref {
