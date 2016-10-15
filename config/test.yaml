@@ -9,7 +9,7 @@
 
 # Test configuration for CORD Subscribers
 xos-controller:tenant:
-  cord:
+  cord-tenant:cord:
     subscriber:
       - id: 1
       - id: 2
@@ -19,7 +19,7 @@ xos-controller:tenant:
 
 # Test configuration for Slice  
 xos-controller:core:
-  slice:
+  xslice:slice:
     - id: 1
       name: Test Slice for VSG
       policy:

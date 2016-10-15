@@ -24,6 +24,14 @@ The preferred installation is *global* for easy access to the `xos`
 utility but can also be used as a dependency module to utilize the XOS
 Controller and associated YANG models as part of your project.
 
+For development/testing, clone from repo and initialize:
+
+```bash
+$ git clone https://github.com/corenova/yang-cord
+$ cd yang-cord
+$ npm install
+```
+
 ## Quick Start
 
 ```bash
