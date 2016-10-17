@@ -39,7 +39,7 @@
   "devDependencies": {
     "config": "^1.21.0",
     "js-yaml": "^3.6.1",
-    "yang-swagger": "^1.1.0"
+    "yang-swagger": "^1.1.1"
   },
   "scripts": {
     "build:api": "yang-swagger -f yaml -o swagger.yaml cord-vsg-service",

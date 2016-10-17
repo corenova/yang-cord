@@ -19,7 +19,7 @@ xos-controller:tenant:
 
 # Test configuration for Slice  
 xos-controller:core:
-  xslice:slice:
+  xos-slice:slice:
     - id: 1
       name: Test Slice for VSG
       policy:
