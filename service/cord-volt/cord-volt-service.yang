@@ -58,7 +58,6 @@ module cord-volt-service {
         description "Uplink description of the OLT device.";
         leaf network { type xtype:network-identifier; }
         leaf tag {
-          if-feature onos-app-olt;
           type xtype:vlan;
           description
             "Represents S-Tag for instructing OLT to associate a VLAN tag for
@@ -77,7 +76,6 @@ module cord-volt-service {
         leaf serial { type string; mandatory true; }
         leaf active { type boolean; default false; }
         leaf tag {
-          if-feature onos-app-olt;
           type xtype:vlan;
           description
             "Represents C-Tag for instructing ONT to add/remove vlan tag for

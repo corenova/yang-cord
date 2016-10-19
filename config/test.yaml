@@ -96,12 +96,12 @@ cord-volt-service:controller:
       tags:
         outer: 222
         inner: 432
-      outflow: 605faceb-f5af-4e6d-b205-b67c5ddbc582
+      #outflow: 605faceb-f5af-4e6d-b205-b67c5ddbc582
     - id: 2
       tags:
         outer: 222
         inner: 450
-      outflow: 0293a880-38a0-4cbe-b737-30b4202d522e
+      #outflow: 0293a880-38a0-4cbe-b737-30b4202d522e
 
 cord-vsg-service:controller:
   id: 2000
@@ -130,11 +130,9 @@ cord-vsg-service:controller:
       uplink:
         network: 
         port: 
-      flow:
 
   # list of unique VSG subscribers
   subscriber:
     - id: 1
       inflow: 605faceb-f5af-4e6d-b205-b67c5ddbc582
-      outflow: 
       
