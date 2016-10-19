@@ -5,9 +5,9 @@ module xos-slice {
 
   import ietf-yang-types { prefix yang; }
   import ietf-inet-types { prefix inet; }
-  import opnfv-iaas      { prefix nfvi; }
   import xos-controller  { prefix xos; }
   import xos-types       { prefix xtype; }
+  import opnfv-infrastructure { prefix nfvi; }
 
   organization
     "Open Networking Lab (XOS) / Corenova Technologies, Inc.";

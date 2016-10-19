@@ -28,7 +28,7 @@ xos-controller:core:
         default-image:  20
 
 # Test configuration for emulating virtualized infrastructure
-opnfv-iaas:controller:
+opnfv-infrastructure:controller:
   compute:
     flavor:
       - id: 10

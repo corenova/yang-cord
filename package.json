@@ -29,7 +29,7 @@
     "ietf-yang-types": "yang-js",
     "ietf-inet-types": "yang-js",
     "yang-meta-types": "yang-js",
-    "opnfv-iaas": "opnfv-promise",
+    "opnfv-infrastructure": "opnfv-promise",
     "xos-controller": "./lib/xos-controller.js",
     "xos-slice": "./schema/xos-slice.yang",
     "xos-topology": "./schema/xos-topology.yang",
@@ -48,10 +48,10 @@
     "js-yaml": "^3.6.1",
     "minimist": "^1.2.0",
     "node-uuid": "^1.4.7",
-    "opnfv-promise": "git://github.com/opnfv/promise#develop",
+    "opnfv-promise": "git://github.com/corenova/opnfv-promise",
     "superagent": "^2.0.0",
     "yang-express": "^0.4.5",
-    "yang-js": "^0.16.13"
+    "yang-js": "^0.16.14"
   },
   "devDependencies": {
     "coffee-script": ">=1.7.0",
