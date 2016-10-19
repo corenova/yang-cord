@@ -36,12 +36,10 @@
   },
   "devDependencies": {
     "coffee-script": ">=1.7.0",
-    "config": "^1.21.0",
-    "js-yaml": "^3.6.1",
-    "yang-swagger": "^1.1.1"
+    "yang-swagger": "^1.1.3"
   },
   "scripts": {
-    "build:src": "coffee -c *.coffee",
+    "build:src": "echo 'coffee -c *.coffee (should enable once bindings are defined)'",
     "build:api": "yang-swagger -f yaml -o swagger.yaml example-service",
     "build": "npm run build:src && npm run build:api",
     "prepublish": "npm run build",

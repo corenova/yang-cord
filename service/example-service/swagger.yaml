@@ -26,27 +26,20 @@ paths:
         '200':
           description: Expected response of controller
           schema:
-            description: >-
-              The controller configuration represents an Example Service
-              controller
-
-              which manages multiple web server instances on behalf of
-              subscribers.
+            description: |-
+              The controller configuration represents an Example Service controller
+              which manages multiple web server instances on behalf of subscribers.
             allOf:
               - $ref: '#/definitions/xos:service'
               - properties:
                   slice:
-                    description: >-
-                      The Example Service uses XOS Slice to instantiate web
-                      server instances.
+                    description: The Example Service uses XOS Slice to instantiate web server instances.
                     $ref: '#/definitions/xslice:slice'
                   web-server:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents a unique instance of a web server
-                        managed by
-
+                      description: |-
+                        Each entry represents a unique instance of a web server managed by
                         this Example Service Controller.
                       type: object
                       properties:
@@ -62,34 +55,24 @@ paths:
       parameters:
         - name: controller
           in: body
-          description: >-
-            The controller configuration represents an Example Service
-            controller
-
-            which manages multiple web server instances on behalf of
-            subscribers.
+          description: |-
+            The controller configuration represents an Example Service controller
+            which manages multiple web server instances on behalf of subscribers.
           schema:
-            description: >-
-              The controller configuration represents an Example Service
-              controller
-
-              which manages multiple web server instances on behalf of
-              subscribers.
+            description: |-
+              The controller configuration represents an Example Service controller
+              which manages multiple web server instances on behalf of subscribers.
             allOf:
               - $ref: '#/definitions/xos:service'
               - properties:
                   slice:
-                    description: >-
-                      The Example Service uses XOS Slice to instantiate web
-                      server instances.
+                    description: The Example Service uses XOS Slice to instantiate web server instances.
                     $ref: '#/definitions/xslice:slice'
                   web-server:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents a unique instance of a web server
-                        managed by
-
+                      description: |-
+                        Each entry represents a unique instance of a web server managed by
                         this Example Service Controller.
                       type: object
                       properties:
@@ -104,27 +87,20 @@ paths:
         '200':
           description: Expected response of controller
           schema:
-            description: >-
-              The controller configuration represents an Example Service
-              controller
-
-              which manages multiple web server instances on behalf of
-              subscribers.
+            description: |-
+              The controller configuration represents an Example Service controller
+              which manages multiple web server instances on behalf of subscribers.
             allOf:
               - $ref: '#/definitions/xos:service'
               - properties:
                   slice:
-                    description: >-
-                      The Example Service uses XOS Slice to instantiate web
-                      server instances.
+                    description: The Example Service uses XOS Slice to instantiate web server instances.
                     $ref: '#/definitions/xslice:slice'
                   web-server:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents a unique instance of a web server
-                        managed by
-
+                      description: |-
+                        Each entry represents a unique instance of a web server managed by
                         this Example Service Controller.
                       type: object
                       properties:
@@ -140,34 +116,24 @@ paths:
       parameters:
         - name: controller
           in: body
-          description: >-
-            The controller configuration represents an Example Service
-            controller
-
-            which manages multiple web server instances on behalf of
-            subscribers.
+          description: |-
+            The controller configuration represents an Example Service controller
+            which manages multiple web server instances on behalf of subscribers.
           schema:
-            description: >-
-              The controller configuration represents an Example Service
-              controller
-
-              which manages multiple web server instances on behalf of
-              subscribers.
+            description: |-
+              The controller configuration represents an Example Service controller
+              which manages multiple web server instances on behalf of subscribers.
             allOf:
               - $ref: '#/definitions/xos:service'
               - properties:
                   slice:
-                    description: >-
-                      The Example Service uses XOS Slice to instantiate web
-                      server instances.
+                    description: The Example Service uses XOS Slice to instantiate web server instances.
                     $ref: '#/definitions/xslice:slice'
                   web-server:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents a unique instance of a web server
-                        managed by
-
+                      description: |-
+                        Each entry represents a unique instance of a web server managed by
                         this Example Service Controller.
                       type: object
                       properties:
@@ -182,27 +148,20 @@ paths:
         '200':
           description: Expected response of controller
           schema:
-            description: >-
-              The controller configuration represents an Example Service
-              controller
-
-              which manages multiple web server instances on behalf of
-              subscribers.
+            description: |-
+              The controller configuration represents an Example Service controller
+              which manages multiple web server instances on behalf of subscribers.
             allOf:
               - $ref: '#/definitions/xos:service'
               - properties:
                   slice:
-                    description: >-
-                      The Example Service uses XOS Slice to instantiate web
-                      server instances.
+                    description: The Example Service uses XOS Slice to instantiate web server instances.
                     $ref: '#/definitions/xslice:slice'
                   web-server:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents a unique instance of a web server
-                        managed by
-
+                      description: |-
+                        Each entry represents a unique instance of a web server managed by
                         this Example Service Controller.
                       type: object
                       properties:
@@ -227,9 +186,7 @@ paths:
         '200':
           description: Expected response of slice
           schema:
-            description: >-
-              The Example Service uses XOS Slice to instantiate web server
-              instances.
+            description: The Example Service uses XOS Slice to instantiate web server instances.
             $ref: '#/definitions/xslice:slice'
     put:
       summary: Update details on slice
@@ -237,22 +194,16 @@ paths:
       parameters:
         - name: slice
           in: body
-          description: >-
-            The Example Service uses XOS Slice to instantiate web server
-            instances.
+          description: The Example Service uses XOS Slice to instantiate web server instances.
           schema:
-            description: >-
-              The Example Service uses XOS Slice to instantiate web server
-              instances.
+            description: The Example Service uses XOS Slice to instantiate web server instances.
             $ref: '#/definitions/xslice:slice'
           required: false
       responses:
         '200':
           description: Expected response of slice
           schema:
-            description: >-
-              The Example Service uses XOS Slice to instantiate web server
-              instances.
+            description: The Example Service uses XOS Slice to instantiate web server instances.
             $ref: '#/definitions/xslice:slice'
     patch:
       summary: Merge details on slice
@@ -260,22 +211,16 @@ paths:
       parameters:
         - name: slice
           in: body
-          description: >-
-            The Example Service uses XOS Slice to instantiate web server
-            instances.
+          description: The Example Service uses XOS Slice to instantiate web server instances.
           schema:
-            description: >-
-              The Example Service uses XOS Slice to instantiate web server
-              instances.
+            description: The Example Service uses XOS Slice to instantiate web server instances.
             $ref: '#/definitions/xslice:slice'
           required: false
       responses:
         '200':
           description: Expected response of slice
           schema:
-            description: >-
-              The Example Service uses XOS Slice to instantiate web server
-              instances.
+            description: The Example Service uses XOS Slice to instantiate web server instances.
             $ref: '#/definitions/xslice:slice'
     delete:
       summary: Delete slice from controller
@@ -294,10 +239,8 @@ paths:
             type: object
             properties:
               max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
+                description: The maximum number of VMs that this slice is allowed to allocate
+                type: integer
                 format: uint16
               default-flavor:
                 type: string
@@ -316,6 +259,10 @@ paths:
                 default: vm
                 type: string
                 format: 'xtype:isolation'
+                enum:
+                  - vm
+                  - lxc
+                  - hybrid
     put:
       summary: Update details on policy
       deprecated: false
@@ -326,10 +273,8 @@ paths:
             type: object
             properties:
               max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
+                description: The maximum number of VMs that this slice is allowed to allocate
+                type: integer
                 format: uint16
               default-flavor:
                 type: string
@@ -348,6 +293,10 @@ paths:
                 default: vm
                 type: string
                 format: 'xtype:isolation'
+                enum:
+                  - vm
+                  - lxc
+                  - hybrid
           required: false
       responses:
         '200':
@@ -356,10 +305,8 @@ paths:
             type: object
             properties:
               max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
+                description: The maximum number of VMs that this slice is allowed to allocate
+                type: integer
                 format: uint16
               default-flavor:
                 type: string
@@ -378,6 +325,10 @@ paths:
                 default: vm
                 type: string
                 format: 'xtype:isolation'
+                enum:
+                  - vm
+                  - lxc
+                  - hybrid
     patch:
       summary: Merge details on policy
       deprecated: false
@@ -388,10 +339,8 @@ paths:
             type: object
             properties:
               max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
+                description: The maximum number of VMs that this slice is allowed to allocate
+                type: integer
                 format: uint16
               default-flavor:
                 type: string
@@ -410,6 +359,10 @@ paths:
                 default: vm
                 type: string
                 format: 'xtype:isolation'
+                enum:
+                  - vm
+                  - lxc
+                  - hybrid
           required: false
       responses:
         '200':
@@ -418,10 +371,8 @@ paths:
             type: object
             properties:
               max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
+                description: The maximum number of VMs that this slice is allowed to allocate
+                type: integer
                 format: uint16
               default-flavor:
                 type: string
@@ -440,15 +391,33 @@ paths:
                 default: vm
                 type: string
                 format: 'xtype:isolation'
+                enum:
+                  - vm
+                  - lxc
+                  - hybrid
     delete:
       summary: Delete policy from slice
       deprecated: false
       responses:
         '204':
           description: Expected response for delete
+  '/example-service:controller/slice/scale':
+    post:
+      description: Adjust scale for slice(s)
+      summary: Invokes scale in slice
+      deprecated: false
+      parameters:
+        - name: 'scale:input'
+          in: body
+          schema: {}
+          required: false
+      responses:
+        '200':
+          description: Expected response of scale
+          schema: {}
   '/example-service:controller/slice/credential':
     post:
-      summary: Creates one or more new credential in slice
+      summary: Creates one or more new credential in credentials-list
       deprecated: false
       parameters:
         - name: credential
@@ -471,6 +440,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '200':
@@ -493,8 +466,12 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
     get:
-      summary: List all credentials from slice
+      summary: List all credentials from credentials-list
       deprecated: false
       responses:
         '200':
@@ -517,6 +494,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
     put:
       summary: Replace the entire credential collection
       deprecated: false
@@ -541,6 +522,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '201':
@@ -569,6 +554,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '201':
@@ -596,6 +585,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     put:
       summary: Update details on credential
       deprecated: false
@@ -618,6 +611,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
           required: false
       responses:
         '200':
@@ -638,6 +635,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     patch:
       summary: Merge details on credential
       deprecated: false
@@ -660,6 +661,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
           required: false
       responses:
         '200':
@@ -680,8 +685,12 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     delete:
-      summary: Delete credential from slice
+      summary: Delete credential from credentials-list
       deprecated: false
       responses:
         '204':
@@ -709,10 +718,8 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a unique instance of a web server managed
-                by
-
+              description: |-
+                Each entry represents a unique instance of a web server managed by
                 this Example Service Controller.
               type: object
               properties:
@@ -729,10 +736,8 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a unique instance of a web server managed
-                by
-
+              description: |-
+                Each entry represents a unique instance of a web server managed by
                 this Example Service Controller.
               type: object
               properties:
@@ -751,10 +756,8 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a unique instance of a web server managed
-                by
-
+              description: |-
+                Each entry represents a unique instance of a web server managed by
                 this Example Service Controller.
               type: object
               properties:
@@ -776,10 +779,8 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a unique instance of a web server managed
-                by
-
+              description: |-
+                Each entry represents a unique instance of a web server managed by
                 this Example Service Controller.
               type: object
               properties:
@@ -805,10 +806,8 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a unique instance of a web server managed
-                by
-
+              description: |-
+                Each entry represents a unique instance of a web server managed by
                 this Example Service Controller.
               type: object
               properties:
@@ -1330,106 +1329,23 @@ paths:
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
-                      type: string
-                      format: enumeration
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
+                - properties:
+                    example-service-message:
                       type: string
                       format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
           required: false
       responses:
         '200':
@@ -1437,96 +1353,16 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
-                      type: string
-                      format: enumeration
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
+                - properties:
+                    example-service-message:
                       type: string
                       format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
     get:
       summary: List all subscribers from service
       deprecated: false
@@ -1536,202 +1372,39 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
-                      type: string
-                      format: enumeration
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
+                - properties:
+                    example-service-message:
                       type: string
                       format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
     put:
       summary: Replace the entire subscriber collection
       deprecated: false
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
-                      type: string
-                      format: enumeration
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
+                - properties:
+                    example-service-message:
                       type: string
                       format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
           required: false
       responses:
         '201':
@@ -1742,106 +1415,23 @@ paths:
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
-                      type: string
-                      format: enumeration
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
+                - properties:
+                    example-service-message:
                       type: string
                       format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
           required: false
       responses:
         '201':
@@ -1858,494 +1448,88 @@ paths:
         '200':
           description: Expected response of subscriber
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
-                    type: string
-                    format: enumeration
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
+              - properties:
+                  example-service-message:
                     type: string
                     format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
     put:
       summary: Update details on subscriber
       deprecated: false
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
-                    type: string
-                    format: enumeration
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
+              - properties:
+                  example-service-message:
                     type: string
                     format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
           required: false
       responses:
         '200':
           description: Expected response of subscriber
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
-                    type: string
-                    format: enumeration
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
+              - properties:
+                  example-service-message:
                     type: string
                     format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
     patch:
       summary: Merge details on subscriber
       deprecated: false
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
-                    type: string
-                    format: enumeration
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
+              - properties:
+                  example-service-message:
                     type: string
                     format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
           required: false
       responses:
         '200':
           description: Expected response of subscriber
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
-                    type: string
-                    format: enumeration
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
+              - properties:
+                  example-service-message:
                     type: string
                     format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
     delete:
       summary: Delete subscriber from service
       deprecated: false
@@ -2361,7 +1545,7 @@ paths:
         format: 'xtype:unique-identifier'
   '/example-service:controller/credential':
     post:
-      summary: Creates one or more new credential in service
+      summary: Creates one or more new credential in credentials-list
       deprecated: false
       parameters:
         - name: credential
@@ -2384,6 +1568,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '200':
@@ -2406,8 +1594,12 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
     get:
-      summary: List all credentials from service
+      summary: List all credentials from credentials-list
       deprecated: false
       responses:
         '200':
@@ -2430,6 +1622,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
     put:
       summary: Replace the entire credential collection
       deprecated: false
@@ -2454,6 +1650,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '201':
@@ -2482,6 +1682,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '201':
@@ -2509,6 +1713,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     put:
       summary: Update details on credential
       deprecated: false
@@ -2531,6 +1739,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
           required: false
       responses:
         '200':
@@ -2551,6 +1763,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     patch:
       summary: Merge details on credential
       deprecated: false
@@ -2573,6 +1789,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
           required: false
       responses:
         '200':
@@ -2593,8 +1813,12 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     delete:
-      summary: Delete credential from service
+      summary: Delete credential from credentials-list
       deprecated: false
       responses:
         '204':
@@ -2608,9 +1832,7 @@ paths:
         format: string
 definitions:
   'xslice:slice':
-    description: >-
-      A slice is a logically centralized container for network and compute
-      resources
+    description: A slice is a logically centralized container for network and compute resources
     allOf:
       - $ref: '#/definitions/xos:provider'
       - properties:
@@ -2619,9 +1841,7 @@ definitions:
             type: string
             format: 'inet:uri'
           network:
-            description: >-
-              The network that the slice uses to connect to other slices and to
-              the Internet.
+            description: The network that the slice uses to connect to other slices and to the Internet.
             default: none
             type: string
             format: enumeration
@@ -2660,9 +1880,7 @@ definitions:
             type: object
             properties:
               max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
+                description: The maximum number of VMs that this slice is allowed to allocate
                 type: integer
                 format: uint16
               default-flavor:
@@ -2686,9 +1904,6 @@ definitions:
                   - vm
                   - lxc
                   - hybrid
-          scale:
-            description: Adjust scale for slice(s)
-            type: object
   'xos:provider':
     allOf:
       - $ref: '#/definitions/xos:tenant'
@@ -2768,12 +1983,6 @@ definitions:
             type: array
             items:
               type: object
-      diff:
-        description: retrieve diff of model state if dirty
-        type: object
-      save:
-        description: trigger save into data store via synchronizer
-        type: object
   'xos:credentials-list':
     type: object
     properties:
@@ -2843,12 +2052,9 @@ definitions:
           subscriber:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               $ref: '#/definitions/xos:subscriber'
   'xos:subscriber':

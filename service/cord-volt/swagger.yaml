@@ -29,31 +29,20 @@ paths:
         '200':
           description: Expected response of controller
           schema:
-            description: >-
-              The controller configuration block represents a VOLT
-              agent/controller
-
+            description: |-
+              The controller configuration block represents a VOLT agent/controller
               which manages multiple OLT devices. The VOLT agent provides
-
               aggregate abstraction of the entire PON as a sigle switch to
-
               the controller. Each port entry of the agent represents each
-
               ONU/ONT endpoint as a separate openflow port.
             allOf:
               - $ref: '#/definitions/xos:service'
               - $ref: '#/definitions/devices-list'
               - properties:
-                  slice:
-                    $ref: '#/definitions/xslice:slice'
-                  radius:
-                    type: object
                   port:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents an ONU/ONT endpoint connected
-                        across OLT devices.
+                      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
                       type: object
                       required:
                         - id
@@ -66,49 +55,35 @@ paths:
                         link:
                           type: string
                           format: leafref
+                  radius:
+                    type: object
     put:
       summary: Update details on controller
       deprecated: false
       parameters:
         - name: controller
           in: body
-          description: >-
-            The controller configuration block represents a VOLT
-            agent/controller
-
+          description: |-
+            The controller configuration block represents a VOLT agent/controller
             which manages multiple OLT devices. The VOLT agent provides
-
             aggregate abstraction of the entire PON as a sigle switch to
-
             the controller. Each port entry of the agent represents each
-
             ONU/ONT endpoint as a separate openflow port.
           schema:
-            description: >-
-              The controller configuration block represents a VOLT
-              agent/controller
-
+            description: |-
+              The controller configuration block represents a VOLT agent/controller
               which manages multiple OLT devices. The VOLT agent provides
-
               aggregate abstraction of the entire PON as a sigle switch to
-
               the controller. Each port entry of the agent represents each
-
               ONU/ONT endpoint as a separate openflow port.
             allOf:
               - $ref: '#/definitions/xos:service'
               - $ref: '#/definitions/devices-list'
               - properties:
-                  slice:
-                    $ref: '#/definitions/xslice:slice'
-                  radius:
-                    type: object
                   port:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents an ONU/ONT endpoint connected
-                        across OLT devices.
+                      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
                       type: object
                       required:
                         - id
@@ -121,36 +96,27 @@ paths:
                         link:
                           type: string
                           format: leafref
+                  radius:
+                    type: object
           required: false
       responses:
         '200':
           description: Expected response of controller
           schema:
-            description: >-
-              The controller configuration block represents a VOLT
-              agent/controller
-
+            description: |-
+              The controller configuration block represents a VOLT agent/controller
               which manages multiple OLT devices. The VOLT agent provides
-
               aggregate abstraction of the entire PON as a sigle switch to
-
               the controller. Each port entry of the agent represents each
-
               ONU/ONT endpoint as a separate openflow port.
             allOf:
               - $ref: '#/definitions/xos:service'
               - $ref: '#/definitions/devices-list'
               - properties:
-                  slice:
-                    $ref: '#/definitions/xslice:slice'
-                  radius:
-                    type: object
                   port:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents an ONU/ONT endpoint connected
-                        across OLT devices.
+                      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
                       type: object
                       required:
                         - id
@@ -163,49 +129,35 @@ paths:
                         link:
                           type: string
                           format: leafref
+                  radius:
+                    type: object
     patch:
       summary: Merge details on controller
       deprecated: false
       parameters:
         - name: controller
           in: body
-          description: >-
-            The controller configuration block represents a VOLT
-            agent/controller
-
+          description: |-
+            The controller configuration block represents a VOLT agent/controller
             which manages multiple OLT devices. The VOLT agent provides
-
             aggregate abstraction of the entire PON as a sigle switch to
-
             the controller. Each port entry of the agent represents each
-
             ONU/ONT endpoint as a separate openflow port.
           schema:
-            description: >-
-              The controller configuration block represents a VOLT
-              agent/controller
-
+            description: |-
+              The controller configuration block represents a VOLT agent/controller
               which manages multiple OLT devices. The VOLT agent provides
-
               aggregate abstraction of the entire PON as a sigle switch to
-
               the controller. Each port entry of the agent represents each
-
               ONU/ONT endpoint as a separate openflow port.
             allOf:
               - $ref: '#/definitions/xos:service'
               - $ref: '#/definitions/devices-list'
               - properties:
-                  slice:
-                    $ref: '#/definitions/xslice:slice'
-                  radius:
-                    type: object
                   port:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents an ONU/ONT endpoint connected
-                        across OLT devices.
+                      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
                       type: object
                       required:
                         - id
@@ -218,36 +170,27 @@ paths:
                         link:
                           type: string
                           format: leafref
+                  radius:
+                    type: object
           required: false
       responses:
         '200':
           description: Expected response of controller
           schema:
-            description: >-
-              The controller configuration block represents a VOLT
-              agent/controller
-
+            description: |-
+              The controller configuration block represents a VOLT agent/controller
               which manages multiple OLT devices. The VOLT agent provides
-
               aggregate abstraction of the entire PON as a sigle switch to
-
               the controller. Each port entry of the agent represents each
-
               ONU/ONT endpoint as a separate openflow port.
             allOf:
               - $ref: '#/definitions/xos:service'
               - $ref: '#/definitions/devices-list'
               - properties:
-                  slice:
-                    $ref: '#/definitions/xslice:slice'
-                  radius:
-                    type: object
                   port:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents an ONU/ONT endpoint connected
-                        across OLT devices.
+                      description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
                       type: object
                       required:
                         - id
@@ -260,479 +203,14 @@ paths:
                         link:
                           type: string
                           format: leafref
+                  radius:
+                    type: object
     delete:
       summary: Delete controller from cord-volt-service
       deprecated: false
       responses:
         '204':
           description: Expected response for delete
-  '/cord-volt-service:controller/slice':
-    get:
-      summary: View detail on slice
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of slice
-          schema:
-            $ref: '#/definitions/xslice:slice'
-    put:
-      summary: Update details on slice
-      deprecated: false
-      parameters:
-        - name: slice
-          in: body
-          schema:
-            $ref: '#/definitions/xslice:slice'
-          required: false
-      responses:
-        '200':
-          description: Expected response of slice
-          schema:
-            $ref: '#/definitions/xslice:slice'
-    patch:
-      summary: Merge details on slice
-      deprecated: false
-      parameters:
-        - name: slice
-          in: body
-          schema:
-            $ref: '#/definitions/xslice:slice'
-          required: false
-      responses:
-        '200':
-          description: Expected response of slice
-          schema:
-            $ref: '#/definitions/xslice:slice'
-    delete:
-      summary: Delete slice from controller
-      deprecated: false
-      responses:
-        '204':
-          description: Expected response for delete
-  '/cord-volt-service:controller/slice/policy':
-    get:
-      summary: View detail on policy
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of policy
-          schema:
-            type: object
-            properties:
-              max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
-                format: uint16
-              default-flavor:
-                type: string
-                format: leafref
-              default-image:
-                type: string
-                format: leafref
-              default-node:
-                type: string
-                format: leafref
-              mount-data-sets:
-                default: GenBank
-                type: string
-                format: string
-              default-isolation:
-                default: vm
-                type: string
-                format: 'xtype:isolation'
-    put:
-      summary: Update details on policy
-      deprecated: false
-      parameters:
-        - name: policy
-          in: body
-          schema:
-            type: object
-            properties:
-              max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
-                format: uint16
-              default-flavor:
-                type: string
-                format: leafref
-              default-image:
-                type: string
-                format: leafref
-              default-node:
-                type: string
-                format: leafref
-              mount-data-sets:
-                default: GenBank
-                type: string
-                format: string
-              default-isolation:
-                default: vm
-                type: string
-                format: 'xtype:isolation'
-          required: false
-      responses:
-        '200':
-          description: Expected response of policy
-          schema:
-            type: object
-            properties:
-              max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
-                format: uint16
-              default-flavor:
-                type: string
-                format: leafref
-              default-image:
-                type: string
-                format: leafref
-              default-node:
-                type: string
-                format: leafref
-              mount-data-sets:
-                default: GenBank
-                type: string
-                format: string
-              default-isolation:
-                default: vm
-                type: string
-                format: 'xtype:isolation'
-    patch:
-      summary: Merge details on policy
-      deprecated: false
-      parameters:
-        - name: policy
-          in: body
-          schema:
-            type: object
-            properties:
-              max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
-                format: uint16
-              default-flavor:
-                type: string
-                format: leafref
-              default-image:
-                type: string
-                format: leafref
-              default-node:
-                type: string
-                format: leafref
-              mount-data-sets:
-                default: GenBank
-                type: string
-                format: string
-              default-isolation:
-                default: vm
-                type: string
-                format: 'xtype:isolation'
-          required: false
-      responses:
-        '200':
-          description: Expected response of policy
-          schema:
-            type: object
-            properties:
-              max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
-                format: uint16
-              default-flavor:
-                type: string
-                format: leafref
-              default-image:
-                type: string
-                format: leafref
-              default-node:
-                type: string
-                format: leafref
-              mount-data-sets:
-                default: GenBank
-                type: string
-                format: string
-              default-isolation:
-                default: vm
-                type: string
-                format: 'xtype:isolation'
-    delete:
-      summary: Delete policy from slice
-      deprecated: false
-      responses:
-        '204':
-          description: Expected response for delete
-  '/cord-volt-service:controller/slice/scale':
-    post:
-      description: Adjust scale for slice(s)
-      summary: Invokes scale in slice
-      deprecated: false
-      parameters:
-        - name: 'scale:input'
-          in: body
-          schema: {}
-          required: false
-      responses:
-        '200':
-          description: Expected response of scale
-          schema: {}
-  '/cord-volt-service:controller/slice/credential':
-    post:
-      summary: Creates one or more new credential in slice
-      deprecated: false
-      parameters:
-        - name: credential
-          in: body
-          schema:
-            type: array
-            items:
-              type: object
-              properties:
-                token:
-                  type: string
-                  format: string
-                password:
-                  type: string
-                  format: 'meta:password'
-                user:
-                  type: string
-                  format: 'xtype:unique-identifier'
-                role:
-                  default: user
-                  type: string
-                  format: 'xtype:access-role'
-          required: false
-      responses:
-        '200':
-          description: Expected response for creating credential(s) in collection
-          schema:
-            type: array
-            items:
-              type: object
-              properties:
-                token:
-                  type: string
-                  format: string
-                password:
-                  type: string
-                  format: 'meta:password'
-                user:
-                  type: string
-                  format: 'xtype:unique-identifier'
-                role:
-                  default: user
-                  type: string
-                  format: 'xtype:access-role'
-    get:
-      summary: List all credentials from slice
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of credentials
-          schema:
-            type: array
-            items:
-              type: object
-              properties:
-                token:
-                  type: string
-                  format: string
-                password:
-                  type: string
-                  format: 'meta:password'
-                user:
-                  type: string
-                  format: 'xtype:unique-identifier'
-                role:
-                  default: user
-                  type: string
-                  format: 'xtype:access-role'
-    put:
-      summary: Replace the entire credential collection
-      deprecated: false
-      parameters:
-        - name: credential
-          in: body
-          schema:
-            type: array
-            items:
-              type: object
-              properties:
-                token:
-                  type: string
-                  format: string
-                password:
-                  type: string
-                  format: 'meta:password'
-                user:
-                  type: string
-                  format: 'xtype:unique-identifier'
-                role:
-                  default: user
-                  type: string
-                  format: 'xtype:access-role'
-          required: false
-      responses:
-        '201':
-          description: Expected response for replacing collection
-    patch:
-      summary: Merge items into the credential collection
-      deprecated: false
-      parameters:
-        - name: credential
-          in: body
-          schema:
-            type: array
-            items:
-              type: object
-              properties:
-                token:
-                  type: string
-                  format: string
-                password:
-                  type: string
-                  format: 'meta:password'
-                user:
-                  type: string
-                  format: 'xtype:unique-identifier'
-                role:
-                  default: user
-                  type: string
-                  format: 'xtype:access-role'
-          required: false
-      responses:
-        '201':
-          description: Expected response for merging into collection
-  '/cord-volt-service:controller/slice/credential/{token}':
-    get:
-      summary: View detail on credential
-      deprecated: false
-      responses:
-        '200':
-          description: Expected response of credential
-          schema:
-            type: object
-            properties:
-              token:
-                type: string
-                format: string
-              password:
-                type: string
-                format: 'meta:password'
-              user:
-                type: string
-                format: 'xtype:unique-identifier'
-              role:
-                default: user
-                type: string
-                format: 'xtype:access-role'
-    put:
-      summary: Update details on credential
-      deprecated: false
-      parameters:
-        - name: credential
-          in: body
-          schema:
-            type: object
-            properties:
-              token:
-                type: string
-                format: string
-              password:
-                type: string
-                format: 'meta:password'
-              user:
-                type: string
-                format: 'xtype:unique-identifier'
-              role:
-                default: user
-                type: string
-                format: 'xtype:access-role'
-          required: false
-      responses:
-        '200':
-          description: Expected response of credential
-          schema:
-            type: object
-            properties:
-              token:
-                type: string
-                format: string
-              password:
-                type: string
-                format: 'meta:password'
-              user:
-                type: string
-                format: 'xtype:unique-identifier'
-              role:
-                default: user
-                type: string
-                format: 'xtype:access-role'
-    patch:
-      summary: Merge details on credential
-      deprecated: false
-      parameters:
-        - name: credential
-          in: body
-          schema:
-            type: object
-            properties:
-              token:
-                type: string
-                format: string
-              password:
-                type: string
-                format: 'meta:password'
-              user:
-                type: string
-                format: 'xtype:unique-identifier'
-              role:
-                default: user
-                type: string
-                format: 'xtype:access-role'
-          required: false
-      responses:
-        '200':
-          description: Expected response of credential
-          schema:
-            type: object
-            properties:
-              token:
-                type: string
-                format: string
-              password:
-                type: string
-                format: 'meta:password'
-              user:
-                type: string
-                format: 'xtype:unique-identifier'
-              role:
-                default: user
-                type: string
-                format: 'xtype:access-role'
-    delete:
-      summary: Delete credential from slice
-      deprecated: false
-      responses:
-        '204':
-          description: Expected response for delete
-    parameters:
-      - name: token
-        in: path
-        required: true
-        description: A key uniquely identifying credential item
-        type: string
-        format: string
   '/cord-volt-service:controller/port':
     post:
       description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
@@ -741,15 +219,11 @@ paths:
       parameters:
         - name: port
           in: body
-          description: >-
-            Each entry represents an ONU/ONT endpoint connected across OLT
-            devices.
+          description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents an ONU/ONT endpoint connected across OLT
-                devices.
+              description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
               type: object
               required:
                 - id
@@ -769,9 +243,7 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents an ONU/ONT endpoint connected across OLT
-                devices.
+              description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
               type: object
               required:
                 - id
@@ -793,9 +265,7 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents an ONU/ONT endpoint connected across OLT
-                devices.
+              description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
               type: object
               required:
                 - id
@@ -814,15 +284,11 @@ paths:
       parameters:
         - name: port
           in: body
-          description: >-
-            Each entry represents an ONU/ONT endpoint connected across OLT
-            devices.
+          description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents an ONU/ONT endpoint connected across OLT
-                devices.
+              description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
               type: object
               required:
                 - id
@@ -845,15 +311,11 @@ paths:
       parameters:
         - name: port
           in: body
-          description: >-
-            Each entry represents an ONU/ONT endpoint connected across OLT
-            devices.
+          description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents an ONU/ONT endpoint connected across OLT
-                devices.
+              description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
               type: object
               required:
                 - id
@@ -879,9 +341,7 @@ paths:
         '200':
           description: Expected response of port
           schema:
-            description: >-
-              Each entry represents an ONU/ONT endpoint connected across OLT
-              devices.
+            description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
             type: object
             required:
               - id
@@ -900,13 +360,9 @@ paths:
       parameters:
         - name: port
           in: body
-          description: >-
-            Each entry represents an ONU/ONT endpoint connected across OLT
-            devices.
+          description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
           schema:
-            description: >-
-              Each entry represents an ONU/ONT endpoint connected across OLT
-              devices.
+            description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
             type: object
             required:
               - id
@@ -924,9 +380,7 @@ paths:
         '200':
           description: Expected response of port
           schema:
-            description: >-
-              Each entry represents an ONU/ONT endpoint connected across OLT
-              devices.
+            description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
             type: object
             required:
               - id
@@ -945,13 +399,9 @@ paths:
       parameters:
         - name: port
           in: body
-          description: >-
-            Each entry represents an ONU/ONT endpoint connected across OLT
-            devices.
+          description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
           schema:
-            description: >-
-              Each entry represents an ONU/ONT endpoint connected across OLT
-              devices.
+            description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
             type: object
             required:
               - id
@@ -969,9 +419,7 @@ paths:
         '200':
           description: Expected response of port
           schema:
-            description: >-
-              Each entry represents an ONU/ONT endpoint connected across OLT
-              devices.
+            description: Each entry represents an ONU/ONT endpoint connected across OLT devices.
             type: object
             required:
               - id
@@ -1396,106 +844,39 @@ paths:
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
+                - properties:
+                    outflow:
+                      description: |-
+                        Each entry represents a unique openflow port ID that the subscriber
+                        uses to connect into the fabric from the VOLT service.
                       type: string
-                      format: enumeration
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      type: string
-                      format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
+                      format: subscriber-outflow
+                    tags:
+                      description: |-
+                        Each entry represents a unique combination of the OLT uplink VLAN
+                        (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+                        into the fabric for the subscriber.
+                      type: object
+                      properties:
+                        outer:
+                          type: string
+                          format: leafref
+                        inner:
+                          type: string
+                          format: leafref
           required: false
       responses:
         '200':
@@ -1503,96 +884,32 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
+                - properties:
+                    outflow:
+                      description: |-
+                        Each entry represents a unique openflow port ID that the subscriber
+                        uses to connect into the fabric from the VOLT service.
                       type: string
-                      format: enumeration
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      type: string
-                      format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
+                      format: subscriber-outflow
+                    tags:
+                      description: |-
+                        Each entry represents a unique combination of the OLT uplink VLAN
+                        (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+                        into the fabric for the subscriber.
+                      type: object
+                      properties:
+                        outer:
+                          type: string
+                          format: leafref
+                        inner:
+                          type: string
+                          format: leafref
     get:
       summary: List all subscribers from service
       deprecated: false
@@ -1602,202 +919,71 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
+                - properties:
+                    outflow:
+                      description: |-
+                        Each entry represents a unique openflow port ID that the subscriber
+                        uses to connect into the fabric from the VOLT service.
                       type: string
-                      format: enumeration
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      type: string
-                      format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
+                      format: subscriber-outflow
+                    tags:
+                      description: |-
+                        Each entry represents a unique combination of the OLT uplink VLAN
+                        (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+                        into the fabric for the subscriber.
+                      type: object
+                      properties:
+                        outer:
+                          type: string
+                          format: leafref
+                        inner:
+                          type: string
+                          format: leafref
     put:
       summary: Replace the entire subscriber collection
       deprecated: false
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
+                - properties:
+                    outflow:
+                      description: |-
+                        Each entry represents a unique openflow port ID that the subscriber
+                        uses to connect into the fabric from the VOLT service.
                       type: string
-                      format: enumeration
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      type: string
-                      format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
+                      format: subscriber-outflow
+                    tags:
+                      description: |-
+                        Each entry represents a unique combination of the OLT uplink VLAN
+                        (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+                        into the fabric for the subscriber.
+                      type: object
+                      properties:
+                        outer:
+                          type: string
+                          format: leafref
+                        inner:
+                          type: string
+                          format: leafref
           required: false
       responses:
         '201':
@@ -1808,106 +994,39 @@ paths:
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
+                - properties:
+                    outflow:
+                      description: |-
+                        Each entry represents a unique openflow port ID that the subscriber
+                        uses to connect into the fabric from the VOLT service.
                       type: string
-                      format: enumeration
-                    id:
-                      type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      type: string
-                      format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
+                      format: subscriber-outflow
+                    tags:
+                      description: |-
+                        Each entry represents a unique combination of the OLT uplink VLAN
+                        (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+                        into the fabric for the subscriber.
+                      type: object
+                      properties:
+                        outer:
+                          type: string
+                          format: leafref
+                        inner:
+                          type: string
+                          format: leafref
           required: false
       responses:
         '201':
@@ -1924,494 +1043,168 @@ paths:
         '200':
           description: Expected response of subscriber
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
+              - properties:
+                  outflow:
+                    description: |-
+                      Each entry represents a unique openflow port ID that the subscriber
+                      uses to connect into the fabric from the VOLT service.
                     type: string
-                    format: enumeration
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    type: string
-                    format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
+                    format: subscriber-outflow
+                  tags:
+                    description: |-
+                      Each entry represents a unique combination of the OLT uplink VLAN
+                      (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+                      into the fabric for the subscriber.
+                    type: object
+                    properties:
+                      outer:
+                        type: string
+                        format: leafref
+                      inner:
+                        type: string
+                        format: leafref
     put:
       summary: Update details on subscriber
       deprecated: false
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
+              - properties:
+                  outflow:
+                    description: |-
+                      Each entry represents a unique openflow port ID that the subscriber
+                      uses to connect into the fabric from the VOLT service.
                     type: string
-                    format: enumeration
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    type: string
-                    format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
+                    format: subscriber-outflow
+                  tags:
+                    description: |-
+                      Each entry represents a unique combination of the OLT uplink VLAN
+                      (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+                      into the fabric for the subscriber.
+                    type: object
+                    properties:
+                      outer:
+                        type: string
+                        format: leafref
+                      inner:
+                        type: string
+                        format: leafref
           required: false
       responses:
         '200':
           description: Expected response of subscriber
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
+              - properties:
+                  outflow:
+                    description: |-
+                      Each entry represents a unique openflow port ID that the subscriber
+                      uses to connect into the fabric from the VOLT service.
                     type: string
-                    format: enumeration
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    type: string
-                    format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
+                    format: subscriber-outflow
+                  tags:
+                    description: |-
+                      Each entry represents a unique combination of the OLT uplink VLAN
+                      (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+                      into the fabric for the subscriber.
+                    type: object
+                    properties:
+                      outer:
+                        type: string
+                        format: leafref
+                      inner:
+                        type: string
+                        format: leafref
     patch:
       summary: Merge details on subscriber
       deprecated: false
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
+              - properties:
+                  outflow:
+                    description: |-
+                      Each entry represents a unique openflow port ID that the subscriber
+                      uses to connect into the fabric from the VOLT service.
                     type: string
-                    format: enumeration
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    type: string
-                    format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
+                    format: subscriber-outflow
+                  tags:
+                    description: |-
+                      Each entry represents a unique combination of the OLT uplink VLAN
+                      (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+                      into the fabric for the subscriber.
+                    type: object
+                    properties:
+                      outer:
+                        type: string
+                        format: leafref
+                      inner:
+                        type: string
+                        format: leafref
           required: false
       responses:
         '200':
           description: Expected response of subscriber
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
+              - properties:
+                  outflow:
+                    description: |-
+                      Each entry represents a unique openflow port ID that the subscriber
+                      uses to connect into the fabric from the VOLT service.
                     type: string
-                    format: enumeration
-                  id:
-                    type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    type: string
-                    format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
+                    format: subscriber-outflow
+                  tags:
+                    description: |-
+                      Each entry represents a unique combination of the OLT uplink VLAN
+                      (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
+                      into the fabric for the subscriber.
+                    type: object
+                    properties:
+                      outer:
+                        type: string
+                        format: leafref
+                      inner:
+                        type: string
+                        format: leafref
     delete:
       summary: Delete subscriber from service
       deprecated: false
@@ -2425,17 +1218,17 @@ paths:
         description: A key uniquely identifying subscriber item
         type: string
         format: 'xtype:unique-identifier'
-  '/cord-volt-service:controller/subscriber/{id}/cord-volt-service:tags':
+  '/cord-volt-service:controller/subscriber/{id}/tags':
     get:
       description: |-
         Each entry represents a unique combination of the OLT uplink VLAN
         (outer tag) and the ONU/ONT link VLAN (inner tag) connecting
         into the fabric for the subscriber.
-      summary: 'View detail on cord-volt-service:tags'
+      summary: View detail on tags
       deprecated: false
       responses:
         '200':
-          description: 'Expected response of cord-volt-service:tags'
+          description: Expected response of tags
           schema:
             description: |-
               Each entry represents a unique combination of the OLT uplink VLAN
@@ -2450,10 +1243,10 @@ paths:
                 type: string
                 format: leafref
     put:
-      summary: 'Update details on cord-volt-service:tags'
+      summary: Update details on tags
       deprecated: false
       parameters:
-        - name: 'cord-volt-service:tags'
+        - name: tags
           in: body
           description: |-
             Each entry represents a unique combination of the OLT uplink VLAN
@@ -2475,7 +1268,7 @@ paths:
           required: false
       responses:
         '200':
-          description: 'Expected response of cord-volt-service:tags'
+          description: Expected response of tags
           schema:
             description: |-
               Each entry represents a unique combination of the OLT uplink VLAN
@@ -2490,10 +1283,10 @@ paths:
                 type: string
                 format: leafref
     patch:
-      summary: 'Merge details on cord-volt-service:tags'
+      summary: Merge details on tags
       deprecated: false
       parameters:
-        - name: 'cord-volt-service:tags'
+        - name: tags
           in: body
           description: |-
             Each entry represents a unique combination of the OLT uplink VLAN
@@ -2515,7 +1308,7 @@ paths:
           required: false
       responses:
         '200':
-          description: 'Expected response of cord-volt-service:tags'
+          description: Expected response of tags
           schema:
             description: |-
               Each entry represents a unique combination of the OLT uplink VLAN
@@ -2530,7 +1323,7 @@ paths:
                 type: string
                 format: leafref
     delete:
-      summary: 'Delete cord-volt-service:tags from subscriber'
+      summary: Delete tags from subscriber
       deprecated: false
       responses:
         '204':
@@ -2544,7 +1337,7 @@ paths:
         format: 'xtype:unique-identifier'
   '/cord-volt-service:controller/credential':
     post:
-      summary: Creates one or more new credential in service
+      summary: Creates one or more new credential in credentials-list
       deprecated: false
       parameters:
         - name: credential
@@ -2567,6 +1360,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '200':
@@ -2589,8 +1386,12 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
     get:
-      summary: List all credentials from service
+      summary: List all credentials from credentials-list
       deprecated: false
       responses:
         '200':
@@ -2613,6 +1414,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
     put:
       summary: Replace the entire credential collection
       deprecated: false
@@ -2637,6 +1442,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '201':
@@ -2665,6 +1474,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '201':
@@ -2692,6 +1505,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     put:
       summary: Update details on credential
       deprecated: false
@@ -2714,6 +1531,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
           required: false
       responses:
         '200':
@@ -2734,6 +1555,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     patch:
       summary: Merge details on credential
       deprecated: false
@@ -2756,6 +1581,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
           required: false
       responses:
         '200':
@@ -2776,8 +1605,12 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     delete:
-      summary: Delete credential from service
+      summary: Delete credential from credentials-list
       deprecated: false
       responses:
         '204':
@@ -2802,64 +1635,7 @@ paths:
             type: array
             items:
               description: Each entry represents an OLT device.
-              allOf:
-                - $ref: '#/definitions/olt-device'
-                - required:
-                    - mac
-                  properties:
-                    name:
-                      description: name of OLT device
-                      type: string
-                      format: string
-                    mac:
-                      type: string
-                      format: 'xtype:mac-address'
-                    uplink:
-                      description: Uplink description of the OLT device.
-                      type: object
-                      properties:
-                        network:
-                          type: string
-                          format: 'xtype:network-identifier'
-                        tag:
-                          description: >-
-                            Represents S-Tag for instructing OLT to associate a
-                            VLAN tag for
-
-                            traffic originating from OLT device.
-                          type: string
-                          format: 'xtype:vlan'
-                    link:
-                      type: array
-                      items:
-                        description: >-
-                          Each link represents an ONU/ONT (Optical Network
-                          Termination) endpoint
-
-                          connection.
-                        type: object
-                        required:
-                          - mac
-                          - serial
-                        properties:
-                          mac:
-                            type: string
-                            format: 'xtype:mac-address'
-                          serial:
-                            type: string
-                            format: string
-                          active:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          tag:
-                            description: >-
-                              Represents C-Tag for instructing ONT to add/remove
-                              vlan tag for
-
-                              traffic within OLT device.
-                            type: string
-                            format: 'xtype:vlan'
+              $ref: '#/definitions/olt-device'
           required: false
       responses:
         '200':
@@ -2868,64 +1644,7 @@ paths:
             type: array
             items:
               description: Each entry represents an OLT device.
-              allOf:
-                - $ref: '#/definitions/olt-device'
-                - required:
-                    - mac
-                  properties:
-                    name:
-                      description: name of OLT device
-                      type: string
-                      format: string
-                    mac:
-                      type: string
-                      format: 'xtype:mac-address'
-                    uplink:
-                      description: Uplink description of the OLT device.
-                      type: object
-                      properties:
-                        network:
-                          type: string
-                          format: 'xtype:network-identifier'
-                        tag:
-                          description: >-
-                            Represents S-Tag for instructing OLT to associate a
-                            VLAN tag for
-
-                            traffic originating from OLT device.
-                          type: string
-                          format: 'xtype:vlan'
-                    link:
-                      type: array
-                      items:
-                        description: >-
-                          Each link represents an ONU/ONT (Optical Network
-                          Termination) endpoint
-
-                          connection.
-                        type: object
-                        required:
-                          - mac
-                          - serial
-                        properties:
-                          mac:
-                            type: string
-                            format: 'xtype:mac-address'
-                          serial:
-                            type: string
-                            format: string
-                          active:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          tag:
-                            description: >-
-                              Represents C-Tag for instructing ONT to add/remove
-                              vlan tag for
-
-                              traffic within OLT device.
-                            type: string
-                            format: 'xtype:vlan'
+              $ref: '#/definitions/olt-device'
     get:
       summary: List all devices from devices-list
       deprecated: false
@@ -2936,64 +1655,7 @@ paths:
             type: array
             items:
               description: Each entry represents an OLT device.
-              allOf:
-                - $ref: '#/definitions/olt-device'
-                - required:
-                    - mac
-                  properties:
-                    name:
-                      description: name of OLT device
-                      type: string
-                      format: string
-                    mac:
-                      type: string
-                      format: 'xtype:mac-address'
-                    uplink:
-                      description: Uplink description of the OLT device.
-                      type: object
-                      properties:
-                        network:
-                          type: string
-                          format: 'xtype:network-identifier'
-                        tag:
-                          description: >-
-                            Represents S-Tag for instructing OLT to associate a
-                            VLAN tag for
-
-                            traffic originating from OLT device.
-                          type: string
-                          format: 'xtype:vlan'
-                    link:
-                      type: array
-                      items:
-                        description: >-
-                          Each link represents an ONU/ONT (Optical Network
-                          Termination) endpoint
-
-                          connection.
-                        type: object
-                        required:
-                          - mac
-                          - serial
-                        properties:
-                          mac:
-                            type: string
-                            format: 'xtype:mac-address'
-                          serial:
-                            type: string
-                            format: string
-                          active:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          tag:
-                            description: >-
-                              Represents C-Tag for instructing ONT to add/remove
-                              vlan tag for
-
-                              traffic within OLT device.
-                            type: string
-                            format: 'xtype:vlan'
+              $ref: '#/definitions/olt-device'
     put:
       summary: Replace the entire device collection
       deprecated: false
@@ -3005,64 +1667,7 @@ paths:
             type: array
             items:
               description: Each entry represents an OLT device.
-              allOf:
-                - $ref: '#/definitions/olt-device'
-                - required:
-                    - mac
-                  properties:
-                    name:
-                      description: name of OLT device
-                      type: string
-                      format: string
-                    mac:
-                      type: string
-                      format: 'xtype:mac-address'
-                    uplink:
-                      description: Uplink description of the OLT device.
-                      type: object
-                      properties:
-                        network:
-                          type: string
-                          format: 'xtype:network-identifier'
-                        tag:
-                          description: >-
-                            Represents S-Tag for instructing OLT to associate a
-                            VLAN tag for
-
-                            traffic originating from OLT device.
-                          type: string
-                          format: 'xtype:vlan'
-                    link:
-                      type: array
-                      items:
-                        description: >-
-                          Each link represents an ONU/ONT (Optical Network
-                          Termination) endpoint
-
-                          connection.
-                        type: object
-                        required:
-                          - mac
-                          - serial
-                        properties:
-                          mac:
-                            type: string
-                            format: 'xtype:mac-address'
-                          serial:
-                            type: string
-                            format: string
-                          active:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          tag:
-                            description: >-
-                              Represents C-Tag for instructing ONT to add/remove
-                              vlan tag for
-
-                              traffic within OLT device.
-                            type: string
-                            format: 'xtype:vlan'
+              $ref: '#/definitions/olt-device'
           required: false
       responses:
         '201':
@@ -3078,64 +1683,7 @@ paths:
             type: array
             items:
               description: Each entry represents an OLT device.
-              allOf:
-                - $ref: '#/definitions/olt-device'
-                - required:
-                    - mac
-                  properties:
-                    name:
-                      description: name of OLT device
-                      type: string
-                      format: string
-                    mac:
-                      type: string
-                      format: 'xtype:mac-address'
-                    uplink:
-                      description: Uplink description of the OLT device.
-                      type: object
-                      properties:
-                        network:
-                          type: string
-                          format: 'xtype:network-identifier'
-                        tag:
-                          description: >-
-                            Represents S-Tag for instructing OLT to associate a
-                            VLAN tag for
-
-                            traffic originating from OLT device.
-                          type: string
-                          format: 'xtype:vlan'
-                    link:
-                      type: array
-                      items:
-                        description: >-
-                          Each link represents an ONU/ONT (Optical Network
-                          Termination) endpoint
-
-                          connection.
-                        type: object
-                        required:
-                          - mac
-                          - serial
-                        properties:
-                          mac:
-                            type: string
-                            format: 'xtype:mac-address'
-                          serial:
-                            type: string
-                            format: string
-                          active:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          tag:
-                            description: >-
-                              Represents C-Tag for instructing ONT to add/remove
-                              vlan tag for
-
-                              traffic within OLT device.
-                            type: string
-                            format: 'xtype:vlan'
+              $ref: '#/definitions/olt-device'
           required: false
       responses:
         '201':
@@ -3150,64 +1698,7 @@ paths:
           description: Expected response of device
           schema:
             description: Each entry represents an OLT device.
-            allOf:
-              - $ref: '#/definitions/olt-device'
-              - required:
-                  - mac
-                properties:
-                  name:
-                    description: name of OLT device
-                    type: string
-                    format: string
-                  mac:
-                    type: string
-                    format: 'xtype:mac-address'
-                  uplink:
-                    description: Uplink description of the OLT device.
-                    type: object
-                    properties:
-                      network:
-                        type: string
-                        format: 'xtype:network-identifier'
-                      tag:
-                        description: >-
-                          Represents S-Tag for instructing OLT to associate a
-                          VLAN tag for
-
-                          traffic originating from OLT device.
-                        type: string
-                        format: 'xtype:vlan'
-                  link:
-                    type: array
-                    items:
-                      description: >-
-                        Each link represents an ONU/ONT (Optical Network
-                        Termination) endpoint
-
-                        connection.
-                      type: object
-                      required:
-                        - mac
-                        - serial
-                      properties:
-                        mac:
-                          type: string
-                          format: 'xtype:mac-address'
-                        serial:
-                          type: string
-                          format: string
-                        active:
-                          default: 'false'
-                          type: string
-                          format: boolean
-                        tag:
-                          description: >-
-                            Represents C-Tag for instructing ONT to add/remove
-                            vlan tag for
-
-                            traffic within OLT device.
-                          type: string
-                          format: 'xtype:vlan'
+            $ref: '#/definitions/olt-device'
     put:
       summary: Update details on device
       deprecated: false
@@ -3217,128 +1708,14 @@ paths:
           description: Each entry represents an OLT device.
           schema:
             description: Each entry represents an OLT device.
-            allOf:
-              - $ref: '#/definitions/olt-device'
-              - required:
-                  - mac
-                properties:
-                  name:
-                    description: name of OLT device
-                    type: string
-                    format: string
-                  mac:
-                    type: string
-                    format: 'xtype:mac-address'
-                  uplink:
-                    description: Uplink description of the OLT device.
-                    type: object
-                    properties:
-                      network:
-                        type: string
-                        format: 'xtype:network-identifier'
-                      tag:
-                        description: >-
-                          Represents S-Tag for instructing OLT to associate a
-                          VLAN tag for
-
-                          traffic originating from OLT device.
-                        type: string
-                        format: 'xtype:vlan'
-                  link:
-                    type: array
-                    items:
-                      description: >-
-                        Each link represents an ONU/ONT (Optical Network
-                        Termination) endpoint
-
-                        connection.
-                      type: object
-                      required:
-                        - mac
-                        - serial
-                      properties:
-                        mac:
-                          type: string
-                          format: 'xtype:mac-address'
-                        serial:
-                          type: string
-                          format: string
-                        active:
-                          default: 'false'
-                          type: string
-                          format: boolean
-                        tag:
-                          description: >-
-                            Represents C-Tag for instructing ONT to add/remove
-                            vlan tag for
-
-                            traffic within OLT device.
-                          type: string
-                          format: 'xtype:vlan'
+            $ref: '#/definitions/olt-device'
           required: false
       responses:
         '200':
           description: Expected response of device
           schema:
             description: Each entry represents an OLT device.
-            allOf:
-              - $ref: '#/definitions/olt-device'
-              - required:
-                  - mac
-                properties:
-                  name:
-                    description: name of OLT device
-                    type: string
-                    format: string
-                  mac:
-                    type: string
-                    format: 'xtype:mac-address'
-                  uplink:
-                    description: Uplink description of the OLT device.
-                    type: object
-                    properties:
-                      network:
-                        type: string
-                        format: 'xtype:network-identifier'
-                      tag:
-                        description: >-
-                          Represents S-Tag for instructing OLT to associate a
-                          VLAN tag for
-
-                          traffic originating from OLT device.
-                        type: string
-                        format: 'xtype:vlan'
-                  link:
-                    type: array
-                    items:
-                      description: >-
-                        Each link represents an ONU/ONT (Optical Network
-                        Termination) endpoint
-
-                        connection.
-                      type: object
-                      required:
-                        - mac
-                        - serial
-                      properties:
-                        mac:
-                          type: string
-                          format: 'xtype:mac-address'
-                        serial:
-                          type: string
-                          format: string
-                        active:
-                          default: 'false'
-                          type: string
-                          format: boolean
-                        tag:
-                          description: >-
-                            Represents C-Tag for instructing ONT to add/remove
-                            vlan tag for
-
-                            traffic within OLT device.
-                          type: string
-                          format: 'xtype:vlan'
+            $ref: '#/definitions/olt-device'
     patch:
       summary: Merge details on device
       deprecated: false
@@ -3348,128 +1725,14 @@ paths:
           description: Each entry represents an OLT device.
           schema:
             description: Each entry represents an OLT device.
-            allOf:
-              - $ref: '#/definitions/olt-device'
-              - required:
-                  - mac
-                properties:
-                  name:
-                    description: name of OLT device
-                    type: string
-                    format: string
-                  mac:
-                    type: string
-                    format: 'xtype:mac-address'
-                  uplink:
-                    description: Uplink description of the OLT device.
-                    type: object
-                    properties:
-                      network:
-                        type: string
-                        format: 'xtype:network-identifier'
-                      tag:
-                        description: >-
-                          Represents S-Tag for instructing OLT to associate a
-                          VLAN tag for
-
-                          traffic originating from OLT device.
-                        type: string
-                        format: 'xtype:vlan'
-                  link:
-                    type: array
-                    items:
-                      description: >-
-                        Each link represents an ONU/ONT (Optical Network
-                        Termination) endpoint
-
-                        connection.
-                      type: object
-                      required:
-                        - mac
-                        - serial
-                      properties:
-                        mac:
-                          type: string
-                          format: 'xtype:mac-address'
-                        serial:
-                          type: string
-                          format: string
-                        active:
-                          default: 'false'
-                          type: string
-                          format: boolean
-                        tag:
-                          description: >-
-                            Represents C-Tag for instructing ONT to add/remove
-                            vlan tag for
-
-                            traffic within OLT device.
-                          type: string
-                          format: 'xtype:vlan'
+            $ref: '#/definitions/olt-device'
           required: false
       responses:
         '200':
           description: Expected response of device
           schema:
             description: Each entry represents an OLT device.
-            allOf:
-              - $ref: '#/definitions/olt-device'
-              - required:
-                  - mac
-                properties:
-                  name:
-                    description: name of OLT device
-                    type: string
-                    format: string
-                  mac:
-                    type: string
-                    format: 'xtype:mac-address'
-                  uplink:
-                    description: Uplink description of the OLT device.
-                    type: object
-                    properties:
-                      network:
-                        type: string
-                        format: 'xtype:network-identifier'
-                      tag:
-                        description: >-
-                          Represents S-Tag for instructing OLT to associate a
-                          VLAN tag for
-
-                          traffic originating from OLT device.
-                        type: string
-                        format: 'xtype:vlan'
-                  link:
-                    type: array
-                    items:
-                      description: >-
-                        Each link represents an ONU/ONT (Optical Network
-                        Termination) endpoint
-
-                        connection.
-                      type: object
-                      required:
-                        - mac
-                        - serial
-                      properties:
-                        mac:
-                          type: string
-                          format: 'xtype:mac-address'
-                        serial:
-                          type: string
-                          format: string
-                        active:
-                          default: 'false'
-                          type: string
-                          format: boolean
-                        tag:
-                          description: >-
-                            Represents C-Tag for instructing ONT to add/remove
-                            vlan tag for
-
-                            traffic within OLT device.
-                          type: string
-                          format: 'xtype:vlan'
+            $ref: '#/definitions/olt-device'
     delete:
       summary: Delete device from devices-list
       deprecated: false
@@ -3499,13 +1762,11 @@ paths:
                 type: string
                 format: 'xtype:network-identifier'
               tag:
-                description: >-
-                  Represents S-Tag for instructing OLT to associate a VLAN tag
-                  for
-
+                description: |-
+                  Represents S-Tag for instructing OLT to associate a VLAN tag for
                   traffic originating from OLT device.
-                type: string
-                format: 'xtype:vlan'
+                type: integer
+                format: uint16
     put:
       summary: Update details on uplink
       deprecated: false
@@ -3521,13 +1782,11 @@ paths:
                 type: string
                 format: 'xtype:network-identifier'
               tag:
-                description: >-
-                  Represents S-Tag for instructing OLT to associate a VLAN tag
-                  for
-
+                description: |-
+                  Represents S-Tag for instructing OLT to associate a VLAN tag for
                   traffic originating from OLT device.
-                type: string
-                format: 'xtype:vlan'
+                type: integer
+                format: uint16
           required: false
       responses:
         '200':
@@ -3540,13 +1799,11 @@ paths:
                 type: string
                 format: 'xtype:network-identifier'
               tag:
-                description: >-
-                  Represents S-Tag for instructing OLT to associate a VLAN tag
-                  for
-
+                description: |-
+                  Represents S-Tag for instructing OLT to associate a VLAN tag for
                   traffic originating from OLT device.
-                type: string
-                format: 'xtype:vlan'
+                type: integer
+                format: uint16
     patch:
       summary: Merge details on uplink
       deprecated: false
@@ -3562,13 +1819,11 @@ paths:
                 type: string
                 format: 'xtype:network-identifier'
               tag:
-                description: >-
-                  Represents S-Tag for instructing OLT to associate a VLAN tag
-                  for
-
+                description: |-
+                  Represents S-Tag for instructing OLT to associate a VLAN tag for
                   traffic originating from OLT device.
-                type: string
-                format: 'xtype:vlan'
+                type: integer
+                format: uint16
           required: false
       responses:
         '200':
@@ -3581,15 +1836,13 @@ paths:
                 type: string
                 format: 'xtype:network-identifier'
               tag:
-                description: >-
-                  Represents S-Tag for instructing OLT to associate a VLAN tag
-                  for
-
+                description: |-
+                  Represents S-Tag for instructing OLT to associate a VLAN tag for
                   traffic originating from OLT device.
-                type: string
-                format: 'xtype:vlan'
+                type: integer
+                format: uint16
     delete:
-      summary: Delete uplink from device
+      summary: Delete uplink from olt-device
       deprecated: false
       responses:
         '204':
@@ -3606,23 +1859,19 @@ paths:
       description: |-
         Each link represents an ONU/ONT (Optical Network Termination) endpoint
         connection.
-      summary: Creates one or more new link in device
+      summary: Creates one or more new link in olt-device
       deprecated: false
       parameters:
         - name: link
           in: body
-          description: >-
-            Each link represents an ONU/ONT (Optical Network Termination)
-            endpoint
-
+          description: |-
+            Each link represents an ONU/ONT (Optical Network Termination) endpoint
             connection.
           schema:
             type: array
             items:
-              description: >-
-                Each link represents an ONU/ONT (Optical Network Termination)
-                endpoint
-
+              description: |-
+                Each link represents an ONU/ONT (Optical Network Termination) endpoint
                 connection.
               type: object
               required:
@@ -3637,16 +1886,14 @@ paths:
                   format: string
                 active:
                   default: 'false'
-                  type: string
+                  type: boolean
                   format: boolean
                 tag:
-                  description: >-
-                    Represents C-Tag for instructing ONT to add/remove vlan tag
-                    for
-
+                  description: |-
+                    Represents C-Tag for instructing ONT to add/remove vlan tag for
                     traffic within OLT device.
-                  type: string
-                  format: 'xtype:vlan'
+                  type: integer
+                  format: uint16
           required: false
       responses:
         '200':
@@ -3654,10 +1901,8 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each link represents an ONU/ONT (Optical Network Termination)
-                endpoint
-
+              description: |-
+                Each link represents an ONU/ONT (Optical Network Termination) endpoint
                 connection.
               type: object
               required:
@@ -3672,18 +1917,16 @@ paths:
                   format: string
                 active:
                   default: 'false'
-                  type: string
+                  type: boolean
                   format: boolean
                 tag:
-                  description: >-
-                    Represents C-Tag for instructing ONT to add/remove vlan tag
-                    for
-
+                  description: |-
+                    Represents C-Tag for instructing ONT to add/remove vlan tag for
                     traffic within OLT device.
-                  type: string
-                  format: 'xtype:vlan'
+                  type: integer
+                  format: uint16
     get:
-      summary: List all links from device
+      summary: List all links from olt-device
       deprecated: false
       responses:
         '200':
@@ -3691,10 +1934,8 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each link represents an ONU/ONT (Optical Network Termination)
-                endpoint
-
+              description: |-
+                Each link represents an ONU/ONT (Optical Network Termination) endpoint
                 connection.
               type: object
               required:
@@ -3709,34 +1950,28 @@ paths:
                   format: string
                 active:
                   default: 'false'
-                  type: string
+                  type: boolean
                   format: boolean
                 tag:
-                  description: >-
-                    Represents C-Tag for instructing ONT to add/remove vlan tag
-                    for
-
+                  description: |-
+                    Represents C-Tag for instructing ONT to add/remove vlan tag for
                     traffic within OLT device.
-                  type: string
-                  format: 'xtype:vlan'
+                  type: integer
+                  format: uint16
     put:
       summary: Replace the entire link collection
       deprecated: false
       parameters:
         - name: link
           in: body
-          description: >-
-            Each link represents an ONU/ONT (Optical Network Termination)
-            endpoint
-
+          description: |-
+            Each link represents an ONU/ONT (Optical Network Termination) endpoint
             connection.
           schema:
             type: array
             items:
-              description: >-
-                Each link represents an ONU/ONT (Optical Network Termination)
-                endpoint
-
+              description: |-
+                Each link represents an ONU/ONT (Optical Network Termination) endpoint
                 connection.
               type: object
               required:
@@ -3751,16 +1986,14 @@ paths:
                   format: string
                 active:
                   default: 'false'
-                  type: string
+                  type: boolean
                   format: boolean
                 tag:
-                  description: >-
-                    Represents C-Tag for instructing ONT to add/remove vlan tag
-                    for
-
+                  description: |-
+                    Represents C-Tag for instructing ONT to add/remove vlan tag for
                     traffic within OLT device.
-                  type: string
-                  format: 'xtype:vlan'
+                  type: integer
+                  format: uint16
           required: false
       responses:
         '201':
@@ -3771,18 +2004,14 @@ paths:
       parameters:
         - name: link
           in: body
-          description: >-
-            Each link represents an ONU/ONT (Optical Network Termination)
-            endpoint
-
+          description: |-
+            Each link represents an ONU/ONT (Optical Network Termination) endpoint
             connection.
           schema:
             type: array
             items:
-              description: >-
-                Each link represents an ONU/ONT (Optical Network Termination)
-                endpoint
-
+              description: |-
+                Each link represents an ONU/ONT (Optical Network Termination) endpoint
                 connection.
               type: object
               required:
@@ -3797,16 +2026,14 @@ paths:
                   format: string
                 active:
                   default: 'false'
-                  type: string
+                  type: boolean
                   format: boolean
                 tag:
-                  description: >-
-                    Represents C-Tag for instructing ONT to add/remove vlan tag
-                    for
-
+                  description: |-
+                    Represents C-Tag for instructing ONT to add/remove vlan tag for
                     traffic within OLT device.
-                  type: string
-                  format: 'xtype:vlan'
+                  type: integer
+                  format: uint16
           required: false
       responses:
         '201':
@@ -3829,10 +2056,8 @@ paths:
         '200':
           description: Expected response of link
           schema:
-            description: >-
-              Each link represents an ONU/ONT (Optical Network Termination)
-              endpoint
-
+            description: |-
+              Each link represents an ONU/ONT (Optical Network Termination) endpoint
               connection.
             type: object
             required:
@@ -3847,32 +2072,26 @@ paths:
                 format: string
               active:
                 default: 'false'
-                type: string
+                type: boolean
                 format: boolean
               tag:
-                description: >-
-                  Represents C-Tag for instructing ONT to add/remove vlan tag
-                  for
-
+                description: |-
+                  Represents C-Tag for instructing ONT to add/remove vlan tag for
                   traffic within OLT device.
-                type: string
-                format: 'xtype:vlan'
+                type: integer
+                format: uint16
     put:
       summary: Update details on link
       deprecated: false
       parameters:
         - name: link
           in: body
-          description: >-
-            Each link represents an ONU/ONT (Optical Network Termination)
-            endpoint
-
+          description: |-
+            Each link represents an ONU/ONT (Optical Network Termination) endpoint
             connection.
           schema:
-            description: >-
-              Each link represents an ONU/ONT (Optical Network Termination)
-              endpoint
-
+            description: |-
+              Each link represents an ONU/ONT (Optical Network Termination) endpoint
               connection.
             type: object
             required:
@@ -3887,25 +2106,21 @@ paths:
                 format: string
               active:
                 default: 'false'
-                type: string
+                type: boolean
                 format: boolean
               tag:
-                description: >-
-                  Represents C-Tag for instructing ONT to add/remove vlan tag
-                  for
-
+                description: |-
+                  Represents C-Tag for instructing ONT to add/remove vlan tag for
                   traffic within OLT device.
-                type: string
-                format: 'xtype:vlan'
+                type: integer
+                format: uint16
           required: false
       responses:
         '200':
           description: Expected response of link
           schema:
-            description: >-
-              Each link represents an ONU/ONT (Optical Network Termination)
-              endpoint
-
+            description: |-
+              Each link represents an ONU/ONT (Optical Network Termination) endpoint
               connection.
             type: object
             required:
@@ -3920,32 +2135,26 @@ paths:
                 format: string
               active:
                 default: 'false'
-                type: string
+                type: boolean
                 format: boolean
               tag:
-                description: >-
-                  Represents C-Tag for instructing ONT to add/remove vlan tag
-                  for
-
+                description: |-
+                  Represents C-Tag for instructing ONT to add/remove vlan tag for
                   traffic within OLT device.
-                type: string
-                format: 'xtype:vlan'
+                type: integer
+                format: uint16
     patch:
       summary: Merge details on link
       deprecated: false
       parameters:
         - name: link
           in: body
-          description: >-
-            Each link represents an ONU/ONT (Optical Network Termination)
-            endpoint
-
+          description: |-
+            Each link represents an ONU/ONT (Optical Network Termination) endpoint
             connection.
           schema:
-            description: >-
-              Each link represents an ONU/ONT (Optical Network Termination)
-              endpoint
-
+            description: |-
+              Each link represents an ONU/ONT (Optical Network Termination) endpoint
               connection.
             type: object
             required:
@@ -3960,25 +2169,21 @@ paths:
                 format: string
               active:
                 default: 'false'
-                type: string
+                type: boolean
                 format: boolean
               tag:
-                description: >-
-                  Represents C-Tag for instructing ONT to add/remove vlan tag
-                  for
-
+                description: |-
+                  Represents C-Tag for instructing ONT to add/remove vlan tag for
                   traffic within OLT device.
-                type: string
-                format: 'xtype:vlan'
+                type: integer
+                format: uint16
           required: false
       responses:
         '200':
           description: Expected response of link
           schema:
-            description: >-
-              Each link represents an ONU/ONT (Optical Network Termination)
-              endpoint
-
+            description: |-
+              Each link represents an ONU/ONT (Optical Network Termination) endpoint
               connection.
             type: object
             required:
@@ -3993,18 +2198,16 @@ paths:
                 format: string
               active:
                 default: 'false'
-                type: string
+                type: boolean
                 format: boolean
               tag:
-                description: >-
-                  Represents C-Tag for instructing ONT to add/remove vlan tag
-                  for
-
+                description: |-
+                  Represents C-Tag for instructing ONT to add/remove vlan tag for
                   traffic within OLT device.
-                type: string
-                format: 'xtype:vlan'
+                type: integer
+                format: uint16
     delete:
-      summary: Delete link from device
+      summary: Delete link from olt-device
       deprecated: false
       responses:
         '204':
@@ -4023,92 +2226,68 @@ paths:
         type: string
         format: 'xtype:mac-address'
 definitions:
-  'xslice:slice':
-    description: >-
-      A slice is a logically centralized container for network and compute
-      resources
+  'xos:service':
     allOf:
       - $ref: '#/definitions/xos:provider'
       - properties:
-          slice-url:
-            description: A URL describing the purpose of this slice
+          view-url:
             type: string
             format: 'inet:uri'
-          network:
-            description: >-
-              The network that the slice uses to connect to other slices and to
-              the Internet.
-            default: none
+          icon-url:
+            type: string
+            format: 'inet:uri'
+          published:
+            default: 'true'
+            type: boolean
+            format: boolean
+          service-specific-id:
+            type: string
+            format: 'xtype:unique-identifier'
+          keypair:
+            type: array
+            items:
+              description: collection of public/private key pair(s)
+              type: object
+              properties:
+                public:
+                  type: string
+                  format: string
+                private:
+                  type: string
+                  format: string
+          attribute:
+            type: array
+            items:
+              description: backwards-compatible attribute association
+              type: object
+              properties:
+                name:
+                  type: string
+                  format: string
+                value:
+                  type: string
+                  format: string
+          subscriber:
+            type: array
+            items:
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
+                provider should augment this block with service specific
+                attributes.
+              $ref: '#/definitions/xos:subscriber'
+  'xos:subscriber':
+    allOf:
+      - $ref: '#/definitions/xos:tenant'
+      - properties:
+          connectivity:
+            default: na
             type: string
             format: enumeration
             enum:
-              - none
-              - host
-              - bridged
-              - noauto
-          creator:
-            type: string
-            format: leafref
-          service:
-            description: The service that runs in this slice
-          instances:
-            type: array
-            items:
-              type: string
-              format: leafref
-          networks:
-            type: array
-            items:
-              type: string
-              format: leafref
-          ports:
-            type: array
-            items:
-              description: The ports to be exposed for other slices to connect to
-              type: integer
-              format: uint16
-          tags:
-            type: array
-            items:
-              type: string
-              format: string
-          policy:
-            type: object
-            properties:
-              max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: integer
-                format: uint16
-              default-flavor:
-                type: string
-                format: leafref
-              default-image:
-                type: string
-                format: leafref
-              default-node:
-                type: string
-                format: leafref
-              mount-data-sets:
-                default: GenBank
-                type: string
-                format: string
-              default-isolation:
-                default: vm
-                type: string
-                format: 'xtype:isolation'
-                enum:
-                  - vm
-                  - lxc
-                  - hybrid
-          scale:
-            description: Adjust scale for slice(s)
-            type: object
-  'xos:provider':
-    allOf:
-      - $ref: '#/definitions/xos:tenant'
-      - $ref: '#/definitions/xos:credentials-list'
+              - public
+              - private
+              - private-unidirectional
+              - na
   'xos:tenant':
     type: object
     required:
@@ -4184,12 +2363,10 @@ definitions:
             type: array
             items:
               type: object
-      diff:
-        description: retrieve diff of model state if dirty
-        type: object
-      save:
-        description: trigger save into data store via synchronizer
-        type: object
+  'xos:provider':
+    allOf:
+      - $ref: '#/definitions/xos:tenant'
+      - $ref: '#/definitions/xos:credentials-list'
   'xos:credentials-list':
     type: object
     properties:
@@ -4215,71 +2392,6 @@ definitions:
                 - admin
                 - staff
                 - user
-  'xos:service':
-    allOf:
-      - $ref: '#/definitions/xos:provider'
-      - properties:
-          view-url:
-            type: string
-            format: 'inet:uri'
-          icon-url:
-            type: string
-            format: 'inet:uri'
-          published:
-            default: 'true'
-            type: boolean
-            format: boolean
-          service-specific-id:
-            type: string
-            format: 'xtype:unique-identifier'
-          keypair:
-            type: array
-            items:
-              description: collection of public/private key pair(s)
-              type: object
-              properties:
-                public:
-                  type: string
-                  format: string
-                private:
-                  type: string
-                  format: string
-          attribute:
-            type: array
-            items:
-              description: backwards-compatible attribute association
-              type: object
-              properties:
-                name:
-                  type: string
-                  format: string
-                value:
-                  type: string
-                  format: string
-          subscriber:
-            type: array
-            items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
-                provider should augment this block with service specific
-
-                attributes.
-              $ref: '#/definitions/xos:subscriber'
-  'xos:subscriber':
-    allOf:
-      - $ref: '#/definitions/xos:tenant'
-      - properties:
-          connectivity:
-            default: na
-            type: string
-            format: enumeration
-            enum:
-              - public
-              - private
-              - private-unidirectional
-              - na
   devices-list:
     type: object
     properties:
@@ -4317,10 +2429,8 @@ definitions:
       link:
         type: array
         items:
-          description: >-
-            Each link represents an ONU/ONT (Optical Network Termination)
-            endpoint
-
+          description: |-
+            Each link represents an ONU/ONT (Optical Network Termination) endpoint
             connection.
           type: object
           required:

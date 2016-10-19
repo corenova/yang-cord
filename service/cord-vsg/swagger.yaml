@@ -29,16 +29,11 @@ paths:
         '200':
           description: Expected response of controller
           schema:
-            description: >-
-              The controller configuration represents a VSG controller which
-              manages
-
+            description: |-
+              The controller configuration represents a VSG controller which manages
               multiple VSG gateways. The VSG controller provides agregate
-
               abstraction of the entire NFaaS as a single switch to the
-
               network fabric. Each port entry of the controller represents
-
               each VSG subscriber flow as a distinct openflow port.
             allOf:
               - $ref: '#/definitions/xos:service'
@@ -49,10 +44,8 @@ paths:
                   port:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents a VSG subscriber flow connected
-                        across VSG
-
+                      description: |-
+                        Each entry represents a VSG subscriber flow connected across VSG
                         gateways.
                       type: object
                       required:
@@ -72,28 +65,18 @@ paths:
       parameters:
         - name: controller
           in: body
-          description: >-
-            The controller configuration represents a VSG controller which
-            manages
-
+          description: |-
+            The controller configuration represents a VSG controller which manages
             multiple VSG gateways. The VSG controller provides agregate
-
             abstraction of the entire NFaaS as a single switch to the
-
             network fabric. Each port entry of the controller represents
-
             each VSG subscriber flow as a distinct openflow port.
           schema:
-            description: >-
-              The controller configuration represents a VSG controller which
-              manages
-
+            description: |-
+              The controller configuration represents a VSG controller which manages
               multiple VSG gateways. The VSG controller provides agregate
-
               abstraction of the entire NFaaS as a single switch to the
-
               network fabric. Each port entry of the controller represents
-
               each VSG subscriber flow as a distinct openflow port.
             allOf:
               - $ref: '#/definitions/xos:service'
@@ -104,10 +87,8 @@ paths:
                   port:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents a VSG subscriber flow connected
-                        across VSG
-
+                      description: |-
+                        Each entry represents a VSG subscriber flow connected across VSG
                         gateways.
                       type: object
                       required:
@@ -126,16 +107,11 @@ paths:
         '200':
           description: Expected response of controller
           schema:
-            description: >-
-              The controller configuration represents a VSG controller which
-              manages
-
+            description: |-
+              The controller configuration represents a VSG controller which manages
               multiple VSG gateways. The VSG controller provides agregate
-
               abstraction of the entire NFaaS as a single switch to the
-
               network fabric. Each port entry of the controller represents
-
               each VSG subscriber flow as a distinct openflow port.
             allOf:
               - $ref: '#/definitions/xos:service'
@@ -146,10 +122,8 @@ paths:
                   port:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents a VSG subscriber flow connected
-                        across VSG
-
+                      description: |-
+                        Each entry represents a VSG subscriber flow connected across VSG
                         gateways.
                       type: object
                       required:
@@ -169,28 +143,18 @@ paths:
       parameters:
         - name: controller
           in: body
-          description: >-
-            The controller configuration represents a VSG controller which
-            manages
-
+          description: |-
+            The controller configuration represents a VSG controller which manages
             multiple VSG gateways. The VSG controller provides agregate
-
             abstraction of the entire NFaaS as a single switch to the
-
             network fabric. Each port entry of the controller represents
-
             each VSG subscriber flow as a distinct openflow port.
           schema:
-            description: >-
-              The controller configuration represents a VSG controller which
-              manages
-
+            description: |-
+              The controller configuration represents a VSG controller which manages
               multiple VSG gateways. The VSG controller provides agregate
-
               abstraction of the entire NFaaS as a single switch to the
-
               network fabric. Each port entry of the controller represents
-
               each VSG subscriber flow as a distinct openflow port.
             allOf:
               - $ref: '#/definitions/xos:service'
@@ -201,10 +165,8 @@ paths:
                   port:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents a VSG subscriber flow connected
-                        across VSG
-
+                      description: |-
+                        Each entry represents a VSG subscriber flow connected across VSG
                         gateways.
                       type: object
                       required:
@@ -223,16 +185,11 @@ paths:
         '200':
           description: Expected response of controller
           schema:
-            description: >-
-              The controller configuration represents a VSG controller which
-              manages
-
+            description: |-
+              The controller configuration represents a VSG controller which manages
               multiple VSG gateways. The VSG controller provides agregate
-
               abstraction of the entire NFaaS as a single switch to the
-
               network fabric. Each port entry of the controller represents
-
               each VSG subscriber flow as a distinct openflow port.
             allOf:
               - $ref: '#/definitions/xos:service'
@@ -243,10 +200,8 @@ paths:
                   port:
                     type: array
                     items:
-                      description: >-
-                        Each entry represents a VSG subscriber flow connected
-                        across VSG
-
+                      description: |-
+                        Each entry represents a VSG subscriber flow connected across VSG
                         gateways.
                       type: object
                       required:
@@ -320,10 +275,8 @@ paths:
             type: object
             properties:
               max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
+                description: The maximum number of VMs that this slice is allowed to allocate
+                type: integer
                 format: uint16
               default-flavor:
                 type: string
@@ -342,6 +295,10 @@ paths:
                 default: vm
                 type: string
                 format: 'xtype:isolation'
+                enum:
+                  - vm
+                  - lxc
+                  - hybrid
     put:
       summary: Update details on policy
       deprecated: false
@@ -352,10 +309,8 @@ paths:
             type: object
             properties:
               max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
+                description: The maximum number of VMs that this slice is allowed to allocate
+                type: integer
                 format: uint16
               default-flavor:
                 type: string
@@ -374,6 +329,10 @@ paths:
                 default: vm
                 type: string
                 format: 'xtype:isolation'
+                enum:
+                  - vm
+                  - lxc
+                  - hybrid
           required: false
       responses:
         '200':
@@ -382,10 +341,8 @@ paths:
             type: object
             properties:
               max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
+                description: The maximum number of VMs that this slice is allowed to allocate
+                type: integer
                 format: uint16
               default-flavor:
                 type: string
@@ -404,6 +361,10 @@ paths:
                 default: vm
                 type: string
                 format: 'xtype:isolation'
+                enum:
+                  - vm
+                  - lxc
+                  - hybrid
     patch:
       summary: Merge details on policy
       deprecated: false
@@ -414,10 +375,8 @@ paths:
             type: object
             properties:
               max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
+                description: The maximum number of VMs that this slice is allowed to allocate
+                type: integer
                 format: uint16
               default-flavor:
                 type: string
@@ -436,6 +395,10 @@ paths:
                 default: vm
                 type: string
                 format: 'xtype:isolation'
+                enum:
+                  - vm
+                  - lxc
+                  - hybrid
           required: false
       responses:
         '200':
@@ -444,10 +407,8 @@ paths:
             type: object
             properties:
               max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
-                type: string
+                description: The maximum number of VMs that this slice is allowed to allocate
+                type: integer
                 format: uint16
               default-flavor:
                 type: string
@@ -466,6 +427,10 @@ paths:
                 default: vm
                 type: string
                 format: 'xtype:isolation'
+                enum:
+                  - vm
+                  - lxc
+                  - hybrid
     delete:
       summary: Delete policy from slice
       deprecated: false
@@ -488,7 +453,7 @@ paths:
           schema: {}
   '/cord-vsg-service:controller/slice/credential':
     post:
-      summary: Creates one or more new credential in slice
+      summary: Creates one or more new credential in credentials-list
       deprecated: false
       parameters:
         - name: credential
@@ -511,6 +476,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '200':
@@ -533,8 +502,12 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
     get:
-      summary: List all credentials from slice
+      summary: List all credentials from credentials-list
       deprecated: false
       responses:
         '200':
@@ -557,6 +530,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
     put:
       summary: Replace the entire credential collection
       deprecated: false
@@ -581,6 +558,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '201':
@@ -609,6 +590,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '201':
@@ -636,6 +621,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     put:
       summary: Update details on credential
       deprecated: false
@@ -658,6 +647,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
           required: false
       responses:
         '200':
@@ -678,6 +671,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     patch:
       summary: Merge details on credential
       deprecated: false
@@ -700,6 +697,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
           required: false
       responses:
         '200':
@@ -720,8 +721,12 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     delete:
-      summary: Delete credential from slice
+      summary: Delete credential from credentials-list
       deprecated: false
       responses:
         '204':
@@ -1400,106 +1405,32 @@ paths:
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
+                - properties:
+                    inflow:
+                      description: |-
+                        Represents a unique flow identifier from the fabric that the
+                        subscriber connects into the VSG service.
                       type: string
-                      format: enumeration
-                    id:
+                      format: 'vsg:subscriber-inflow'
+                    outflow:
+                      description: |-
+                        Represents a unique flow identifier from the VSG service that the
+                        subscriber uses to connect into the fabric.
                       type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      type: string
-                      format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
+                      format: 'vsg:subscriber-outflow'
           required: false
       responses:
         '200':
@@ -1507,96 +1438,25 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
+                - properties:
+                    inflow:
+                      description: |-
+                        Represents a unique flow identifier from the fabric that the
+                        subscriber connects into the VSG service.
                       type: string
-                      format: enumeration
-                    id:
+                      format: 'vsg:subscriber-inflow'
+                    outflow:
+                      description: |-
+                        Represents a unique flow identifier from the VSG service that the
+                        subscriber uses to connect into the fabric.
                       type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      type: string
-                      format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
+                      format: 'vsg:subscriber-outflow'
     get:
       summary: List all subscribers from service
       deprecated: false
@@ -1606,202 +1466,57 @@ paths:
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
+                - properties:
+                    inflow:
+                      description: |-
+                        Represents a unique flow identifier from the fabric that the
+                        subscriber connects into the VSG service.
                       type: string
-                      format: enumeration
-                    id:
+                      format: 'vsg:subscriber-inflow'
+                    outflow:
+                      description: |-
+                        Represents a unique flow identifier from the VSG service that the
+                        subscriber uses to connect into the fabric.
                       type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      type: string
-                      format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
+                      format: 'vsg:subscriber-outflow'
     put:
       summary: Replace the entire subscriber collection
       deprecated: false
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
+                - properties:
+                    inflow:
+                      description: |-
+                        Represents a unique flow identifier from the fabric that the
+                        subscriber connects into the VSG service.
                       type: string
-                      format: enumeration
-                    id:
+                      format: 'vsg:subscriber-inflow'
+                    outflow:
+                      description: |-
+                        Represents a unique flow identifier from the VSG service that the
+                        subscriber uses to connect into the fabric.
                       type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      type: string
-                      format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
+                      format: 'vsg:subscriber-outflow'
           required: false
       responses:
         '201':
@@ -1812,106 +1527,32 @@ paths:
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               allOf:
                 - $ref: '#/definitions/xos:subscriber'
-                - $ref: '#/definitions/xos:tenant'
-                - required:
-                    - id
-                  properties:
-                    connectivity:
-                      default: na
+                - properties:
+                    inflow:
+                      description: |-
+                        Represents a unique flow identifier from the fabric that the
+                        subscriber connects into the VSG service.
                       type: string
-                      format: enumeration
-                    id:
+                      format: 'vsg:subscriber-inflow'
+                    outflow:
+                      description: |-
+                        Represents a unique flow identifier from the VSG service that the
+                        subscriber uses to connect into the fabric.
                       type: string
-                      format: 'xtype:unique-identifier'
-                    name:
-                      type: string
-                      format: string
-                    kind:
-                      default: subscriber
-                      type: string
-                      format: identityref
-                    description:
-                      type: string
-                      format: 'meta:description'
-                    enabled:
-                      default: 'true'
-                      type: string
-                      format: boolean
-                    record:
-                      allOf:
-                        - $ref: '#/definitions/xos:record'
-                        - properties:
-                            created:
-                              type: string
-                              format: 'yang:date-and-time'
-                            updated:
-                              type: string
-                              format: 'yang:date-and-time'
-                            enacted:
-                              type: string
-                              format: 'yang:date-and-time'
-                            policed:
-                              type: string
-                              format: 'yang:date-and-time'
-                            writable:
-                              default: 'true'
-                              type: string
-                              format: boolean
-                            locked:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            deleted:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            dirty:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            sync:
-                              type: object
-                              properties:
-                                progress:
-                                  type: string
-                                  format: enumeration
-                                disabled:
-                                  default: 'false'
-                                  type: string
-                                  format: boolean
-                                enforced:
-                                  default: 'true'
-                                  type: string
-                                  format: boolean
-                                policy:
-                                  type: array
-                                  items:
-                                    type: object
-                            diff:
-                              description: retrieve diff of model state if dirty
-                              type: object
-                            save:
-                              description: trigger save into data store via synchronizer
-                              type: object
+                      format: 'vsg:subscriber-outflow'
           required: false
       responses:
         '201':
@@ -1928,494 +1569,133 @@ paths:
         '200':
           description: Expected response of subscriber
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
+              - properties:
+                  inflow:
+                    description: |-
+                      Represents a unique flow identifier from the fabric that the
+                      subscriber connects into the VSG service.
                     type: string
-                    format: enumeration
-                  id:
+                    format: 'vsg:subscriber-inflow'
+                  outflow:
+                    description: |-
+                      Represents a unique flow identifier from the VSG service that the
+                      subscriber uses to connect into the fabric.
                     type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    type: string
-                    format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
+                    format: 'vsg:subscriber-outflow'
     put:
       summary: Update details on subscriber
       deprecated: false
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
+              - properties:
+                  inflow:
+                    description: |-
+                      Represents a unique flow identifier from the fabric that the
+                      subscriber connects into the VSG service.
                     type: string
-                    format: enumeration
-                  id:
+                    format: 'vsg:subscriber-inflow'
+                  outflow:
+                    description: |-
+                      Represents a unique flow identifier from the VSG service that the
+                      subscriber uses to connect into the fabric.
                     type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    type: string
-                    format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
+                    format: 'vsg:subscriber-outflow'
           required: false
       responses:
         '200':
           description: Expected response of subscriber
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
+              - properties:
+                  inflow:
+                    description: |-
+                      Represents a unique flow identifier from the fabric that the
+                      subscriber connects into the VSG service.
                     type: string
-                    format: enumeration
-                  id:
+                    format: 'vsg:subscriber-inflow'
+                  outflow:
+                    description: |-
+                      Represents a unique flow identifier from the VSG service that the
+                      subscriber uses to connect into the fabric.
                     type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    type: string
-                    format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
+                    format: 'vsg:subscriber-outflow'
     patch:
       summary: Merge details on subscriber
       deprecated: false
       parameters:
         - name: subscriber
           in: body
-          description: >-
-            Each entry represents a subscriber of the service. Each unique
-            service
-
+          description: |-
+            Each entry represents a subscriber of the service. Each unique service
             provider should augment this block with service specific
-
             attributes.
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
+              - properties:
+                  inflow:
+                    description: |-
+                      Represents a unique flow identifier from the fabric that the
+                      subscriber connects into the VSG service.
                     type: string
-                    format: enumeration
-                  id:
+                    format: 'vsg:subscriber-inflow'
+                  outflow:
+                    description: |-
+                      Represents a unique flow identifier from the VSG service that the
+                      subscriber uses to connect into the fabric.
                     type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    type: string
-                    format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
+                    format: 'vsg:subscriber-outflow'
           required: false
       responses:
         '200':
           description: Expected response of subscriber
           schema:
-            description: >-
-              Each entry represents a subscriber of the service. Each unique
-              service
-
+            description: |-
+              Each entry represents a subscriber of the service. Each unique service
               provider should augment this block with service specific
-
               attributes.
             allOf:
               - $ref: '#/definitions/xos:subscriber'
-              - $ref: '#/definitions/xos:tenant'
-              - required:
-                  - id
-                properties:
-                  connectivity:
-                    default: na
+              - properties:
+                  inflow:
+                    description: |-
+                      Represents a unique flow identifier from the fabric that the
+                      subscriber connects into the VSG service.
                     type: string
-                    format: enumeration
-                  id:
+                    format: 'vsg:subscriber-inflow'
+                  outflow:
+                    description: |-
+                      Represents a unique flow identifier from the VSG service that the
+                      subscriber uses to connect into the fabric.
                     type: string
-                    format: 'xtype:unique-identifier'
-                  name:
-                    type: string
-                    format: string
-                  kind:
-                    default: subscriber
-                    type: string
-                    format: identityref
-                  description:
-                    type: string
-                    format: 'meta:description'
-                  enabled:
-                    default: 'true'
-                    type: string
-                    format: boolean
-                  record:
-                    allOf:
-                      - $ref: '#/definitions/xos:record'
-                      - properties:
-                          created:
-                            type: string
-                            format: 'yang:date-and-time'
-                          updated:
-                            type: string
-                            format: 'yang:date-and-time'
-                          enacted:
-                            type: string
-                            format: 'yang:date-and-time'
-                          policed:
-                            type: string
-                            format: 'yang:date-and-time'
-                          writable:
-                            default: 'true'
-                            type: string
-                            format: boolean
-                          locked:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          deleted:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          dirty:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          sync:
-                            type: object
-                            properties:
-                              progress:
-                                type: string
-                                format: enumeration
-                              disabled:
-                                default: 'false'
-                                type: string
-                                format: boolean
-                              enforced:
-                                default: 'true'
-                                type: string
-                                format: boolean
-                              policy:
-                                type: array
-                                items:
-                                  type: object
-                          diff:
-                            description: retrieve diff of model state if dirty
-                            type: object
-                          save:
-                            description: trigger save into data store via synchronizer
-                            type: object
+                    format: 'vsg:subscriber-outflow'
     delete:
       summary: Delete subscriber from service
       deprecated: false
@@ -2431,7 +1711,7 @@ paths:
         format: 'xtype:unique-identifier'
   '/cord-vsg-service:controller/credential':
     post:
-      summary: Creates one or more new credential in service
+      summary: Creates one or more new credential in credentials-list
       deprecated: false
       parameters:
         - name: credential
@@ -2454,6 +1734,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '200':
@@ -2476,8 +1760,12 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
     get:
-      summary: List all credentials from service
+      summary: List all credentials from credentials-list
       deprecated: false
       responses:
         '200':
@@ -2500,6 +1788,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
     put:
       summary: Replace the entire credential collection
       deprecated: false
@@ -2524,6 +1816,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '201':
@@ -2552,6 +1848,10 @@ paths:
                   default: user
                   type: string
                   format: 'xtype:access-role'
+                  enum:
+                    - admin
+                    - staff
+                    - user
           required: false
       responses:
         '201':
@@ -2579,6 +1879,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     put:
       summary: Update details on credential
       deprecated: false
@@ -2601,6 +1905,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
           required: false
       responses:
         '200':
@@ -2621,6 +1929,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     patch:
       summary: Merge details on credential
       deprecated: false
@@ -2643,6 +1955,10 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
           required: false
       responses:
         '200':
@@ -2663,8 +1979,12 @@ paths:
                 default: user
                 type: string
                 format: 'xtype:access-role'
+                enum:
+                  - admin
+                  - staff
+                  - user
     delete:
-      summary: Delete credential from service
+      summary: Delete credential from credentials-list
       deprecated: false
       responses:
         '204':
@@ -2692,58 +2012,9 @@ paths:
               allOf:
                 - $ref: '#/definitions/subscriber-gateway'
                 - properties:
-                    id:
+                    instance:
                       type: string
-                      format: 'xtype:unique-identifier'
-                    features:
-                      description: Contains various features provided by the gateway.
-                      type: object
-                      properties:
-                        firewall:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            rules:
-                              type: array
-                              items:
-                                type: string
-                                format: string
-                        url-filter:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            level:
-                              type: string
-                              format: enumeration
-                            rules:
-                              type: array
-                              items:
-                                type: string
-                                format: string
-                        uverse:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                    flow:
-                      type: array
-                      items:
-                        description: >-
-                          Each flow represents a subscriber flow into the VSG
-                          instance.
-                        type: object
-                        properties:
-                          id:
-                            type: string
-                            format: 'xtype:flow-identifier'
+                      format: leafref
           required: false
       responses:
         '200':
@@ -2755,58 +2026,9 @@ paths:
               allOf:
                 - $ref: '#/definitions/subscriber-gateway'
                 - properties:
-                    id:
+                    instance:
                       type: string
-                      format: 'xtype:unique-identifier'
-                    features:
-                      description: Contains various features provided by the gateway.
-                      type: object
-                      properties:
-                        firewall:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            rules:
-                              type: array
-                              items:
-                                type: string
-                                format: string
-                        url-filter:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            level:
-                              type: string
-                              format: enumeration
-                            rules:
-                              type: array
-                              items:
-                                type: string
-                                format: string
-                        uverse:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                    flow:
-                      type: array
-                      items:
-                        description: >-
-                          Each flow represents a subscriber flow into the VSG
-                          instance.
-                        type: object
-                        properties:
-                          id:
-                            type: string
-                            format: 'xtype:flow-identifier'
+                      format: leafref
     get:
       summary: List all gateways from gateways-list
       deprecated: false
@@ -2820,58 +2042,9 @@ paths:
               allOf:
                 - $ref: '#/definitions/subscriber-gateway'
                 - properties:
-                    id:
+                    instance:
                       type: string
-                      format: 'xtype:unique-identifier'
-                    features:
-                      description: Contains various features provided by the gateway.
-                      type: object
-                      properties:
-                        firewall:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            rules:
-                              type: array
-                              items:
-                                type: string
-                                format: string
-                        url-filter:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            level:
-                              type: string
-                              format: enumeration
-                            rules:
-                              type: array
-                              items:
-                                type: string
-                                format: string
-                        uverse:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                    flow:
-                      type: array
-                      items:
-                        description: >-
-                          Each flow represents a subscriber flow into the VSG
-                          instance.
-                        type: object
-                        properties:
-                          id:
-                            type: string
-                            format: 'xtype:flow-identifier'
+                      format: leafref
     put:
       summary: Replace the entire gateway collection
       deprecated: false
@@ -2886,58 +2059,9 @@ paths:
               allOf:
                 - $ref: '#/definitions/subscriber-gateway'
                 - properties:
-                    id:
+                    instance:
                       type: string
-                      format: 'xtype:unique-identifier'
-                    features:
-                      description: Contains various features provided by the gateway.
-                      type: object
-                      properties:
-                        firewall:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            rules:
-                              type: array
-                              items:
-                                type: string
-                                format: string
-                        url-filter:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            level:
-                              type: string
-                              format: enumeration
-                            rules:
-                              type: array
-                              items:
-                                type: string
-                                format: string
-                        uverse:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                    flow:
-                      type: array
-                      items:
-                        description: >-
-                          Each flow represents a subscriber flow into the VSG
-                          instance.
-                        type: object
-                        properties:
-                          id:
-                            type: string
-                            format: 'xtype:flow-identifier'
+                      format: leafref
           required: false
       responses:
         '201':
@@ -2956,58 +2080,9 @@ paths:
               allOf:
                 - $ref: '#/definitions/subscriber-gateway'
                 - properties:
-                    id:
+                    instance:
                       type: string
-                      format: 'xtype:unique-identifier'
-                    features:
-                      description: Contains various features provided by the gateway.
-                      type: object
-                      properties:
-                        firewall:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            rules:
-                              type: array
-                              items:
-                                type: string
-                                format: string
-                        url-filter:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                            level:
-                              type: string
-                              format: enumeration
-                            rules:
-                              type: array
-                              items:
-                                type: string
-                                format: string
-                        uverse:
-                          type: object
-                          properties:
-                            enabled:
-                              default: 'false'
-                              type: string
-                              format: boolean
-                    flow:
-                      type: array
-                      items:
-                        description: >-
-                          Each flow represents a subscriber flow into the VSG
-                          instance.
-                        type: object
-                        properties:
-                          id:
-                            type: string
-                            format: 'xtype:flow-identifier'
+                      format: leafref
           required: false
       responses:
         '201':
@@ -3025,58 +2100,9 @@ paths:
             allOf:
               - $ref: '#/definitions/subscriber-gateway'
               - properties:
-                  id:
+                  instance:
                     type: string
-                    format: 'xtype:unique-identifier'
-                  features:
-                    description: Contains various features provided by the gateway.
-                    type: object
-                    properties:
-                      firewall:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          rules:
-                            type: array
-                            items:
-                              type: string
-                              format: string
-                      url-filter:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          level:
-                            type: string
-                            format: enumeration
-                          rules:
-                            type: array
-                            items:
-                              type: string
-                              format: string
-                      uverse:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                  flow:
-                    type: array
-                    items:
-                      description: >-
-                        Each flow represents a subscriber flow into the VSG
-                        instance.
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                          format: 'xtype:flow-identifier'
+                    format: leafref
     put:
       summary: Update details on gateway
       deprecated: false
@@ -3089,58 +2115,9 @@ paths:
             allOf:
               - $ref: '#/definitions/subscriber-gateway'
               - properties:
-                  id:
+                  instance:
                     type: string
-                    format: 'xtype:unique-identifier'
-                  features:
-                    description: Contains various features provided by the gateway.
-                    type: object
-                    properties:
-                      firewall:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          rules:
-                            type: array
-                            items:
-                              type: string
-                              format: string
-                      url-filter:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          level:
-                            type: string
-                            format: enumeration
-                          rules:
-                            type: array
-                            items:
-                              type: string
-                              format: string
-                      uverse:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                  flow:
-                    type: array
-                    items:
-                      description: >-
-                        Each flow represents a subscriber flow into the VSG
-                        instance.
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                          format: 'xtype:flow-identifier'
+                    format: leafref
           required: false
       responses:
         '200':
@@ -3150,58 +2127,9 @@ paths:
             allOf:
               - $ref: '#/definitions/subscriber-gateway'
               - properties:
-                  id:
+                  instance:
                     type: string
-                    format: 'xtype:unique-identifier'
-                  features:
-                    description: Contains various features provided by the gateway.
-                    type: object
-                    properties:
-                      firewall:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          rules:
-                            type: array
-                            items:
-                              type: string
-                              format: string
-                      url-filter:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          level:
-                            type: string
-                            format: enumeration
-                          rules:
-                            type: array
-                            items:
-                              type: string
-                              format: string
-                      uverse:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                  flow:
-                    type: array
-                    items:
-                      description: >-
-                        Each flow represents a subscriber flow into the VSG
-                        instance.
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                          format: 'xtype:flow-identifier'
+                    format: leafref
     patch:
       summary: Merge details on gateway
       deprecated: false
@@ -3214,58 +2142,9 @@ paths:
             allOf:
               - $ref: '#/definitions/subscriber-gateway'
               - properties:
-                  id:
+                  instance:
                     type: string
-                    format: 'xtype:unique-identifier'
-                  features:
-                    description: Contains various features provided by the gateway.
-                    type: object
-                    properties:
-                      firewall:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          rules:
-                            type: array
-                            items:
-                              type: string
-                              format: string
-                      url-filter:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          level:
-                            type: string
-                            format: enumeration
-                          rules:
-                            type: array
-                            items:
-                              type: string
-                              format: string
-                      uverse:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                  flow:
-                    type: array
-                    items:
-                      description: >-
-                        Each flow represents a subscriber flow into the VSG
-                        instance.
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                          format: 'xtype:flow-identifier'
+                    format: leafref
           required: false
       responses:
         '200':
@@ -3275,58 +2154,9 @@ paths:
             allOf:
               - $ref: '#/definitions/subscriber-gateway'
               - properties:
-                  id:
+                  instance:
                     type: string
-                    format: 'xtype:unique-identifier'
-                  features:
-                    description: Contains various features provided by the gateway.
-                    type: object
-                    properties:
-                      firewall:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          rules:
-                            type: array
-                            items:
-                              type: string
-                              format: string
-                      url-filter:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                          level:
-                            type: string
-                            format: enumeration
-                          rules:
-                            type: array
-                            items:
-                              type: string
-                              format: string
-                      uverse:
-                        type: object
-                        properties:
-                          enabled:
-                            default: 'false'
-                            type: string
-                            format: boolean
-                  flow:
-                    type: array
-                    items:
-                      description: >-
-                        Each flow represents a subscriber flow into the VSG
-                        instance.
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                          format: 'xtype:flow-identifier'
+                    format: leafref
     delete:
       summary: Delete gateway from gateways-list
       deprecated: false
@@ -3357,7 +2187,7 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
                   rules:
                     type: array
@@ -3369,11 +2199,13 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
                   level:
                     type: string
                     format: enumeration
+                    enum:
+                      - PG
                   rules:
                     type: array
                     items:
@@ -3384,7 +2216,7 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
     put:
       summary: Update details on features
@@ -3402,7 +2234,7 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
                   rules:
                     type: array
@@ -3414,11 +2246,13 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
                   level:
                     type: string
                     format: enumeration
+                    enum:
+                      - PG
                   rules:
                     type: array
                     items:
@@ -3429,7 +2263,7 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
           required: false
       responses:
@@ -3444,7 +2278,7 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
                   rules:
                     type: array
@@ -3456,11 +2290,13 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
                   level:
                     type: string
                     format: enumeration
+                    enum:
+                      - PG
                   rules:
                     type: array
                     items:
@@ -3471,7 +2307,7 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
     patch:
       summary: Merge details on features
@@ -3489,7 +2325,7 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
                   rules:
                     type: array
@@ -3501,11 +2337,13 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
                   level:
                     type: string
                     format: enumeration
+                    enum:
+                      - PG
                   rules:
                     type: array
                     items:
@@ -3516,7 +2354,7 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
           required: false
       responses:
@@ -3531,7 +2369,7 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
                   rules:
                     type: array
@@ -3543,11 +2381,13 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
                   level:
                     type: string
                     format: enumeration
+                    enum:
+                      - PG
                   rules:
                     type: array
                     items:
@@ -3558,10 +2398,10 @@ paths:
                 properties:
                   enabled:
                     default: 'false'
-                    type: string
+                    type: boolean
                     format: boolean
     delete:
-      summary: Delete features from gateway
+      summary: Delete features from subscriber-gateway
       deprecated: false
       responses:
         '204':
@@ -3576,7 +2416,7 @@ paths:
   '/cord-vsg-service:controller/gateway/{id}/flow':
     post:
       description: Each flow represents a subscriber flow into the VSG instance.
-      summary: Creates one or more new flow in gateway
+      summary: Creates one or more new flow in subscriber-gateway
       deprecated: false
       parameters:
         - name: flow
@@ -3605,7 +2445,7 @@ paths:
                   type: string
                   format: 'xtype:flow-identifier'
     get:
-      summary: List all flows from gateway
+      summary: List all flows from subscriber-gateway
       deprecated: false
       responses:
         '200':
@@ -3732,7 +2572,7 @@ paths:
                 type: string
                 format: 'xtype:flow-identifier'
     delete:
-      summary: Delete flow from gateway
+      summary: Delete flow from subscriber-gateway
       deprecated: false
       responses:
         '204':
@@ -3752,9 +2592,7 @@ paths:
         format: 'xtype:unique-identifier'
 definitions:
   'xslice:slice':
-    description: >-
-      A slice is a logically centralized container for network and compute
-      resources
+    description: A slice is a logically centralized container for network and compute resources
     allOf:
       - $ref: '#/definitions/xos:provider'
       - properties:
@@ -3763,9 +2601,7 @@ definitions:
             type: string
             format: 'inet:uri'
           network:
-            description: >-
-              The network that the slice uses to connect to other slices and to
-              the Internet.
+            description: The network that the slice uses to connect to other slices and to the Internet.
             default: none
             type: string
             format: enumeration
@@ -3804,9 +2640,7 @@ definitions:
             type: object
             properties:
               max-instances:
-                description: >-
-                  The maximum number of VMs that this slice is allowed to
-                  allocate
+                description: The maximum number of VMs that this slice is allowed to allocate
                 type: integer
                 format: uint16
               default-flavor:
@@ -3830,9 +2664,6 @@ definitions:
                   - vm
                   - lxc
                   - hybrid
-          scale:
-            description: Adjust scale for slice(s)
-            type: object
   'xos:provider':
     allOf:
       - $ref: '#/definitions/xos:tenant'
@@ -3912,12 +2743,6 @@ definitions:
             type: array
             items:
               type: object
-      diff:
-        description: retrieve diff of model state if dirty
-        type: object
-      save:
-        description: trigger save into data store via synchronizer
-        type: object
   'xos:credentials-list':
     type: object
     properties:
@@ -3987,12 +2812,9 @@ definitions:
           subscriber:
             type: array
             items:
-              description: >-
-                Each entry represents a subscriber of the service. Each unique
-                service
-
+              description: |-
+                Each entry represents a subscriber of the service. Each unique service
                 provider should augment this block with service specific
-
                 attributes.
               $ref: '#/definitions/xos:subscriber'
   'xos:subscriber':
