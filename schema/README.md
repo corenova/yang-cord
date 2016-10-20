@@ -58,7 +58,7 @@ When loaded by `xos` it provides the additional API endpoint:
 
 Explicit | Prefixed | Implicit
 --- | --- | ---
-/xos-controller:core/xos-slice:slice | /xos:core/xslice:slice | /core/slice
+/xos-controller:core/xos-slice:slice | /xos:core/xslice:slice | /core/xslice:slice
 
 ### xos-topology
 
@@ -77,11 +77,11 @@ When loaded by `xos` it provides the additional API endpoints:
 
 Explicit | Prefixed | Implicit
 --- | --- | ---
-/xos-controller:core/xos-topology:deployment | /xos:core/xtop:deployment | /core/deployment
-/xos-controller:core/xos-topology:site       | /xos:core/xtop:site       | /core/site
-/xos-controller:core/xos-topology:node       | /xos:core/xtop:node       | /core/node
-/xos-controller:core/xos-topology:user       | /xos:core/xtop:user       | /core/user
-/xos-controller:core/xos-topology:template   | /xos:core/xtop:template   | /core/template
+/xos-controller:core/xos-topology:deployment | /xos:core/xtop:deployment | /core/xtop:deployment
+/xos-controller:core/xos-topology:site       | /xos:core/xtop:site       | /core/xtop:site
+/xos-controller:core/xos-topology:node       | /xos:core/xtop:node       | /core/xtop:node
+/xos-controller:core/xos-topology:user       | /xos:core/xtop:user       | /core/xtop:user
+/xos-controller:core/xos-topology:template   | /xos:core/xtop:template   | /core/xtop:template
 
 ### xos-types
 
@@ -138,8 +138,8 @@ When loaded by `xos` it provides the additional API endpoints:
 
 Explicit | Prefixed | Implicit
 --- | --- | ---
-/xos-controller:tenant/cord-tenant:cord | /xos:tenant/cord:cord | /tenant/cord
-/xos-controller:tenant/cord-tenant:cord/subscriber | /xos:tenant/cord:cord/subscriber | /tenant/cord/subscriber
+/xos-controller:tenant/cord-tenant:cord | /xos:tenant/cord:cord | /tenant/cord:cord
+/xos-controller:tenant/cord-tenant:cord/subscriber | /xos:tenant/cord:cord/subscriber | /tenant/cord:cord/subscriber
 
 It essentially serves as the primary entity for mapping the CORD
 Subscriber to one or more `Service` subscriptions.
@@ -175,7 +175,7 @@ Explicit | Prefixed | Implicit
 /cord-volt-service:controller/subscriber | /volt:controller/subscriber | N/A
 /cord-volt-service:controller/device | /volt:controller/device | N/A
 /cord-volt-service:controller/port | /volt:controller/port | N/A
-/xos-controller:tenant/cord-tenant:cord/cord-tenant:subscriber/cord-volt-service:volt | /xos:tenant/cord:cord/cord:subscriber/volt:volt | /tenant/cord/subscriber/volt
+/xos-controller:tenant/cord-tenant:cord/cord-tenant:subscriber/cord-volt-service:service | /xos:tenant/cord:cord/cord:subscriber/volt:service | /tenant/cord:cord/subscriber/volt:service
 
 ### cord-vsg-service
 
@@ -205,5 +205,5 @@ Explicit | Prefixed | Implicit
 /cord-vsg-service:controller/subscriber | /vsg:controller/subscriber | N/A
 /cord-vsg-service:controller/gateway | /vsg:controller/gateway | N/A
 /cord-vsg-service:controller/port | /vsg:controller/port | N/A
-/xos-controller:tenant/cord-tenant:cord/cord-tenant:subscriber/cord-vsg-service:vsg | /xos:tenant/cord:cord/cord:subscriber/vsg:vsg | /tenant/cord/subscriber/vsg
+/xos-controller:tenant/cord-tenant:cord/cord-tenant:subscriber/cord-vsg-service:service | /xos:tenant/cord:cord/cord:subscriber/vsg:service | /tenant/cord:cord/subscriber/vsg:service
 

@@ -166,7 +166,7 @@ module cord-volt-service {
    * Augmentations to CORD Tenant in XOS
    */
   augment "/xos:tenant/cord:cord/cord:subscriber" {
-    container volt {
+    container service {
       leaf id {
         type leafref {
           path "/volt:controller/subscriber/id";

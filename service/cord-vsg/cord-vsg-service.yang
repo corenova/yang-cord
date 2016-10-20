@@ -166,7 +166,7 @@ module cord-vsg-service {
    * Augmentations to XOS
    */
   augment "/xos:tenant/cord:cord/cord:subscriber" {
-    container vsg {
+    container service {
       leaf id {
         type leafref {
           path "/vsg:controller/subscriber/id";

@@ -75,7 +75,7 @@ module example-service {
    * Augmentations to XOS
    */
   augment "/xos:tenant/cord:cord/subscriber" {
-    container example {
+    container service {
       leaf id {
         type leafref {
           path "/example:controller/subscriber/id";
