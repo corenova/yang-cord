@@ -20,9 +20,7 @@ module example-service {
     description "Initial revision.";
   }
 
-  identity my-example-service {
-    base xos:service;
-  }
+  identity my-example-service { base xos:xos-service; }
   /*
    * Type Definitions
    */

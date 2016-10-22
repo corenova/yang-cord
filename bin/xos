@@ -4,8 +4,8 @@ var argv = require('minimist')(process.argv.slice(2), {
   boolean: [ 'help' ],
   alias: {
     help: 'h',
-	config: 'c',
-	port: 'p',
+    config: 'c',
+    port: 'p',
   },
   string: [ 'config' ]
 });
@@ -29,7 +29,7 @@ var express = require('yang-express').eval(config);
 var yaml = require('js-yaml');
 
 argv.modules = [ 'xos-controller' ].concat(argv._)
-argv.feature = [ 'restjson', 'openapi' ]
+argv.features = [ 'restjson', 'openapi' ]
 
 express.in('run')
   .invoke(argv)

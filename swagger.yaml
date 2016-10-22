@@ -35,7 +35,6 @@ paths:
         '200':
           description: Expected response of core
           schema:
-            description: Primary endpoint for additional core entities to augment
             allOf:
               - $ref: '#/definitions/xos:provider'
               - properties:
@@ -71,7 +70,6 @@ paths:
           in: body
           description: Primary endpoint for additional core entities to augment
           schema:
-            description: Primary endpoint for additional core entities to augment
             allOf:
               - $ref: '#/definitions/xos:provider'
               - properties:
@@ -104,7 +102,6 @@ paths:
         '200':
           description: Expected response of core
           schema:
-            description: Primary endpoint for additional core entities to augment
             allOf:
               - $ref: '#/definitions/xos:provider'
               - properties:
@@ -140,7 +137,6 @@ paths:
           in: body
           description: Primary endpoint for additional core entities to augment
           schema:
-            description: Primary endpoint for additional core entities to augment
             allOf:
               - $ref: '#/definitions/xos:provider'
               - properties:
@@ -173,7 +169,6 @@ paths:
         '200':
           description: Expected response of core
           schema:
-            description: Primary endpoint for additional core entities to augment
             allOf:
               - $ref: '#/definitions/xos:provider'
               - properties:
@@ -2516,7 +2511,6 @@ paths:
         '200':
           description: Expected response of service
           schema:
-            description: Primary endpoint for services to augment
             type: object
     put:
       summary: Update details on service
@@ -2526,14 +2520,12 @@ paths:
           in: body
           description: Primary endpoint for services to augment
           schema:
-            description: Primary endpoint for services to augment
             type: object
           required: false
       responses:
         '200':
           description: Expected response of service
           schema:
-            description: Primary endpoint for services to augment
             type: object
     patch:
       summary: Merge details on service
@@ -2543,14 +2535,12 @@ paths:
           in: body
           description: Primary endpoint for services to augment
           schema:
-            description: Primary endpoint for services to augment
             type: object
           required: false
       responses:
         '200':
           description: Expected response of service
           schema:
-            description: Primary endpoint for services to augment
             type: object
     delete:
       summary: Delete service from xos-controller
@@ -2567,7 +2557,6 @@ paths:
         '200':
           description: Expected response of tenant
           schema:
-            description: Primary endpoint for tenants to augment
             type: object
             properties:
               'cord-tenant:cord':
@@ -2587,7 +2576,6 @@ paths:
           in: body
           description: Primary endpoint for tenants to augment
           schema:
-            description: Primary endpoint for tenants to augment
             type: object
             properties:
               'cord-tenant:cord':
@@ -2604,7 +2592,6 @@ paths:
         '200':
           description: Expected response of tenant
           schema:
-            description: Primary endpoint for tenants to augment
             type: object
             properties:
               'cord-tenant:cord':
@@ -2624,7 +2611,6 @@ paths:
           in: body
           description: Primary endpoint for tenants to augment
           schema:
-            description: Primary endpoint for tenants to augment
             type: object
             properties:
               'cord-tenant:cord':
@@ -2641,7 +2627,6 @@ paths:
         '200':
           description: Expected response of tenant
           schema:
-            description: Primary endpoint for tenants to augment
             type: object
             properties:
               'cord-tenant:cord':
@@ -2668,7 +2653,6 @@ paths:
         '200':
           description: 'Expected response of cord-tenant:cord'
           schema:
-            description: Register cord as a tenant into XOS
             type: object
             properties:
               subscriber:
@@ -2684,7 +2668,6 @@ paths:
           in: body
           description: Register cord as a tenant into XOS
           schema:
-            description: Register cord as a tenant into XOS
             type: object
             properties:
               subscriber:
@@ -2697,7 +2680,6 @@ paths:
         '200':
           description: 'Expected response of cord-tenant:cord'
           schema:
-            description: Register cord as a tenant into XOS
             type: object
             properties:
               subscriber:
@@ -2713,7 +2695,6 @@ paths:
           in: body
           description: Register cord as a tenant into XOS
           schema:
-            description: Register cord as a tenant into XOS
             type: object
             properties:
               subscriber:
@@ -2726,7 +2707,6 @@ paths:
         '200':
           description: 'Expected response of cord-tenant:cord'
           schema:
-            description: Register cord as a tenant into XOS
             type: object
             properties:
               subscriber:
@@ -2815,7 +2795,6 @@ paths:
         '200':
           description: Expected response of subscriber
           schema:
-            description: Each entry represents a unique CORD subscriber.
             $ref: '#/definitions/cord:subscriber'
     put:
       summary: Update details on subscriber
@@ -2825,14 +2804,12 @@ paths:
           in: body
           description: Each entry represents a unique CORD subscriber.
           schema:
-            description: Each entry represents a unique CORD subscriber.
             $ref: '#/definitions/cord:subscriber'
           required: false
       responses:
         '200':
           description: Expected response of subscriber
           schema:
-            description: Each entry represents a unique CORD subscriber.
             $ref: '#/definitions/cord:subscriber'
     patch:
       summary: Merge details on subscriber
@@ -2842,14 +2819,12 @@ paths:
           in: body
           description: Each entry represents a unique CORD subscriber.
           schema:
-            description: Each entry represents a unique CORD subscriber.
             $ref: '#/definitions/cord:subscriber'
           required: false
       responses:
         '200':
           description: Expected response of subscriber
           schema:
-            description: Each entry represents a unique CORD subscriber.
             $ref: '#/definitions/cord:subscriber'
     delete:
       summary: 'Delete subscriber from cord-tenant:cord'
@@ -2866,7 +2841,6 @@ paths:
         format: 'xtype:unique-identifier'
 definitions:
   'xslice:slice':
-    description: A slice is a logically centralized container for network and compute resources
     allOf:
       - $ref: '#/definitions/xos:provider'
       - properties:
@@ -2966,7 +2940,6 @@ definitions:
       record:
         $ref: '#/definitions/xos:record'
   'xos:record':
-    description: Synchronizer-specific properties for model entities
     type: object
     properties:
       created:

@@ -18,7 +18,7 @@ module cord-volt-service {
     description "Initial revision.";
   }
 
-  identity virtual-olt { base xos:service; }
+  identity virtual-olt { base xos:xos-service; }
 
   feature onos-app-olt {
     description "System facility to configure VLAN tags on the OLT.";

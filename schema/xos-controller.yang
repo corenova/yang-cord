@@ -142,7 +142,7 @@ module xos-controller {
   }
   grouping subscriber {
     uses xos:tenant {
-      refine kind { default subscriber; }
+      refine kind { default xos-subscriber; }
     }
     leaf connectivity {
       type enumeration {
@@ -156,7 +156,7 @@ module xos-controller {
   }
   grouping provider {
     uses xos:tenant {
-      refine kind { default provider; }
+      refine kind { default xos-provider; }
     }
     uses xos:credentials-list;
   }

@@ -20,7 +20,7 @@ module cord-vsg-service {
     description "Initial revision.";
   }
 
-  identity virtual-subscriber-gateway { base xos:service; }
+  identity virtual-subscriber-gateway { base xos:xos-service; }
 
   /*
    * Type definitions
