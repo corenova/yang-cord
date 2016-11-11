@@ -32,7 +32,7 @@ argv.modules = [ 'xos-controller' ].concat(argv._)
 argv.features = [ 'restjson', 'openapi' ]
 
 express.in('run')
-  .invoke(argv)
+  .do(argv)
   .then(function (res) {
     console.info("XOS Controller running...");
     console.info(yaml.dump(res));
